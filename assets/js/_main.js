@@ -26,7 +26,7 @@ MW.attr = {
     },
     textCommand: {
         'font-size': 12,
-        'cursor': 'pointer'
+        'cursor': 'default'
     },
     activeCommand: {
         fill: 'red'
@@ -74,7 +74,15 @@ MW.centralUnit = function(containerCentralUnit) {
         var wejaArrow = MW.setArrow(paper, 'M450 300 V250', true),
             wejaText = MW.setText(paper, 'weja', 425, 275, wejaArrow),
             wyakArrow = MW.setArrow(paper, 'M550 300 V75, 75 H450, 450 V100', false),
-            wyakText = MW.setText(paper, 'wyak', 575, 180, wyakArrow);
+            wyakText = MW.setText(paper, 'wyak', 575, 180, wyakArrow),
+            weakArrow = MW.setArrow(paper, 'M345 150 H370', true),
+            weakText = MW.setText(paper, 'weak', 325, 150, weakArrow),
+            dodArrow = MW.setArrow(paper, 'M345 170 H370', true),
+            dodText = MW.setText(paper, 'dod', 327, 170, dodArrow),
+            odeArrow = MW.setArrow(paper, 'M345 190 H370', true),
+            odeText = MW.setText(paper, 'ode', 328, 190, odeArrow),
+            przepArrow = MW.setArrow(paper, 'M345 210 H370', true),
+            przepText = MW.setText(paper, 'przep', 324, 210, przepArrow);
     };
 
 
@@ -167,16 +175,19 @@ MW.setText = function(paper, command, posX, posY, arrow) {
     checkbox.click(function() {
         if(checkbox.prop('checked')) {
             label
+                .attr({'cursor': 'pointer'})
                 .click(MW.clickHandler)
                 .hover(hoverIn, hoverOut)
                 .click(arrowAction);
         }
         else {
             label
+                .attr({'cursor': 'default'})
                 .animate(MW.attr.inactiveCommand, 250)
                 .unclick(MW.clickHandler)
                 .unhover(hoverIn, hoverOut)
                 .unclick(arrowAction);
+
             arrow
                 .animate(MW.attr.inactiveArrow, 250);
         }
