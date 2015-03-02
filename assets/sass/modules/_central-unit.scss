@@ -1,0 +1,230 @@
+.central-unit {
+	position: relative;
+	height: 300px;
+	width: 90%;
+	max-width: 850px;
+	min-width: 850px;
+	margin: 50px auto;
+	font-size: 12px;
+	border-top: 3px double $cpu;
+	border-bottom: 3px double $cpu;
+
+	&::before {
+		display: block;
+		position: absolute;
+		right: 0px;
+		top: -20px;
+		content: "magistrala adresowa";
+	}
+
+	&::after {
+		display: block;
+		position: absolute;
+		right: 0px;
+		bottom: -20px;
+		content: "magistrala slowna";
+	}
+
+	.element {
+		border: 1px solid $cpu;
+		background: $bg-components;
+		@include transition(all 0.3s ease-in-out);
+
+		&:hover {
+			background: $bg-active-components;
+		}
+
+		&__data {
+			background: none;
+			outline: none;
+			width: 100%;
+			height: 25px;
+			text-align: center;
+			border: 1px solid $cpu;
+			font-size: 12px;
+			font-family: $base-font;
+			cursor: pointer;
+			@include transition(all 0.3s ease-in-out);
+			@include box-sizing(border-box);
+
+			&:hover {
+				background: $bg-hover;
+			}
+
+			&:focus {
+				background: $bg-focus;
+			}
+		}
+	}
+
+	.acumulator {
+		@extend .element;
+		position: absolute;
+		bottom: 50px;
+		top: 100px;
+		right: 325px;
+		width: 150px;
+		
+		&::before {
+			display: block;
+			position: absolute;
+			left: 10px;
+			top: 4px;
+			content: "AK :";
+		}
+
+		&__data {
+			@extend .element__data;
+			position: absolute;
+			top: -31px;
+			margin-top: 30px;
+			border-right: none;
+			border-left: none;
+		}
+	}
+
+	.memory {
+		@extend .element;
+		position: absolute;
+		bottom: 50px;
+		top: 50px;
+		right: 50px;
+		width: 175px;
+		@include scrollbars(13px, $hover-row);
+
+		&::before {
+			display: block;
+			position: absolute;
+			left: 10px;
+			top: 4px;
+			content: "A :";
+		}
+
+		&::after {
+			display: block;
+			position: absolute;
+			left: 10px;
+			bottom: 4px;
+			content: "S :";
+		}
+		
+		&__address {
+			@extend .element__data;
+			position: absolute;
+			top: -31px;
+			left: -1px;
+			margin-top: 30px;
+			border-right: none;
+			border-left: none;
+		}
+
+		&__verbal {
+			@extend .element__data;
+			position: absolute;
+			bottom: -1px;
+			left: -1px;
+			margin-top: 30px;
+			border-right: none;
+			border-left: none;
+		}
+
+		&__table {
+			display: block;
+			overflow-y: scroll;
+			width: 100%;
+			height: 150px;
+			margin: 23px 0;
+
+			&--row {
+				position: relative;
+				display: block;
+				height: 20px;
+				width: 100%;
+				@include transition(all 0.3s ease-in-out);
+	
+				&:hover {
+					background: $hover-row;
+					cursor: pointer;
+				}
+
+				&:nth-child(even) {
+					background: $background-table;
+
+					&:hover {
+						background: $hover-row;
+						cursor: pointer;
+					}
+				}
+			}
+
+			&--cell {
+				display: inline-block;
+				width: 20%;
+				padding: 2px 0;
+				text-align: center;
+				white-space: nowrap;
+
+
+				&:last-of-type {
+					padding-left: 40%;
+				}
+			}
+
+			&__data {
+				@include box-sizing(border-box);
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 20px;
+				padding: 2px 50% 2px 25%;
+				background: none;
+				border: none;
+				outline: none;
+				text-align: center;
+				font-size: 12px;
+				font-family: $base-font;
+				cursor: pointer;
+				@include transition(all 0.3s ease-in-out);
+
+				&:focus {
+					background: $bg-focus;
+				}
+			}
+		}
+	}
+
+	.counter {
+		@extend .element;
+		border: none;
+		position: absolute;
+		top: 50px;
+		left: 50px;
+		width: 100px;
+
+		&::after {
+			display: block;
+			position: absolute;
+			left: 10px;
+			bottom: 6px;
+			content: "L :";
+		}
+	}
+
+	.address {
+		@extend .element;
+		border: none;
+		position: absolute;
+		bottom: 50px;
+		left: 100px;
+		width: 150px;
+
+		&::after {
+			display: block;
+			position: absolute;
+			left: 10px;
+			bottom: 6px;
+			content: "I :";
+		}
+	}
+}

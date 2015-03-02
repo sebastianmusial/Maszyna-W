@@ -1,0 +1,213 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif; }
+
+svg {
+  height: 100%;
+  width: 100%; }
+
+.central-unit {
+  position: relative;
+  height: 300px;
+  width: 90%;
+  max-width: 850px;
+  min-width: 850px;
+  margin: 50px auto;
+  font-size: 12px;
+  border-top: 3px double #000;
+  border-bottom: 3px double #000; }
+  .central-unit::before {
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: -20px;
+    content: "magistrala adresowa"; }
+  .central-unit::after {
+    display: block;
+    position: absolute;
+    right: 0px;
+    bottom: -20px;
+    content: "magistrala slowna"; }
+  .central-unit .element, .central-unit .acumulator, .central-unit .memory, .central-unit .counter, .central-unit .address {
+    border: 1px solid #000;
+    background: #F5F5F3;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }
+    .central-unit .element:hover, .central-unit .acumulator:hover, .central-unit .memory:hover, .central-unit .counter:hover, .central-unit .address:hover {
+      background: #D3D6CD; }
+    .central-unit .element__data, .central-unit .acumulator__data, .central-unit .memory__address, .central-unit .memory__verbal {
+      background: none;
+      outline: none;
+      width: 100%;
+      height: 25px;
+      text-align: center;
+      border: 1px solid #000;
+      font-size: 12px;
+      font-family: "Lato", sans-serif;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box; }
+      .central-unit .element__data:hover, .central-unit .acumulator__data:hover, .central-unit .memory__address:hover, .central-unit .memory__verbal:hover {
+        background: rgba(0, 0, 0, 0.3); }
+      .central-unit .element__data:focus, .central-unit .acumulator__data:focus, .central-unit .memory__address:focus, .central-unit .memory__verbal:focus {
+        background: rgba(255, 0, 0, 0.3); }
+  .central-unit .acumulator {
+    position: absolute;
+    bottom: 50px;
+    top: 100px;
+    right: 325px;
+    width: 150px; }
+    .central-unit .acumulator::before {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      content: "AK :"; }
+    .central-unit .acumulator__data {
+      position: absolute;
+      top: -31px;
+      margin-top: 30px;
+      border-right: none;
+      border-left: none; }
+  .central-unit .memory {
+    position: absolute;
+    bottom: 50px;
+    top: 50px;
+    right: 50px;
+    width: 175px; }
+    .central-unit .memory ::-webkit-scrollbar {
+      width: 13px;
+      height: 13px; }
+    .central-unit .memory ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3); }
+    .central-unit .memory ::-webkit-scrollbar-track {
+      background: rgba(216, 216, 216, 0.65); }
+    .central-unit .memory body {
+      scrollbar-face-color: rgba(0, 0, 0, 0.3);
+      scrollbar-track-color: rgba(216, 216, 216, 0.65); }
+    .central-unit .memory::before {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      content: "A :"; }
+    .central-unit .memory::after {
+      display: block;
+      position: absolute;
+      left: 10px;
+      bottom: 4px;
+      content: "S :"; }
+    .central-unit .memory__address {
+      position: absolute;
+      top: -31px;
+      left: -1px;
+      margin-top: 30px;
+      border-right: none;
+      border-left: none; }
+    .central-unit .memory__verbal {
+      position: absolute;
+      bottom: -1px;
+      left: -1px;
+      margin-top: 30px;
+      border-right: none;
+      border-left: none; }
+    .central-unit .memory__table {
+      display: block;
+      overflow-y: scroll;
+      width: 100%;
+      height: 150px;
+      margin: 23px 0; }
+      .central-unit .memory__table--row {
+        position: relative;
+        display: block;
+        height: 20px;
+        width: 100%;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out; }
+        .central-unit .memory__table--row:hover {
+          background: rgba(0, 0, 0, 0.3);
+          cursor: pointer; }
+        .central-unit .memory__table--row:nth-child(even) {
+          background: rgba(0, 0, 0, 0.05); }
+          .central-unit .memory__table--row:nth-child(even):hover {
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer; }
+      .central-unit .memory__table--cell {
+        display: inline-block;
+        width: 20%;
+        padding: 2px 0;
+        text-align: center;
+        white-space: nowrap; }
+        .central-unit .memory__table--cell:last-of-type {
+          padding-left: 40%; }
+      .central-unit .memory__table__data {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        padding: 2px 50% 2px 25%;
+        background: none;
+        border: none;
+        outline: none;
+        text-align: center;
+        font-size: 12px;
+        font-family: "Lato", sans-serif;
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out; }
+        .central-unit .memory__table__data:focus {
+          background: rgba(255, 0, 0, 0.3); }
+  .central-unit .counter {
+    border: none;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 100px; }
+    .central-unit .counter::after {
+      display: block;
+      position: absolute;
+      left: 10px;
+      bottom: 6px;
+      content: "L :"; }
+  .central-unit .address {
+    border: none;
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    width: 150px; }
+    .central-unit .address::after {
+      display: block;
+      position: absolute;
+      left: 10px;
+      bottom: 6px;
+      content: "I :"; }
+
+.control-panel {
+  width: 400px;
+  margin: 0 auto; }
+
+/*# sourceMappingURL=style.css.map */

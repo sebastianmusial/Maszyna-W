@@ -5,7 +5,7 @@
 * http://s24.hekko.pl/phpmyadmin/ 
 ******************************************************/ 
 
-function connection() { 
+function config() { 
     // host
     $mysql_host = "mysql3.hekko.net.pl"; 
     // nazwa użytkonika
