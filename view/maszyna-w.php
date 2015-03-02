@@ -9,8 +9,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	Na razie brzydko to wygląda bo robie funkcjonalność<br><br>
-
 	<div class="control-panel">
 		<input type="checkbox" name="handControls" id="handControls" value="0">
 		<label for="handControls">sterowanie ręczne</label>
