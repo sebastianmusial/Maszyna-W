@@ -1,11 +1,49 @@
 .central-unit {
 	position: relative;
-	height: 300px;
+	height: 100%;
 	width: 90%;
 	max-width: 850px;
 	min-width: 850px;
-	margin: 50px auto;
-	font-size: 12px;
+	margin: 0 auto;
+}
+
+.element {
+	border: 1px solid $cpu;
+	background: $bg-components;
+	@include transition(all 0.3s ease-in-out);
+
+	&:hover {
+		background: $bg-active-components;
+	}
+
+	&__data {
+		z-index: 2;
+		background: none;
+		outline: none;
+		width: 100%;
+		height: 25px;
+		text-align: center;
+		border: 1px solid $cpu;
+		font-size: 12px;
+		font-family: $base-font;
+		cursor: pointer;
+		@include transition(all 0.3s ease-in-out);
+		@include box-sizing(border-box);
+
+		&:hover {
+			background: $bg-hover;
+		}
+
+		&:focus {
+			background: $bg-focus;
+		}
+	}
+}
+
+.central-unit__base {
+	position: relative;
+	height: 300px;
+	width: 100%;
 	border-top: 3px double $cpu;
 	border-bottom: 3px double $cpu;
 
@@ -22,46 +60,14 @@
 		position: absolute;
 		right: 0px;
 		bottom: -20px;
-		content: "magistrala slowna";
-	}
-
-	.element {
-		border: 1px solid $cpu;
-		background: $bg-components;
-		@include transition(all 0.3s ease-in-out);
-
-		&:hover {
-			background: $bg-active-components;
-		}
-
-		&__data {
-			background: none;
-			outline: none;
-			width: 100%;
-			height: 25px;
-			text-align: center;
-			border: 1px solid $cpu;
-			font-size: 12px;
-			font-family: $base-font;
-			cursor: pointer;
-			@include transition(all 0.3s ease-in-out);
-			@include box-sizing(border-box);
-
-			&:hover {
-				background: $bg-hover;
-			}
-
-			&:focus {
-				background: $bg-focus;
-			}
-		}
+		content: "magistrala danych";
 	}
 
 	.acumulator {
 		@extend .element;
 		position: absolute;
-		bottom: 50px;
-		top: 100px;
+		bottom: 40px;
+		top: 90px;
 		right: 325px;
 		width: 150px;
 		
@@ -199,7 +205,7 @@
 		border: none;
 		position: absolute;
 		top: 50px;
-		left: 50px;
+		left: 40px;
 		width: 100px;
 
 		&::after {
@@ -217,7 +223,7 @@
 		position: absolute;
 		bottom: 50px;
 		left: 100px;
-		width: 150px;
+		width: 100px;
 
 		&::after {
 			display: block;
@@ -227,4 +233,191 @@
 			content: "I :";
 		}
 	}
+
+	.bus-connection {
+		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 240px;
+		width: 60px;
+	}
+}
+
+
+.central-unit__extension {
+	position: relative;
+	height: 55px;
+	width: 100%;
+}
+
+
+.central-unit__extension {
+	position: relative;
+	height: 55px;
+	width: 100%;
+}
+
+.register {
+	@extend .element;
+	border: none;
+	background: none;
+	position: absolute;
+	width: 100px;
+	height: 25px;
+
+	&:hover {
+		background: none;
+	}
+
+	&:focus {
+		background: none;
+	}
+
+	&::after {
+		display: block;
+		position: absolute;
+		z-index: 3;
+		left: 10px;
+		bottom: -20px;
+	}
+
+	.element__data {
+		margin-top: -3px;
+		background: $bg-components;
+
+		&:hover {
+			background: $bg-hover;
+		}
+
+		&:focus {
+			background: $bg-focus;
+		}
+	}
+}
+
+.register-x {
+	@extend .register;
+	left: 50px;
+
+	&::after {
+		content: "X :";
+	}
+}
+
+.register-y {
+	@extend .register;
+	left: 225px;
+
+	&::after {
+		content: "Y :";
+	}
+}
+
+.extension-rb {
+	@extend .register;
+	left: 400px;
+
+	&::after {
+		content: "RB :";
+	}
+}
+
+.extension-g {
+	@extend .register;
+	left: 575px;
+
+	&::after {
+		content: "G :";
+	}
+}
+
+.extension-ws {
+	@extend .register;
+	left: 400px;
+	top: 8px;
+
+	&::after {
+		content: "WS :";
+		top: 3px;
+	}
+
+	.element__data {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	svg {
+		height: 50px;
+		width: 250px;
+		margin-left: -50px;
+		z-index: 1;
+	}
+}
+
+.aritmetical-operations {
+	position: absolute;
+	top: 200px;
+	left: 290px;
+	width: 85px;
+	height: 100px;
+}
+
+.logical-operations {
+	position: absolute;
+	top: 135px;
+	left: 525px;
+	width: 75px;
+	height: 100px;
+}
+
+.extension-iak {
+	position: absolute;
+	top: 85px;
+	left: 300px;
+	width: 75px;
+	height: 30px;
+}
+
+.extension-dak {
+	position: absolute;
+	top: 85px;
+	left: 525px;
+	width: 75px;
+	height: 30px;
+}
+
+.extension-f {
+	@extend .register;
+	left: 373px;
+	top: 69px;
+
+	&::after {
+		content: "F :";
+		top: 3px;
+	}
+
+	.element__data {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	svg {
+		height: 50px;
+		width: 250px;
+		margin-left: -50px;
+		z-index: 1;
+	}
+}
+
+.type { 
+	width: 30%;
+	float: left;
+}
+
+.extensions { 
+	display: inline-block;
+	width: 40%;
 }
