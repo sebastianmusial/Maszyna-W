@@ -1,4 +1,30 @@
 .control-panel {
-	width: 400px;
-	margin: 0 auto;
+	display: table;
+	width: 850px;
+	margin: 30px auto;
+	padding: 15px;
+	border: 1px solid #9F9F9F;
+
+	h5 {
+		margin: 0px;
+		margin-bottom: 10px;
+		padding: 10px;
+		background-color: #9F9F9F;
+		color: #FFF;
+	}
+
+	label {
+		padding-left: 10px;
+		font-weight: normal;
+	}
+
+	.type {
+		width: 50%;
+		padding: 15px;
+	}
+
+	.extensions {
+		width: 50%;
+		padding: 15px;
+	}
 }
