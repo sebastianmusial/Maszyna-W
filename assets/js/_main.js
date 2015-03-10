@@ -6,7 +6,18 @@ var MW = MW || {};
  * Vars
  */
 MW.vars = {
-    containerCentralUnit: $('#central-unit')
+    containerCentralUnit: $('#central-unit'),
+    busConnection: $('#bus-connection'),
+    registerX: $('#register-x'),
+    registerY: $('#register-y'),
+    extensionRB: $('#extension-rb'),
+    extensionG: $('#extension-g'),
+    extensionWS: $('#extension-ws'),
+    aritmeticalOperations: $('#aritmetical-operations'),
+    logicalOperations: $('#logical-operations'),
+    extensionIAK: $('#extension-iak'),
+    extensionDAK: $('#extension-dak'),
+    extensionF: $('#extension-f'),
 };
 
 
@@ -47,74 +58,343 @@ MW.attr = {
  * Run on page init
  */
 MW.init = function() {
-    if( MW.vars.containerCentralUnit.length ) {
+    if(MW.vars.containerCentralUnit.length) {
         MW.centralUnit(MW.vars.containerCentralUnit);
+        MW.additionalElements();
+        MW.typeMachine();
+        MW.showExtension();
     }
 };
 
 
-/*
- *	All components for application
+/**
+ *	Basic machine components.
  */
 MW.centralUnit = function(containerCentralUnit) {
-    var paper = Raphael("central-unit");
+    var paper = Raphael("central-unit__base");
 
     //counter
     var counter = function() {
-        var welArrow = MW.setArrow(paper, 'M120 0 V50', true),
+        var welArrow = MW.setArrow(paper, 'M100 0 V50', true),
             wylArrow = MW.setArrow(paper, 'M80 0 V50', false),
-            ilArrow = MW.setArrow(paper, 'M30 65 H50', true),
-            welText = MW.setText(paper, 'wel', 140, 25, welArrow),
+            ilArrow = MW.setArrow(paper, 'M20 65 H37', true, true),
+            welText = MW.setText(paper, 'wel', 120, 25, welArrow),
             wylText = MW.setText(paper, 'wyl', 60, 25, wylArrow),
-            ilText = MW.setText(paper, 'il', 20, 65, ilArrow);
+            ilText = MW.setText(paper, 'il', 10, 65, ilArrow);
     };
 
     //acumulator
     var acumulator = function() {
-        var wejaArrow = MW.setArrow(paper, 'M450 300 V250', true),
+        var wejaArrow = MW.setArrow(paper, 'M450 300 V260', true),
             wejaText = MW.setText(paper, 'weja', 425, 275, wejaArrow),
-            wyakArrow = MW.setArrow(paper, 'M550 300 V75, 75 H450, 450 V100', false),
-            wyakText = MW.setText(paper, 'wyak', 575, 180, wyakArrow),
-            weakArrow = MW.setArrow(paper, 'M345 150 H370', true),
-            weakText = MW.setText(paper, 'weak', 325, 150, weakArrow),
-            dodArrow = MW.setArrow(paper, 'M345 170 H370', true),
-            dodText = MW.setText(paper, 'dod', 327, 170, dodArrow),
-            odeArrow = MW.setArrow(paper, 'M345 190 H370', true),
-            odeText = MW.setText(paper, 'ode', 328, 190, odeArrow),
-            przepArrow = MW.setArrow(paper, 'M345 210 H370', true),
-            przepText = MW.setText(paper, 'przep', 324, 210, przepArrow);
+            wyakArrow = MW.setArrow(paper, 'M605 300 V65, 65 H500, 500 V100', false),
+            wyakText = MW.setText(paper, 'wyak', 550, 55, wyakArrow),
+            weakArrow = MW.setArrow(paper, 'M345 125 H373', true),
+            weakText = MW.setText(paper, 'weak', 325, 125, weakArrow),
+            dodArrow = MW.setArrow(paper, 'M345 145 H370', true, true),
+            dodText = MW.setText(paper, 'dod', 327, 145, dodArrow),
+            odeArrow = MW.setArrow(paper, 'M345 165 H370', true, true),
+            odeText = MW.setText(paper, 'ode', 328, 165, odeArrow),
+            przepArrow = MW.setArrow(paper, 'M345 185 H370', true, true),
+            przepText = MW.setText(paper, 'przep', 324, 185, przepArrow);
     };
 
 
     //instruction register
     var instructionRegister = function() {
-        var weiArrow = MW.setArrow(paper, 'M145 500 V250', true),
-            weiText = MW.setText(paper, 'wei', 120, 275, weiArrow),
-            wyadArrow = MW.setArrow(paper, 'M195 0 V250', false),
-            wyadText = MW.setText(paper, 'wyad', 170, 190, wyadArrow);
+        var weiArrow = MW.setArrow(paper, 'M125 300 V250', true),
+            weiText = MW.setText(paper, 'wei', 100, 275, weiArrow),
+            wyadArrow = MW.setArrow(paper, 'M175 0 V225', false),
+            wyadText = MW.setText(paper, 'wyad', 150, 190, wyadArrow);
     };
 
     //Memory
     var memory = function() {
-        var wesArrow = MW.setArrow(paper, 'M730 500 V250', true),
+        var wesArrow = MW.setArrow(paper, 'M730 300 V250', true),
             wesText = MW.setText(paper, 'wes', 750, 275, wesArrow),
-            wysArrow = MW.setArrow(paper, 'M690 300 V50', false),
+            wysArrow = MW.setArrow(paper, 'M690 300 V250', false),
             wysText = MW.setText(paper, 'wys', 670, 275, wysArrow),
             weaArrow = MW.setArrow(paper, 'M710 0 V50', true),
             weaText = MW.setText(paper, 'wea', 730, 25, weaArrow),
-            czytArrow = MW.setArrow(paper, 'M820 140 H800', true),
+            czytArrow = MW.setArrow(paper, 'M820 140 H803', true, true),
             czytText = MW.setText(paper, 'czyt', 835, 140, czytArrow),
-            piszArrow = MW.setArrow(paper, 'M820 180 H800', true),
+            piszArrow = MW.setArrow(paper, 'M820 180 H803', true, true),
             piszText = MW.setText(paper, 'pisz', 835, 180, piszArrow);
     };
 
-    //Drawing
+    //Drawing elements
     counter();
     acumulator();
     instructionRegister();
     memory();
 
 	MW.editInputValue();
+};
+
+
+/**
+ * Additional elements of the machine
+ */
+MW.additionalElements = function() {
+
+    //Bus connection
+    var busConnection = function() {
+        var paper = Raphael("bus-connection");
+
+        var asSaArrow = MW.setArrow(paper, 'M10 0 V300, M5 0 V300' , true);
+            asSaArrow.attr({'arrow-start': 'block-wide-long'});
+
+        var asSaText = MW.setText(paper, 'as (sa)', 40, 35, asSaArrow);
+    };
+
+    //Register X
+    var registerX = function() {
+        var paper = Raphael("register-x");
+
+        var wyxArrow = MW.setArrow(paper, 'M65 0 V25' , true),
+            wyxText = MW.setText(paper, 'wex', 85, 12, wyxArrow),
+            wexArrow = MW.setArrow(paper, 'M35 0 V25' , false),
+            wexText = MW.setText(paper, 'wyx', 15, 12, wexArrow);
+    };
+
+    //Register Y
+    var registerY = function() {
+        var paper = Raphael("register-y");
+
+        var weyArrow = MW.setArrow(paper, 'M65 0 V25' , true),
+            weyText = MW.setText(paper, 'wey', 85, 12, weyArrow),
+            wyyArrow = MW.setArrow(paper, 'M35 0 V25' , false),
+            wyyText = MW.setText(paper, 'wyy', 15, 12, wyyArrow);
+    };
+
+    //extension RB - out/in
+    var extensionRB = function() {
+        var paper = Raphael("extension-rb");
+
+        var werbArrow = MW.setArrow(paper, 'M65 0 V25' , true),
+            werbText = MW.setText(paper, 'werb', 85, 12, werbArrow),
+            wyrbArrow = MW.setArrow(paper, 'M35 0 V25' , false),
+            wyrbText = MW.setText(paper, 'wyrb', 15, 12, wyrbArrow);
+    };
+
+    //extension G - out/in
+    var extensionG = function() {
+        var paper = Raphael("extension-g");
+
+        var wegArrow = MW.setArrow(paper, 'M65 0 V25' , true),
+            wegText = MW.setText(paper, 'weg', 85, 12, wegArrow),
+            wygArrow = MW.setArrow(paper, 'M35 0 V25' , false),
+            wygText = MW.setText(paper, 'wyg', 15, 12, wygArrow);
+    };
+
+    //extension WS
+    var extensionWS = function() {
+        var paper = Raphael("extension-ws");
+
+        var wywsArrow = MW.setArrow(paper, 'M115 22 V47' , true),
+            wywsText = MW.setText(paper, 'wyws', 140, 35, wywsArrow),
+            wewsArrow = MW.setArrow(paper, 'M85 22 V47' , false),
+            wewsText = MW.setText(paper, 'wews', 60, 35, wewsArrow),
+            iwsArrow = MW.setArrow(paper, 'M30 10 H48' , true, true),
+            iwsText = MW.setText(paper, 'iws', 15, 10, iwsArrow),
+            dwsArrow = MW.setArrow(paper, 'M170 10 H153' , true, true),
+            dwsText = MW.setText(paper, 'dws', 185, 10, dwsArrow);
+    };
+
+    //artimetical operations
+    var aritmeticalOperations = function() {
+        var paper = Raphael("aritmetical-operations");
+
+        var mnoArrow = MW.setArrow(paper, 'M55 5 H80', true, true),
+            mnoText = MW.setText(paper, 'mno', 37, 5, mnoArrow),
+            dzielArrow = MW.setArrow(paper, 'M55 25 H80', true, true),
+            dzielText = MW.setText(paper, 'dziel', 37, 25, dzielArrow),
+            shrArrow = MW.setArrow(paper, 'M55 45 H80', true, true),
+            shrText = MW.setText(paper, 'shr', 40, 45, shrArrow);
+    };
+
+    //logical operations
+    var logicalOperations = function() {
+        var paper = Raphael("logical-operations");
+
+        var negArrow = MW.setArrow(paper, 'M5 5 H30', false, true),
+            negText = MW.setText(paper, 'neg', 47, 5, negArrow),
+            lubArrow = MW.setArrow(paper, 'M5 25 H30', false, true),
+            lubText = MW.setText(paper, 'lub', 45, 25, lubArrow),
+            iArrow = MW.setArrow(paper, 'M5 45 H30', false, true),
+            iText = MW.setText(paper, 'i', 38, 45, iArrow);
+    };
+
+    //inc/dec
+    var incDec = function() {
+        var paper = Raphael("extension-iak");
+
+        var iakArrow = MW.setArrow(paper, 'M45 20 H70', true, true),
+            iakText = MW.setText(paper, 'iak', 30, 20, iakArrow);
+
+        var paper2 = Raphael("extension-dak");
+
+        var dakArrow = MW.setArrow(paper2, 'M5 20 H30', false, true),
+            dakText = MW.setText(paper2, 'dak', 47, 20, dakArrow);
+    };
+
+    //Drawing elements
+    busConnection();
+    registerX();
+    registerY();
+    extensionRB();
+    extensionG();
+    extensionWS();
+    aritmeticalOperations();
+    logicalOperations();
+    incDec();
+
+    
+    //Checkbox - activation of additional elements
+   $('.js-extension').on('click', function() {
+        MW.showExtension();
+        $('.js-type').prop('checked', false);
+    });
+
+};
+
+
+/**
+ * Wybór typu maszyny
+ */
+MW.typeMachine = function() {
+    var type  = [
+            $('#type0'),
+            $('#type1'),
+            $('#type2'),
+            $('#type3'),
+        ];;
+
+    var extensions = [
+            $('#extension0'),
+            $('#extension1'),
+            $('#extension2'),
+            $('#extension3'),
+            $('#extension4'),
+            $('#extension5'),
+            $('#extension6'),
+            $('#extension7'),
+            $('#extension8')
+        ];
+
+
+    type[0].on('click', function() {
+        var $this = $(this);
+        if($this.prop('checked')) {
+            for (var i = extensions.length - 1; i >= 0; i--) {
+                extensions[i].prop('checked', false);  
+            };
+            MW.showExtension();
+        }
+    });
+
+    type[1].on('click', function() {
+        var $this = $(this);
+        if($this.prop('checked')) {
+            for (var i = extensions.length - 1; i >= 0; i--) {
+                if(i == 0) {
+                    extensions[i].prop('checked', true);
+                }
+                else {
+                    extensions[i].prop('checked', false);
+                }
+            };
+            MW.showExtension();
+        }
+    });
+
+    type[2].on('click', function() {
+        var $this = $(this);
+        if($this.prop('checked')) {
+            for (var i = extensions.length - 1; i >= 0; i--) {
+                if(i == 3 || i== 8) {
+                    extensions[i].prop('checked', false);
+                }
+                else {
+                    extensions[i].prop('checked', true);
+                }
+            };
+            MW.showExtension();
+        }
+    });
+
+    type[3].on('click', function() {
+        var $this = $(this);
+        if($this.prop('checked')) {
+            for (var i = extensions.length - 1; i >= 0; i--) {
+                extensions[i].prop('checked', true);  
+            };
+            MW.showExtension();
+        }
+    });
+};
+
+
+/**
+ * Pokazywanie zaznaczonych elementów
+ */
+MW.showExtension = function() {
+    var components = [
+            MW.vars.busConnection,
+            MW.vars.registerX,
+            MW.vars.registerY,
+            MW.vars.extensionRB,
+            MW.vars.extensionG,
+            MW.vars.extensionWS,
+            MW.vars.aritmeticalOperations,
+            MW.vars.logicalOperations,
+            MW.vars.extensionIAK,
+            MW.vars.extensionDAK,
+            MW.vars.extensionF
+        ];
+
+    var extensions = [
+            $('#extension0'),
+            $('#extension1'),
+            $('#extension2'),
+            $('#extension3'),
+            null,
+            $('#extension4'),
+            $('#extension5'),
+            $('#extension6'),
+            $('#extension7'),
+            null,
+            $('#extension8')
+        ];
+
+    //Chowanie dodatkowych elementów
+    for (var i = components.length - 1; i >= 0; i--) {
+        components[i].fadeOut(0);
+    }
+
+    //Checkbox - activation of additional elements
+    for (var i = 0; i <= components.length -1; i++) {
+        if(i == 3 || i == 8) {
+            if(extensions[i].prop('checked')) {
+                components[i].fadeIn(0);
+                components[i+1].fadeIn(0);
+            }
+            else {
+                components[i].fadeOut(0);
+                components[i+1].fadeOut(0);
+            }
+            i++;
+            continue;
+        }
+
+        if(extensions[i].prop('checked')) {
+            components[i].fadeIn(0);
+        }
+        else {
+            components[i].fadeOut(0);
+        }
+    }
+    
 };
 
 
@@ -203,7 +483,7 @@ MW.setText = function(paper, command, posX, posY, arrow) {
  * @param {string}  position property for line
  * @param {Boolean} isWe - if is true - arrowhead at the end
  */
-MW.setArrow = function(paper, position, isWe) {
+MW.setArrow = function(paper, position, isWe, isOtherArrow) {
     var arrow = paper.path(position);
 
     if(isWe) {
@@ -213,6 +493,14 @@ MW.setArrow = function(paper, position, isWe) {
         arrow.attr(MW.attr.wyCommand);
     }
 
+    if(isOtherArrow) {
+        if(isWe) {
+            arrow.attr({'arrow-end': 'diamond-wide-long'});
+        }
+        else {
+            arrow.attr({'arrow-start': 'diamond-wide-long'});
+        }  
+    }
     return arrow;
 };
 
