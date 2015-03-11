@@ -85,24 +85,24 @@ MW.centralUnit = function(containerCentralUnit) {
 
     //acumulator
     var acumulator = function() {
-        var wejaArrow = MW.setArrow(paper, 'M450 300 V260', true),
+        var wejaArrow = MW.setArrow(paper, 'M450 300 V255', true),
             wejaText = MW.setText(paper, 'weja', 425, 275, wejaArrow),
             wyakArrow = MW.setArrow(paper, 'M605 300 V65, 65 H500, 500 V100', false),
             wyakText = MW.setText(paper, 'wyak', 550, 55, wyakArrow),
-            weakArrow = MW.setArrow(paper, 'M345 125 H373', true),
+            weakArrow = MW.setArrow(paper, 'M345 125 H374', true),
             weakText = MW.setText(paper, 'weak', 325, 125, weakArrow),
-            dodArrow = MW.setArrow(paper, 'M345 145 H370', true, true),
+            dodArrow = MW.setArrow(paper, 'M345 145 H371', true, true),
             dodText = MW.setText(paper, 'dod', 327, 145, dodArrow),
-            odeArrow = MW.setArrow(paper, 'M345 165 H370', true, true),
+            odeArrow = MW.setArrow(paper, 'M345 165 H371', true, true),
             odeText = MW.setText(paper, 'ode', 328, 165, odeArrow),
-            przepArrow = MW.setArrow(paper, 'M345 185 H370', true, true),
+            przepArrow = MW.setArrow(paper, 'M345 185 H371', true, true),
             przepText = MW.setText(paper, 'przep', 324, 185, przepArrow);
     };
 
 
     //instruction register
     var instructionRegister = function() {
-        var weiArrow = MW.setArrow(paper, 'M125 300 V250', true),
+        var weiArrow = MW.setArrow(paper, 'M125 300 V245', true),
             weiText = MW.setText(paper, 'wei', 100, 275, weiArrow),
             wyadArrow = MW.setArrow(paper, 'M175 0 V225', false),
             wyadText = MW.setText(paper, 'wyad', 150, 190, wyadArrow);
@@ -110,15 +110,15 @@ MW.centralUnit = function(containerCentralUnit) {
 
     //Memory
     var memory = function() {
-        var wesArrow = MW.setArrow(paper, 'M730 300 V250', true),
+        var wesArrow = MW.setArrow(paper, 'M730 300 V245', true),
             wesText = MW.setText(paper, 'wes', 750, 275, wesArrow),
-            wysArrow = MW.setArrow(paper, 'M690 300 V250', false),
+            wysArrow = MW.setArrow(paper, 'M690 295 V245', false),
             wysText = MW.setText(paper, 'wys', 670, 275, wysArrow),
             weaArrow = MW.setArrow(paper, 'M710 0 V50', true),
             weaText = MW.setText(paper, 'wea', 730, 25, weaArrow),
-            czytArrow = MW.setArrow(paper, 'M820 140 H803', true, true),
+            czytArrow = MW.setArrow(paper, 'M820 140 H805', true, true),
             czytText = MW.setText(paper, 'czyt', 835, 140, czytArrow),
-            piszArrow = MW.setArrow(paper, 'M820 180 H803', true, true),
+            piszArrow = MW.setArrow(paper, 'M820 180 H805', true, true),
             piszText = MW.setText(paper, 'pisz', 835, 180, piszArrow);
     };
 
@@ -141,7 +141,7 @@ MW.additionalElements = function() {
     var busConnection = function() {
         var paper = Raphael("bus-connection");
 
-        var asSaArrow = MW.setArrow(paper, 'M10 0 V300, M5 0 V300' , true);
+        var asSaArrow = MW.setArrow(paper, 'M10 0 V295, M5 0 V295' , true);
             asSaArrow.attr({'arrow-start': 'block-wide-long'});
 
         var asSaText = MW.setText(paper, 'as (sa)', 40, 35, asSaArrow);
@@ -195,9 +195,9 @@ MW.additionalElements = function() {
             wywsText = MW.setText(paper, 'wyws', 140, 35, wywsArrow),
             wewsArrow = MW.setArrow(paper, 'M85 22 V47' , false),
             wewsText = MW.setText(paper, 'wews', 60, 35, wewsArrow),
-            iwsArrow = MW.setArrow(paper, 'M30 10 H48' , true, true),
+            iwsArrow = MW.setArrow(paper, 'M30 10 H46' , true, true),
             iwsText = MW.setText(paper, 'iws', 15, 10, iwsArrow),
-            dwsArrow = MW.setArrow(paper, 'M170 10 H153' , true, true),
+            dwsArrow = MW.setArrow(paper, 'M170 10 H154' , true, true),
             dwsText = MW.setText(paper, 'dws', 185, 10, dwsArrow);
     };
 
@@ -205,11 +205,11 @@ MW.additionalElements = function() {
     var aritmeticalOperations = function() {
         var paper = Raphael("aritmetical-operations");
 
-        var mnoArrow = MW.setArrow(paper, 'M55 5 H80', true, true),
+        var mnoArrow = MW.setArrow(paper, 'M55 5 H81', true, true),
             mnoText = MW.setText(paper, 'mno', 37, 5, mnoArrow),
-            dzielArrow = MW.setArrow(paper, 'M55 25 H80', true, true),
+            dzielArrow = MW.setArrow(paper, 'M55 25 H81', true, true),
             dzielText = MW.setText(paper, 'dziel', 37, 25, dzielArrow),
-            shrArrow = MW.setArrow(paper, 'M55 45 H80', true, true),
+            shrArrow = MW.setArrow(paper, 'M55 45 H81', true, true),
             shrText = MW.setText(paper, 'shr', 40, 45, shrArrow);
     };
 
@@ -229,12 +229,12 @@ MW.additionalElements = function() {
     var incDec = function() {
         var paper = Raphael("extension-iak");
 
-        var iakArrow = MW.setArrow(paper, 'M45 20 H70', true, true),
+        var iakArrow = MW.setArrow(paper, 'M45 20 H74', true),
             iakText = MW.setText(paper, 'iak', 30, 20, iakArrow);
 
         var paper2 = Raphael("extension-dak");
 
-        var dakArrow = MW.setArrow(paper2, 'M5 20 H30', false, true),
+        var dakArrow = MW.setArrow(paper2, 'M2 20 H30', false),
             dakText = MW.setText(paper2, 'dak', 47, 20, dakArrow);
     };
 

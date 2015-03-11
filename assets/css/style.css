@@ -152,7 +152,7 @@ svg {
       display: block;
       overflow-y: scroll;
       width: 100%;
-      height: 150px;
+      height: 145px;
       margin: 23px 0; }
       .central-unit__base .memory__table--row {
         position: relative;
@@ -337,7 +337,7 @@ svg {
   height: 30px; }
 
 .extension-f {
-  left: 373px;
+  left: 375px;
   top: 69px; }
   .extension-f::after {
     content: "F :";
@@ -521,3 +521,5 @@ section.w-machine {
   background-color: #FFF;
   border-top: 0px solid #60A9FF;
   border-bottom: 0px solid #60A9FF; }
+
+/*# sourceMappingURL=style.css.map */
