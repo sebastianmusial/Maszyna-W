@@ -15,7 +15,6 @@
   "dependencies": {
     "jquery": "1.11.2",
     "angular": "1.3.13",
-    "raphael": "2.1.2",
     "bootstrap": "3.3.2"
   }
 }
