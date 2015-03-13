@@ -372,6 +372,8 @@ svg {
     padding: 10px;
     background-color: #9F9F9F;
     color: #FFF; }
+  .control-panel input {
+    margin-left: 10px; }
   .control-panel label {
     padding-left: 10px;
     font-weight: normal; }
@@ -408,13 +410,13 @@ section.forum {
     color: #AFA4A4; }
   section.forum .table-category tr {
     height: 50px; }
-    section.forum .table-category tr td.col-content {
+    section.forum .table-category tr .col-content {
       max-width: 100%;
       padding-left: 20px; }
-    section.forum .table-category tr td.col-views {
+    section.forum .table-category tr .col-views {
       width: 120px;
       line-height: 50px; }
-    section.forum .table-category tr td.col-post {
+    section.forum .table-category tr .col-post {
       width: 200px;
       height: 50px;
       padding-top: 20px; }
@@ -427,6 +429,8 @@ section.register-form {
   display: block; }
   section.register-form h3.signup {
     text-align: center; }
+  section.register-form .alert {
+    display: none; }
   section.register-form form {
     width: 400px;
     margin: 0 auto;

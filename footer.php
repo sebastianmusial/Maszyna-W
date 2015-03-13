@@ -11,5 +11,6 @@
   <script src="assets/vendor/angular/angular.min.js"></script>
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/js/_main.js"></script>
+  <script src="assets/js/_registration.js"></script>
 </body>
 </html>
