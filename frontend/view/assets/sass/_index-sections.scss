@@ -1,0 +1,15 @@
+
+/* ------------------------------------------------------------------
+	SECTION - W Machine
+   ------------------------------------------------------------------ */
+   
+section.w-machine {
+	font-size: 11px;
+	padding: 20px;
+	margin: 10px;
+	background-color: #FFF;
+	border: {
+		top:    0px solid $bg-navbar-active;
+		bottom: 0px solid $bg-navbar-active;
+	}
+}
