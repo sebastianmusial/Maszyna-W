@@ -1,0 +1,41 @@
+
+/* ------------------------------------------------------------------
+	NAVBAR
+--------------------------------------------------------------------- */
+
+#navbar {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 0px;
+	background-color: $bg-navbar;
+
+	.glyphicon { margin-right: 10px; }
+	.active a { background-color: $bg-navbar-active; }
+
+	a { 
+		color: $nav-link; 
+		@include transition(background-color 0.5s ease);
+
+		&:hover:not(.navbar-brand) { background-color: $bg-navbar-active; }
+	}
+
+	.dropdown {
+		.dropdown-menu { 
+			border-radius: 0px;
+			background-color: $bg-navbar-active; 
+
+			a {
+				font-size: 11px; 
+				line-height: 30px;
+				font-weight: 600;
+
+				&:hover { background-color: #FFF; color: $bg-navbar-active; }
+			}
+
+		}
+
+		.dropdown-toggle { background-color: $bg-navbar; }
+	}
+
+}

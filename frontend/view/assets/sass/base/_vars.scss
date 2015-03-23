@@ -1,0 +1,22 @@
+//Fonts
+$base-font: 'Helvetica Neue', 'Lato', sans-serif;
+
+//Colors
+
+$color-blue: #4A90E2;
+$color-blue-lighten: #60A9FF;
+
+$cpu: #000;
+$active: #FF1111;
+$bg-components: #F5F5F3;
+$bg-active-components: #D3D6CD;
+$bg-hover: rgba(0, 0, 0, 0.3);
+$bg-focus: rgba(255, 0, 0, 0.3);
+$bg-navbar: $color-blue;
+$bg-navbar-active: $color-blue-lighten;
+$background-table: rgba(0, 0, 0, 0.05);
+$hover-row: rgba(0, 0, 0, 0.3);
+$nav-link: #FFF;
+
+//Sizes
+$wrap-width: 1200px;
