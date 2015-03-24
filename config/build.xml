@@ -10,7 +10,6 @@
     <property name="tomcat-home" location="/var/lib/tomcat8" />
     
     <path id="project-classpath">
-        <fileset dir="web/WEB-INF/lib" includes="*.jar" />
         <fileset dir="${tomcat-home}/lib" includes="*.jar" />
     </path>
 
