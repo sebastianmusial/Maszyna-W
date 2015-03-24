@@ -7,7 +7,7 @@
     <property name="web" location="web" />
     <property name="build" location="classes" />
     <property name="dist"  location="dist" />
-    <property name="tomcat-home" location="/var/lib/tomcat8" />
+    <property name="tomcat-home" location="/usr/share/tomcat8" />
     
     <path id="project-classpath">
         <fileset dir="${tomcat-home}/lib" includes="*.jar" />
