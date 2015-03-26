@@ -21,6 +21,7 @@ MW.vars = {
 };
 
 
+
 /**
  * Basic attributes which have been used
  */
@@ -72,6 +73,7 @@ MW.init = function() {
  */
 MW.centralUnit = function(containerCentralUnit) {
     var paper = Raphael("central-unit__base");
+    MW.paper = paper;
 
     //counter
     var counter = function() {
@@ -414,6 +416,8 @@ MW.setText = function(paper, command, posX, posY, arrow) {
     label
         .attr({ x: posX, y: posY})
         .attr(MW.attr.textCommand);
+    label.id = 'signal-' + command + '-label';
+    arrow.id = 'signal-' + command + '-arrow';
 
     //Click action for arrows
     var arrowAction = function() {
