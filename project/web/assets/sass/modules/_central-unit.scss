@@ -1,0 +1,423 @@
+.central-unit {
+	position: relative;
+	height: 100%;
+	width: 90%;
+	max-width: 850px;
+	min-width: 850px;
+	margin: 0 auto;
+}
+
+.element {
+	border: 1px solid $cpu;
+	background: $bg-components;
+	@include transition(all 0.3s ease-in-out);
+
+	&:hover {
+		background: $bg-active-components;
+	}
+
+	&__data {
+		z-index: 2;
+		background: none;
+		outline: none;
+		width: 100%;
+		height: 25px;
+		text-align: center;
+		border: 1px solid $cpu;
+		font-size: 12px;
+		font-family: $base-font;
+		cursor: pointer;
+		@include transition(all 0.3s ease-in-out);
+		@include box-sizing(border-box);
+
+		&:hover {
+			background: $bg-hover;
+		}
+
+		&:focus {
+			background: $bg-focus;
+		}
+	}
+}
+
+.central-unit__base {
+	position: relative;
+	height: 300px;
+	width: 100%;
+	border-top: 3px double $cpu;
+	border-bottom: 3px double $cpu;
+
+	&::before {
+		display: block;
+		position: absolute;
+		right: 0px;
+		top: -20px;
+		content: "magistrala adresowa";
+	}
+
+	&::after {
+		display: block;
+		position: absolute;
+		right: 0px;
+		bottom: -20px;
+		content: "magistrala danych";
+	}
+
+	.acumulator {
+		@extend .element;
+		position: absolute;
+		bottom: 40px;
+		top: 90px;
+		right: 325px;
+		width: 150px;
+		
+		&::before {
+			display: block;
+			position: absolute;
+			left: 10px;
+			top: 4px;
+			content: "AK :";
+		}
+
+		&__data {
+			@extend .element__data;
+			position: absolute;
+			top: -31px;
+			margin-top: 30px;
+			border-right: none;
+			border-left: none;
+		}
+	}
+
+	.memory {
+		@extend .element;
+		position: absolute;
+		bottom: 50px;
+		top: 50px;
+		right: 50px;
+		width: 175px;
+		@include scrollbars(13px, $hover-row);
+
+		&::before {
+			display: block;
+			position: absolute;
+			left: 10px;
+			top: 4px;
+			content: "A :";
+		}
+
+		&::after {
+			display: block;
+			position: absolute;
+			left: 10px;
+			bottom: 4px;
+			content: "S :";
+		}
+		
+		&__address {
+			@extend .element__data;
+			position: absolute;
+			top: -31px;
+			left: -1px;
+			margin-top: 30px;
+			border-right: none;
+			border-left: none;
+		}
+
+		&__verbal {
+			@extend .element__data;
+			position: absolute;
+			bottom: -1px;
+			left: -1px;
+			margin-top: 30px;
+			border-right: none;
+			border-left: none;
+		}
+
+		&__table {
+			display: block;
+			overflow-y: scroll;
+			width: 100%;
+			height: 145px;
+			margin: 23px 0;
+
+			&--row {
+				position: relative;
+				display: block;
+				height: 20px;
+				width: 100%;
+				@include transition(all 0.3s ease-in-out);
+	
+				&:hover {
+					background: $hover-row;
+					cursor: pointer;
+				}
+
+				&:nth-child(even) {
+					background: $background-table;
+
+					&:hover {
+						background: $hover-row;
+						cursor: pointer;
+					}
+				}
+			}
+
+			&--cell {
+				display: inline-block;
+				width: 20%;
+				padding: 2px 0;
+				text-align: center;
+				white-space: nowrap;
+
+
+				&:last-of-type {
+					padding-left: 40%;
+				}
+			}
+
+			&__data {
+				@include box-sizing(border-box);
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 20px;
+				padding: 2px 50% 2px 25%;
+				background: none;
+				border: none;
+				outline: none;
+				text-align: center;
+				font-size: 12px;
+				font-family: $base-font;
+				cursor: pointer;
+				@include transition(all 0.3s ease-in-out);
+
+				&:focus {
+					background: $bg-focus;
+				}
+			}
+		}
+	}
+
+	.counter {
+		@extend .element;
+		border: none;
+		position: absolute;
+		top: 50px;
+		left: 40px;
+		width: 100px;
+
+		&::after {
+			display: block;
+			position: absolute;
+			left: 10px;
+			bottom: 6px;
+			content: "L :";
+		}
+	}
+
+	.address {
+		@extend .element;
+		border: none;
+		position: absolute;
+		bottom: 50px;
+		left: 100px;
+		width: 100px;
+
+		&::after {
+			display: block;
+			position: absolute;
+			left: 10px;
+			bottom: 6px;
+			content: "I :";
+		}
+	}
+
+	.bus-connection {
+		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 240px;
+		width: 60px;
+	}
+}
+
+
+.central-unit__extension {
+	position: relative;
+	height: 55px;
+	width: 100%;
+}
+
+
+.central-unit__extension {
+	position: relative;
+	height: 55px;
+	width: 100%;
+}
+
+.register {
+	@extend .element;
+	border: none;
+	background: none;
+	position: absolute;
+	width: 100px;
+	height: 25px;
+
+	&:hover {
+		background: none;
+	}
+
+	&:focus {
+		background: none;
+	}
+
+	&::after {
+		display: block;
+		position: absolute;
+		z-index: 3;
+		left: 10px;
+		bottom: -20px;
+	}
+
+	.element__data {
+		margin-top: -3px;
+		background: $bg-components;
+
+		&:hover {
+			background: $bg-hover;
+		}
+
+		&:focus {
+			background: $bg-focus;
+		}
+	}
+}
+
+.register-x {
+	@extend .register;
+	left: 50px;
+
+	&::after {
+		content: "X :";
+	}
+}
+
+.register-y {
+	@extend .register;
+	left: 225px;
+
+	&::after {
+		content: "Y :";
+	}
+}
+
+.extension-rb {
+	@extend .register;
+	left: 400px;
+
+	&::after {
+		content: "RB :";
+	}
+}
+
+.extension-g {
+	@extend .register;
+	left: 575px;
+
+	&::after {
+		content: "G :";
+	}
+}
+
+.extension-ws {
+	@extend .register;
+	left: 400px;
+	top: 8px;
+
+	&::after {
+		content: "WS :";
+		top: 3px;
+	}
+
+	.element__data {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	svg {
+		height: 50px;
+		width: 250px;
+		margin-left: -50px;
+		z-index: 1;
+	}
+}
+
+.aritmetical-operations {
+	position: absolute;
+	top: 200px;
+	left: 290px;
+	width: 85px;
+	height: 100px;
+}
+
+.logical-operations {
+	position: absolute;
+	top: 135px;
+	left: 525px;
+	width: 75px;
+	height: 100px;
+}
+
+.extension-iak {
+	position: absolute;
+	top: 85px;
+	left: 300px;
+	width: 75px;
+	height: 30px;
+}
+
+.extension-dak {
+	position: absolute;
+	top: 85px;
+	left: 525px;
+	width: 75px;
+	height: 30px;
+}
+
+.extension-f {
+	@extend .register;
+	left: 375px;
+	top: 69px;
+
+	&::after {
+		content: "F :";
+		top: 3px;
+	}
+
+	.element__data {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	svg {
+		height: 50px;
+		width: 250px;
+		margin-left: -50px;
+		z-index: 1;
+	}
+}
+
+.type { 
+	width: 30%;
+	float: left;
+}
+
+.extensions { 
+	display: inline-block;
+	width: 40%;
+}

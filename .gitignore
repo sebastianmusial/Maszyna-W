@@ -5,6 +5,7 @@ assets/css/main.css.map
 assets/css/*main*.css
 assets/js/*scripts*.js
 assets/manifest.json
+project/build
 
 ### SublimeText ###
 # cache files for sublime text
