@@ -34,7 +34,7 @@
     </target>
     
     <target name="build-war" depends="compile" description="Create a WAR file.">
-        <war destfile="./WMachine.war" webxml="${web}/WEB-INF/web.xml">
+        <war destfile="./build/WMachine.war" webxml="${web}/WEB-INF/web.xml">
             <fileset dir="${web}" />
             <!--<lib dir="thirdpartyjars">
                 <exclude name="portlet.jar"/>
