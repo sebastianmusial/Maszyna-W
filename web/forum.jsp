@@ -1,11 +1,11 @@
-<?php 
-	// booleans
-	$is_forum = true;
+<%@ page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-	// includes
-	require "header.php";
-	include "view/navbar.php";
-?>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
+
+<%@ include file="header.jsp" %>
+<%@ include file="view/navbar.jsp" %>
 
 <div class="container-fluid wrap">
 	<section class="forum">
@@ -38,4 +38,4 @@
 	</section>
 </div>
 
-<?php require "footer.php"; ?>
+<%@ include file="footer.jsp" %>

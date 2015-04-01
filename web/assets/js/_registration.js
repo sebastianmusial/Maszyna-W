@@ -4,7 +4,7 @@
 --------------------------------------------------------------------- */
 
 var form = "registration";
-var alert = $(".alert");
+var alert = $(".alert:not(.alert-info)");
 
 
 function validateEmail() {

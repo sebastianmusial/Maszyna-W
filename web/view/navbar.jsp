@@ -15,8 +15,8 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-main">
 				<li class="active"><a href="index.jsp">Symulator <span class="sr-only">(current)</span></a></li>
-				<li><a href="guestbook.php">Księga gości</a></li>
-				<li><a href="forum.php">Forum</a></li>
+				<li><a href="guestbook.jsp">Księga gości</a></li>
+				<li><a href="forum.jsp">Forum</a></li>
 
 				<!--<?php if($is_forum): ?>
 				<li class="dropdown">
@@ -36,8 +36,8 @@
 					  Witaj nieznajomy!<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-					  <li><a href="login.php">Logowanie</a></li>
-					  <li><a href="register.php">Rejestracja</a></li>
+					  <li><a href="login.jsp">Logowanie</a></li>
+					  <li><a href="register.jsp">Rejestracja</a></li>
 					</ul>
 				</li>
 			</ul>

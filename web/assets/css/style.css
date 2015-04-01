@@ -422,33 +422,45 @@ section.forum {
       padding-top: 20px; }
 
 /* ------------------------------------------------------------------
-	SECTION - Register
+	SECTION - Register/Login
 --------------------------------------------------------------------- */
+section.login-form,
 section.register-form {
   margin-top: 50px;
   display: block; }
-  section.register-form h3.signup {
+  section.login-form h3.signup, section.login-form h3.signin,
+  section.register-form h3.signup,
+  section.register-form h3.signin {
     text-align: center; }
-  section.register-form .alert {
+  section.login-form .alert:not(.alert-info),
+  section.register-form .alert:not(.alert-info) {
     display: none; }
+  section.login-form form,
   section.register-form form {
     width: 400px;
     margin: 0 auto;
     margin-top: 20px;
     padding: 40px;
     border: 1px solid #dfdada; }
+    section.login-form form .form-container,
     section.register-form form .form-container {
       margin: 0 auto;
       border-collapse: collapse; }
+      section.login-form form .form-container .form-field,
       section.register-form form .form-container .form-field {
         padding-top: 10px; }
+        section.login-form form .form-container .form-field td,
         section.register-form form .form-container .form-field td {
           padding: 5px 0px; }
+        section.login-form form .form-container .form-field td:first-child,
         section.register-form form .form-container .form-field td:first-child {
           color: #6c6c6c;
           font-size: 12px;
           font-weight: bold;
           padding-right: 20px; }
+  section.login-form .login-button,
+  section.login-form .register-button,
+  section.register-form .login-button,
   section.register-form .register-button {
     display: block;
     width: 100%;
@@ -468,8 +480,26 @@ section.register-form {
     -ms-transition: background-color 0.5s ease;
     -o-transition: background-color 0.5s ease;
     transition: background-color 0.5s ease; }
+    section.login-form .login-button:hover,
+    section.login-form .register-button:hover,
+    section.register-form .login-button:hover,
     section.register-form .register-button:hover {
       background-color: #60A9FF; }
+  section.login-form .info,
+  section.register-form .info {
+    margin: 0;
+    margin-top: 40px;
+    text-align: center; }
+
+section.register-successful .alert {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 50px; }
+  section.register-successful .alert .glyphicon {
+    display: block;
+    float: left;
+    font-size: 32px;
+    margin-right: 15px; }
 
 /* ------------------------------------------------------------------
 	NAVBAR
@@ -525,5 +555,3 @@ section.w-machine {
   background-color: #FFF;
   border-top: 0px solid #60A9FF;
   border-bottom: 0px solid #60A9FF; }
-
-/*# sourceMappingURL=style.css.map */

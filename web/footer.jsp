@@ -1,9 +1,10 @@
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*" %>
+
 <div class="wrap">
   <footer class="footer-site">
   	Developed by Michał Rakoczy, Sebastian Musiał, Dawid Poloczek, <br /> 
   	Tomasz Rzepka, Józef Flakus <br />
-  	Have fun! <%= new java.util.Date() %>
+  	Have fun! <%= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date()) %>
   </footer>
 </div>
 
