@@ -5,6 +5,8 @@ assets/css/main.css.map
 assets/css/*main*.css
 assets/js/*scripts*.js
 assets/manifest.json
+assets/sass/.sass-cache
+build
 
 ### SublimeText ###
 # cache files for sublime text
@@ -48,3 +50,7 @@ Temporary Items
 *.codekit
 
 *.sublime-project
+
+*.scssc
+
+*.scssc
