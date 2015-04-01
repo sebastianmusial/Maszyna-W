@@ -1,4 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
 <nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid wrap">
 
@@ -30,16 +34,34 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-					  <span class="glyphicon glyphicon-user"></span>
-					  Witaj nieznajomy!<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-					  <li><a href="login.jsp">Logowanie</a></li>
-					  <li><a href="register.jsp">Rejestracja</a></li>
-					</ul>
-				</li>
+			
+				<c:if test="${sessionScope.loggedUser == null}">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						  <span class="glyphicon glyphicon-user"></span>
+						  Witaj nieznajomy!<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+						  <li><a href="login.jsp">Logowanie</a></li>
+						  <li><a href="register.jsp">Rejestracja</a></li>
+						</ul>
+					</li>				
+				</c:if>
+				
+				<c:if test="${sessionScope.loggedUser != null}">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						  <span class="glyphicon glyphicon-user"></span>
+						  Witaj ${sessionScope.loggedUser}!<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+						  <li>
+						  	<a href="LogoutUser">Wyloguj się</a>
+						  </li>
+						</ul>
+					</li>				
+				</c:if>
+				
 			</ul>
 		</div><!-- /.navbar-collapse -->
 

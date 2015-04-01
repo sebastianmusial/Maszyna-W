@@ -74,6 +74,18 @@ section.register-form {
 		text-align: center;
 	}
 
+	.alert {
+		line-height: 24px;
+
+		.glyphicon {
+			display: block;
+			float: left;
+			font-size: 24px;
+			line-height: 24px;
+			margin-right: 15px;
+		}
+	}
+
 	.alert:not(.alert-info) { display: none; } 
 
 
@@ -134,6 +146,8 @@ section.register-form {
 		text-align: center;
 	}
 }
+
+section.login-form { .alert:not(.alert-info) { display: block; }  }
 
 section.register-successful {
 

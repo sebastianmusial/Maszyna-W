@@ -52,7 +52,7 @@ public class DatabaseConnection {
             }
                             
             isCreated = true;
-            System.out.printf("First connection to database.");
+            System.out.printf("First connection to database.\n");
         }
     }
 }

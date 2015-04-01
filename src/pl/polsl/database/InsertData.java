@@ -6,16 +6,27 @@ import java.sql.SQLException;
 
 public class InsertData {
 
-	public static void insertUser(Connection con, String user_login, String user_pass, String user_email) throws SQLException, Exception {	
+	public static void insertUser(Connection con, String userLogin, String userPass, String userEmail) throws SQLException, Exception {	
 			
-            PreparedStatement pst = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)");
+		PreparedStatement pst = null;
+		
+		try {
+			
+            pst = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)");
 
             pst.setNull(1, 0);
-            pst.setString(2, user_login);
-            pst.setString(3, user_pass);
-            pst.setString(4, user_email);
+            pst.setString(2, userLogin);
+            pst.setString(3, userPass);
+            pst.setString(4, userEmail);
 
-            pst.executeUpdate();			
+            pst.executeUpdate();
+            
+		} finally {	
+			
+			if (pst != null) {
+				pst.close();
+			}			
+		}
 	}
 	
 }

@@ -13,7 +13,7 @@
 	  <c:when test="${error}">
 		<div class="alert alert-danger" role="alert">
 			<span class="glyphicon glyphicon-alert"></span><strong>Wystąpił błąd podczas rejestracji.</strong><br />
-			Spróbój ponownie wracajć do formularza <a href="register.jsp">rejestracji</a>.
+			Spróbój ponownie wracając do formularza <a href="register.jsp">rejestracji</a>.
 		</div>
 	  </c:when>
 	  <c:otherwise>

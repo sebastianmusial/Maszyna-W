@@ -10,20 +10,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import pl.polsl.database.*;
+import pl.polsl.database.DatabaseConnection;
+import pl.polsl.database.QueryData;
 
 /**
- * Register user in the database
+ * Sign in user
  * @author Józef Flakus
- * @verion 1.0
+ * @version 1.0
  */
-
-@WebServlet("/RegisterUser")
-public class RegisterUser extends HttpServlet {
+@WebServlet("/LoginUser")
+public class LoginUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -35,27 +35,44 @@ public class RegisterUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
-    	String user_login = request.getParameter("user_name");
-    	String user_pass  = request.getParameter("user_pass");
-    	String user_email = request.getParameter("user_email");
+    	String userLogin = request.getParameter("user_name");
+    	String userPass  = request.getParameter("user_pass");
     	
     	boolean error = false;
+    	String result = null;
     	
     	Connection con = new DatabaseConnection(request).getInstance();
     	
     	try {
-			InsertData.insertUser(con, user_login, user_pass, user_email);
+    		result = QueryData.findUser(con, userLogin, userPass);
+    		
+    		if (result.isEmpty()) {
+    			error = true;
+    		}
+    		
 		} catch (SQLException e) {
 			error = true;
 		} catch (Exception e) {
 			error = true;
 		}
-    	
-    	// output  	
+    	   	
+    	// set output attributes
         request.setAttribute("error", error); 
-
-        RequestDispatcher rd = request.getRequestDispatcher("register_status.jsp");
-        rd.forward(request, response);
+        RequestDispatcher rd = null;
+        
+        if (!error) {
+        	
+        	HttpSession session = request.getSession(true);
+        	session.setAttribute("loggedUser", result);  
+        	session.setAttribute("isAdmin", false); 
+        	
+        	response.sendRedirect("index.jsp");
+        	
+        } else {
+        	
+        	rd = request.getRequestDispatcher("login.jsp");
+        	rd.forward(request, response);
+        }   
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

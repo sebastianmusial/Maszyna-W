@@ -432,6 +432,16 @@ section.register-form {
   section.register-form h3.signup,
   section.register-form h3.signin {
     text-align: center; }
+  section.login-form .alert,
+  section.register-form .alert {
+    line-height: 24px; }
+    section.login-form .alert .glyphicon,
+    section.register-form .alert .glyphicon {
+      display: block;
+      float: left;
+      font-size: 24px;
+      line-height: 24px;
+      margin-right: 15px; }
   section.login-form .alert:not(.alert-info),
   section.register-form .alert:not(.alert-info) {
     display: none; }
@@ -490,6 +500,9 @@ section.register-form {
     margin: 0;
     margin-top: 40px;
     text-align: center; }
+
+section.login-form .alert:not(.alert-info) {
+  display: block; }
 
 section.register-successful .alert {
   max-width: 600px;
