@@ -12,34 +12,21 @@ import javax.servlet.http.HttpSession;
 import pl.polsl.architecture.WMachine;
 
 /**
- * Servlet implementation class WMachineServletBase
+ * Base class for servlets manipulating W Machine state.
+ * @author Tomasz Rzepka
+ * @version 1.0
  */
 @WebServlet("/WMachineServletBase")
 public class WMachineServletBase extends HttpServlet {
+	/** Serial version UID. */
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WMachineServletBase() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Return W Machine stored in HTTP session or creates
+	 * a new one and save it in the session.
+	 * @param session - current HTTP session.
+	 * @return W Machine instance.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 	protected WMachine getCurrentWMachine(HttpSession session) {
 		WMachine machine = (WMachine)session.getAttribute("WMachineInstance");
 		if(machine == null) {
@@ -48,5 +35,46 @@ public class WMachineServletBase extends HttpServlet {
 			session.setAttribute("WMachineInstance", machine);
 		}
 		return machine;
+	}
+    
+	/**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> method.
+     * This function should be overriden in subclasses.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+	
+	/**
+     * Processes requests for HTTP <code>GET</code> method.
+     * By default calls processRequest method.
+     * This method should not be overriden unless different
+     * behaviour is needed for GET and POST methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	/**
+     * Processes requests for HTTP <code>POST</code> methods.
+     * By default calls processRequest method.
+     * This method should not be overriden unless different
+     * behaviour is needed for GET and POST methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
 	}
 }
