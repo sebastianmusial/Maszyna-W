@@ -14,7 +14,7 @@ public class QueryData {
 		
 		try {
 			
-			pst = con.prepareStatement("SELECT login FROM user WHERE login = ? AND password = ?");
+			pst = con.prepareStatement("SELECT login FROM User WHERE login = ? AND password = ?");
 	        pst.setString(1, userName);
 	        pst.setString(2, userPass);	
 	        

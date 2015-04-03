@@ -2,15 +2,15 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <context-param>
     <param-name>DB_URL</param-name>
-    <param-value>jdbc:mysql://localhost:3306/test</param-value>
+    <param-value>jdbc:mysql://mysql3.hekko.net.pl:3306/sssebuss_bd</param-value>
   </context-param>
   <context-param>
     <param-name>DB_USER</param-name>
-    <param-value>root</param-value>
+    <param-value>sssebuss_bd</param-value>
   </context-param>
   <context-param>
     <param-name>DB_PASS</param-name>
-    <param-value></param-value>
+    <param-value>maszynaW2015</param-value>
   </context-param>
   <context-param>
     <param-name>DB_DRIVER</param-name>

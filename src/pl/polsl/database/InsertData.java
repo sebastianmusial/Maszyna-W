@@ -12,7 +12,7 @@ public class InsertData {
 		
 		try {
 			
-            pst = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)");
+            pst = con.prepareStatement("INSERT INTO User VALUES (?, ?, ?, ?)");
 
             pst.setNull(1, 0);
             pst.setString(2, userLogin);
