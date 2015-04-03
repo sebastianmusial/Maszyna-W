@@ -18,6 +18,8 @@ public class Signal {
     /** Signal data target. */
     private DataTarget target;
     
+    private boolean enabled = false;
+    
     /**
      * Constructs signal configured to pass data from source to target.
      * @param source - source of data.
@@ -39,7 +41,7 @@ public class Signal {
             return;
         getTarget().setValue(getSource().getValue());
     }
-
+    
     /**
      * Getter of data source.
      * @return the source
@@ -54,5 +56,13 @@ public class Signal {
      */
     public DataTarget getTarget() {
         return target;
+    }
+    
+    public boolean isEnabled() {
+    	return enabled;
+    }
+    
+    public void setEnabled(boolean enabled) {
+    	this.enabled = enabled;
     }
 }

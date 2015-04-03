@@ -48,18 +48,14 @@ MW.bindRegisterChangeHandler = function(registerName) {
 // Init interaction.
 $(document).ready(function() {
 	for(var registerName in MW.Registers) {
-		MW.readRegisterValue(registerName);
 		MW.bindRegisterChangeHandler(registerName);
 	}
 	
-	$('#run_test_interaction').click(function() {
-		var activeSignals = [];
-		for(key in MW.Signals) {
-			var signal = MW.Signals[key];
-			if(signal.state)
-				activeSignals.push(key);
-			signal.state = !signal.state;
-		}
-		$('#test_interaction').html(activeSignals.toString());
+	$.get("WMachineState", {action: "restore"}, function(data) {
+		wmachine = JSON.parse(data);
+		for(registerName in wmachine.registers)
+			MW.Registers[registerName].prop('value', wmachine.registers[registerName]);
+		for(signalName in wmachine.signals)
+			MW.Signals[signalName].state = wmachine.signals[signalName];
 	});
 });

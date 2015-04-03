@@ -79,6 +79,21 @@ public class WMachine {
         signals.put("wys", new Signal(S, magS));
         signals.put("wes", new Signal(magS, S));
         signals.put("wei", new Signal(magS, I));
+        
+        try {
+        	L.setValue(5);
+        	L.nextTact();
+			A.setValue(5);
+			A.nextTact();
+			S.setValue(20);
+			S.nextTact();
+			signals.get("wyad").setEnabled(true);
+			signals.get("wea").setEnabled(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     }
     
     /**
@@ -133,5 +148,23 @@ public class WMachine {
     	if(components.containsKey(componentName))
     		return components.get(componentName);
     	else return null;
+    }
+    
+    public List<String> getRegisterNames() {
+    	List<String> names = new LinkedList<>();
+    	for(String componentName : components.keySet()) {
+    		WMachineComponent component = components.get(componentName);
+    		if(component instanceof Register)
+    			names.add(componentName);
+    	}
+    	return names;
+    }
+    
+    public List<String> getSignalNames() {
+    	return new LinkedList<String>(signals.keySet());
+    }
+    
+    public Signal getSignal(String signalName) {
+    	return signals.get(signalName);
     }
 }
