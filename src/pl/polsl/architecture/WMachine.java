@@ -12,20 +12,38 @@ import java.util.Map;
 
 
 /**
- *
+ * W Machine. Is configured by address bit count and operation code
+ * bit count. Store all components and signals.
  * @author Tomasz Rzepka
+ * @version 1.0
  */
 public class WMachine {
-	Integer addressBitCount = 5;
-    Integer opCodeBitCount = 3;
-    Integer dataBitCount = addressBitCount + opCodeBitCount;
+	/** Bit count for address. */
+	private Integer addressBitCount = 5;
+	
+	/** Bit count for operation code. */
+	private Integer opCodeBitCount = 3;
     
-	Map<String, WMachineComponent> components = new HashMap<>();
-    Map<String, Signal> signals = new HashMap<>();
+    /** Bit count for command (operation + address). */
+	private Integer dataBitCount = addressBitCount + opCodeBitCount;
     
-    List<WMachineComponent> addressComponents = new LinkedList<>();
-    List<WMachineComponent> dataComponents = new LinkedList<>();
+    /** Map of components identified by names. */
+	private Map<String, WMachineComponent> components = new HashMap<>();
+	
+	/** Map of signals identified by names. */
+	private Map<String, Signal> signals = new HashMap<>();
     
+	/** List of components storing addresses. */
+	private List<WMachineComponent> addressComponents = new LinkedList<>();
+	
+	/** List of components storing commands. */
+	private List<WMachineComponent> dataComponents = new LinkedList<>();
+    
+	/**
+	 * TODO: move to a separate class
+	 * For now creates simplest W Machine architecture.
+	 * @param filename - file defining architecture
+	 */
     public void readArchitecture(String filename) {
         // Test architecture
         Bus magA = new Bus(addressBitCount);
@@ -61,14 +79,40 @@ public class WMachine {
         signals.put("wys", new Signal(S, magS));
         signals.put("wes", new Signal(magS, S));
         signals.put("wei", new Signal(magS, I));
+        
+        try {
+        	L.setValue(5);
+        	L.nextTact();
+			A.setValue(5);
+			A.nextTact();
+			S.setValue(20);
+			S.nextTact();
+			signals.get("wyad").setEnabled(true);
+			signals.get("wea").setEnabled(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     }
     
-    void activateSignal(String signalName) throws Exception {
+    /**
+     * Activates signal identified by signalName.
+     * @param signalName - name of the signal to be activated.
+     * @throws Exception when signalName is not a valid signal name
+     * or when signal cannot be activated.
+     */
+    public void activateSignal(String signalName) throws Exception {
         if(!signals.containsKey(signalName))
             throw new Exception("There is no such signal: " + signalName);
         signals.get(signalName).activate();
     }
     
+    /**
+     * Sets new address bit count. Changes bit count for commands
+     * and informs address and command storing components about the change.
+     * @param count - new address bit count.
+     */
     public void setAddressBitCount(Integer count) {
     	if(addressBitCount == count)
     		return;
@@ -76,8 +120,15 @@ public class WMachine {
     	dataBitCount = addressBitCount + opCodeBitCount;
     	for(WMachineComponent component : addressComponents)
     		component.setBitCount(count);
+    	for(WMachineComponent component : dataComponents)
+    		component.setBitCount(dataBitCount);
     }
     
+    /**
+     * Sets new operation code bit count. Changes bit count for commands
+     * and informs command storing components about the change.
+     * @param count - new operation code bit count.
+     */
     public void setOpCodeBitCount(Integer count) {
     	if(opCodeBitCount == count)
     		return;
@@ -87,9 +138,33 @@ public class WMachine {
     		component.setBitCount(dataBitCount);
     }
     
+    /**
+     * Function to get W Machine component by its name.
+     * @param componentName - name of component to be returned.
+     * @return Component with name componentName or null if there
+     * is no such component.
+     */
     public WMachineComponent getComponent(String componentName) {
     	if(components.containsKey(componentName))
     		return components.get(componentName);
     	else return null;
+    }
+    
+    public List<String> getRegisterNames() {
+    	List<String> names = new LinkedList<>();
+    	for(String componentName : components.keySet()) {
+    		WMachineComponent component = components.get(componentName);
+    		if(component instanceof Register)
+    			names.add(componentName);
+    	}
+    	return names;
+    }
+    
+    public List<String> getSignalNames() {
+    	return new LinkedList<String>(signals.keySet());
+    }
+    
+    public Signal getSignal(String signalName) {
+    	return signals.get(signalName);
     }
 }

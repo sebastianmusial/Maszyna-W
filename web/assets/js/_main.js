@@ -2,6 +2,8 @@
 
 var MW = MW || {};
 
+MW.Signals = {};
+
 /**
  * Vars
  */
@@ -409,6 +411,7 @@ MW.showExtension = function() {
  * @param {svg element} arrow for command
  */
 MW.setText = function(paper, command, posX, posY, arrow) {
+	
     var label = paper.text(0, 0, command),
         checkbox = $('#handControls');
 
@@ -416,8 +419,23 @@ MW.setText = function(paper, command, posX, posY, arrow) {
     label
         .attr({ x: posX, y: posY})
         .attr(MW.attr.textCommand);
-    label.id = 'signal-' + command + '-label';
-    arrow.id = 'signal-' + command + '-arrow';
+    MW.Signals[command] = {
+		label: label,
+		arrow: arrow,
+		get state() { return (label.data('status') == 1); },
+    	set state(value) {
+			if(value) {
+				label.animate( MW.attr.activeCommand, 250 ).data('status', 1);
+		        arrow.animate( MW.attr.activeArrow, 250 ).data('status', 1);
+			}
+			else {
+				label.animate( MW.attr.inactiveCommand, 250 ).data('status', 0);
+		        arrow.animate( MW.attr.inactiveArrow, 250 ).data('status', 0);
+			}
+		}
+	};
+    label.signalName = command;
+    arrow.signalName = command;
 
     //Click action for arrows
     var arrowAction = function() {
@@ -461,19 +479,13 @@ MW.setText = function(paper, command, posX, posY, arrow) {
             label
                 .attr({'cursor': 'pointer'})
                 .click(MW.clickHandler)
-                .hover(hoverIn, hoverOut)
-                .click(arrowAction);
+                .hover(hoverIn, hoverOut);
         }
         else {
             label
                 .attr({'cursor': 'default'})
-                .animate(MW.attr.inactiveCommand, 250)
                 .unclick(MW.clickHandler)
-                .unhover(hoverIn, hoverOut)
-                .unclick(arrowAction);
-
-            arrow
-                .animate(MW.attr.inactiveArrow, 250);
+                .unhover(hoverIn, hoverOut);
         }
     });
 
@@ -510,19 +522,11 @@ MW.setArrow = function(paper, position, isWe, isOtherArrow) {
 
 
 /**
- * Click action for commands
+ * Click action for commands - toggle state
  */
 MW.clickHandler = function() {
-    var attrOff = MW.attr.inactiveCommand;
-    var attrOn = MW.attr.activeCommand;
-
-    //animation effect
-    if (this.data('status') == 1) {
-        this.animate( attrOff, 250 ).data('status', 0 );
-    }
-    else {
-        this.animate( attrOn, 250 ).data('status', 1 );
-    }
+	var signal = MW.Signals[this.signalName];  
+	signal.state = !signal.state;
 };
 
 

@@ -10,7 +10,13 @@ MW.Registers = {
 	I: $('input', $('#address')),
 	AK: $('input', $('#acumulator')),
 	A: $('input.memory__address', $('#memory')),
-	S: $('input.memory__verbal', $('#memory'))
+	S: $('input.memory__verbal', $('#memory')),
+	X: $('#register-x'),
+	Y: $('#register-y'),
+	RB: $('#extension-rb'),
+	G: $('#extension-g'),
+	WS: $('#extension-ws'),
+	F: $('#extension-f')
 };
 
 // Read value of the register from the server.
@@ -39,48 +45,17 @@ MW.bindRegisterChangeHandler = function(registerName) {
 	});
 }
 
-MW.Signals = [
-    'wyl', 'wel', 'il',
-    'wea',
-    'czyt', 'pisz',
-    'wys', 'wes',
-    'weja', 'przep', 'ode', 'dod',
-    'weak', 'wyak',
-    'wei', 'wyad'
-];
-
-MW.toogleSignal = function(signal) {
-	var label = MW.paper.getById('signal-' + signal + '-label');
-	var arrow = MW.paper.getById('signal-' + signal + '-arrow');
-	if (label.data('status') == 1) {
-		label.animate({fill: '#000'}).data('status', 0 );
-		arrow.animate({stroke: '#000'});
-    }
-    else {
-    	label.animate({fill: 'red'}).data('status', 1 );
-    	arrow.animate({stroke: 'red'});
-    }
-};
-
-MW.getSignalState = function(signal) {
-	var label = MW.paper.getById('signal-' + signal + '-label');
-	return (label.data('status') == 1);
-};
-
-
 // Init interaction.
 $(document).ready(function() {
 	for(var registerName in MW.Registers) {
-		MW.readRegisterValue(registerName);
 		MW.bindRegisterChangeHandler(registerName);
 	}
 	
-	$('#run_test_interaction').click(function() {
-		var machineState = {};
-		for(key in MW.Signals) {
-			var signal = MW.Signals[key];
-			machineState[signal] = MW.getSignalState(signal);
-		}
-		$('#test_interaction').html(JSON.stringify(machineState));
+	$.get("WMachineState", {action: "restore"}, function(data) {
+		wmachine = JSON.parse(data);
+		for(registerName in wmachine.registers)
+			MW.Registers[registerName].prop('value', wmachine.registers[registerName]);
+		for(signalName in wmachine.signals)
+			MW.Signals[signalName].state = wmachine.signals[signalName];
 	});
 });
