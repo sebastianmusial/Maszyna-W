@@ -45,6 +45,14 @@ public class Register implements DataSource, DataTarget {
     }
     
     /**
+     * Returns current bit count set for this register.
+     * @return Current bit count set for this register
+     */
+    public Integer getBitCount() {
+		return bitCount;
+	}
+    
+    /**
      * Implementation of WMachineComponent interface.
      * Sets new bit count that register can store.
      * @param count - new bit count. Must be greater than zero.
@@ -65,7 +73,7 @@ public class Register implements DataSource, DataTarget {
      */
     @Override
     public Integer getValue() throws Exception {
-        return getMask() & value;
+        return getMask(bitCount) & value;
     }
     
     /**
@@ -81,15 +89,6 @@ public class Register implements DataSource, DataTarget {
     public void setValue(Integer value) throws Exception {
     	if(valueChanged)
     		throw new Exception("Rejestr jest używany.");
-        this.value = getMask() & value;
-    }
-    
-    /**
-     * Function to generate mask depending on bus bit count.
-     * getMask() & value gives value adjusted to accurate bit count.
-     * @return Mask for value to be set or returned.
-     */
-    public Integer getMask() {
-        return ~((~0) << bitCount);
+        this.value = getMask(bitCount) & value;
     }
 }

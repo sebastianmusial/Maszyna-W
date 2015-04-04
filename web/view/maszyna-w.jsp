@@ -24,11 +24,11 @@
 			<input type="text" class="memory__verbal js-only-numbers js-quick-edit" value="0">
 			<div class="memory__table">
 
-				<% for(int i = 0; i < 32; ++i) { %>
-				<div class="memory__table--row">
-					<div class="memory__table--cell"><% out.print(i); %></div>
-					<input class="memory__table__data js-only-numbers js-quick-edit" value="0">
-					<div class="memory__table--cell">stp 0</div>
+				<% for(int i = 0; i < 64; ++i) { %>
+				<div id="memory-row-<%= i %>" class="memory__table--row">
+					<div class="memory__table--cell"><%= i %></div>
+					<input id="memory-cell-<%= i %>-value" class="memory__table__data js-only-numbers js-quick-edit" value="0">
+					<div id="memory-cell-<%= i %>-text" class="memory__table--cell">stp 0</div>
 				</div>
 				<% } %>
 

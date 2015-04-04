@@ -22,4 +22,14 @@ public interface WMachineComponent {
      * @param count - new bit count.
      */
     public void setBitCount(Integer count);
+    
+    /**
+     * Function to generate mask depending on bus bit count.
+     * getMask() & integer_value gives value adjusted to accurate bit count.
+     * @param bitCount - bit count mask should keep.
+     * @return Mask that keep bitCount bits in value after logical conjunction.
+     */
+    default public Integer getMask(Integer bitCount) {
+        return ~((~0) << (bitCount - 1));
+    }
 }

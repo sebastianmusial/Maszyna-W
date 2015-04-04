@@ -18,6 +18,7 @@ public class Signal {
     /** Signal data target. */
     private DataTarget target;
     
+    /** Value indicating if signal is enabled on client side. */
     private boolean enabled = false;
     
     /**
@@ -58,10 +59,18 @@ public class Signal {
         return target;
     }
     
+    /**
+     * Check if signal is enabled on client side.
+     * @return Value indicating if signal is enabled on client side.
+     */
     public boolean isEnabled() {
     	return enabled;
     }
     
+    /**
+     * Set value indicating if signal is enabled on client side.
+     * @param enabled - state of signal to be set.
+     */
     public void setEnabled(boolean enabled) {
     	this.enabled = enabled;
     }

@@ -66,7 +66,7 @@ public class Bus implements DataSource, DataTarget {
     public Integer getValue() throws Exception {
         if(value == null)
             throw new Exception("Brak wartości.");
-        return getMask() & value;
+        return getMask(bitCount) & value;
     }
     
     /**
@@ -82,15 +82,6 @@ public class Bus implements DataSource, DataTarget {
     public void setValue(Integer value) throws Exception {
         if(this.value != null)
             throw new Exception("Magistrala jest używany.");
-        this.value = getMask() & value;
-    }
-    
-    /**
-     * Function to generate mask depending on bus bit count.
-     * getMask() & value gives value adjusted to accurate bit count.
-     * @return Mask for value to be set or returned.
-     */
-    public Integer getMask() {
-        return ~((~0) << (bitCount - 1));
+        this.value = getMask(bitCount) & value;
     }
 }

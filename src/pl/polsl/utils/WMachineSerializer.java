@@ -6,8 +6,10 @@ import pl.polsl.architecture.Register;
 import pl.polsl.architecture.Signal;
 import pl.polsl.architecture.WMachine;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
@@ -19,7 +21,17 @@ import com.google.gson.JsonSerializer;
 public class WMachineSerializer implements JsonSerializer<WMachine> {
 
 	/**
-	 * 
+	 * Overriden method from super class. Serializes W Machine state
+	 * to a JsonElement object.
+	 * @param machine - W Machine instance to be serialized
+	 * @param type - unused, for more information see @see JsonSerializer#serialize(Object, Type, JsonSerializationContext)
+	 * @param context - unused, for more information see @see JsonSerializer#serialize(Object, Type, JsonSerializationContext)
+	 * @return Serialized W Machine state. Returned JSON has following structure:
+	 * <pre>{
+	 *    registers: { ak: 10, s: 10, ... },
+	 *    signals: { wyak: true, weak: false, ... },
+	 *    memory: [0, 0, ...]
+	 *};</pre>
 	 */
 	@Override
 	public JsonElement serialize(WMachine machine, Type type, JsonSerializationContext context) {
@@ -43,26 +55,13 @@ public class WMachineSerializer implements JsonSerializer<WMachine> {
 		}
 		wmachine.add("signals", signals);
 		
-		// TODO: add memory serialization
+		final JsonArray memory = new JsonArray();
+		for(Integer value : machine.getMemory().getValues()) {
+			memory.add(new JsonPrimitive(value));
+		}
+		wmachine.add("memory", memory);
 		
 		return wmachine;
-		
-		/*
-		 * wmachine = {
-    registers: {
-        ak: 10,
-        s: 10,
-        ...
-    },
-    signals: {
-        wyak: true,
-        weak: false,
-        ...
-    },
-    memory: [0, 0, ...],
-};
-		 * 
-		 */
 	}
 
 }

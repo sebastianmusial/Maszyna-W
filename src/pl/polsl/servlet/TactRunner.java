@@ -6,19 +6,16 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdk.nashorn.internal.parser.JSONParser;
-import pl.polsl.architecture.Signal;
 import pl.polsl.architecture.WMachine;
 
 /**
  * Parameters constains list of signals to be activated in current tact.
  * These signals are activated in certain order.
  */
-@WebServlet("/SignalAccessor")
+@WebServlet("/TactRunner")
 public class TactRunner extends WMachineServletBase {
 	/** Serial version UID. */
 	private static final long serialVersionUID = 1L;
