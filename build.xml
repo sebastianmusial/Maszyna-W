@@ -11,6 +11,7 @@
     
     <path id="project-classpath">
         <fileset dir="${tomcat-home}/lib" includes="*.jar" />
+        <fileset dir="./web/WEB-INF/lib" includes="*.jar" />
     </path>
 
     <target name="init">
