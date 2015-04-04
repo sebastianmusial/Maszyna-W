@@ -5,6 +5,12 @@
         <dependent-module archiveName="mysql-connector-java-5.1.35-bin.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/WMachine/web/WEB-INF/lib/mysql-connector-java-5.1.35-bin.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jstl-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/F:/Studia/VI/Bazy danych/Maszyna-W/web/WEB-INF/lib/jstl-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gson-2.3.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/F:/Studia/VI/Bazy danych/Maszyna-W/web/WEB-INF/lib/gson-2.3.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="WMachine"/>
         <property name="java-output-path" value="/WMachine/build/classes"/>
     </wb-module>

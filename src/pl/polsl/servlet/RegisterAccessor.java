@@ -14,24 +14,19 @@ import pl.polsl.architecture.Register;
 import pl.polsl.architecture.WMachine;
 
 /**
- * Servlet implementation class RegisterAccessor
+ * Allow to access registers from client side.
+ * @author Tomasz Rzepka
+ * @version 1.0
  */
 @WebServlet("/RegisterAccessor")
 public class RegisterAccessor extends WMachineServletBase {
+	/** Serial version UID. */
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterAccessor() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see WMachineServletBase#processRequest(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WMachine machine = getCurrentWMachine(request.getSession());
 		PrintWriter out = response.getWriter();
 		String componentName = request.getParameter("componentName");
@@ -50,12 +45,4 @@ public class RegisterAccessor extends WMachineServletBase {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
 }

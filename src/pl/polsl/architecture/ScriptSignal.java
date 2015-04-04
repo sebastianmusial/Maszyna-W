@@ -11,10 +11,13 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 /**
- *
+ * Signal configured by script describing operation performed
+ * when signal is activated.
  * @author Tomasz Rzepka
+ * @version 1.0
  */
 public class ScriptSignal extends Signal {
+	// TODO: engine and static {...} goes to WMachine class (and are not static!)
     static ScriptEngine engine;
     
     static {
@@ -26,16 +29,32 @@ public class ScriptSignal extends Signal {
         System.out.println("Koniec kluczy");
     }
     
+    /** Text descibing operation performed by script. */
+    private String functionString;
     
-    String functionString;
-    Function<Object, Object> functionObject;
+    /** Object representing script function. */
+    private Function<Object, Object> functionObject;
 
+    /**
+     * Construct script signal. source and target are the same
+     * as in super class.
+     * @param source - source of data.
+     * @param target - target for data.
+     * @param function - operation to be performed, e.g. "AK+x"
+     * will add value stored in accumulator and value stored in
+     * data source and pass result to data target.
+     */
     public ScriptSignal(DataSource source, DataTarget target, String function) {
         super(source, target);
         this.functionString = "function(x) " + function;
         // <ScriptSignal script="AK+x"
     }
     
+    /**
+     * Overriden function from super class.
+     * Value read from data source is passed to script and
+     * result is passed to data target.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public void activate() throws Exception {
