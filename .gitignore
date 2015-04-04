@@ -54,3 +54,5 @@ Temporary Items
 *.scssc
 
 *.scssc
+
+.classpath
