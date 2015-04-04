@@ -22,12 +22,15 @@ import com.google.gson.GsonBuilder;
  */
 @WebServlet("/WMachineState")
 public class WMachineState extends WMachineServletBase {
+	/** Serial version UID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** Gson instance used to serialize W Machine state. */
 	private final Gson GSON;
 
     /**
-     * Default constructor. 
+     * Default constructor. Initializes registers W Machine serializer
+     * into Gson object.
      */
     public WMachineState() {
     	final GsonBuilder gsonBuilder = new GsonBuilder();
@@ -35,8 +38,8 @@ public class WMachineState extends WMachineServletBase {
         GSON = gsonBuilder.create();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * @see WMachineServletBase#processRequest(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Writer writer = response.getWriter();

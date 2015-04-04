@@ -38,6 +38,9 @@ public class WMachine {
 	
 	/** List of components storing commands. */
 	private List<WMachineComponent> dataComponents = new LinkedList<>();
+	
+	/** Memory instance. */
+	private Memory memory;
     
 	/**
 	 * TODO: move to a separate class
@@ -72,6 +75,9 @@ public class WMachine {
         dataComponents.add(S);
         dataComponents.add(AK);
         
+        memory = new Memory(dataBitCount, A);
+        dataComponents.add(memory);
+        
         signals.put("wyl", new Signal(L, magA));
         signals.put("wel", new Signal(magA, L));
         signals.put("wea", new Signal(magA, A));
@@ -79,6 +85,8 @@ public class WMachine {
         signals.put("wys", new Signal(S, magS));
         signals.put("wes", new Signal(magS, S));
         signals.put("wei", new Signal(magS, I));
+        signals.put("czyt", new Signal(memory, S));
+        signals.put("pisz", new Signal(S, memory));
         
         try {
         	L.setValue(5);
@@ -122,6 +130,7 @@ public class WMachine {
     		component.setBitCount(count);
     	for(WMachineComponent component : dataComponents)
     		component.setBitCount(dataBitCount);
+    	memory.updateSize();
     }
     
     /**
@@ -150,6 +159,10 @@ public class WMachine {
     	else return null;
     }
     
+    /**
+     * Function to get names of all registers available in current architecture.
+     * @return List of names of all registers available in current architecture.
+     */
     public List<String> getRegisterNames() {
     	List<String> names = new LinkedList<>();
     	for(String componentName : components.keySet()) {
@@ -160,11 +173,28 @@ public class WMachine {
     	return names;
     }
     
+    /**
+     * Function to get names of all signals available in current architecture.
+     * @return List of names of all signals available in current architecture.
+     */
     public List<String> getSignalNames() {
     	return new LinkedList<String>(signals.keySet());
     }
     
+    /**
+     * Return signal with given name.
+     * @param signalName - name of the signal to be returned
+     * @return Signal with name <i>signalName</i>.
+     */
     public Signal getSignal(String signalName) {
     	return signals.get(signalName);
+    }
+    
+    /**
+     * Memory getter.
+     * @return Memory instance.
+     */
+    public Memory getMemory() {
+    	return memory;
     }
 }
