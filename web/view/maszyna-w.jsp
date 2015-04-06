@@ -68,6 +68,37 @@
 					</div>
 			    </div>
 			</div>
+			<div class="panel panel-default">
+			    <div class="panel-heading panel-heading--clear" role="tab" id="headingZero">
+				    <h4 class="panel-title">
+					    <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero" class="collapse-headline">
+						   Poziom śledzenia
+				      	</a>
+			      	</h4>
+			    </div>
+			    <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
+			      <div class="panel-body">
+			      	<div class="radio">
+		      			<label>
+							<input type="radio" name="trace-lavel" id="trace-lavel0" class="js-type">
+							niski (program)
+						</label>
+					</div>
+					<div class="radio">
+		      			<label>
+							<input type="radio" name="trace-lavel" id="trace-lavel1" class="js-type">
+							średni (rozkaz)
+						</label>
+					</div>
+					<div class="radio">
+		      			<label>
+							<input type="radio" name="trace-lavel" id="trace-lavel2" class="js-type">
+							wysoki (takt)
+						</label>
+					</div>
+			      </div>
+			    </div>
+		    </div>
 		  <div class="panel panel-default">
 		    <div class="panel-heading panel-heading--clear" role="tab" id="headingOne">
 			    <h4 class="panel-title">
@@ -198,7 +229,33 @@
 		    </div>
 		    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 		      <div class="panel-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			      <table class="table table-hover">
+			      	<thead>
+			      		<th></th>
+			      		<th>Adres (port)</th>
+			      		<th>Przerwanie</th>
+			      	</thead>
+			      	<tbody>
+			      		<tr>
+			      			<td>Wejście</td>
+			      			<td>
+							    <input type="text" class="form-control js-only-numbers" value="1">
+			      			</td>
+			      			<td>
+							    <input type="text" class="form-control js-only-numbers" value="2">
+			      			</td>
+			      		</tr>
+			      		<tr>
+			      			<td>Wyjście</td>
+			      			<td>
+							    <input type="text" class="form-control js-only-numbers" value="3">
+			      			</td>
+			      			<td>
+							    <input type="text" class="form-control js-only-numbers" value="4">
+			      			</td>
+			      		</tr>
+			      	</tbody>
+			      </table>
 		      </div>
 		    </div>
 		  </div>
