@@ -9,10 +9,10 @@
 			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
 		</div>
 		<div id="address" class="address" data-name="I">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="10">
+			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
 		</div>
 		<div id="acumulator" class="acumulator" data-name="AK">
-			<input type="text" class="acumulator__data js-only-numbers js-quick-edit" value="20">
+			<input type="text" class="acumulator__data js-only-numbers js-quick-edit" value="0">
 		</div>
 		<div id="memory" class="memory" data-top-name="A" data-down-name="S">
 			<input type="text" class="memory__address js-only-numbers js-quick-edit" value="0">

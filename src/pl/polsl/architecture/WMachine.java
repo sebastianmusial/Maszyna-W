@@ -89,21 +89,6 @@ public class WMachine {
         signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_IN.ID, new Signal(magS, I));
         signals.put(ArchitectureInfo.AvailableSignals.MEMORY_READ.ID, new Signal(memory, S));
         signals.put(ArchitectureInfo.AvailableSignals.MEMORY_WRITE.ID, new Signal(S, memory));
-        
-        try {
-        	L.setValue(5);
-        	L.nextTact();
-			A.setValue(5);
-			A.nextTact();
-			S.setValue(20);
-			S.nextTact();
-			signals.get("wyad").setEnabled(true);
-			signals.get("wea").setEnabled(true);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
     }
     
     /**

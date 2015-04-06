@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.polsl.architecture.WMachine;
-import pl.polsl.utils.WMachineSerializer;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -38,14 +35,24 @@ public class LanguageAccessor extends HttpServlet {
      */
     public LanguageAccessor() {
         // readDefaultLanguage();
-    	LanguageReader reader = new LanguageReader();
-    	Language defaultLanguage = reader.readLanguage("pl-pl.lang"); 
+    	Language defaultLanguage = new DefaultLanguage(); 
     	languages.put("default", defaultLanguage);
     	final GsonBuilder gsonBuilder = new GsonBuilder();
-    	gsonBuilder.registerTypeAdapter(Language.class, new LanguageSerializer(defaultLanguage));
+    	final LanguageSerializer serializer = new LanguageSerializer(defaultLanguage);
+    	gsonBuilder.registerTypeAdapter(Language.class, serializer);
+    	gsonBuilder.registerTypeAdapter(DefaultLanguage.class, serializer);
         GSON = gsonBuilder.create();
     }
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> method.
+     * Serializes language with name given in request's "lang" parameter and returns it.
+     * If there is no language with that name, default language is returned.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	PrintWriter writer = response.getWriter();
     	String lang = request.getParameter("lang");

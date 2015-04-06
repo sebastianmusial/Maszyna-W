@@ -9,33 +9,38 @@ MW.Memory = [];
 // Init interaction.
 MW.initInteraction = function() {
 	var initRegisters = function() {
-		MW.Registers = {};
-		MW.Registers[MW.Architecture.Registers.PROGRAM_COUNTER] = $('input', $('#counter'));
-		MW.Registers[MW.Architecture.Registers.INSTRUCTION] = $('input', $('#address'));
-		MW.Registers[MW.Architecture.Registers.ACCUMULATOR] = $('input', $('#acumulator'));
-		MW.Registers[MW.Architecture.Registers.MEMORY_ADDRESS] = $('input.memory__address', $('#memory'));
-		MW.Registers[MW.Architecture.Registers.MEMORY_DATA] = $('input.memory__verbal', $('#memory'));
-		MW.Registers[MW.Architecture.Registers.DATA_X] = $('#register-x');
-		MW.Registers[MW.Architecture.Registers.DATA_Y] = $('#register-y');
-		MW.Registers[MW.Architecture.Registers.IO_PORT] = $('#extension-rb');
-		MW.Registers[MW.Architecture.Registers.STROBE] = $('#extension-g');
-		MW.Registers[MW.Architecture.Registers.STACK_POINTER] = $('#extension-ws');
-		MW.Registers[MW.Architecture.Registers.FLAGS] = $('#extension-f');
-		
-		var bindRegisterChangeHandler = function(registerId) {
-			var register = MW.Registers[registerId];
-			register.change(function() {
-				var _value = register.prop('value');
-				var args = {registerId: registerId, value: _value};
+		var initRegister = function(registerId, divSelector, inputSelector, nameAttribute) {
+			var div = $(divSelector);
+			var input = $(inputSelector, div);
+			var attributeName = 'data-' + nameAttribute;
+			var register = {
+				get name() { return div.attr(attributeName); },
+				set name(value) { div.attr(attributeName, value); },
+				get value() { return input.prop('value'); },
+				set value(value) { input.prop('value', value); }
+			};
+			input.change(function() {
+				var args = {registerId: registerId, value: register.value};
 				$.get("RegisterAccessor", args, function(corrected) {
-					register.prop('value', corrected);
+					register.value = corrected;
 				});
 			});
-		}
+			MW.Registers[registerId] = register;
+		};
 		
-		for(var registerId in MW.Registers) {
-			bindRegisterChangeHandler(registerId)
-		}
+		var IDs = MW.Architecture.Registers;
+		MW.Registers = {};
+		initRegister(IDs.PROGRAM_COUNTER, "#counter", "input", "name");
+		initRegister(IDs.INSTRUCTION, "#address", "input", "name");
+		initRegister(IDs.ACCUMULATOR, "#acumulator", "input", "name");
+		initRegister(IDs.MEMORY_ADDRESS, "#memory", "input.memory__address", "top-name");
+		initRegister(IDs.MEMORY_DATA, "#memory", "input.memory__verbal", "down-name");
+		initRegister(IDs.DATA_X, "#register-x", "input", "name");
+		initRegister(IDs.DATA_Y, "#register-y", "input", "name");
+		initRegister(IDs.IO_PORT, "#extension-rb", "input", "name");
+		initRegister(IDs.STROBE, "#extension-g", "input", "name");
+		initRegister(IDs.STACK_POINTER, "#extension-ws", "input", "name");
+		initRegister(IDs.FLAGS, "#extension-f", "input", "name");
 	};
 	
 	initRegisters();
@@ -50,11 +55,12 @@ MW.initInteraction = function() {
 	
 	$.get("WMachineState", {action: "restore"}, function(data) {
 		var wmachine = JSON.parse(data);
-		for(registerName in wmachine.registers)
-			MW.Registers[registerName].prop('value', wmachine.registers[registerName]);
-		for(signalName in wmachine.signals) {
-			initSignal(signalName, wmachine.signals[signalName]);
+		for(registerId in wmachine.registers) {
+			MW.Registers[registerId].name = MW.Language.Registers[registerId];
+			MW.Registers[registerId].value = wmachine.registers[registerId];
 		}
+		for(signalId in wmachine.signals)
+			initSignal(signalId, wmachine.signals[signalId]);
 		
 		var initMemoryCell = function(index) {
 			var row = $("#memory-row-" + index);
@@ -79,15 +85,4 @@ MW.initInteraction = function() {
 		for(var i = wmachine.memory.length; i < 64; ++i)
 			MW.Memory[i].row.hide();
 	});
-	
-//	$.get("ArchitectureInfo", function(data) {
-//		document.write("<pre>" + JSON.stringify(JSON.parse(data), null, 4) + "</pre>");
-//	});
-	
-//	$.get("LanguageAccessor", {lang: "pl"}, function(data) {
-//		var lang = JSON.parse(data);
-//		document.write("<pre>" + JSON.stringify(lang, null, 4) + "</pre>");
-//		
-//		console.log(lang.registers[11]);
-//	});
 };
