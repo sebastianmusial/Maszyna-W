@@ -1,32 +1,31 @@
 .control-panel {
-	display: table;
-	width: 850px;
 	margin: 30px auto;
-	padding: 15px;
-	border: 1px solid #9F9F9F;
+}
 
-	h5 {
-		margin: 0px;
-		margin-bottom: 10px;
-		padding: 10px;
-		background-color: #9F9F9F;
-		color: #FFF;
+.collapse-headline {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	text-decoration: none;
+
+	&:hover, &:focus {
+		text-decoration: none;
 	}
+}
 
-	input { margin-left: 10px; }
+.panel-heading--clear {
+	padding: 0px;
+}
 
-	label {
-		padding-left: 10px;
-		font-weight: normal;
-	}
+.area-height {
+	min-height: 200px;
+}
 
-	.type {
-		width: 50%;
-		padding: 15px;
-	}
+.checkbox--clear {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 
-	.extensions {
-		width: 50%;
-		padding: 15px;
-	}
+.hand-controls {
+	background-color: $other-tab;
 }

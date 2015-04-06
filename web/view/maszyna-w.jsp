@@ -1,9 +1,4 @@
-﻿<div class="control-panel">
-	<input type="checkbox" name="handControls" id="handControls" value="0">
-	<label for="handControls">sterowanie ręczne</label>
-</div>
-
-<div id="central-unit" class="central-unit" ng-controller="cpuController">
+﻿<div id="central-unit" class="central-unit" ng-controller="cpuController">
 	<div id="central-unit__extension-top" class="central-unit__extension">
 		<div id="extension-ws" class="extension-ws">
 			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
@@ -59,48 +54,160 @@
 	</div>
 </div>
 
-<div class="control-panel">
-	<div class="type">
-		<h5>Typ:</h5>
-		<input type="radio" name="type" id="type0" class="js-type">
-		<label for="type0">W</label>
-		<br>
-		<input type="radio" name="type" id="type1" class="js-type">
-		<label for="type1">W+</label>
-		<br>
-		<input type="radio" name="type" id="type2" class="js-type">
-		<label for="type2">L</label>
-		<br>
-		<input type="radio" name="type" id="type3" class="js-type">
-		<label for="type3">EW</label>
-	</div>
-	<div class="extensions">
-		<h5>Składniki:</h5>
-		<input type="checkbox" name="extension0" id="extension0" class="js-extension" value="0">
-		<label for="extension0">połączenie międzymagistralowe</label>
-		<br>
-		<input type="checkbox" name="extension7" id="extension7" class="js-extension" value="0">
-		<label for="extension7">inkrementacja i dekrementacja akumulatora</label>
-		<br>
-		<input type="checkbox" name="extension6" id="extension6" class="js-extension" value="0">
-		<label for="extension6">operacje logiczne w JAL</label>
-		<br>
-		<input type="checkbox" name="extension5" id="extension5" class="js-extension" value="0">
-		<label for="extension5">rozszerzone operacje arytmetyczne w JAL</label>
-		<br>
-		<input type="checkbox" name="extension4" id="extension4" class="js-extension" value="0">
-		<label for="extension4">obsługa stosu</label>
-		<br>
-		<input type="checkbox" name="extension1" id="extension1" class="js-extension" value="0">
-		<label for="extension1">rejestr X</label>
-		<br>
-		<input type="checkbox" name="extension2" id="extension2" class="js-extension" value="0">
-		<label for="extension2">rejestr Y</label>
-		<br>
-		<input type="checkbox" name="extension3" id="extension3" class="js-extension" value="0">
-		<label for="extension3">wejście/wyjście</label>
-		<br>
-		<input type="checkbox" name="extension8" id="extension8" class="js-extension" value="0">
-		<label for="extension8">dodatkowe znaczniki</label>
-	</div>
+<div class="container-fluid control-panel">
+  <div class="row">
+  	<div class="col-xs-6">
+  		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  			<div class="panel panel-default">
+			    <div class="panel-heading panel-heading--clear" role="tab">
+		 			<div class="checkbox collapse-headline checkbox--clear hand-controls">
+				      	<label>
+							<input type="checkbox" name="handControls" id="handControls" value="0">
+							sterowanie ręczne
+						</label>
+					</div>
+			    </div>
+			</div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading panel-heading--clear" role="tab" id="headingOne">
+			    <h4 class="panel-title">
+				    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapse-headline">
+					   Typ i składniki
+			      	</a>
+		      	</h4>
+		    </div>
+		    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+		      <div class="panel-body">
+	      		<div class="col-xs-3">
+	      			<div class="radio">
+		      			<label>
+							<input type="radio" name="type" id="type0" class="js-type">
+							W
+						</label>
+					</div>
+					<div class="radio">
+		      			<label>
+							<input type="radio" name="type" id="type1" class="js-type">
+							W+
+						</label>
+					</div>
+					<div class="radio">
+		      			<label>
+							<input type="radio" name="type" id="type2" class="js-type">
+							L	
+						</label>
+					</div>
+					<div class="radio">
+		      			<label>
+							<input type="radio" name="type" id="type3" class="js-type">
+							EW	
+						</label>
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div class="checkbox">
+			  			<label>
+				  			<input type="checkbox" name="extension0" id="extension0" class="js-extension" value="0">
+							połączenie międzymagistralowe
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension7" id="extension7" class="js-extension" value="0">
+							inkrementacja i dekrementacja akumulatora
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension6" id="extension6" class="js-extension" value="0">
+							operacje logiczne w JAL
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension5" id="extension5" class="js-extension" value="0">
+							rozszerzone operacje arytmetyczne w JAL
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension4" id="extension4" class="js-extension" value="0">
+							obsługa stosu
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension1" id="extension1" class="js-extension" value="0">
+							rejestr X
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension2" id="extension2" class="js-extension" value="0">
+							rejestr Y
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension3" id="extension3" class="js-extension" value="0">
+							wejście/wyjście
+						</label>
+					</div>
+					<div class="checkbox">
+			  			<label>
+							<input type="checkbox" name="extension8" id="extension8" class="js-extension" value="0">
+							dodatkowe znaczniki
+						</label>
+					</div>
+				</div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading panel-heading--clear" role="tab" id="headingTwo">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed collapse-headline">
+		          Architektura
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body">
+				   <div class="col-xs-6">
+					    <label>
+					    	Liczba bitów adresowych 
+					    	<input type="number" class="form-control js-only-numbers" value="5">
+					    </label>
+					</div>
+					<div class="col-xs-6">
+					    <label>
+					    	Liczba bitów kodu
+					   		<input type="number" class="form-control js-only-numbers" value="3">
+					    </label>
+					 </div>
+		    	</div>
+		    </div>
+		  </div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading panel-heading--clear" role="tab" id="headingThree">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed collapse-headline">
+		          Adresy
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+		      <div class="panel-body">
+		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+		      </div>
+		    </div>
+		  </div>
+		</div>
+  	</div>  	
+  	<div class="col-xs-6">
+  		<textarea class="form-control area-height" rows="3"></textarea>
+  	</div>
+  </div>
 </div>
+
+

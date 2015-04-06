@@ -5,8 +5,7 @@ html, body {
   background-color: #F5F5F3;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  padding-top: 25px;
-  font-size: 12px; }
+  padding-top: 25px; }
 
 svg {
   height: 100%;
@@ -32,7 +31,8 @@ svg {
   width: 90%;
   max-width: 850px;
   min-width: 850px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  font-size: 12px; }
 
 .element, .central-unit__base .acumulator, .central-unit__base .memory, .central-unit__base .counter, .central-unit__base .address, .register, .register-x, .register-y, .extension-rb, .extension-g, .extension-ws, .extension-f {
   border: 1px solid #000;
@@ -293,7 +293,7 @@ svg {
     content: "G :"; }
 
 .extension-ws {
-  left: 400px;
+  left: 550px;
   top: 8px; }
   .extension-ws::after {
     content: "WS :";
@@ -361,28 +361,28 @@ svg {
   width: 40%; }
 
 .control-panel {
-  display: table;
-  width: 850px;
-  margin: 30px auto;
-  padding: 15px;
-  border: 1px solid #9F9F9F; }
-  .control-panel h5 {
-    margin: 0px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #9F9F9F;
-    color: #FFF; }
-  .control-panel input {
-    margin-left: 10px; }
-  .control-panel label {
-    padding-left: 10px;
-    font-weight: normal; }
-  .control-panel .type {
-    width: 50%;
-    padding: 15px; }
-  .control-panel .extensions {
-    width: 50%;
-    padding: 15px; }
+  margin: 30px auto; }
+
+.collapse-headline {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-decoration: none; }
+  .collapse-headline:hover, .collapse-headline:focus {
+    text-decoration: none; }
+
+.panel-heading--clear {
+  padding: 0px; }
+
+.area-height {
+  min-height: 200px; }
+
+.checkbox--clear {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.hand-controls {
+  background-color: #ddd; }
 
 /* ------------------------------------------------------------------
 	SECTION - Forum
@@ -562,9 +562,10 @@ footer.footer-site {
 	SECTION - W Machine
    ------------------------------------------------------------------ */
 section.w-machine {
-  font-size: 11px;
   padding: 20px;
   margin: 10px;
   background-color: #FFF;
   border-top: 0px solid #60A9FF;
   border-bottom: 0px solid #60A9FF; }
+
+/*# sourceMappingURL=style.css.map */

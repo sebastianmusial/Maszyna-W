@@ -5,6 +5,7 @@
 	max-width: 850px;
 	min-width: 850px;
 	margin: 0 auto;
+	font-size: 12px;
 }
 
 .element {
@@ -334,7 +335,7 @@
 
 .extension-ws {
 	@extend .register;
-	left: 400px;
+	left: 550px;
 	top: 8px;
 
 	&::after {
