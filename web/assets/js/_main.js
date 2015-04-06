@@ -82,48 +82,48 @@ MW.centralUnit = function(containerCentralUnit) {
         var welArrow = MW.setArrow(paper, 'M100 0 V50', true),
             wylArrow = MW.setArrow(paper, 'M80 0 V50', false),
             ilArrow = MW.setArrow(paper, 'M20 65 H37', true, true),
-            welText = MW.setText(paper, 'wel', 120, 25, welArrow),
-            wylText = MW.setText(paper, 'wyl', 60, 25, wylArrow),
-            ilText = MW.setText(paper, 'il', 10, 65, ilArrow);
+            welText = MW.setText(paper, MW.Architecture.Signals.PROGRAM_COUNTER_IN, 120, 25, welArrow),
+            wylText = MW.setText(paper, MW.Architecture.Signals.PROGRAM_COUNTER_OUT, 60, 25, wylArrow),
+            ilText = MW.setText(paper, MW.Architecture.Signals.PROGRAM_COUNTER_INCREMENT, 10, 65, ilArrow);
     };
 
     //acumulator
     var acumulator = function() {
         var wejaArrow = MW.setArrow(paper, 'M450 300 V255', true),
-            wejaText = MW.setText(paper, 'weja', 425, 275, wejaArrow),
+            wejaText = MW.setText(paper, MW.Architecture.Signals.ALU_IN, 425, 275, wejaArrow),
             wyakArrow = MW.setArrow(paper, 'M605 300 V65, 65 H500, 500 V100', false),
-            wyakText = MW.setText(paper, 'wyak', 550, 55, wyakArrow),
+            wyakText = MW.setText(paper, MW.Architecture.Signals.ACCUMULATOR_OUT, 550, 55, wyakArrow),
             weakArrow = MW.setArrow(paper, 'M345 125 H374', true),
-            weakText = MW.setText(paper, 'weak', 325, 125, weakArrow),
+            weakText = MW.setText(paper, MW.Architecture.Signals.ACCUMULATOR_IN, 325, 125, weakArrow),
             dodArrow = MW.setArrow(paper, 'M345 145 H371', true, true),
-            dodText = MW.setText(paper, 'dod', 327, 145, dodArrow),
+            dodText = MW.setText(paper, MW.Architecture.Signals.ALU_ADD, 327, 145, dodArrow),
             odeArrow = MW.setArrow(paper, 'M345 165 H371', true, true),
-            odeText = MW.setText(paper, 'ode', 328, 165, odeArrow),
+            odeText = MW.setText(paper, MW.Architecture.Signals.ALU_SUBTRACT, 328, 165, odeArrow),
             przepArrow = MW.setArrow(paper, 'M345 185 H371', true, true),
-            przepText = MW.setText(paper, 'przep', 324, 185, przepArrow);
+            przepText = MW.setText(paper, MW.Architecture.Signals.ALU_COPY, 324, 185, przepArrow);
     };
 
 
     //instruction register
     var instructionRegister = function() {
         var weiArrow = MW.setArrow(paper, 'M125 300 V245', true),
-            weiText = MW.setText(paper, 'wei', 100, 275, weiArrow),
+            weiText = MW.setText(paper, MW.Architecture.Signals.INSTRUCTION_IN, 100, 275, weiArrow),
             wyadArrow = MW.setArrow(paper, 'M175 0 V225', false),
-            wyadText = MW.setText(paper, 'wyad', 150, 190, wyadArrow);
+            wyadText = MW.setText(paper, MW.Architecture.Signals.INSTRUCTION_OUT, 150, 190, wyadArrow);
     };
 
     //Memory
     var memory = function() {
         var wesArrow = MW.setArrow(paper, 'M730 300 V245', true),
-            wesText = MW.setText(paper, 'wes', 750, 275, wesArrow),
+            wesText = MW.setText(paper, MW.Architecture.Signals.MEMORY_DATA_IN, 750, 275, wesArrow),
             wysArrow = MW.setArrow(paper, 'M690 295 V245', false),
-            wysText = MW.setText(paper, 'wys', 670, 275, wysArrow),
+            wysText = MW.setText(paper, MW.Architecture.Signals.MEMORY_DATA_OUT, 670, 275, wysArrow),
             weaArrow = MW.setArrow(paper, 'M710 0 V50', true),
-            weaText = MW.setText(paper, 'wea', 730, 25, weaArrow),
+            weaText = MW.setText(paper, MW.Architecture.Signals.MEMORY_ADDRESS_IN, 730, 25, weaArrow),
             czytArrow = MW.setArrow(paper, 'M820 140 H805', true, true),
-            czytText = MW.setText(paper, 'czyt', 835, 140, czytArrow),
+            czytText = MW.setText(paper, MW.Architecture.Signals.MEMORY_READ, 835, 140, czytArrow),
             piszArrow = MW.setArrow(paper, 'M820 180 H805', true, true),
-            piszText = MW.setText(paper, 'pisz', 835, 180, piszArrow);
+            piszText = MW.setText(paper, MW.Architecture.Signals.MEMORY_WRITE, 835, 180, piszArrow);
     };
 
     //Drawing elements
@@ -148,7 +148,7 @@ MW.additionalElements = function() {
         var asSaArrow = MW.setArrow(paper, 'M10 0 V295, M5 0 V295' , true);
             asSaArrow.attr({'arrow-start': 'block-wide-long'});
 
-        var asSaText = MW.setText(paper, 'as (sa)', 40, 35, asSaArrow);
+        var asSaText = MW.setText(paper, MW.Architecture.Signals.BUS_CONNECTION, 40, 35, asSaArrow);
     };
 
     //Register X
@@ -156,9 +156,9 @@ MW.additionalElements = function() {
         var paper = Raphael("register-x");
 
         var wyxArrow = MW.setArrow(paper, 'M65 0 V25' , true),
-            wyxText = MW.setText(paper, 'wex', 85, 12, wyxArrow),
+            wyxText = MW.setText(paper, MW.Architecture.Signals.DATA_X_OUT, 85, 12, wyxArrow),
             wexArrow = MW.setArrow(paper, 'M35 0 V25' , false),
-            wexText = MW.setText(paper, 'wyx', 15, 12, wexArrow);
+            wexText = MW.setText(paper, MW.Architecture.Signals.DATA_X_IN, 15, 12, wexArrow);
     };
 
     //Register Y
@@ -166,9 +166,9 @@ MW.additionalElements = function() {
         var paper = Raphael("register-y");
 
         var weyArrow = MW.setArrow(paper, 'M65 0 V25' , true),
-            weyText = MW.setText(paper, 'wey', 85, 12, weyArrow),
+            weyText = MW.setText(paper, MW.Architecture.Signals.DATA_Y_IN, 85, 12, weyArrow),
             wyyArrow = MW.setArrow(paper, 'M35 0 V25' , false),
-            wyyText = MW.setText(paper, 'wyy', 15, 12, wyyArrow);
+            wyyText = MW.setText(paper, MW.Architecture.Signals.DATA_Y_OUT, 15, 12, wyyArrow);
     };
 
     //extension RB - out/in
@@ -176,9 +176,9 @@ MW.additionalElements = function() {
         var paper = Raphael("extension-rb");
 
         var werbArrow = MW.setArrow(paper, 'M65 0 V25' , true),
-            werbText = MW.setText(paper, 'werb', 85, 12, werbArrow),
+            werbText = MW.setText(paper, MW.Architecture.Signals.IO_PORT_IN, 85, 12, werbArrow),
             wyrbArrow = MW.setArrow(paper, 'M35 0 V25' , false),
-            wyrbText = MW.setText(paper, 'wyrb', 15, 12, wyrbArrow);
+            wyrbText = MW.setText(paper, MW.Architecture.Signals.IO_PORT_OUT, 15, 12, wyrbArrow);
     };
 
     //extension G - out/in
@@ -186,9 +186,9 @@ MW.additionalElements = function() {
         var paper = Raphael("extension-g");
 
         var wegArrow = MW.setArrow(paper, 'M65 0 V25' , true),
-            wegText = MW.setText(paper, 'weg', 85, 12, wegArrow),
+            wegText = MW.setText(paper, MW.Architecture.Signals.STROBE_START, 85, 12, wegArrow),
             wygArrow = MW.setArrow(paper, 'M35 0 V25' , false),
-            wygText = MW.setText(paper, 'wyg', 15, 12, wygArrow);
+            wygText = MW.setText(paper, MW.Architecture.Signals.STROBE_OUT, 15, 12, wygArrow);
     };
 
     //extension WS
@@ -196,13 +196,13 @@ MW.additionalElements = function() {
         var paper = Raphael("extension-ws");
 
         var wywsArrow = MW.setArrow(paper, 'M115 22 V47' , true),
-            wywsText = MW.setText(paper, 'wyws', 140, 35, wywsArrow),
+            wywsText = MW.setText(paper, MW.Architecture.Signals.STACK_POINTER_OUT, 140, 35, wywsArrow),
             wewsArrow = MW.setArrow(paper, 'M85 22 V47' , false),
-            wewsText = MW.setText(paper, 'wews', 60, 35, wewsArrow),
+            wewsText = MW.setText(paper, MW.Architecture.Signals.STACK_POINTER_IN, 60, 35, wewsArrow),
             iwsArrow = MW.setArrow(paper, 'M30 10 H46' , true, true),
-            iwsText = MW.setText(paper, 'iws', 15, 10, iwsArrow),
+            iwsText = MW.setText(paper, MW.Architecture.Signals.STACK_POINTER_INCREMENT, 15, 10, iwsArrow),
             dwsArrow = MW.setArrow(paper, 'M170 10 H154' , true, true),
-            dwsText = MW.setText(paper, 'dws', 185, 10, dwsArrow);
+            dwsText = MW.setText(paper, MW.Architecture.Signals.STACK_POINTER_DECREMENT, 185, 10, dwsArrow);
     };
 
     //artimetical operations
@@ -210,11 +210,11 @@ MW.additionalElements = function() {
         var paper = Raphael("aritmetical-operations");
 
         var mnoArrow = MW.setArrow(paper, 'M55 5 H81', true, true),
-            mnoText = MW.setText(paper, 'mno', 37, 5, mnoArrow),
+            mnoText = MW.setText(paper, MW.Architecture.Signals.ALU_MULTIPLY, 37, 5, mnoArrow),
             dzielArrow = MW.setArrow(paper, 'M55 25 H81', true, true),
-            dzielText = MW.setText(paper, 'dziel', 37, 25, dzielArrow),
+            dzielText = MW.setText(paper, MW.Architecture.Signals.ALU_DIVIDE, 37, 25, dzielArrow),
             shrArrow = MW.setArrow(paper, 'M55 45 H81', true, true),
-            shrText = MW.setText(paper, 'shr', 40, 45, shrArrow);
+            shrText = MW.setText(paper, MW.Architecture.Signals.ALU_SHIFT_RIGHT, 40, 45, shrArrow);
     };
 
     //logical operations
@@ -222,11 +222,11 @@ MW.additionalElements = function() {
         var paper = Raphael("logical-operations");
 
         var negArrow = MW.setArrow(paper, 'M5 5 H30', false, true),
-            negText = MW.setText(paper, 'neg', 47, 5, negArrow),
+            negText = MW.setText(paper, MW.Architecture.Signals.ALU_NEGATION, 47, 5, negArrow),
             lubArrow = MW.setArrow(paper, 'M5 25 H30', false, true),
-            lubText = MW.setText(paper, 'lub', 45, 25, lubArrow),
+            lubText = MW.setText(paper, MW.Architecture.Signals.ALU_ALTERNATIVE, 45, 25, lubArrow),
             iArrow = MW.setArrow(paper, 'M5 45 H30', false, true),
-            iText = MW.setText(paper, 'i', 38, 45, iArrow);
+            iText = MW.setText(paper, MW.Architecture.Signals.ALU_CONJUNCTION, 38, 45, iArrow);
     };
 
     //inc/dec
@@ -234,12 +234,12 @@ MW.additionalElements = function() {
         var paper = Raphael("extension-iak");
 
         var iakArrow = MW.setArrow(paper, 'M45 20 H74', true),
-            iakText = MW.setText(paper, 'iak', 30, 20, iakArrow);
+            iakText = MW.setText(paper, MW.Architecture.Signals.ACCUMULATOR_INCREMENT, 30, 20, iakArrow);
 
         var paper2 = Raphael("extension-dak");
 
         var dakArrow = MW.setArrow(paper2, 'M2 20 H30', false),
-            dakText = MW.setText(paper2, 'dak', 47, 20, dakArrow);
+            dakText = MW.setText(paper2, MW.Architecture.Signals.ACCUMULATOR_DECREMENT, 47, 20, dakArrow);
     };
 
     //Drawing elements
@@ -410,7 +410,9 @@ MW.showExtension = function() {
  * @param {int} posY 
  * @param {svg element} arrow for command
  */
-MW.setText = function(paper, command, posX, posY, arrow) {
+MW.setText = function(paper, signalId, posX, posY, arrow) {
+	
+	var command = MW.Language.Signals[signalId];
 	
     var label = paper.text(0, 0, command),
         checkbox = $('#handControls');
@@ -419,7 +421,7 @@ MW.setText = function(paper, command, posX, posY, arrow) {
     label
         .attr({ x: posX, y: posY})
         .attr(MW.attr.textCommand);
-    MW.Signals[command] = {
+    MW.Signals[signalId] = {
 		label: label,
 		arrow: arrow,
 		get state() { return (label.data('status') == 1); },
@@ -434,8 +436,8 @@ MW.setText = function(paper, command, posX, posY, arrow) {
 			}
 		}
 	};
-    label.signalName = command;
-    arrow.signalName = command;
+    label.signalId = signalId;
+    arrow.signalId = signalId;
 
     //Click action for arrows
     var arrowAction = function() {
@@ -525,7 +527,7 @@ MW.setArrow = function(paper, position, isWe, isOtherArrow) {
  * Click action for commands - toggle state
  */
 MW.clickHandler = function() {
-	var signal = MW.Signals[this.signalName];  
+	var signal = MW.Signals[this.signalId];  
 	signal.state = !signal.state;
 };
 
@@ -570,10 +572,3 @@ MW.editInputValue = function() {
     });
 };
 
-
-/**
- * Running JS functions.
- */
-$(document).ready(function() {
-    MW.init();
-});

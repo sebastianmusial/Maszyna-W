@@ -25,10 +25,10 @@ public class SignalAccessor extends WMachineServletBase {
 	 */
 	@Override
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String signalName = request.getParameter("signalName");
+		Integer signalId = Integer.parseInt(request.getParameter("signalId"));
 		boolean signalEnabled = Boolean.parseBoolean(request.getParameter("signalEnabled"));
 		WMachine machine = getCurrentWMachine(request.getSession());
-		Signal signal = machine.getSignal(signalName);
+		Signal signal = machine.getSignal(signalId);
 		signal.setEnabled(signalEnabled);
 	}
 }
