@@ -1,52 +1,44 @@
-<project name="WMachine" default="build-war" basedir=".">
+<project name="WMachine" default="create-war" basedir=".">
     <description>
-        WMachine build file
+        WMachine build file.
     </description>
-    <!-- set global properties for this build -->
+    
     <property name="src" location="src" />
     <property name="web" location="web" />
-    <property name="build" location="classes" />
-    <property name="dist"  location="dist" />
+    <property name="doc" location="doc" />
+    <property name="build" location="build" />
     <property name="tomcat-home" location="/usr/share/tomcat8" />
-    
-    <path id="project-classpath">
+    <path id="classpath">
         <fileset dir="${tomcat-home}/lib" includes="*.jar" />
-        <fileset dir="./web/WEB-INF/lib" includes="*.jar" />
+        <fileset dir="${web}/WEB-INF/lib" includes="*.jar" />
     </path>
-
-    <target name="init">
-        <!-- Create the time stamp -->
-        <tstamp />
-        <!-- Create the build directory structure used by compile -->
+    
+    <target name="init" description="Clean up before build and create directories.">
+        <delete dir="${build}" failonerror="false" />
+        <delete dir="${web}/doc" failonerror="false" />
         <mkdir dir="${build}" />
     </target>
 
-    <target name="compile" depends="init" description="compile the source">
-        <!-- Compile the java code from ${src} into ${build} -->
-        <javac srcdir="${src}" destdir="${build}" classpathref="project-classpath" includeantruntime="false" />
+    <target name="compile" description="compile the source">
+        <javac srcdir="${src}" destdir="${build}" classpathref="classpath" includeantruntime="false" />
     </target>
 
-    <target name="dist" depends="compile" description="generate the distribution">
-        <!-- Create the distribution directory -->
-        <mkdir dir="${dist}/lib" />
-
-        <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-        <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}" />
+    <target name="doc" description="Generate Java documentation.">
+        <javadoc destdir="${doc}" author="true" version="true" use="true" windowtitle="W Machine" classpathref="classpath">
+            <fileset dir="${src}" />
+            <link href="http://docs.oracle.com/javase/8/docs/api/"/>
+            <link href="http://docs.oracle.com/javaee/7/api/"/>
+        </javadoc>
     </target>
     
-    <target name="build-war" depends="compile" description="Create a WAR file.">
+    <target name="create-war" depends="init,compile,doc" description="Create a WAR file.">
+        <copy todir="${web}/doc">
+            <fileset dir="${doc}" />
+        </copy>
         <war destfile="./build/WMachine.war" webxml="${web}/WEB-INF/web.xml">
             <fileset dir="${web}" />
-            <!--<lib dir="thirdpartyjars">
-                <exclude name="portlet.jar"/>
-            </lib>-->
             <classes dir="${build}"/>
         </war>
     </target>
-
-    <target name="clean" description="clean up" >
-        <!-- Delete the ${build} and ${dist} directory trees -->
-        <delete dir="${build}" />
-        <delete dir="${dist}" />
-    </target>
+    
 </project>
