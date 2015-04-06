@@ -53,7 +53,7 @@
 		position: absolute;
 		right: 0px;
 		top: -20px;
-		content: "magistrala adresowa";
+		content: attr(data-top-bus);
 	}
 
 	&::after {
@@ -61,7 +61,7 @@
 		position: absolute;
 		right: 0px;
 		bottom: -20px;
-		content: "magistrala danych";
+		content: attr(data-down-bus);
 	}
 
 	.acumulator {
@@ -77,7 +77,7 @@
 			position: absolute;
 			left: 10px;
 			top: 4px;
-			content: "AK :";
+			content: attr(data-name) ':';
 		}
 
 		&__data {
@@ -104,7 +104,7 @@
 			position: absolute;
 			left: 10px;
 			top: 4px;
-			content: "A :";
+			content: attr(data-top-name) ':';
 		}
 
 		&::after {
@@ -112,7 +112,7 @@
 			position: absolute;
 			left: 10px;
 			bottom: 4px;
-			content: "S :";
+			content: attr(data-down-name) ':';
 		}
 		
 		&__address {
@@ -214,7 +214,7 @@
 			position: absolute;
 			left: 10px;
 			bottom: 6px;
-			content: "L :";
+			content: attr(data-name) ':';
 		}
 	}
 
@@ -231,7 +231,7 @@
 			position: absolute;
 			left: 10px;
 			bottom: 6px;
-			content: "I :";
+			content: attr(data-name) ':';
 		}
 	}
 
@@ -302,7 +302,7 @@
 	left: 50px;
 
 	&::after {
-		content: "X :";
+		content: attr(data-name) ':';
 	}
 }
 
@@ -311,7 +311,7 @@
 	left: 225px;
 
 	&::after {
-		content: "Y :";
+		content: attr(data-name) ':';
 	}
 }
 
@@ -320,7 +320,7 @@
 	left: 400px;
 
 	&::after {
-		content: "RB :";
+		content: attr(data-name) ':';
 	}
 }
 
@@ -329,7 +329,7 @@
 	left: 575px;
 
 	&::after {
-		content: "G :";
+		content: attr(data-name) ':';
 	}
 }
 
@@ -339,7 +339,7 @@
 	top: 8px;
 
 	&::after {
-		content: "WS :";
+		content: attr(data-name) ':';
 		top: 3px;
 	}
 
@@ -395,7 +395,7 @@
 	top: 69px;
 
 	&::after {
-		content: "F :";
+		content: attr(data-name) ':';
 		top: 3px;
 	}
 
