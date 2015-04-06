@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.polsl.architecture.WMachine;
+import pl.polsl.utils.WMachineSerializer;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,6 +42,7 @@ public class LanguageAccessor extends HttpServlet {
     	Language defaultLanguage = reader.readLanguage("pl-pl.lang"); 
     	languages.put("default", defaultLanguage);
     	final GsonBuilder gsonBuilder = new GsonBuilder();
+    	gsonBuilder.registerTypeAdapter(Language.class, new LanguageSerializer(defaultLanguage));
         GSON = gsonBuilder.create();
     }
 

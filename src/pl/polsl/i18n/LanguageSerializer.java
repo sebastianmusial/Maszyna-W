@@ -39,9 +39,9 @@ public class LanguageSerializer implements JsonSerializer<Language> {
 		final JsonObject signals = new JsonObject();
 		for(ArchitectureInfo.AvailableSignals signal : ArchitectureInfo.AvailableSignals.values()) {
 			Integer id = signal.ID;
-			String name = language.getRegisterName(id);
+			String name = language.getSignalName(id);
 			if(name == null || "".equals(name))
-				name = defaultLanguage.getRegisterName(id);
+				name = defaultLanguage.getSignalName(id);
 			signals.addProperty(id.toString(), name);
 		}
 		lang.add("Signals", signals);
