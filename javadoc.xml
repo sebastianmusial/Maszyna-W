@@ -7,10 +7,11 @@
     <property name="web" location="web" />
     <property name="build" location="classes" />
     <property name="dist"  location="dist" />
-    <property name="tomcat-home" location="C:/Program Files (x86)/Apache Software Foundation/Tomcat 8.0_WMachine" />
+    <property name="tomcat-home" location="/usr/share/tomcat8" />
     
     <path id="project-classpath">
         <fileset dir="${tomcat-home}/lib" includes="*.jar" />
+        <fileset dir="${web}/WEB-INF/lib" includes="*.jar" />
     </path>
 
     <target name="doc">
@@ -18,6 +19,8 @@
             <fileset dir="src" defaultexcludes="yes">
               <include name="pl/polsl/**"/>
             </fileset>
+            <link href="http://docs.oracle.com/javase/8/docs/api/"/>
+            <link href="http://docs.oracle.com/javaee/7/api/"/>
         </javadoc>
     </target>
 
