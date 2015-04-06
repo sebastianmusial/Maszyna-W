@@ -16,7 +16,7 @@ import pl.polsl.database.*;
 /**
  * Register user in the database
  * @author Józef Flakus
- * @verion 1.0
+ * @version 1.0
  */
 
 @WebServlet("/RegisterUser")

@@ -10,6 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import pl.polsl.servlet.ArchitectureInfo;
+
 
 /**
  * W Machine. Is configured by address bit count and operation code
@@ -27,11 +29,11 @@ public class WMachine {
     /** Bit count for command (operation + address). */
 	private Integer dataBitCount = addressBitCount + opCodeBitCount;
     
-    /** Map of components identified by names. */
-	private Map<String, WMachineComponent> components = new HashMap<>();
+    /** Map of registers identified by IDs. */
+	private Map<Integer, Register> registers = new HashMap<>();
 	
-	/** Map of signals identified by names. */
-	private Map<String, Signal> signals = new HashMap<>();
+	/** Map of signals identified by IDs. */
+	private Map<Integer, Signal> signals = new HashMap<>();
     
 	/** List of components storing addresses. */
 	private List<WMachineComponent> addressComponents = new LinkedList<>();
@@ -58,13 +60,13 @@ public class WMachine {
         Register S = new Register(dataBitCount);
         Register AK = new Register(dataBitCount);
         
-        components.put("magA", magA);
-        components.put("magS", magS);
-        components.put("A", A);
-        components.put("L", L);
-        components.put("I", I);
-        components.put("S", S);
-        components.put("AK", AK);
+        //components.put("magA", magA);
+        //components.put("magS", magS);
+        registers.put(ArchitectureInfo.AvailableRegisters.MEMORY_ADDRESS.ID, A);
+        registers.put(ArchitectureInfo.AvailableRegisters.PROGRAM_COUNTER.ID, L);
+        registers.put(ArchitectureInfo.AvailableRegisters.INSTRUCTION.ID, I);
+        registers.put(ArchitectureInfo.AvailableRegisters.MEMORY_DATA.ID, S);
+        registers.put(ArchitectureInfo.AvailableRegisters.ACCUMULATOR.ID, AK);
         
         addressComponents.add(magA);
         addressComponents.add(A);
@@ -78,15 +80,15 @@ public class WMachine {
         memory = new Memory(dataBitCount, A);
         dataComponents.add(memory);
         
-        signals.put("wyl", new Signal(L, magA));
-        signals.put("wel", new Signal(magA, L));
-        signals.put("wea", new Signal(magA, A));
-        signals.put("wyad", new Signal(I, magA));
-        signals.put("wys", new Signal(S, magS));
-        signals.put("wes", new Signal(magS, S));
-        signals.put("wei", new Signal(magS, I));
-        signals.put("czyt", new Signal(memory, S));
-        signals.put("pisz", new Signal(S, memory));
+        signals.put(ArchitectureInfo.AvailableSignals.PROGRAM_COUNTER_OUT.ID, new Signal(L, magA));
+        signals.put(ArchitectureInfo.AvailableSignals.PROGRAM_COUNTER_IN.ID, new Signal(magA, L));
+        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_ADDRESS_IN.ID, new Signal(magA, A));
+        signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_OUT.ID, new Signal(I, magA));
+        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_DATA_OUT.ID, new Signal(S, magS));
+        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_DATA_IN.ID, new Signal(magS, S));
+        signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_IN.ID, new Signal(magS, I));
+        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_READ.ID, new Signal(memory, S));
+        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_WRITE.ID, new Signal(S, memory));
         
         try {
         	L.setValue(5);
@@ -148,46 +150,38 @@ public class WMachine {
     }
     
     /**
-     * Function to get W Machine component by its name.
-     * @param componentName - name of component to be returned.
-     * @return Component with name componentName or null if there
-     * is no such component.
+     * Function to get W Machine register by its ID.
+     * @param registerId - ID of register to be returned.
+     * @return Register with ID registerId or null if there
+     * is no such register.
      */
-    public WMachineComponent getComponent(String componentName) {
-    	if(components.containsKey(componentName))
-    		return components.get(componentName);
-    	else return null;
+    public Register getRegister(Integer registerId) {
+    	return registers.get(registerId);
     }
     
     /**
-     * Function to get names of all registers available in current architecture.
-     * @return List of names of all registers available in current architecture.
+     * Function to get IDs of all registers available in current architecture.
+     * @return List of IDs of all registers available in current architecture.
      */
-    public List<String> getRegisterNames() {
-    	List<String> names = new LinkedList<>();
-    	for(String componentName : components.keySet()) {
-    		WMachineComponent component = components.get(componentName);
-    		if(component instanceof Register)
-    			names.add(componentName);
-    	}
-    	return names;
+    public List<Integer> getRegisterIds() {
+    	return new LinkedList<>(registers.keySet());
     }
     
     /**
-     * Function to get names of all signals available in current architecture.
-     * @return List of names of all signals available in current architecture.
+     * Function to get IDs of all signals available in current architecture.
+     * @return List of IDs of all signals available in current architecture.
      */
-    public List<String> getSignalNames() {
-    	return new LinkedList<String>(signals.keySet());
+    public List<Integer> getSignalIds() {
+    	return new LinkedList<>(signals.keySet());
     }
     
     /**
-     * Return signal with given name.
-     * @param signalName - name of the signal to be returned
-     * @return Signal with name <i>signalName</i>.
+     * Return signal with given ID.
+     * @param signalId - ID of the signal to be returned
+     * @return Signal with ID <i>signalId</i>.
      */
-    public Signal getSignal(String signalName) {
-    	return signals.get(signalName);
+    public Signal getSignal(Integer signalId) {
+    	return signals.get(signalId);
     }
     
     /**

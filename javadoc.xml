@@ -1,0 +1,24 @@
+<project name="WMachine-doc" default="doc" basedir=".">
+    <description>
+        WMachine build file
+    </description>
+    <!-- set global properties for this build -->
+    <property name="src" location="src" />
+    <property name="web" location="web" />
+    <property name="build" location="classes" />
+    <property name="dist"  location="dist" />
+    <property name="tomcat-home" location="C:/Program Files (x86)/Apache Software Foundation/Tomcat 8.0_WMachine" />
+    
+    <path id="project-classpath">
+        <fileset dir="${tomcat-home}/lib" includes="*.jar" />
+    </path>
+
+    <target name="doc">
+        <javadoc destdir="doc" author="true" version="true" use="true" windowtitle="W Machine" classpathref="project-classpath">
+            <fileset dir="src" defaultexcludes="yes">
+              <include name="pl/polsl/**"/>
+            </fileset>
+        </javadoc>
+    </target>
+
+</project>

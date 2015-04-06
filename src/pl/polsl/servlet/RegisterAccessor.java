@@ -27,10 +27,10 @@ public class RegisterAccessor extends WMachineServletBase {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WMachine machine = getCurrentWMachine(request.getSession());
 		PrintWriter out = response.getWriter();
-		String componentName = request.getParameter("componentName");
+		Integer registerId = Integer.parseInt(request.getParameter("registerId"));
 		String value = request.getParameter("value");
 		
-		Register register = (Register)machine.getComponent(componentName);
+		Register register = (Register)machine.getRegister(registerId);
 		if(register == null)
 			return;
 		

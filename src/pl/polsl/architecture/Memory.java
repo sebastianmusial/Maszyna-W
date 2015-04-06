@@ -24,8 +24,8 @@ public class Memory implements DataSource, DataTarget {
 	 * Constructor with parameters. Creates Memory objec with
 	 * data bit count set to <i>bitCount</i> and addressed with value
 	 * of the <i>addressRegister</i>.
-	 * @param bitCount - bit count of every value stored in memory
-	 * @param addressRegister - reference to address register used
+	 * @param bitCount bit count of every value stored in memory
+	 * @param addressRegister reference to address register used
 	 * to address memory cell
 	 */
 	public Memory(Integer bitCount, Register addressRegister) {
@@ -49,7 +49,7 @@ public class Memory implements DataSource, DataTarget {
 	/**
      * Implementation of WMachineComponent interface.
      * Sets new bit count that single memory cell can store.
-     * @param count - new bit count. Must be greater than zero.
+     * @param count new bit count. Must be greater than zero.
      */
 	@Override
 	public void setBitCount(Integer count) {
@@ -80,7 +80,7 @@ public class Memory implements DataSource, DataTarget {
      * Set new value in the cell at address stored in address register.
      * If memory was read in current tact exception will be thrown.
      * Before value is set it is masked by mask returned from function getMask.
-     * @param value - value to be set in the memory cell.
+     * @param value value to be set in the memory cell.
      * @throws Exception will be thrown if memory was read in current tact.
      */
 	@Override
@@ -121,8 +121,8 @@ public class Memory implements DataSource, DataTarget {
 	
 	/**
 	 * Function to set value of certain memory cell.
-	 * @param index - index of memory to be changed.
-	 * @param value - value to be set in the cell.
+	 * @param index index of memory to be changed.
+	 * @param value value to be set in the cell.
 	 */
 	public void setValue(Integer index, Integer value) {
 		data.set(index, value);

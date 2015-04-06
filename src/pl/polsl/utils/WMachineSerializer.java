@@ -16,7 +16,7 @@ import com.google.gson.JsonSerializer;
 /**
  * W Machine serializer.
  * @author Tomasz Rzepka
- * @verison 1.0
+ * @version 1.0
  */
 public class WMachineSerializer implements JsonSerializer<WMachine> {
 
@@ -38,10 +38,10 @@ public class WMachineSerializer implements JsonSerializer<WMachine> {
 		final JsonObject wmachine = new JsonObject();
 		
 		final JsonObject registers = new JsonObject();
-		for(String registerName : machine.getRegisterNames()) {
-			Register register = (Register)machine.getComponent(registerName);
+		for(Integer registerId : machine.getRegisterIds()) {
+			Register register = (Register)machine.getRegister(registerId);
 			try {
-				registers.addProperty(registerName.toUpperCase(), register.getValue());
+				registers.addProperty(registerId.toString(), register.getValue());
 			} catch (Exception e) {
 				// will never enter this catch block
 			}
@@ -49,9 +49,9 @@ public class WMachineSerializer implements JsonSerializer<WMachine> {
 		wmachine.add("registers", registers);
 		
 		final JsonObject signals = new JsonObject();
-		for(String signalName : machine.getSignalNames()) {
-			Signal signal = machine.getSignal(signalName);
-			signals.addProperty(signalName.toLowerCase(), signal.isEnabled());
+		for(Integer signalId : machine.getSignalIds()) {
+			Signal signal = machine.getSignal(signalId);
+			signals.addProperty(signalId.toString(), signal.isEnabled());
 		}
 		wmachine.add("signals", signals);
 		
