@@ -28,4 +28,9 @@
 
 .hand-controls {
 	background-color: $other-tab;
+
+
+	.checkbox & {
+		padding-left: 30px;
+	}
 }

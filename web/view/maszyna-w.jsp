@@ -60,8 +60,8 @@
   		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   			<div class="panel panel-default">
 			    <div class="panel-heading panel-heading--clear" role="tab">
-		 			<div class="checkbox collapse-headline checkbox--clear hand-controls">
-				      	<label>
+		 			<div class="checkbox checkbox--clear">
+				      	<label class="collapse-headline hand-controls">
 							<input type="checkbox" name="handControls" id="handControls" value="0">
 							sterowanie ręczne
 						</label>
