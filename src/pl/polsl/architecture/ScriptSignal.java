@@ -6,9 +6,7 @@
 package pl.polsl.architecture;
 
 import java.util.function.Function;
-import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 
 /**
  * Signal configured by script describing operation performed
@@ -17,18 +15,9 @@ import javax.script.ScriptEngineManager;
  * @version 1.0
  */
 public class ScriptSignal extends Signal {
-	// TODO: engine and static {...} goes to WMachine class (and are not static!)
-    static ScriptEngine engine;
-    
-    static {
-        engine = new ScriptEngineManager().getEngineByName("nashorn");
-        engine.getContext().setAttribute("AK", 10, ScriptContext.GLOBAL_SCOPE);
-        System.out.println("Klucze:");
-        for(String key : engine.getBindings(ScriptContext.GLOBAL_SCOPE).keySet())
-            System.out.println(key);
-        System.out.println("Koniec kluczy");
-    }
-    
+	/** Script engine used to evaluate out value. */
+	private ScriptEngine engine;
+	
     /** Text descibing operation performed by script. */
     private String functionString;
     
@@ -40,13 +29,15 @@ public class ScriptSignal extends Signal {
      * as in super class.
      * @param source - source of data.
      * @param target - target for data.
-     * @param function - operation to be performed, e.g. "AK+x"
+     * @param function - operation to be performed, e.g. "ACCUMULATOR+x"
      * will add value stored in accumulator and value stored in
      * data source and pass result to data target.
+     * @param engine - script engine to perform operation specified by <i>function</i>.
      */
-    public ScriptSignal(DataSource source, DataTarget target, String function) {
+    public ScriptSignal(DataSource source, DataTarget target, String function, ScriptEngine engine) {
         super(source, target);
         this.functionString = "function(x) " + function;
+        this.engine = engine;
         // <ScriptSignal script="AK+x"
     }
     
@@ -59,7 +50,13 @@ public class ScriptSignal extends Signal {
     @SuppressWarnings("unchecked")
     public void activate() throws Exception {
         functionObject = (Function<Object,Object>)engine.eval(String.format("new java.util.function.Function(%s)", functionString));
-        getTarget().setValue((Integer)functionObject.apply(getSource().getValue()));
+        Object value = functionObject.apply(getSource().getValue());
+        try {
+        	getTarget().setValue((Integer)value);
+        }
+        catch(ClassCastException ex) {
+        	getTarget().setValue(((Double)value).intValue());
+        }
     }
     
 }

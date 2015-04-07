@@ -10,7 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pl.polsl.servlet.ArchitectureInfo;
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
+import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
 
 /**
@@ -43,6 +48,12 @@ public class WMachine {
 	
 	/** Memory instance. */
 	private Memory memory;
+	
+	/** ALU instance. */
+	private ArithmeticLogicUnit alu;
+	
+	/** Script engine used by ScriptSignal instances. */
+	ScriptEngine engine;
     
 	/**
 	 * TODO: move to a separate class
@@ -62,11 +73,11 @@ public class WMachine {
         
         //components.put("magA", magA);
         //components.put("magS", magS);
-        registers.put(ArchitectureInfo.AvailableRegisters.MEMORY_ADDRESS.ID, A);
-        registers.put(ArchitectureInfo.AvailableRegisters.PROGRAM_COUNTER.ID, L);
-        registers.put(ArchitectureInfo.AvailableRegisters.INSTRUCTION.ID, I);
-        registers.put(ArchitectureInfo.AvailableRegisters.MEMORY_DATA.ID, S);
-        registers.put(ArchitectureInfo.AvailableRegisters.ACCUMULATOR.ID, AK);
+        registers.put(AvailableRegisters.MEMORY_ADDRESS.ID, A);
+        registers.put(AvailableRegisters.PROGRAM_COUNTER.ID, L);
+        registers.put(AvailableRegisters.INSTRUCTION.ID, I);
+        registers.put(AvailableRegisters.MEMORY_DATA.ID, S);
+        registers.put(AvailableRegisters.ACCUMULATOR.ID, AK);
         
         addressComponents.add(magA);
         addressComponents.add(A);
@@ -80,27 +91,43 @@ public class WMachine {
         memory = new Memory(dataBitCount, A);
         dataComponents.add(memory);
         
-        signals.put(ArchitectureInfo.AvailableSignals.PROGRAM_COUNTER_OUT.ID, new Signal(L, magA));
-        signals.put(ArchitectureInfo.AvailableSignals.PROGRAM_COUNTER_IN.ID, new Signal(magA, L));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_ADDRESS_IN.ID, new Signal(magA, A));
-        signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_OUT.ID, new Signal(I, magA));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_DATA_OUT.ID, new Signal(S, magS));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_DATA_IN.ID, new Signal(magS, S));
-        signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_IN.ID, new Signal(magS, I));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_READ.ID, new Signal(memory, S));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_WRITE.ID, new Signal(S, memory));
-    }
-    
-    /**
-     * Activates signal identified by signalName.
-     * @param signalName - name of the signal to be activated.
-     * @throws Exception when signalName is not a valid signal name
-     * or when signal cannot be activated.
-     */
-    public void activateSignal(String signalName) throws Exception {
-        if(!signals.containsKey(signalName))
-            throw new Exception("There is no such signal: " + signalName);
-        signals.get(signalName).activate();
+        Buffer aluInBuffer = new Buffer(32);
+        Buffer aluOutBuffer = new Buffer(32);
+        alu = new ArithmeticLogicUnit(aluInBuffer, aluOutBuffer);
+        dataComponents.add(alu);
+        
+        engine = new ScriptEngineManager().getEngineByName("nashorn");
+        updateScriptContext();
+        
+        signals.put(AvailableSignals.PROGRAM_COUNTER_OUT.ID, new Signal(L, magA));
+        signals.put(AvailableSignals.PROGRAM_COUNTER_IN.ID, new Signal(magA, L));
+        signals.put(AvailableSignals.MEMORY_ADDRESS_IN.ID, new Signal(magA, A));
+        signals.put(AvailableSignals.INSTRUCTION_OUT.ID, new Signal(I, magA));
+        signals.put(AvailableSignals.MEMORY_DATA_OUT.ID, new Signal(S, magS));
+        signals.put(AvailableSignals.MEMORY_DATA_IN.ID, new Signal(magS, S));
+        signals.put(AvailableSignals.INSTRUCTION_IN.ID, new Signal(magS, I));
+        signals.put(AvailableSignals.MEMORY_READ.ID, new Signal(memory, S));
+        signals.put(AvailableSignals.MEMORY_WRITE.ID, new Signal(S, memory));
+        
+        signals.put(AvailableSignals.ALU_IN.ID, new Signal(magS, alu));
+        signals.put(AvailableSignals.ACCUMULATOR_IN.ID, new Signal(alu, AK));
+        signals.put(AvailableSignals.ACCUMULATOR_OUT.ID, new Signal(AK, magS));
+        signals.put(AvailableSignals.ALU_ADD.ID, new ScriptSignal(aluInBuffer, aluOutBuffer, "ACCUMULATOR+x", engine));
+        signals.put(AvailableSignals.ALU_SUBTRACT.ID, new ScriptSignal(aluInBuffer, aluOutBuffer, "ACCUMULATOR-x", engine));
+        signals.put(AvailableSignals.ALU_COPY.ID, new ScriptSignal(aluInBuffer, aluOutBuffer, "x", engine));
+        
+//        try {
+//        	AK.setValue(10);
+//			magS.setValue(3);
+//			updateScriptContext();
+//			signals.get(AvailableSignals.ALU_IN.ID).activate();
+//			signals.get(AvailableSignals.ALU_COPY.ID).activate();
+//			signals.get(AvailableSignals.ACCUMULATOR_IN.ID).activate();
+//			System.out.print(AK.getValue());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
     }
     
     /**
@@ -145,22 +172,6 @@ public class WMachine {
     }
     
     /**
-     * Function to get IDs of all registers available in current architecture.
-     * @return List of IDs of all registers available in current architecture.
-     */
-    public List<Integer> getRegisterIds() {
-    	return new LinkedList<>(registers.keySet());
-    }
-    
-    /**
-     * Function to get IDs of all signals available in current architecture.
-     * @return List of IDs of all signals available in current architecture.
-     */
-    public List<Integer> getSignalIds() {
-    	return new LinkedList<>(signals.keySet());
-    }
-    
-    /**
      * Return signal with given ID.
      * @param signalId - ID of the signal to be returned
      * @return Signal with ID <i>signalId</i>.
@@ -175,5 +186,19 @@ public class WMachine {
      */
     public Memory getMemory() {
     	return memory;
+    }
+    
+    /**
+     * Update variables in script context in script engine.
+     */
+    public void updateScriptContext() {
+    	ScriptContext context = engine.getContext();
+    	try {
+	    	for(AvailableRegisters value : AvailableRegisters.values())
+	    		context.setAttribute(value.name(), getRegister(value.ID).getValue(), ScriptContext.GLOBAL_SCOPE);
+    	}
+    	catch(Exception ex) {
+    		// will never enter this catch block
+    	}
     }
 }

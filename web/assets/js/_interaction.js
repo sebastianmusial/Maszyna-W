@@ -14,6 +14,7 @@ MW.initInteraction = function() {
 			var input = $(inputSelector, div);
 			var attributeName = 'data-' + nameAttribute;
 			var register = {
+				id: registerId,
 				get name() { return div.attr(attributeName); },
 				set name(value) { div.attr(attributeName, value); },
 				get value() { return input.prop('value'); },
@@ -48,9 +49,6 @@ MW.initInteraction = function() {
 	var initSignal = function(signalId, state) {
 		var signal = MW.Signals[signalId];
 		signal.state = state;
-		signal.label.click(function() {
-			$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
-		});
 	}
 	
 	$.get("WMachineState", {action: "restore"}, function(data) {

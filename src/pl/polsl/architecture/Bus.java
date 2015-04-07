@@ -65,7 +65,7 @@ public class Bus implements DataSource, DataTarget {
     @Override
     public Integer getValue() throws Exception {
         if(value == null)
-            throw new Exception("Brak wartości.");
+            throw new Exception("Magistrala jest pusta.");
         return getMask(bitCount) & value;
     }
     
@@ -81,7 +81,7 @@ public class Bus implements DataSource, DataTarget {
     @Override
     public void setValue(Integer value) throws Exception {
         if(this.value != null)
-            throw new Exception("Magistrala jest używany.");
+            throw new Exception("Magistrala jest używana.");
         this.value = getMask(bitCount) & value;
     }
 }

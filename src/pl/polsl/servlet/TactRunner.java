@@ -35,8 +35,8 @@ public class TactRunner extends WMachineServletBase {
 		}
 		
 		try {
-			for(Integer signalId : signals.keySet())
-				machine.activateSignal(signals.get(signalId));
+//			for(Integer signalId : signals.keySet())
+//				machine.activateSignal(signals.get(signalId));
 		}
 		catch(Exception ex) {
 			

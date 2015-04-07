@@ -416,14 +416,16 @@ MW.setText = function(paper, signalId, posX, posY, arrow) {
 	
     var label = paper.text(0, 0, command),
         checkbox = $('#handControls');
-
+    
     //Command attributes
     label
         .attr({ x: posX, y: posY})
         .attr(MW.attr.textCommand);
-    MW.Signals[signalId] = {
-		label: label,
-		arrow: arrow,
+    
+    var signal = {
+		id: signalId,
+		get name() { return label.attr('text'); },
+		set name(value) { label.attr('text', value); },
 		get state() { return (label.data('status') == 1); },
     	set state(value) {
 			if(value) {
@@ -436,8 +438,14 @@ MW.setText = function(paper, signalId, posX, posY, arrow) {
 			}
 		}
 	};
+    
+    label.click(function() {
+		$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
+	});
     label.signalId = signalId;
     arrow.signalId = signalId;
+
+    MW.Signals[signalId] = signal;
 
     //Click action for arrows
     var arrowAction = function() {

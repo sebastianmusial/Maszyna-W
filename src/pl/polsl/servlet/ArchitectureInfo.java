@@ -3,6 +3,8 @@ package pl.polsl.servlet;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -191,6 +193,30 @@ public class ArchitectureInfo extends WMachineServletBase {
 			this.ID = id;
 		}
 	}
+	
+	
+    /**
+     * Function to get IDs of all registers available in full architecture.
+     * @return List of IDs of all registers available in full architecture.
+     */
+    public static List<Integer> getRegisterIds() {
+    	LinkedList<Integer> ids = new LinkedList<>();
+    	for(AvailableRegisters value : AvailableRegisters.values())
+    		ids.add(value.ID);
+		return ids;
+    }
+    
+    /**
+     * Function to get IDs of all signals available in full architecture.
+     * @return List of IDs of all signals available in full architecture.
+     */
+    public static List<Integer> getSignalIds() {
+    	LinkedList<Integer> ids = new LinkedList<>();
+    	for(AvailableSignals value : AvailableSignals.values())
+    		ids.add(value.ID);
+		return ids;
+    }
+	
 	
 	/**
 	 * List of all available extensions.
