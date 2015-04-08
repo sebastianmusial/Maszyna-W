@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.polsl.architecture.Memory;
 import pl.polsl.architecture.WMachine;
+import pl.polsl.architecture.components.finalized.Memory;
 
 /**
  * Allow to access memory from client side.

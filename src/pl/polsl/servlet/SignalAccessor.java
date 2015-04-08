@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.polsl.architecture.Signal;
 import pl.polsl.architecture.WMachine;
+import pl.polsl.architecture.signals.Signal;
 
 /**
  * Allow to access signals from client side.

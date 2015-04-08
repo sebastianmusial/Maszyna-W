@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.polsl.architecture.Register;
 import pl.polsl.architecture.WMachine;
+import pl.polsl.architecture.components.finalized.Register;
 
 /**
  * Allow to access registers from client side.

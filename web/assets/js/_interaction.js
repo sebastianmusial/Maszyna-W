@@ -6,6 +6,16 @@ var MW = MW || {};
 
 MW.Memory = [];
 
+MW.restoreState = function() {
+	$.get("WMachineState", {action: "restore"}, function(data) {
+		var wmachine = JSON.parse(data);
+		for(registerId in wmachine.registers)
+			MW.Registers[registerId].value = wmachine.registers[registerId];
+		for(signalId in wmachine.signals)
+			MW.Signals[signalId].state = wmachine.signals[signalId];
+	});
+}
+
 // Init interaction.
 MW.initInteraction = function() {
 	var initRegisters = function() {
@@ -14,6 +24,8 @@ MW.initInteraction = function() {
 			var input = $(inputSelector, div);
 			var attributeName = 'data-' + nameAttribute;
 			var register = {
+				id: registerId,
+				get isVisible() { return div.is(':visible'); },
 				get name() { return div.attr(attributeName); },
 				set name(value) { div.attr(attributeName, value); },
 				get value() { return input.prop('value'); },
@@ -48,9 +60,6 @@ MW.initInteraction = function() {
 	var initSignal = function(signalId, state) {
 		var signal = MW.Signals[signalId];
 		signal.state = state;
-		signal.label.click(function() {
-			$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
-		});
 	}
 	
 	$.get("WMachineState", {action: "restore"}, function(data) {
@@ -62,27 +71,27 @@ MW.initInteraction = function() {
 		for(signalId in wmachine.signals)
 			initSignal(signalId, wmachine.signals[signalId]);
 		
-		var initMemoryCell = function(index) {
-			var row = $("#memory-row-" + index);
-			var input = $("#memory-cell-" + index + "-value");
-			var text = $("#memory-cell-" + index + "-text");
-			MW.Memory[i] = {
-				row: row,
-				get value() { return input.prop('value'); },
-				set value(v) { input.prop('value', v); }
-			};
-			input.change(function() {
-				$.get("MemoryAccessor", {index: index, value: input.prop("value")});
-			});
-		}
-		
-		for(var i = 0; i < 64; ++i)
-			initMemoryCell(i);
-		
-		for(var i = 0; i < wmachine.memory.length; ++i)
-			MW.Memory[i].value = wmachine.memory[i];
-		
-		for(var i = wmachine.memory.length; i < 64; ++i)
-			MW.Memory[i].row.hide();
+//		var initMemoryCell = function(index) {
+//			var row = $("#memory-row-" + index);
+//			var input = $("#memory-cell-" + index + "-value");
+//			var text = $("#memory-cell-" + index + "-text");
+//			MW.Memory[i] = {
+//				row: row,
+//				get value() { return input.prop('value'); },
+//				set value(v) { input.prop('value', v); }
+//			};
+//			input.change(function() {
+//				$.get("MemoryAccessor", {index: index, value: input.prop("value")});
+//			});
+//		}
+//		
+//		for(var i = 0; i < 64; ++i)
+//			initMemoryCell(i);
+//		
+//		for(var i = 0; i < wmachine.memory.length; ++i)
+//			MW.Memory[i].value = wmachine.memory[i];
+//		
+//		for(var i = wmachine.memory.length; i < 64; ++i)
+//			MW.Memory[i].row.hide();
 	});
 };

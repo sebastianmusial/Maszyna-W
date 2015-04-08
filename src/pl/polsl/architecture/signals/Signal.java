@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.architecture;
+package pl.polsl.architecture.signals;
+
+import pl.polsl.architecture.components.DataSource;
+import pl.polsl.architecture.components.DataTarget;
 
 /**
  * W Machine signal. When activated cause data to flow

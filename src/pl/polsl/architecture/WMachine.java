@@ -10,7 +10,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pl.polsl.servlet.ArchitectureInfo;
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
+import pl.polsl.architecture.components.WMachineComponent;
+import pl.polsl.architecture.components.finalized.ArithmeticLogicUnit;
+import pl.polsl.architecture.components.finalized.Memory;
+import pl.polsl.architecture.components.finalized.Register;
+import pl.polsl.architecture.signals.Signal;
+import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
+import pl.polsl.utils.Primitive;
 
 
 /**
@@ -21,103 +32,63 @@ import pl.polsl.servlet.ArchitectureInfo;
  */
 public class WMachine {
 	/** Bit count for address. */
-	private Integer addressBitCount = 5;
-	
-	/** Bit count for operation code. */
-	private Integer opCodeBitCount = 3;
+	private Primitive<Integer> addressBitCount;
     
     /** Bit count for command (operation + address). */
-	private Integer dataBitCount = addressBitCount + opCodeBitCount;
+	private Primitive<Integer> dataBitCount;
     
     /** Map of registers identified by IDs. */
 	private Map<Integer, Register> registers = new HashMap<>();
 	
 	/** Map of signals identified by IDs. */
 	private Map<Integer, Signal> signals = new HashMap<>();
-    
-	/** List of components storing addresses. */
-	private List<WMachineComponent> addressComponents = new LinkedList<>();
-	
-	/** List of components storing commands. */
-	private List<WMachineComponent> dataComponents = new LinkedList<>();
-	
+
 	/** Memory instance. */
 	private Memory memory;
+	
+	/** ALU instance. */
+	private ArithmeticLogicUnit alu;
+	
+	/** List of all components in this architecture. */
+	private List<WMachineComponent> components = new LinkedList<>();
+	
+	/** Script engine used by ScriptSignal instances. */
+	private ScriptEngine engine;
     
-	/**
-	 * TODO: move to a separate class
-	 * For now creates simplest W Machine architecture.
-	 * @param filename - file defining architecture
-	 */
-    public void readArchitecture(String filename) {
-        // Test architecture
-        Bus magA = new Bus(addressBitCount);
-        Bus magS = new Bus(dataBitCount);
-        
-        Register A = new Register(addressBitCount);
-        Register L = new Register(addressBitCount);
-        Register I = new Register(dataBitCount);
-        Register S = new Register(dataBitCount);
-        Register AK = new Register(dataBitCount);
-        
-        //components.put("magA", magA);
-        //components.put("magS", magS);
-        registers.put(ArchitectureInfo.AvailableRegisters.MEMORY_ADDRESS.ID, A);
-        registers.put(ArchitectureInfo.AvailableRegisters.PROGRAM_COUNTER.ID, L);
-        registers.put(ArchitectureInfo.AvailableRegisters.INSTRUCTION.ID, I);
-        registers.put(ArchitectureInfo.AvailableRegisters.MEMORY_DATA.ID, S);
-        registers.put(ArchitectureInfo.AvailableRegisters.ACCUMULATOR.ID, AK);
-        
-        addressComponents.add(magA);
-        addressComponents.add(A);
-        addressComponents.add(L);
-        
-        dataComponents.add(magS);
-        dataComponents.add(I);
-        dataComponents.add(S);
-        dataComponents.add(AK);
-        
-        memory = new Memory(dataBitCount, A);
-        dataComponents.add(memory);
-        
-        signals.put(ArchitectureInfo.AvailableSignals.PROGRAM_COUNTER_OUT.ID, new Signal(L, magA));
-        signals.put(ArchitectureInfo.AvailableSignals.PROGRAM_COUNTER_IN.ID, new Signal(magA, L));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_ADDRESS_IN.ID, new Signal(magA, A));
-        signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_OUT.ID, new Signal(I, magA));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_DATA_OUT.ID, new Signal(S, magS));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_DATA_IN.ID, new Signal(magS, S));
-        signals.put(ArchitectureInfo.AvailableSignals.INSTRUCTION_IN.ID, new Signal(magS, I));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_READ.ID, new Signal(memory, S));
-        signals.put(ArchitectureInfo.AvailableSignals.MEMORY_WRITE.ID, new Signal(S, memory));
-    }
-    
-    /**
-     * Activates signal identified by signalName.
-     * @param signalName - name of the signal to be activated.
-     * @throws Exception when signalName is not a valid signal name
-     * or when signal cannot be activated.
-     */
-    public void activateSignal(String signalName) throws Exception {
-        if(!signals.containsKey(signalName))
-            throw new Exception("There is no such signal: " + signalName);
-        signals.get(signalName).activate();
-    }
-    
+	public WMachine(Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount, ScriptEngine engine) {
+		this.addressBitCount = addressBitCount;
+		this.dataBitCount = dataBitCount;
+		this.engine = engine;
+	}
+	
+	public void addRegister(Integer registerId, Register register) {
+		registers.put(registerId, register);
+		addComponent(register);
+	}
+	
+	public void addSignal(Integer signalId, Signal signal) {
+		signals.put(signalId, signal);
+	}
+	
+	public void addComponent(WMachineComponent component) {
+		components.add(component);
+		if(component instanceof Memory)
+			memory = (Memory)component;
+		else if(component instanceof ArithmeticLogicUnit)
+			alu = (ArithmeticLogicUnit)component;
+	}
+	
     /**
      * Sets new address bit count. Changes bit count for commands
      * and informs address and command storing components about the change.
      * @param count - new address bit count.
      */
     public void setAddressBitCount(Integer count) {
-    	if(addressBitCount == count)
+    	if(addressBitCount.getValue() == count)
     		return;
-    	addressBitCount = count;
-    	dataBitCount = addressBitCount + opCodeBitCount;
-    	for(WMachineComponent component : addressComponents)
-    		component.setBitCount(count);
-    	for(WMachineComponent component : dataComponents)
-    		component.setBitCount(dataBitCount);
-    	memory.updateSize();
+    	Integer opCodeBitCount = dataBitCount.getValue() - addressBitCount.getValue();
+    	addressBitCount.setValue(count);
+    	dataBitCount.setValue(count + opCodeBitCount);
     }
     
     /**
@@ -125,13 +96,10 @@ public class WMachine {
      * and informs command storing components about the change.
      * @param count - new operation code bit count.
      */
-    public void setOpCodeBitCount(Integer count) {
-    	if(opCodeBitCount == count)
+    public void setDataBitCount(Integer count) {
+    	if(dataBitCount.getValue() == count)
     		return;
-    	opCodeBitCount = count;
-    	dataBitCount = addressBitCount + opCodeBitCount;
-    	for(WMachineComponent component : dataComponents)
-    		component.setBitCount(dataBitCount);
+    	dataBitCount.setValue(count);
     }
     
     /**
@@ -142,22 +110,6 @@ public class WMachine {
      */
     public Register getRegister(Integer registerId) {
     	return registers.get(registerId);
-    }
-    
-    /**
-     * Function to get IDs of all registers available in current architecture.
-     * @return List of IDs of all registers available in current architecture.
-     */
-    public List<Integer> getRegisterIds() {
-    	return new LinkedList<>(registers.keySet());
-    }
-    
-    /**
-     * Function to get IDs of all signals available in current architecture.
-     * @return List of IDs of all signals available in current architecture.
-     */
-    public List<Integer> getSignalIds() {
-    	return new LinkedList<>(signals.keySet());
     }
     
     /**
@@ -175,5 +127,25 @@ public class WMachine {
      */
     public Memory getMemory() {
     	return memory;
+    }
+    
+    /**
+     * Update variables in script context in script engine.
+     */
+    public void updateScriptContext() {
+    	ScriptContext context = engine.getContext();
+    	try {
+	    	for(AvailableRegisters value : AvailableRegisters.values())
+	    		context.setAttribute(value.name(), getRegister(value.ID).getValue(), ScriptContext.GLOBAL_SCOPE);
+    	}
+    	catch(Exception ex) {
+    		// will never enter this catch block
+    	}
+    }
+    
+    public void nextTact() {
+    	for(WMachineComponent component : components) {
+    		component.nextTact();
+    	}
     }
 }
