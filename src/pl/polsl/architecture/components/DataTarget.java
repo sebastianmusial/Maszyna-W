@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.architecture;
+package pl.polsl.architecture.components;
+
 
 /**
  * Interface of data target. If component of W Machine should be able

@@ -1,18 +1,23 @@
-package pl.polsl.architecture;
+package pl.polsl.architecture.components.finalized;
 
 import java.util.Vector;
+
+import pl.polsl.architecture.components.DataSource;
+import pl.polsl.architecture.components.DataTarget;
+import pl.polsl.utils.Primitive;
+import pl.polsl.utils.PrimitiveChangeListener;
 
 /**
  * 
  * @author Tomasz Rzepka
  * @version 1.0
  */
-public class Memory implements DataSource, DataTarget {
+final public class Memory implements DataSource, DataTarget, PrimitiveChangeListener<Integer> {
 	/** Bit count defining data word. */
-    private Integer bitCount;
+    private Primitive<Integer> bitCount;
     
 	/** Vector containing memory cells. */
-	Vector<Integer> data = new Vector<>();
+	Vector<MemoryCell> cells = new Vector<>();
 	
 	/** Reference to address register. */
 	Register addressRegister;
@@ -28,13 +33,13 @@ public class Memory implements DataSource, DataTarget {
 	 * @param addressRegister reference to address register used
 	 * to address memory cell
 	 */
-	public Memory(Integer bitCount, Register addressRegister) {
-		this.bitCount = bitCount;
+	public Memory(Register addressRegister, Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount) {
 		this.addressRegister = addressRegister;
-		Integer memorySize = 1 << addressRegister.getBitCount(); 
-		data.setSize(memorySize);
+		bitCount = dataBitCount;
+		Integer memorySize = 1 << addressBitCount.getValue(); 
+		cells.setSize(memorySize);
 		for(int i = 0; i < memorySize; ++i)
-			data.set(i, i);
+			cells.set(i, new MemoryCell(bitCount));
 	}
 	
 	/**
@@ -44,18 +49,6 @@ public class Memory implements DataSource, DataTarget {
 	@Override
 	public void nextTact() {
 		memoryAccessed = false;
-	}
-
-	/**
-     * Implementation of WMachineComponent interface.
-     * Sets new bit count that single memory cell can store.
-     * @param count new bit count. Must be greater than zero.
-     */
-	@Override
-	public void setBitCount(Integer count) {
-		if(count > 0 && count != bitCount) {
-			bitCount = count;
-		}
 	}
 
 	/**
@@ -72,7 +65,7 @@ public class Memory implements DataSource, DataTarget {
     		throw new Exception("Jednoczesny odczyt i zapis do pamięci jest niemożliwy.");
 		memoryAccessed = true;
 		Integer address = addressRegister.getValue();
-		return getMask(bitCount) & data.get(address);
+		return cells.get(address).getValue();
 	}
 	
 	/**
@@ -89,20 +82,7 @@ public class Memory implements DataSource, DataTarget {
     		throw new Exception("Jednoczesny odczyt i zapis do pamięci jest niemożliwy.");
 		memoryAccessed = true;
 		Integer address = addressRegister.getValue();
-        data.set(address, getMask(bitCount) & value);
-	}
-
-	/**
-	 * Size of memory is set to 2^(current address bit count).
-	 * Address bit count is read from address register.
-	 * @return New memory size.
-	 */
-	Integer updateSize() {
-		Integer addressBitCount = addressRegister.getBitCount();
-		Integer memorySize = 1 << addressBitCount;
-		if(memorySize != data.size())
-			data.setSize(memorySize);
-		return memorySize;
+        cells.get(address).setValue(value);
 	}
 
 	/**
@@ -111,12 +91,14 @@ public class Memory implements DataSource, DataTarget {
 	 * every value is masked by mask returned from function getMask.
 	 */
 	public Integer[] getValues() {
-		Integer memorySize = updateSize();
-		Integer mask = getMask(bitCount);
-		Integer[] values = new Integer[memorySize];
-		for(int i = 0; i < memorySize; ++i)
-			values[i] = data.get(i) & mask;
-		return values;
+		return cells.stream().map( cell -> {
+			try {
+				return cell.getValue();
+			}
+			catch(Exception ex) {
+				return 0;
+			}
+		} ).toArray(Integer[]::new);
 	}
 	
 	/**
@@ -125,6 +107,24 @@ public class Memory implements DataSource, DataTarget {
 	 * @param value value to be set in the cell.
 	 */
 	public void setValue(Integer index, Integer value) {
-		data.set(index, value);
+		try {
+			cells.get(index).setValue(value);
+		} catch (Exception e) {
+			// ignore
+		}
+	}
+
+	@Override
+	public void primitiveChanged(Primitive<Integer> primitive) {
+		Integer addressBitCount = primitive.getValue();
+		Integer newSize = 1 << addressBitCount;
+		Integer oldSize = cells.size();
+		if(newSize != oldSize) {
+			cells.setSize(newSize);
+			if(newSize > oldSize) {
+				for(int i = oldSize; i < newSize; ++i)
+					cells.set(i, new MemoryCell(bitCount));
+			}
+		}
 	}
 }

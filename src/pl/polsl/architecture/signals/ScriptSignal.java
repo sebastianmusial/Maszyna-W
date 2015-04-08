@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.polsl.architecture;
+package pl.polsl.architecture.signals;
 
 import java.util.function.Function;
+
 import javax.script.ScriptEngine;
+
+import pl.polsl.architecture.components.DataSource;
+import pl.polsl.architecture.components.DataTarget;
 
 /**
  * Signal configured by script describing operation performed

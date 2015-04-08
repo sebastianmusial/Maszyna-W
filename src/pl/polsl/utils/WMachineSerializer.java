@@ -2,9 +2,9 @@ package pl.polsl.utils;
 
 import java.lang.reflect.Type;
 
-import pl.polsl.architecture.Register;
-import pl.polsl.architecture.Signal;
 import pl.polsl.architecture.WMachine;
+import pl.polsl.architecture.components.finalized.Register;
+import pl.polsl.architecture.signals.Signal;
 import pl.polsl.servlet.ArchitectureInfo;
 
 import com.google.gson.JsonArray;

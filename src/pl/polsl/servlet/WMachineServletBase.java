@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import pl.polsl.architecture.WMachine;
+import pl.polsl.architecture.WMachineFactory;
 
 /**
  * Base class for servlets manipulating W Machine state.
@@ -30,8 +31,8 @@ public class WMachineServletBase extends HttpServlet {
 	protected WMachine getCurrentWMachine(HttpSession session) {
 		WMachine machine = (WMachine)session.getAttribute("WMachineInstance");
 		if(machine == null) {
-			machine = new WMachine();
-			machine.readArchitecture("");
+			machine = new WMachineFactory().getInstance();
+			machine.setAddressBitCount(10);
 			session.setAttribute("WMachineInstance", machine);
 		}
 		return machine;
