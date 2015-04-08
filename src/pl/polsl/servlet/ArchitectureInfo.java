@@ -106,81 +106,81 @@ public class ArchitectureInfo extends WMachineServletBase {
 	 */
 	public static enum AvailableSignals {
 		/** Pass value from address bus to program counter. */
-		PROGRAM_COUNTER_IN(16),
+		PROGRAM_COUNTER_IN(160),
 		/** Pass value from program counter to address bus. */
-		PROGRAM_COUNTER_OUT(1),
+		PROGRAM_COUNTER_OUT(10),
 		/** Increment value stored in program counter. */
-		PROGRAM_COUNTER_INCREMENT(11),
+		PROGRAM_COUNTER_INCREMENT(110),
 		/** Pass value from program counter to data bus. */
-		PROGRAM_COUNTER_OUT_TO_DATA_BUS(2),
+		PROGRAM_COUNTER_OUT_TO_DATA_BUS(20),
 		/** Pass value from data bus to instruction register. */
-		INSTRUCTION_IN(18),
+		INSTRUCTION_IN(180),
 		/** Pass value from instruction register to address bus. */
-		INSTRUCTION_OUT(3),
+		INSTRUCTION_OUT(30),
 		/** Pass value from arithmetic logic unit to accumulator. */
-		ACCUMULATOR_IN(35),
+		ACCUMULATOR_IN(350),
 		/** Pass value from accumulator to data bus. */
-		ACCUMULATOR_OUT(36),
+		ACCUMULATOR_OUT(59),
 		/** Increment value stored in accumulator. */
-		ACCUMULATOR_INCREMENT(14),
+		ACCUMULATOR_INCREMENT(140),
 		/** Decrement value stored in accumulator. */
-		ACCUMULATOR_DECREMENT(15),
+		ACCUMULATOR_DECREMENT(150),
 		/** Pass value from address bus to memory address register. */
-		MEMORY_ADDRESS_IN(17),
+		MEMORY_ADDRESS_IN(170),
 		/** Pass value from data bus to memory data register. */
-		MEMORY_DATA_IN(19),
+		MEMORY_DATA_IN(190),
 		/** Pass value from memory data register to data bus. */
-		MEMORY_DATA_OUT(4),
+		MEMORY_DATA_OUT(40),
 		/** Pass value from memory data register to memory cell selected by memory address register. */
-		MEMORY_WRITE(37),
+		MEMORY_WRITE(370),
 		/** Pass value from memory cell selected by memory address register to memory data register. */
 		MEMORY_READ(0),
 		/** Pass value from address bus to stack pointer register. */
-		STACK_POINTER_IN(20),
+		STACK_POINTER_IN(200),
 		/** Pass value from stack pointer register to address bus. */
-		STACK_POINTER_OUT(5),
+		STACK_POINTER_OUT(50),
 		/** Increment value stored in stack pointer register. */
-		STACK_POINTER_INCREMENT(12),
+		STACK_POINTER_INCREMENT(120),
 		/** Decrement value stored in stack pointer register. */
-		STACK_POINTER_DECREMENT(13),
+		STACK_POINTER_DECREMENT(130),
 		/** Pass value from one bus to another bus. */
-		BUS_CONNECTION(10),
+		BUS_CONNECTION(100),
 		/** Perform addition in arithmetic logic unit. */
-		ALU_ADD(26),
+		ALU_ADD(260),
 		/** Perform subtraction in arithmetic logic unit. */
-		ALU_SUBTRACT(27),
+		ALU_SUBTRACT(270),
 		/** Perform multiplication in arithmetic logic unit. */
-		ALU_MULTIPLY(28),
+		ALU_MULTIPLY(280),
 		/** Perform division in arithmetic logic unit. */
-		ALU_DIVIDE(29),
+		ALU_DIVIDE(290),
 		/** Perform copy in arithmetic logic unit. */
-		ALU_COPY(30),
+		ALU_COPY(300),
 		/** Perform logical shift right in arithmetic logic unit. */
-		ALU_SHIFT_RIGHT(31),
+		ALU_SHIFT_RIGHT(310),
 		/** Perform logical conjunction in arithmetic logic unit. */
-		ALU_CONJUNCTION(32),
+		ALU_CONJUNCTION(320),
 		/** Perform logical alternative in arithmetic logic unit. */
-		ALU_ALTERNATIVE(33),
+		ALU_ALTERNATIVE(330),
 		/** Perform logical negation in arithmetic logic unit. */
-		ALU_NEGATION(34),
+		ALU_NEGATION(340),
 		/** Pass value from data bus to data register X. */
-		DATA_X_IN(21),
+		DATA_X_IN(210),
 		/** Pass value from data register X to data bus. */
-		DATA_X_OUT(6),
+		DATA_X_OUT(60),
 		/** Pass value from data bus to data register Y. */
-		DATA_Y_IN(22),
+		DATA_Y_IN(220),
 		/** Pass value from data register Y to data bus. */
-		DATA_Y_OUT(7),
+		DATA_Y_OUT(70),
 		/** Pass value from data bus to I/O port register. */
-		IO_PORT_IN(23),
+		IO_PORT_IN(230),
 		/** Pass value from I/O port register to data bus. */
-		IO_PORT_OUT(8),
+		IO_PORT_OUT(80),
 		/** Perform I/O operation. */
-		STROBE_START(24),
+		STROBE_START(240),
 		/** Pass value from strobe signal register to data bus. */
-		STROBE_OUT(9),
+		STROBE_OUT(90),
 		/** Pass value from data bus to logic arithmetic unit. */
-		ALU_IN(25);
+		ALU_IN(250);
 		
 		/** Signal ID. */
 		public final Integer ID;
