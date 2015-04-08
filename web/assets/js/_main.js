@@ -422,8 +422,11 @@ MW.setText = function(paper, signalId, posX, posY, arrow) {
         .attr({ x: posX, y: posY})
         .attr(MW.attr.textCommand);
     
+    
+    var parentDiv = paper.canvas.parentNode;
     var signal = {
 		id: signalId,
+		get isVisible() { return (parentDiv.style.display != "none"); },
 		get name() { return label.attr('text'); },
 		set name(value) { label.attr('text', value); },
 		get state() { return (label.data('status') == 1); },
