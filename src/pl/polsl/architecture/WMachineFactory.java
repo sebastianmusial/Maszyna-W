@@ -22,7 +22,7 @@ public class WMachineFactory {
         Bus magA = builder.addBus(addressBitCount);
         Bus magS = builder.addBus(dataBitCount);
         
-        Register A = builder.addRegister("MEMORY_ADDRES", addressBitCount);
+        Register A = builder.addRegister("MEMORY_ADDRESS", addressBitCount);
         Register L = builder.addRegister("PROGRAM_COUNTER", addressBitCount);
         Register I = builder.addRegister("INSTRUCTION", dataBitCount);
         Register S = builder.addRegister("MEMORY_DATA", dataBitCount);
@@ -47,10 +47,15 @@ public class WMachineFactory {
         builder.addSignal("ALU_IN", magS, alu);
         builder.addSignal("ACCUMULATOR_IN", alu, AK);
         builder.addSignal("ACCUMULATOR_OUT", AK, magS);
-        builder.addScriptSignal("ALU_ADD", aluInBuffer, aluOutBuffer, "ACCUMULATOR+x");
-        builder.addScriptSignal("ALU_SUBTRACT", aluInBuffer, aluOutBuffer, "ACCUMULATOR-x");
+        builder.addScriptSignal("ALU_ADD", aluInBuffer, aluOutBuffer, "ACCUMULATOR + x");
+        builder.addScriptSignal("ALU_SUBTRACT", aluInBuffer, aluOutBuffer, "ACCUMULATOR - x");
         builder.addScriptSignal("ALU_COPY", aluInBuffer, aluOutBuffer, "x");
-        
+        builder.addScriptSignal("ALU_MULTIPLY", aluInBuffer, aluOutBuffer, "ACCUMULATOR * x");
+        builder.addScriptSignal("ALU_DIVIDE", aluInBuffer, aluOutBuffer, "ACCUMULATOR / x");
+        builder.addScriptSignal("ALU_SHIFT_RIGHT", aluInBuffer, aluOutBuffer, "ACCUMULATOR >> x");
+        builder.addScriptSignal("ALU_CONJUNTION", aluInBuffer, aluOutBuffer, "ACCUMULATOR & x");
+        builder.addScriptSignal("ALU_ALTERNATIVE", aluInBuffer, aluOutBuffer, "ACCUMULATOR | x");
+        builder.addScriptSignal("ALU_NEGATION", aluInBuffer, aluOutBuffer, "~x");
 		return builder.end();
 	}
 	

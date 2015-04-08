@@ -142,4 +142,10 @@ public class WMachine {
     		// will never enter this catch block
     	}
     }
+    
+    public void nextTact() {
+    	for(WMachineComponent component : components) {
+    		component.nextTact();
+    	}
+    }
 }

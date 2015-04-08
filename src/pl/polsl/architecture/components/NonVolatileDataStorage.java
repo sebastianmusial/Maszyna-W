@@ -4,7 +4,7 @@ import pl.polsl.utils.Primitive;
 
 public class NonVolatileDataStorage extends DataStorage {
 	/** Current value stored in the storage. */
-    private Integer value;
+    private Integer value = 0;
 
     /** Logical value indicating if value has been changed in current tact. */
     private Boolean valueChanged = false;
