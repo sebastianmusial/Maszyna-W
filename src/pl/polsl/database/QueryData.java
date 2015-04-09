@@ -29,7 +29,7 @@ public class QueryData {
 				loggedUserName = rs.getString("login");
 				
 				// debugging purpose
-				System.out.printf("logged user: " + loggedUserID + " " + loggedUserName + "\n");
+				//System.out.printf("logged user: " + loggedUserID + " " + loggedUserName + "\n");
 			}
 			
 			result = new ArrayList<String>();

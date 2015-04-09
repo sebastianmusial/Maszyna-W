@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +38,7 @@ public class LoginUser extends HttpServlet {
     	String userLogin = request.getParameter("user_name");
     	String userPass  = request.getParameter("user_pass");
     	
-    	boolean error = false;
+    	int error = 0;
     	List<String> result = null;
     	
     	Connection con = new DatabaseConnection(request).getInstance();
@@ -47,33 +46,27 @@ public class LoginUser extends HttpServlet {
     	try {
     		result = QueryData.findUser(con, userLogin, userPass);
     		
-    		if (result.isEmpty()) {
-    			error = true;
+    		if (result.get(0) == null || result.get(1) == null) {
+    			error = 1;
     		}
     		
 		} catch (SQLException e) {
-			error = true;
+			error = 1;
 		} catch (Exception e) {
-			error = true;
+			error = 1;
 		}
-    	   	
-    	// set output attributes
-        request.setAttribute("error", error); 
-        RequestDispatcher rd = null;
         
-        if (!error) {
-        	
+        if (error == 0) {       	
         	HttpSession session = request.getSession(true);
         	session.setAttribute("loggedID", result.get(0));  
         	session.setAttribute("loggedUser", result.get(1));  
         	session.setAttribute("isAdmin", false); 
         	
         	response.sendRedirect("index.jsp");
-        	
-        } else {
-        	
-        	rd = request.getRequestDispatcher("login.jsp");
-        	rd.forward(request, response);
+        	System.out.println("Logged: " + result.get(0) + " " + result.get(1));        	
+        } else {     
+        	System.out.println(error);
+        	response.sendRedirect("login.jsp?error=" + error);
         }   
     }
 	

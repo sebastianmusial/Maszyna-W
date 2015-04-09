@@ -16,18 +16,19 @@ section.forum {
 		.category-header {
 			padding-top: 12px;
 			padding-left: 20px;
-
-			height: 20px;
-			line-height: 20px;
-
 			background-color: #9F9F9F;
 
 			h3 {
 				margin: 0;
-				font-size: 22px;
+				font-size: 20px;
+				line-height: 40px;
 				color: white;
 			}		
 		}
+
+		.title-header { padding-left: 20px; }
+		.count-header { text-align: center; }
+		.last-header { text-align: center; }
 
 		.topic-headline {
 			font-size: 16px;
@@ -44,6 +45,7 @@ section.forum {
 			height: $row-height;
 
 			.col-content {
+				h4 { font-size: 18px; }
 				max-width: 100%;
 				padding-left: 20px;
 			}
@@ -51,12 +53,14 @@ section.forum {
 			.col-views {
 				width: 120px;
 				line-height: $row-height;
+				text-align: center;
 			}
 
 			.col-post {
 				width: 200px;
 				height: $row-height;
 				padding-top: $row-height / 2.5;
+				text-align: center;
 			}
 		}
 	}
@@ -155,7 +159,8 @@ section.login-form { .alert:not(.alert-info) { display: block; }  }
 	SECTION - Register/create topic status
 --------------------------------------------------------------------- */
 
-section.register-successful, section.createTopic-successful {
+section.register-successful, 
+section.createTopic-successful {
 
 	.alert {
 		max-width: 600px;

@@ -399,13 +399,18 @@ section.forum {
   section.forum .table-category .category-header {
     padding-top: 12px;
     padding-left: 20px;
-    height: 20px;
-    line-height: 20px;
     background-color: #9F9F9F; }
     section.forum .table-category .category-header h3 {
       margin: 0;
-      font-size: 22px;
+      font-size: 20px;
+      line-height: 40px;
       color: white; }
+  section.forum .table-category .title-header {
+    padding-left: 20px; }
+  section.forum .table-category .count-header {
+    text-align: center; }
+  section.forum .table-category .last-header {
+    text-align: center; }
   section.forum .table-category .topic-headline {
     font-size: 16px;
     color: #4A90E2; }
@@ -416,13 +421,17 @@ section.forum {
     section.forum .table-category tr .col-content {
       max-width: 100%;
       padding-left: 20px; }
+      section.forum .table-category tr .col-content h4 {
+        font-size: 18px; }
     section.forum .table-category tr .col-views {
       width: 120px;
-      line-height: 50px; }
+      line-height: 50px;
+      text-align: center; }
     section.forum .table-category tr .col-post {
       width: 200px;
       height: 50px;
-      padding-top: 20px; }
+      padding-top: 20px;
+      text-align: center; }
 
 /* ------------------------------------------------------------------
 	SECTION - Register/Login
@@ -510,11 +519,13 @@ section.login-form .alert:not(.alert-info) {
 /* ------------------------------------------------------------------
 	SECTION - Register/create topic status
 --------------------------------------------------------------------- */
-section.register-successful .alert, section.createTopic-successful .alert {
+section.register-successful .alert,
+section.createTopic-successful .alert {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 50px; }
-  section.register-successful .alert .glyphicon, section.createTopic-successful .alert .glyphicon {
+  section.register-successful .alert .glyphicon,
+  section.createTopic-successful .alert .glyphicon {
     display: block;
     float: left;
     font-size: 32px;
