@@ -32,7 +32,7 @@ public class InsertData {
 		PreparedStatement pst = null;		
 		int topicID = 0;
 		
-		try {		
+		try {			
             pst = con.prepareStatement("INSERT INTO Topics VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             pst.setNull(1, 0);
             pst.setInt(2, userID);

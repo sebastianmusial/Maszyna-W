@@ -44,13 +44,32 @@ public class CreateTopic extends HttpServlet {
     	Connection con = new DatabaseConnection(request).getInstance();
     	
     	try {
-    		InsertData.insertTopic(con, topicName, topicBody, userID);   		
+    		con.setAutoCommit(false);
+    		InsertData.insertTopic(con, topicName, topicBody, userID); 
+    		con.commit();
 		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 			error = true;
 		} catch (Exception e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 			error = true;
+		} finally {
+			try {
+				con.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
     	   	
     	// output  	
