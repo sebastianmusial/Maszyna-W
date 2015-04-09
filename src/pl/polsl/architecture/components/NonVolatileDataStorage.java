@@ -2,6 +2,13 @@ package pl.polsl.architecture.components;
 
 import pl.polsl.utils.Primitive;
 
+/**
+ * Non volatile data storage always have value,
+ * exception from getValue method will never
+ * be thrown.
+ * @author Tomasz Rzepka
+ * @version 1.0
+ */
 public class NonVolatileDataStorage extends DataStorage {
 	/** Current value stored in the storage. */
     private Integer value = 0;

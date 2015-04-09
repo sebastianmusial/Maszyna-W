@@ -12,15 +12,12 @@ import java.util.Map;
 
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 
 import pl.polsl.architecture.components.WMachineComponent;
-import pl.polsl.architecture.components.finalized.ArithmeticLogicUnit;
 import pl.polsl.architecture.components.finalized.Memory;
 import pl.polsl.architecture.components.finalized.Register;
 import pl.polsl.architecture.signals.Signal;
 import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
-import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 import pl.polsl.utils.Primitive;
 
 
@@ -46,8 +43,8 @@ public class WMachine {
 	/** Memory instance. */
 	private Memory memory;
 	
-	/** ALU instance. */
-	private ArithmeticLogicUnit alu;
+//	/** ALU instance. */
+//	private ArithmeticLogicUnit alu;
 	
 	/** List of all components in this architecture. */
 	private List<WMachineComponent> components = new LinkedList<>();
@@ -55,27 +52,48 @@ public class WMachine {
 	/** Script engine used by ScriptSignal instances. */
 	private ScriptEngine engine;
     
+	/**
+	 * Constructs W Machine configured with given parameters.
+	 * @param addressBitCount bit count for address components
+	 * @param dataBitCount bit count for data components
+	 * @param engine script engine used to execute script signals
+	 */
 	public WMachine(Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount, ScriptEngine engine) {
 		this.addressBitCount = addressBitCount;
 		this.dataBitCount = dataBitCount;
 		this.engine = engine;
 	}
 	
+	/**
+	 * Add register identified by given ID.
+	 * @param registerId ID of register to be added
+	 * @param register register to be added
+	 */
 	public void addRegister(Integer registerId, Register register) {
 		registers.put(registerId, register);
 		addComponent(register);
 	}
 	
+	/**
+	 * Add signal identified by given ID.
+	 * @param signalId ID of signal to be added
+	 * @param signal signal to be added
+	 */
 	public void addSignal(Integer signalId, Signal signal) {
 		signals.put(signalId, signal);
 	}
 	
+	/**
+	 * Add component without ID.
+	 * @param component component to be added, if it is memory
+	 * or arithmetic logic unit, references are saved in fields. 
+	 */
 	public void addComponent(WMachineComponent component) {
 		components.add(component);
 		if(component instanceof Memory)
 			memory = (Memory)component;
-		else if(component instanceof ArithmeticLogicUnit)
-			alu = (ArithmeticLogicUnit)component;
+//		else if(component instanceof ArithmeticLogicUnit)
+//			alu = (ArithmeticLogicUnit)component;
 	}
 	
     /**
@@ -143,6 +161,9 @@ public class WMachine {
     	}
     }
     
+    /**
+     * Informs all components that new tact started.
+     */
     public void nextTact() {
     	for(WMachineComponent component : components) {
     		component.nextTact();

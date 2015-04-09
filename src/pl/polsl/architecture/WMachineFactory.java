@@ -1,20 +1,26 @@
 package pl.polsl.architecture;
 
-import javax.script.ScriptEngineManager;
-
 import pl.polsl.architecture.components.finalized.ArithmeticLogicUnit;
 import pl.polsl.architecture.components.finalized.Buffer;
 import pl.polsl.architecture.components.finalized.Bus;
 import pl.polsl.architecture.components.finalized.Memory;
 import pl.polsl.architecture.components.finalized.Register;
-import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
-import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
+/**
+ * Factory to create WMachine class instances.
+ * @author Tomasz Rzepka
+ * @version 1.0
+ */
 public class WMachineFactory {
 
+	/**
+	 * Create and return WMachine class instance.
+	 * @return New WMachine class instance.
+	 */
 	public WMachine getInstance() {
-		Integer addressBitCount = 5;
-		Integer dataBitCount = 8;
+		final Integer addressBitCount = 5;
+		final Integer dataBitCount = 8;
+		assert addressBitCount != dataBitCount;
 		
 		WMachineBuilder builder = new WMachineBuilder();
 		builder.begin(addressBitCount, dataBitCount);
@@ -56,6 +62,7 @@ public class WMachineFactory {
         builder.addScriptSignal("ALU_CONJUNTION", aluInBuffer, aluOutBuffer, "ACCUMULATOR & x");
         builder.addScriptSignal("ALU_ALTERNATIVE", aluInBuffer, aluOutBuffer, "ACCUMULATOR | x");
         builder.addScriptSignal("ALU_NEGATION", aluInBuffer, aluOutBuffer, "~x");
+        
 		return builder.end();
 	}
 	
