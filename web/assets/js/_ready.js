@@ -32,8 +32,10 @@ $(document).ready(function() {
 						state.registers[registerId] = register.value;
 				}
 				
-				$.get("TactRunner", {state: JSON.stringify(state)}, function(data) {
-					console.log(data);
+				$.get("TactRunner", {state: JSON.stringify(state)}).done(function(data) {
+					result = JSON.parse(data);
+					if(result.status == "ERROR")
+						console.log(result.message)
 					MW.restoreState();
 				});
 			});

@@ -13,6 +13,8 @@ MW.restoreState = function() {
 			MW.Registers[registerId].value = wmachine.registers[registerId];
 		for(signalId in wmachine.signals)
 			MW.Signals[signalId].state = wmachine.signals[signalId];
+		for(var i = 0; i < wmachine.memory.length; ++i)
+			MW.Memory[i].value = wmachine.memory[i];
 	});
 }
 
@@ -71,26 +73,25 @@ MW.initInteraction = function() {
 		for(signalId in wmachine.signals)
 			initSignal(signalId, wmachine.signals[signalId]);
 		
-//		var initMemoryCell = function(index) {
-//			var row = $("#memory-row-" + index);
-//			var input = $("#memory-cell-" + index + "-value");
-//			var text = $("#memory-cell-" + index + "-text");
-//			MW.Memory[i] = {
-//				row: row,
-//				get value() { return input.prop('value'); },
-//				set value(v) { input.prop('value', v); }
-//			};
-//			input.change(function() {
-//				$.get("MemoryAccessor", {index: index, value: input.prop("value")});
-//			});
-//		}
-//		
-//		for(var i = 0; i < 64; ++i)
-//			initMemoryCell(i);
-//		
-//		for(var i = 0; i < wmachine.memory.length; ++i)
-//			MW.Memory[i].value = wmachine.memory[i];
-//		
+		var initMemoryCell = function(index) {
+			var row = $("#memory-row-" + index);
+			var input = $("#memory-cell-" + index + "-value");
+			var text = $("#memory-cell-" + index + "-text");
+			MW.Memory[i] = {
+				row: row,
+				get value() { return input.prop('value'); },
+				set value(v) { input.prop('value', v); }
+			};
+			input.change(function() {
+				$.get("MemoryAccessor", {index: index, value: input.prop("value")});
+			});
+		}
+		
+		for(var i = 0; i < wmachine.memory.length; ++i) {
+			initMemoryCell(i);
+			MW.Memory[i].value = wmachine.memory[i];
+		}
+		
 //		for(var i = wmachine.memory.length; i < 64; ++i)
 //			MW.Memory[i].row.hide();
 	});

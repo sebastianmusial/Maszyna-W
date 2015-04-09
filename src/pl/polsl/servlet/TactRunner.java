@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.signals.Signal;
+import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
 /**
  * Parameters constains list of signals to be activated in current tact.
@@ -34,6 +36,8 @@ public class TactRunner extends WMachineServletBase {
 	 * @see WMachineServletBase#processRequest(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		
 		WMachine machine = getCurrentWMachine(request.getSession());
 		String st = request.getParameter("state");
 		Gson gson = new Gson();
@@ -42,6 +46,9 @@ public class TactRunner extends WMachineServletBase {
 		machine.nextTact();
 		machine.updateScriptContext();
 		
+		Integer cellAddress = 0;
+		Integer cellValue = 0;
+		Map<String, String> result = new HashMap<>();
 		try {
 			for(Integer signalId : state.signals.keySet()) {
 				Signal signal = machine.getSignal(signalId);
@@ -49,12 +56,21 @@ public class TactRunner extends WMachineServletBase {
 					continue;
 				Boolean signalState = state.signals.get(signalId);
 				signal.setEnabled(signalState);
-				if(signalState)
+				if(signalState) {
+					if(signalId == AvailableSignals.MEMORY_WRITE.ID) {
+						cellAddress = machine.getRegister(AvailableRegisters.MEMORY_ADDRESS.ID).getValue();
+						cellValue = machine.getMemory().getValue(cellAddress);
+					}
 					signal.activate();
+				}
 			}
+			result.put("status", "OK");
 		}
 		catch(Exception ex) {
-			
+			// TODO wycofać zmiany wprowadzone w tym takcie
+			result.put("status", "ERROR");
+			result.put("message", ex.getMessage());
 		}
+		new Gson().toJson(result, response.getWriter());
 	}
 }
