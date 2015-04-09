@@ -6,13 +6,6 @@
 <%@ include file="header.jsp" %>
 <%@ include file="view/navbar.jsp" %>
 
-<sql:setDataSource 
-	var="database" 
-	driver="com.mysql.jdbc.Driver" 
-	url="jdbc:mysql://localhost:3306/test" 
-	user="root" 
-	password=""/>
-
 <section class="login-form wrap">
     <h3 class="signin">Zaloguj się</h3>
 

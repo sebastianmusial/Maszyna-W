@@ -3,18 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-
-
-
 <%@ include file="../header.jsp" %>
 <%@ include file="../view/navbar.jsp" %>
-
-<sql:setDataSource 
-	var="database" 
-	driver="com.mysql.jdbc.Driver" 
-	url="jdbc:mysql://localhost:3306/test" 
-	user="root" 
-	password=""/>
 
 <section class="register-form wrap">
     <h3 class="signup">Zarejestruj się</h3>

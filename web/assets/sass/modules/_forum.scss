@@ -150,7 +150,12 @@ section.register-form {
 
 section.login-form { .alert:not(.alert-info) { display: block; }  }
 
-section.register-successful {
+
+/* ------------------------------------------------------------------
+	SECTION - Register/create topic status
+--------------------------------------------------------------------- */
+
+section.register-successful, section.createTopic-successful {
 
 	.alert {
 		max-width: 600px;
@@ -165,6 +170,7 @@ section.register-successful {
 		}
 	}
 }
+
 
 /* ------------------------------------------------------------------
 	SECTION - Create topic
@@ -195,5 +201,8 @@ section.create-topic {
 		letter-spacing: 1px;
 		margin-left: auto;
 		margin-right: auto;
+		margin-bottom: 15px;
 	}
+
+	.alert-danger:not(.alert-danger-sql) { display: none; }
 }

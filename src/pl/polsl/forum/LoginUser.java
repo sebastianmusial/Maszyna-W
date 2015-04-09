@@ -3,6 +3,7 @@ package pl.polsl.forum;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,7 +40,7 @@ public class LoginUser extends HttpServlet {
     	String userPass  = request.getParameter("user_pass");
     	
     	boolean error = false;
-    	String result = null;
+    	List<String> result = null;
     	
     	Connection con = new DatabaseConnection(request).getInstance();
     	
@@ -63,7 +64,8 @@ public class LoginUser extends HttpServlet {
         if (!error) {
         	
         	HttpSession session = request.getSession(true);
-        	session.setAttribute("loggedUser", result);  
+        	session.setAttribute("loggedID", result.get(0));  
+        	session.setAttribute("loggedUser", result.get(1));  
         	session.setAttribute("isAdmin", false); 
         	
         	response.sendRedirect("index.jsp");

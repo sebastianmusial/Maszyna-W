@@ -507,11 +507,14 @@ section.register-form {
 section.login-form .alert:not(.alert-info) {
   display: block; }
 
-section.register-successful .alert {
+/* ------------------------------------------------------------------
+	SECTION - Register/create topic status
+--------------------------------------------------------------------- */
+section.register-successful .alert, section.createTopic-successful .alert {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 50px; }
-  section.register-successful .alert .glyphicon {
+  section.register-successful .alert .glyphicon, section.createTopic-successful .alert .glyphicon {
     display: block;
     float: left;
     font-size: 32px;
@@ -539,7 +542,10 @@ section.create-topic {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-bottom: 15px; }
+  section.create-topic .alert-danger:not(.alert-danger-sql) {
+    display: none; }
 
 /* ------------------------------------------------------------------
 	NAVBAR
