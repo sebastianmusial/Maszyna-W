@@ -39,7 +39,7 @@ public class CreateTopic extends HttpServlet {
     	String topicBody  = request.getParameter("topic_body");
     	int userID = Integer.parseInt((String)session.getAttribute("loggedID"));
     	    	
-    	boolean error = false;
+    	int error = 0;
     	
     	Connection con = new DatabaseConnection(request).getInstance();
     	
@@ -54,7 +54,7 @@ public class CreateTopic extends HttpServlet {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-			error = true;
+			error = 1;
 		} catch (Exception e) {
 			try {
 				con.rollback();
@@ -63,7 +63,7 @@ public class CreateTopic extends HttpServlet {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-			error = true;
+			error = 1;
 		} finally {
 			try {
 				con.setAutoCommit(true);
@@ -72,11 +72,7 @@ public class CreateTopic extends HttpServlet {
 			}
 		}
     	   	
-    	// output  	
-        request.setAttribute("error", error); 
-
-        RequestDispatcher rd = request.getRequestDispatcher("createTopic_status.jsp");
-        rd.forward(request, response); 
+    	response.sendRedirect("createTopic_status.jsp?error=" + error);
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -10,7 +10,7 @@
 <section class="register-successful wrap">
   	
 	<c:choose> 
-	  <c:when test="${error}">
+	  <c:when test="${error == 1}">
 		<div class="alert alert-danger" role="alert">
 			<span class="glyphicon glyphicon-alert"></span><strong>Wystąpił błąd podczas rejestracji.</strong><br />
 			Spróbój ponownie wracając do formularza <a href="register.jsp">rejestracji</a>.

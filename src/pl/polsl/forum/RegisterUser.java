@@ -54,7 +54,7 @@ public class RegisterUser extends HttpServlet {
     	// output  	
         request.setAttribute("error", error); 
 
-        RequestDispatcher rd = request.getRequestDispatcher("register_status.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("create_topic.jsp");
         rd.forward(request, response);
     }
 	
