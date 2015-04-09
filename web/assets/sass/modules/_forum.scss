@@ -4,6 +4,7 @@
 --------------------------------------------------------------------- */
 
 section.forum {
+	margin-top: 25px;
 	width: 100%;
 	padding: 20px;
 	background-color: #FFF;
@@ -162,5 +163,37 @@ section.register-successful {
 			font-size: 32px;
 			margin-right: 15px;
 		}
+	}
+}
+
+/* ------------------------------------------------------------------
+	SECTION - Create topic
+--------------------------------------------------------------------- */
+
+section.create-topic {
+	margin-top: 25px;
+
+	input[type=text] {
+		padding: 0px 15px;
+		font-size: 32px;
+		color: $color-blue;
+	}
+
+	input[type=text], #topic-body {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	input[type=submit] {
+		width: 100%;
+		background-color: $color-blue;
+		border: 0px solid $color-blue;
+		color: white;
+		height: 50px;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
