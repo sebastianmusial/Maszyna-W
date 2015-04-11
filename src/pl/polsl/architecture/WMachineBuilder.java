@@ -51,59 +51,41 @@ public class WMachineBuilder {
 	
 	/**
 	 * Add register to the instance.
-	 * @param registerName universal name of the register
+	 * @param register enum constant identifying register 
 	 * @param bitCount bit count that register will store
 	 * @return Added register.
 	 */
-	public Register addRegister(String registerName, Integer bitCount) {
-		try {
-			Integer registerId = AvailableRegisters.valueOf(registerName).ID;
-			Register register = new Register(getBitCountPrimitive(bitCount));
-			machine.addRegister(registerId, register);
-			return register;
-		}
-		catch(IllegalArgumentException ex) {
-			return null;
-		}
+	public Register addRegister(AvailableRegisters register, Integer bitCount) {
+		Register _register = new Register(getBitCountPrimitive(bitCount));
+		machine.addRegister(register.ID, _register);
+		return _register;
 	}
 	
 	/**
 	 * Add signal to the instance.
-	 * @param signalName universal name of the signal
+	 * @param signal enum constant identifying signal
 	 * @param source data source
 	 * @param target data target
 	 * @return Added signal.
 	 */
-	public Signal addSignal(String signalName, DataSource source, DataTarget target) {
-		try {
-			Integer signalId = AvailableSignals.valueOf(signalName).ID;
-			Signal signal = new Signal(source, target);
-			machine.addSignal(signalId, signal);
-			return signal;
-		}
-		catch(IllegalArgumentException ex) {
-			return null;
-		}
+	public Signal addSignal(AvailableSignals signal, DataSource source, DataTarget target) {
+		Signal _signal = new Signal(source, target);
+		machine.addSignal(signal.ID, _signal);
+		return _signal;
 	}
 	
 	/**
 	 * Add script signal to the instance.
-	 * @param signalName universal name of the signal
+	 * @param signal enum constant identifying signal
 	 * @param source data source
 	 * @param target data target
 	 * @param function operation performed when signal is activated
 	 * @return Added signal.
 	 */
-	public Signal addScriptSignal(String signalName, DataSource source, DataTarget target, String function) {
-		try {
-			Integer signalId = AvailableSignals.valueOf(signalName).ID;
-			Signal signal = new ScriptSignal(source, target, function, engine);
-			machine.addSignal(signalId, signal);
-			return signal;
-		}
-		catch(IllegalArgumentException ex) {
-			return null;
-		}
+	public Signal addScriptSignal(AvailableSignals signal, DataSource source, DataTarget target, String function) {
+		Signal _signal = new ScriptSignal(source, target, function, engine);
+		machine.addSignal(signal.ID, _signal);
+		return _signal;
 	}
 	
 	/**
