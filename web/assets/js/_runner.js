@@ -1,9 +1,13 @@
 /**
- * 
+ * Initialize interaction with runner buttons.
+ * Allow to run program, command or tact.
  */
 
 var MW = MW || {};
 
+/**
+ * Runners initializer.
+ */
 MW.initRunner = function() {
 	$("#run-tact").click(function() {
 		var state = {

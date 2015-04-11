@@ -1,11 +1,15 @@
 /**
- * 
+ * Initialize interaction with settings.
+ * Enable saving settings on server side
+ * and restoring it after refresh.
  */
 
 var MW = MW || {};
 
+/**
+ * Settings initializer.
+ */
 MW.initSettings = function() {
-	
 	$.get("SettingsAccessor", {action: "get"}, function(data) {
 		var settings = JSON.parse(data);
 		

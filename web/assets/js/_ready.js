@@ -1,5 +1,7 @@
 /**
- * Running JS functions.
+ * Running JS functions defined in other files
+ * in the right order, but first read language
+ * and architecture info.
  */
 $(document).ready(function() {
 	$.get("LanguageAccessor", {lang: "pl"}, function(data) {

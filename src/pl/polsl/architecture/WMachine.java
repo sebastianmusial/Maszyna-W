@@ -192,18 +192,34 @@ public class WMachine {
     	}
     }
     
+    /**
+     * Address of the input port getter.
+     * @return Address of the input port.
+     */
     public Integer getInputPortAddress() {
     	return inputPortAddress;
     }
     
+    /**
+     * Address of the input port setter.
+     * @param address address of the input port to be set
+     */
     public void setInputPortAddress(Integer address) {
     	inputPortAddress = address;
     }
     
+    /**
+     * Address of the output port getter.
+     * @return Address of the output port.
+     */
     public Integer getOutputPortAddress() {
     	return outputPortAddress;
     }
     
+    /**
+     * Address of the output port setter.
+     * @param address address of the output port to be set
+     */
     public void setOutputPortAddress(Integer address) {
     	outputPortAddress = address;
     }

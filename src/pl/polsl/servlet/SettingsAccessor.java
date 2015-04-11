@@ -1,10 +1,8 @@
 package pl.polsl.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.components.finalized.Register;
-import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
 import pl.polsl.settings.Architecture;
 import pl.polsl.settings.Extension;
 import pl.polsl.settings.Settings;
@@ -26,7 +23,9 @@ import pl.polsl.settings.TrackLevel;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class SettingsAccessor
+ * Allow to access settings from client side.
+ * @author Tomasz Rzepka
+ * @version 1.0
  */
 @WebServlet("/SettingsAccessor")
 public class SettingsAccessor extends WMachineServletBase implements Servlet {
@@ -100,6 +99,12 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 		}
 	}
 	
+	/**
+	 * Helper function to obtain map where key is ID of register
+	 * and mapped value is value stored in the register.
+	 * @param machine W Machine instance with registers
+	 * @return Collection mapping register ID to value stored in that register.
+	 */
 	protected Map<Integer, Integer> getRegisterValues(WMachine machine) {
 		Map<Integer, Integer> values = new HashMap<>();
 		for(Integer registerId : ArchitectureInfo.getRegisterIds()) {
