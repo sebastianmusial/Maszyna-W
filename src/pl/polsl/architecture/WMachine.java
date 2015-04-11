@@ -51,6 +51,12 @@ public class WMachine {
 	
 	/** Script engine used by ScriptSignal instances. */
 	private ScriptEngine engine;
+	
+	/** Address of the input port. */
+	private Integer inputPortAddress = 1;
+	
+	/** Address of the output port. */
+	private Integer outputPortAddress = 2;
     
 	/**
 	 * Constructs W Machine configured with given parameters.
@@ -96,6 +102,14 @@ public class WMachine {
 //			alu = (ArithmeticLogicUnit)component;
 	}
 	
+	/**
+	 * Address bit count getter.
+	 * @return Address bit count.
+	 */
+	public Integer getAddressBitCount() {
+    	return addressBitCount.getValue();
+    }
+	
     /**
      * Sets new address bit count. Changes bit count for commands
      * and informs address and command storing components about the change.
@@ -107,6 +121,14 @@ public class WMachine {
     	Integer opCodeBitCount = dataBitCount.getValue() - addressBitCount.getValue();
     	addressBitCount.setValue(count);
     	dataBitCount.setValue(count + opCodeBitCount);
+    }
+    
+    /**
+	 * Data bit count getter.
+	 * @return Data bit count.
+	 */
+	public Integer getDataBitCount() {
+    	return dataBitCount.getValue();
     }
     
     /**
@@ -168,5 +190,21 @@ public class WMachine {
     	for(WMachineComponent component : components) {
     		component.nextTact();
     	}
+    }
+    
+    public Integer getInputPortAddress() {
+    	return inputPortAddress;
+    }
+    
+    public void setInputPortAddress(Integer address) {
+    	inputPortAddress = address;
+    }
+    
+    public Integer getOutputPortAddress() {
+    	return outputPortAddress;
+    }
+    
+    public void setOutputPortAddress(Integer address) {
+    	outputPortAddress = address;
     }
 }

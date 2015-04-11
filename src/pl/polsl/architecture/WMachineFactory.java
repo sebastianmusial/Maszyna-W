@@ -20,7 +20,7 @@ public class WMachineFactory {
 	public WMachine getInstance() {
 		final Integer addressBitCount = 5;
 		final Integer dataBitCount = 8;
-		assert addressBitCount != dataBitCount;
+		assert addressBitCount < dataBitCount;
 		
 		WMachineBuilder builder = new WMachineBuilder();
 		builder.begin(addressBitCount, dataBitCount);
