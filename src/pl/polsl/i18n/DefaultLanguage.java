@@ -1,7 +1,6 @@
 package pl.polsl.i18n;
 
 import pl.polsl.servlet.ArchitectureInfo;
-
 /**
  * Default language.
  * @author Tomasz Rzepka
@@ -63,7 +62,45 @@ public class DefaultLanguage extends Language {
 		setSignalName("STROBE_START", "start");
 		setSignalName("STROBE_OUT", "wyg");
 		setSignalName("ALU_IN", "weja");
+		
+		setUITextName("SITE_HEADER", "Maszyna W");
+		setUITextName("SIMULATOR_TAB", "Symulator");
+		setUITextName("GUEST_BOOK_TAB", "Ksiêga kutasów	");
+		setUITextName("USER_MENU_DROP_BOX", "WITAJ NIEZNAJOMY!");
+		setUITextName("USER_REGISTER_TAB", "REJESTRACJA");
+		setUITextName("USER_LOGIN_TAB", "LOGOWANIE");
+		setUITextName("MANUAL_CONTROL_CHECK_BOX", "Sterowanie rêczne");
+		setUITextName("TRACKING_LEVEL_PANEL", "Poziom œledzenia");
+		setUITextName("TRACKING_LEVEL_LOW_OPTION", "niski (program)");
+		setUITextName("TRACKING_LEVEL_MEDIUM_OPTION", "œredni (rozkaz)");
+		setUITextName("TRACKING_LEVEL_HIGH_OPTION", "wysoki (takt)");
+		setUITextName("TYPES_AND_COMPONENTS_PANEL", "Typy i sk³adniki");
+		setUITextName("TYPE_W_RADIO_BUTTON", "W");
+		setUITextName("TYPE_W_PLUS_RADIO_BUTTON", "W+");
+		setUITextName("TYPE_L_RADIO_BUTTON", "L");
+		setUITextName("TYPE_EW_RADIO_BUTTON", "EW");
+		setUITextName("BUS_CONNECTION_CHECK_BOX", "po³¹czenie miêdzymagistralowe");
+		setUITextName("INC_DEC_ACCUMULATOR_CHECK_BOX", "inkrementacja i dekrementacja akumulatora");
+		setUITextName("LOGICAL_OPERATIONS_ALU_CHECK_BOX", "opreacje logiczne w JAL");
+		setUITextName("EXTENDED_ARYTHMETICAL_ALU_OPERATIONS_CHECK_BOX", "rozszerzone operacje atytmetyczne w JAL");
+		setUITextName("STACK_MANAGEMENT_CHECK_BOX", "obs³uga stosu");
+		setUITextName("X_REGISTER_CHECK_BOX", "rejestr X");
+		setUITextName("Y_REGISTER_CHECK_BOX", "rejestr Y");
+		setUITextName("INPUT_OUTPUT_CHECK_BOX", "wejœcie/wyjœcie");
+		setUITextName("ADDITIONAL_MARKS_CHECK_BOX", "dodatkowe znaczniki");
+		setUITextName("ARCHITECTURE_TAB", "Architektura");
+		setUITextName("ADDRESS_BIT_COUNT_INPUT", "Liczba bitów adresowych");
+		setUITextName("CODE_BIT_COUNT_INPUT", "Liczba bitów kodu");
+		setUITextName("ADDRESSES_TAB", "Adresy");
+		setUITextName("ADRESS_LABEL", "Adres (port)");
+		setUITextName("INTERRUPT_LABEL", "Przerwanie");
+		setUITextName("ADDRESS_INPUT_LABEL", "Wejœcie");
+		setUITextName("ADDRESS_OUTPUT_LABEL", "Wyjœcie");
+		setUITextName("FORUM_TAB", "Forum");
+		setUITextName("LOGOUT_TAB", "Wyloguj siê");
 	}
+	
+	
 	
 	/**
 	 * Add translated resiter name to language.
@@ -91,6 +128,22 @@ public class DefaultLanguage extends Language {
 			ArchitectureInfo.AvailableSignals value = ArchitectureInfo.AvailableSignals.valueOf(signal);
 			if(value != null)
 				signals.put(value.ID, name);
+		}
+		catch(IllegalArgumentException ex) {
+			
+		}
+	}
+	
+	/**
+	 * Add translated UI element to language.
+	 * @param element name of constant defined in UIElements
+	 * @param name translated UI element name
+	 */
+	public void setUITextName(String element, String name) {
+		try {
+			UIElements value = UIElements.valueOf(element);
+			if(value != null)
+				userInterface.put(value.ID, name);
 		}
 		catch(IllegalArgumentException ex) {
 			

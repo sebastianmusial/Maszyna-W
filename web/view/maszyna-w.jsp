@@ -65,15 +65,17 @@
 		 			<div class="checkbox checkbox--clear">
 				      	<label class="collapse-headline hand-controls">
 							<input type="checkbox" name="handControls" id="handControls" value="0">
-							sterowanie ręczne
+							<span id="MANUAL_CONTROL_CHECK_BOX">
+								sterowanie ręczne
+							</span>
 						</label>
-					</div>
+					</div>	
 			    </div>
 			</div>
 			<div class="panel panel-default">
 			    <div class="panel-heading panel-heading--clear" role="tab" id="headingZero">
 				    <h4 class="panel-title">
-					    <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero" class="collapse-headline">
+					    <a id="TRACKING_LEVEL_PANEL" data-toggle="collapse" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero" class="collapse-headline">
 						   Poziom śledzenia
 				      	</a>
 			      	</h4>
@@ -82,20 +84,26 @@
 			      <div class="panel-body">
 			      	<div class="radio">
 		      			<label>
-							<input id="track-program" type="radio" name="trace-lavel" id="trace-lavel0" class="js-type">
-							niski (program)
+							<input id="track-program" type="radio" name="trace-lavel" class="js-type">
+							<span id="TRACKING_LEVEL_LOW_OPTION">
+								niski (program)
+							</span>
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input id="track-command" type="radio" name="trace-lavel" id="trace-lavel1" class="js-type">
-							średni (rozkaz)
+							<input id="track-command" type="radio" name="trace-lavel" class="js-type">
+							<span id="TRACKING_LEVEL_MEDIUM_OPTION">
+								średni (rozkaz)
+							</span>
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input id="track-tact" type="radio" name="trace-lavel" id="trace-lavel2" class="js-type">
-							wysoki (takt)
+							<input id="track-tact" type="radio" name="trace-lavel" class="js-type">
+							<span id="TRACKING_LEVEL_HIGH_OPTION">
+								wysoki (takt)
+							</span>
 						</label>
 					</div>
 			      </div>
@@ -104,7 +112,7 @@
 		  <div class="panel panel-default">
 		    <div class="panel-heading panel-heading--clear" role="tab" id="headingOne">
 			    <h4 class="panel-title">
-				    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapse-headline">
+				    <a id="TYPES_AND_COMPONENTS_PANEL" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapse-headline">
 					   Typ i składniki
 			      	</a>
 		      	</h4>
@@ -114,26 +122,26 @@
 	      		<div class="col-xs-3">
 	      			<div class="radio">
 		      			<label>
-							<input id="architecture-w" type="radio" name="type" id="type0" class="js-type">
-							W
+							<input id="architecture-w" type="radio" name="type" class="js-type">
+							<span id="TYPE_W_RADIO_BUTTON">W</span>
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
 							<input id="architecture-w-plus" type="radio" name="type" id="type1" class="js-type">
-							W+
+							<span id="TYPE_W_PLUS_RADIO_BUTTON">W+</span>
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input id="architecture-l" type="radio" name="type" id="type2" class="js-type">
-							L	
+							<input id="architecture-l" type="radio" name="type" class="js-type">
+							<span id="TYPE_L_RADIO_BUTTON">L</span>	
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input id="architecture-ew" type="radio" name="type" id="type3" class="js-type">
-							EW	
+							<input id="architecture-ew" type="radio" name="type" class="js-type">
+							<span id="TYPE_EW_RADIO_BUTTON">EW</span>	
 						</label>
 					</div>
 				</div>
@@ -141,55 +149,55 @@
 					<div class="checkbox">
 			  			<label>
 				  			<input type="checkbox" name="extension0" id="extension0" class="js-extension" value="0">
-							połączenie międzymagistralowe
+							<span id="BUS_CONNECTION_CHECK_BOX">połączenie międzymagistralowe</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension7" id="extension7" class="js-extension" value="0">
-							inkrementacja i dekrementacja akumulatora
+							<span id="INC_DEC_ACCUMULATOR_CHECK_BOX">inkrementacja i dekrementacja akumulatora</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension6" id="extension6" class="js-extension" value="0">
-							operacje logiczne w JAL
+							<span id="LOGICAL_OPERATIONS_ALU_CHECK_BOX">operacje logiczne w JAL</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension5" id="extension5" class="js-extension" value="0">
-							rozszerzone operacje arytmetyczne w JAL
+							<span id="EXTENDED_ARYTHMETICAL_ALU_OPERATIONS_CHECK_BOX">rozszerzone operacje arytmetyczne w JAL</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension4" id="extension4" class="js-extension" value="0">
-							obsługa stosu
+							<span id="STACK_MANAGEMENT_CHECK_BOX">obsługa stosu</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension1" id="extension1" class="js-extension" value="0">
-							rejestr X
+							<span id="X_REGISTER_CHECK_BOX">rejestr X</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension2" id="extension2" class="js-extension" value="0">
-							rejestr Y
+							<span id="Y_REGISTER_CHECK_BOX">rejestr Y</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension3" id="extension3" class="js-extension" value="0">
-							wejście/wyjście
+							<span id="INPUT_OUTPUT_CHECK_BOX">wejście/wyjście</span>
 						</label>
 					</div>
 					<div class="checkbox">
 			  			<label>
 							<input type="checkbox" name="extension8" id="extension8" class="js-extension" value="0">
-							dodatkowe znaczniki
+							<span id="ADDITIONAL_MARKS_CHECK_BOX">dodatkowe znaczniki</span>
 						</label>
 					</div>
 				</div>
@@ -199,7 +207,7 @@
 		  <div class="panel panel-default">
 		    <div class="panel-heading panel-heading--clear" role="tab" id="headingTwo">
 		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed collapse-headline">
+		        <a id="ARCHITECTURE_TAB" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed collapse-headline">
 		          Architektura
 		        </a>
 		      </h4>
@@ -208,13 +216,13 @@
 				<div class="panel-body">
 				   <div class="col-xs-6">
 					    <label>
-					    	Liczba bitów adresowych 
+					    	<span id="ADDRESS_BIT_COUNT_INPUT">Liczba bitów adresowych</span> 
 					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5" min="5" max="16">
 					    </label>
 					</div>
 					<div class="col-xs-6">
 					    <label>
-					    	Liczba bitów kodu
+					    	<span id="CODE_BIT_COUNT_INPUT">Liczba bitów kodu</span>
 					   		<input id="op-code-bit-count" type="number" class="form-control js-only-numbers" value="3">
 					    </label>
 					 </div>
@@ -224,7 +232,7 @@
 		  <div class="panel panel-default">
 		    <div class="panel-heading panel-heading--clear" role="tab" id="headingThree">
 		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed collapse-headline">
+		        <a id="ADDRESSES_TAB" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed collapse-headline">
 		          Adresy
 		        </a>
 		      </h4>
@@ -234,17 +242,26 @@
 			      <table class="table table-hover">
 			      	<thead>
 			      		<th></th>
-			      		<th>Wejście</th>
-			      		<th>Wyjście</th>
+			      		<th id="ADRESS_LABEL">Adres (port)</th>
+			      		<th id="INTERRUPT_LABEL">Przerwanie</th>
 			      	</thead>
 			      	<tbody>
 			      		<tr>
-			      			<td>Adres (port)</td>
+			      			<td id="ADDRESS_INPUT_LABEL">Wejście</td>
 			      			<td>
 							    <input id="input-port-address" type="text" class="form-control js-only-numbers" value="1">
 			      			</td>
 			      			<td>
-							    <input id="output-port-address" type="text" class="form-control js-only-numbers" value="3">
+							    <input type="text" class="form-control js-only-numbers" value="2">
+			      			</td>
+			      		</tr>
+			      		<tr>
+			      			<td id="ADDRESS_OUTPUT_LABEL">Wyjście</td>
+			      			<td>
+							    <input type="text" class="form-control js-only-numbers" value="3">
+			      			</td>
+			      			<td>
+							    <input id="output-port-address" type="text" class="form-control js-only-numbers" value="4">
 			      			</td>
 			      		</tr>
 			      	</tbody>
@@ -259,5 +276,3 @@
   	</div>
   </div>
 </div>
-
-
