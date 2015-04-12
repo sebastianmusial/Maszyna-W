@@ -53,3 +53,24 @@ function formValidate() {
 
 	return validateEmail();
 }
+
+
+/* ------------------------------------------------------------------
+	CREATE TOPIC FORM
+--------------------------------------------------------------------- */
+
+function createTopicValidate() {
+	
+	var field;
+	
+	// check if all fields are filled
+	for(var i = 0; i < document.forms["createTopic"].length - 1; i++) {
+		field = document.forms["createTopic"][i].value;
+		if (field === null || field === "") {
+	    	$(alert).text("Jedno lub więcej pól jest nieuzupełnionych!");
+	    	$(alert).fadeOut();
+	    	$(alert).fadeIn();
+	    	return false;			
+		}
+	}
+}

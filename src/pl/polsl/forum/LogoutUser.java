@@ -30,6 +30,7 @@ public class LogoutUser extends HttpServlet {
     	    	
     	HttpSession session = request.getSession(true);
 	    session.setAttribute("loggedUser", null);  
+	    session.setAttribute("loggedID", null); 
 	    session.setAttribute("isAdmin", false); 
 	        	
 	    response.sendRedirect("index.jsp");

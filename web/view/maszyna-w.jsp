@@ -82,7 +82,7 @@
 			      <div class="panel-body">
 			      	<div class="radio">
 		      			<label>
-							<input type="radio" name="trace-lavel" id="trace-lavel0" class="js-type">
+							<input id="track-program" type="radio" name="trace-lavel" class="js-type">
 							<span id="TRACKING_LEVEL_LOW_OPTION">
 								niski (program)
 							</span>
@@ -90,7 +90,7 @@
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="trace-lavel" id="trace-lavel1" class="js-type">
+							<input id="track-command" type="radio" name="trace-lavel" class="js-type">
 							<span id="TRACKING_LEVEL_MEDIUM_OPTION">
 								średni (rozkaz)
 							</span>
@@ -98,7 +98,7 @@
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="trace-lavel" id="trace-lavel2" class="js-type">
+							<input id="track-tact" type="radio" name="trace-lavel" class="js-type">
 							<span id="TRACKING_LEVEL_HIGH_OPTION">
 								wysoki (takt)
 							</span>
@@ -120,25 +120,25 @@
 	      		<div class="col-xs-3">
 	      			<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type0" class="js-type">
+							<input id="architecture-w" type="radio" name="type" class="js-type">
 							<span id="TYPE_W_RADIO_BUTTON">W</span>
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type1" class="js-type">
+							<input id="architecture-w-plus" type="radio" name="type" id="type1" class="js-type">
 							<span id="TYPE_W_PLUS_RADIO_BUTTON">W+</span>
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type2" class="js-type">
+							<input id="architecture-l" type="radio" name="type" class="js-type">
 							<span id="TYPE_L_RADIO_BUTTON">L</span>	
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type3" class="js-type">
+							<input id="architecture-ew" type="radio" name="type" class="js-type">
 							<span id="TYPE_EW_RADIO_BUTTON">EW</span>	
 						</label>
 					</div>
@@ -215,13 +215,13 @@
 				   <div class="col-xs-6">
 					    <label>
 					    	<span id="ADDRESS_BIT_COUNT_INPUT">Liczba bitów adresowych</span> 
-					    	<input type="number" class="form-control js-only-numbers" value="5">
+					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5">
 					    </label>
 					</div>
 					<div class="col-xs-6">
 					    <label>
 					    	<span id="CODE_BIT_COUNT_INPUT">Liczba bitów kodu</span>
-					   		<input type="number" class="form-control js-only-numbers" value="3">
+					   		<input id="op-code-bit-count" type="number" class="form-control js-only-numbers" value="3">
 					    </label>
 					 </div>
 		    	</div>
@@ -247,7 +247,7 @@
 			      		<tr>
 			      			<td id="ADDRESS_INPUT_LABEL">Wejście</td>
 			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="1">
+							    <input id="input-port-address" type="text" class="form-control js-only-numbers" value="1">
 			      			</td>
 			      			<td>
 							    <input type="text" class="form-control js-only-numbers" value="2">
@@ -259,7 +259,7 @@
 							    <input type="text" class="form-control js-only-numbers" value="3">
 			      			</td>
 			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="4">
+							    <input id="output-port-address" type="text" class="form-control js-only-numbers" value="4">
 			      			</td>
 			      		</tr>
 			      	</tbody>

@@ -51,11 +51,7 @@ public class RegisterUser extends HttpServlet {
 			error = true;
 		}
     	
-    	// output  	
-        request.setAttribute("error", error); 
-
-        RequestDispatcher rd = request.getRequestDispatcher("register_status.jsp");
-        rd.forward(request, response);
+    	response.sendRedirect("register_status.jsp?error=" + error);
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

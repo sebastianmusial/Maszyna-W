@@ -194,7 +194,6 @@ public class ArchitectureInfo extends WMachineServletBase {
 		}
 	}
 	
-	
     /**
      * Function to get IDs of all registers available in full architecture.
      * @return List of IDs of all registers available in full architecture.

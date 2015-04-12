@@ -6,19 +6,11 @@
 <%@ include file="header.jsp" %>
 <%@ include file="view/navbar.jsp" %>
 
-<sql:setDataSource 
-	var="database" 
-	driver="com.mysql.jdbc.Driver" 
-	url="jdbc:mysql://localhost:3306/test" 
-	user="root" 
-	password=""/>
-
 <section class="login-form wrap">
     <h3 class="signin">Zaloguj się</h3>
-
     <form name="login" method="post" action="LoginUser" onsubmit="return formValidate()">
     
-	    <c:if test="${error == true}">
+	    <c:if test="${not empty param.error}">
 	    	<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-alert"></span>Niepoprawny login lub hasło.</div>
 		</c:if>
         
@@ -27,12 +19,10 @@
                 <td>Login:</td>
                 <td><input type="text" name="user_name" /></td>
             </tr>
-
             <tr class="form-field password">
                 <td>Hasło:</td> 
                 <td><input type="password" name="user_pass"></td>
-            </tr>
-            
+            </tr>         
         </table>
         <input class="login-button" type="submit" value="Logowanie" />
     </form>

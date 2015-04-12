@@ -8,7 +8,7 @@ import pl.polsl.utils.Primitive;
 import pl.polsl.utils.PrimitiveChangeListener;
 
 /**
- * 
+ * W Machine memory.
  * @author Tomasz Rzepka
  * @version 1.0
  */
@@ -29,17 +29,20 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	 * Constructor with parameters. Creates Memory objec with
 	 * data bit count set to <i>bitCount</i> and addressed with value
 	 * of the <i>addressRegister</i>.
-	 * @param bitCount bit count of every value stored in memory
 	 * @param addressRegister reference to address register used
 	 * to address memory cell
+	 * @param addressBitCount bit count used to store addresses
+	 * @param dataBitCount bit count used to store data
 	 */
 	public Memory(Register addressRegister, Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount) {
 		this.addressRegister = addressRegister;
 		bitCount = dataBitCount;
 		Integer memorySize = 1 << addressBitCount.getValue(); 
 		cells.setSize(memorySize);
-		for(int i = 0; i < memorySize; ++i)
+		for(int i = 0; i < memorySize; ++i) {
 			cells.set(i, new MemoryCell(bitCount));
+			setValue(i, i);
+		}
 	}
 	
 	/**
@@ -102,18 +105,38 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	}
 	
 	/**
+	 * Function to get value of certain memory cell.
+	 * @param index index of memory cell to be returned.
+	 * @return Value stored in selected cell.
+	 */
+	public Integer getValue(Integer index) {
+		try {
+			MemoryCell cell = cells.get(index); 
+			return cell.getValue();
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	/**
 	 * Function to set value of certain memory cell.
-	 * @param index index of memory to be changed.
+	 * @param index index of memory cell to be changed.
 	 * @param value value to be set in the cell.
 	 */
 	public void setValue(Integer index, Integer value) {
 		try {
-			cells.get(index).setValue(value);
+			MemoryCell cell = cells.get(index); 
+			cell.setValue(value);
+			cell.nextTact();
 		} catch (Exception e) {
 			// ignore
 		}
 	}
 
+	/**
+	 * Implementation of PrimitiveChangeListener.
+	 * Change memory size after address bit count has changed.
+	 */
 	@Override
 	public void primitiveChanged(Primitive<Integer> primitive) {
 		Integer addressBitCount = primitive.getValue();
@@ -127,4 +150,5 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 			}
 		}
 	}
+	
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.WMachineFactory;
+import pl.polsl.settings.Settings;
 
 /**
  * Base class for servlets manipulating W Machine state.
@@ -36,6 +37,21 @@ public class WMachineServletBase extends HttpServlet {
 			session.setAttribute("WMachineInstance", machine);
 		}
 		return machine;
+	}
+	
+	/**
+	 * Return settings stored in HTTP session or creates
+	 * a new one and save it in the session.
+	 * @param session - current HTTP session.
+	 * @return Settings instance.
+	 */
+	protected Settings getCurrentSettings(HttpSession session) {
+		Settings settings = (Settings)session.getAttribute("SettingsInstance");
+		if(settings == null) {
+			settings = new Settings();
+			session.setAttribute("SettingsInstance", settings);
+		}
+		return settings;
 	}
     
 	/**

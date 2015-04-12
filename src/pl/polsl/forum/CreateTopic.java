@@ -3,7 +3,6 @@ package pl.polsl.forum;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,15 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import pl.polsl.database.DatabaseConnection;
-import pl.polsl.database.QueryData;
+import pl.polsl.database.InsertData;
 
 /**
- * Sign in user
- * @author Józef Flakus
- * @version 1.0
+ * Servlet implementation class CreateTopic
  */
-@WebServlet("/LoginUser")
-public class LoginUser extends HttpServlet {
+@WebServlet("/CreateTopic")
+public class CreateTopic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -35,39 +32,46 @@ public class LoginUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
-    	String userLogin = request.getParameter("user_name");
-    	String userPass  = request.getParameter("user_pass");
+    	HttpSession session = request.getSession(true);
     	
+    	String topicName = request.getParameter("topic_name");
+    	String topicBody  = request.getParameter("topic_body");
+    	int userID = Integer.parseInt((String)session.getAttribute("loggedID"));
+    	    	
     	int error = 0;
-    	List<String> result = null;
     	
     	Connection con = new DatabaseConnection(request).getInstance();
     	
     	try {
-    		result = QueryData.findUser(con, userLogin, userPass);
-    		
-    		if (result.get(0) == null || result.get(1) == null) {
-    			error = 1;
-    		}
-    		
+    		con.setAutoCommit(false);
+    		InsertData.insertTopic(con, topicName, topicBody, userID); 
+    		con.commit();
 		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
 			error = 1;
 		} catch (Exception e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
 			error = 1;
+		} finally {
+			try {
+				con.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-        
-        if (error == 0) {       	
-        	HttpSession session = request.getSession(true);
-        	session.setAttribute("loggedID", result.get(0));  
-        	session.setAttribute("loggedUser", result.get(1));  
-        	session.setAttribute("isAdmin", false); 
-        	
-        	response.sendRedirect("index.jsp");
-        	System.out.println("Logged: " + result.get(0) + " " + result.get(1));        	
-        } else {     
-        	System.out.println(error);
-        	response.sendRedirect("login.jsp?error=" + error);
-        }   
+    	   	
+    	response.sendRedirect("createTopic_status.jsp?error=" + error);
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
