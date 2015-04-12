@@ -12,6 +12,7 @@ $(document).ready(function() {
 			MW.initInteraction();
 			MW.initSettings();
 			MW.initRunner();
+			}
 		});
 	});
 });
