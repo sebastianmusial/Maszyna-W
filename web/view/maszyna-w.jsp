@@ -2,6 +2,8 @@
 	<div id="central-unit__extension-top" class="central-unit__extension">
 		<div id="extension-ws" class="extension-ws" data-name="WS">
 			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+			
+		<div id="extension-wyls" class="extension-wyls"></div>
 		</div>
 	</div>
 	<div id="central-unit__base" class="central-unit__base" data-top-bus="magistrala adresowa" data-down-bus="magistrala danych">
@@ -207,7 +209,7 @@
 				   <div class="col-xs-6">
 					    <label>
 					    	Liczba bitów adresowych 
-					    	<input type="number" class="form-control js-only-numbers" value="5">
+					    	<input type="number" class="form-control js-only-numbers" value="5" min="5" max="16">
 					    </label>
 					</div>
 					<div class="col-xs-6">

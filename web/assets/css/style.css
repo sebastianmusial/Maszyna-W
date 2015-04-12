@@ -42,8 +42,6 @@ svg {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out; }
-  .element:hover, .central-unit__base .acumulator:hover, .central-unit__base .memory:hover, .central-unit__base .counter:hover, .central-unit__base .address:hover, .register:hover, .register-x:hover, .register-y:hover, .extension-rb:hover, .extension-g:hover, .extension-ws:hover, .extension-f:hover {
-    background: #D3D6CD; }
   .element__data, .central-unit__base .acumulator__data, .central-unit__base .memory__address, .central-unit__base .memory__verbal {
     z-index: 2;
     background: none;
@@ -66,7 +64,7 @@ svg {
     -ms-box-sizing: border-box;
     box-sizing: border-box; }
     .element__data:hover, .central-unit__base .acumulator__data:hover, .central-unit__base .memory__address:hover, .central-unit__base .memory__verbal:hover {
-      background: rgba(0, 0, 0, 0.3); }
+      background: rgba(0, 0, 0, 0.15); }
     .element__data:focus, .central-unit__base .acumulator__data:focus, .central-unit__base .memory__address:focus, .central-unit__base .memory__verbal:focus {
       background: rgba(255, 0, 0, 0.3); }
 
@@ -94,6 +92,10 @@ svg {
     top: 90px;
     right: 325px;
     width: 150px; }
+    .central-unit__base .acumulator:hover {
+      background: #D3D6CD; }
+      .central-unit__base .acumulator:hover .acumulator__data:hover {
+        background: none; }
     .central-unit__base .acumulator::before {
       display: block;
       position: absolute;
@@ -268,7 +270,7 @@ svg {
     margin-top: -3px;
     background: #F5F5F3; }
     .register .element__data:hover, .register-x .element__data:hover, .register-y .element__data:hover, .extension-rb .element__data:hover, .extension-g .element__data:hover, .extension-ws .element__data:hover, .extension-f .element__data:hover, .register .central-unit__base .acumulator__data:hover, .central-unit__base .register .acumulator__data:hover, .register-x .central-unit__base .acumulator__data:hover, .central-unit__base .register-x .acumulator__data:hover, .register-y .central-unit__base .acumulator__data:hover, .central-unit__base .register-y .acumulator__data:hover, .extension-rb .central-unit__base .acumulator__data:hover, .central-unit__base .extension-rb .acumulator__data:hover, .extension-g .central-unit__base .acumulator__data:hover, .central-unit__base .extension-g .acumulator__data:hover, .extension-ws .central-unit__base .acumulator__data:hover, .central-unit__base .extension-ws .acumulator__data:hover, .extension-f .central-unit__base .acumulator__data:hover, .central-unit__base .extension-f .acumulator__data:hover, .register .central-unit__base .memory__address:hover, .central-unit__base .register .memory__address:hover, .register-x .central-unit__base .memory__address:hover, .central-unit__base .register-x .memory__address:hover, .register-y .central-unit__base .memory__address:hover, .central-unit__base .register-y .memory__address:hover, .extension-rb .central-unit__base .memory__address:hover, .central-unit__base .extension-rb .memory__address:hover, .extension-g .central-unit__base .memory__address:hover, .central-unit__base .extension-g .memory__address:hover, .extension-ws .central-unit__base .memory__address:hover, .central-unit__base .extension-ws .memory__address:hover, .extension-f .central-unit__base .memory__address:hover, .central-unit__base .extension-f .memory__address:hover, .register .central-unit__base .memory__verbal:hover, .central-unit__base .register .memory__verbal:hover, .register-x .central-unit__base .memory__verbal:hover, .central-unit__base .register-x .memory__verbal:hover, .register-y .central-unit__base .memory__verbal:hover, .central-unit__base .register-y .memory__verbal:hover, .extension-rb .central-unit__base .memory__verbal:hover, .central-unit__base .extension-rb .memory__verbal:hover, .extension-g .central-unit__base .memory__verbal:hover, .central-unit__base .extension-g .memory__verbal:hover, .extension-ws .central-unit__base .memory__verbal:hover, .central-unit__base .extension-ws .memory__verbal:hover, .extension-f .central-unit__base .memory__verbal:hover, .central-unit__base .extension-f .memory__verbal:hover {
-      background: rgba(0, 0, 0, 0.3); }
+      background: rgba(0, 0, 0, 0.15); }
     .register .element__data:focus, .register-x .element__data:focus, .register-y .element__data:focus, .extension-rb .element__data:focus, .extension-g .element__data:focus, .extension-ws .element__data:focus, .extension-f .element__data:focus, .register .central-unit__base .acumulator__data:focus, .central-unit__base .register .acumulator__data:focus, .register-x .central-unit__base .acumulator__data:focus, .central-unit__base .register-x .acumulator__data:focus, .register-y .central-unit__base .acumulator__data:focus, .central-unit__base .register-y .acumulator__data:focus, .extension-rb .central-unit__base .acumulator__data:focus, .central-unit__base .extension-rb .acumulator__data:focus, .extension-g .central-unit__base .acumulator__data:focus, .central-unit__base .extension-g .acumulator__data:focus, .extension-ws .central-unit__base .acumulator__data:focus, .central-unit__base .extension-ws .acumulator__data:focus, .extension-f .central-unit__base .acumulator__data:focus, .central-unit__base .extension-f .acumulator__data:focus, .register .central-unit__base .memory__address:focus, .central-unit__base .register .memory__address:focus, .register-x .central-unit__base .memory__address:focus, .central-unit__base .register-x .memory__address:focus, .register-y .central-unit__base .memory__address:focus, .central-unit__base .register-y .memory__address:focus, .extension-rb .central-unit__base .memory__address:focus, .central-unit__base .extension-rb .memory__address:focus, .extension-g .central-unit__base .memory__address:focus, .central-unit__base .extension-g .memory__address:focus, .extension-ws .central-unit__base .memory__address:focus, .central-unit__base .extension-ws .memory__address:focus, .extension-f .central-unit__base .memory__address:focus, .central-unit__base .extension-f .memory__address:focus, .register .central-unit__base .memory__verbal:focus, .central-unit__base .register .memory__verbal:focus, .register-x .central-unit__base .memory__verbal:focus, .central-unit__base .register-x .memory__verbal:focus, .register-y .central-unit__base .memory__verbal:focus, .central-unit__base .register-y .memory__verbal:focus, .extension-rb .central-unit__base .memory__verbal:focus, .central-unit__base .extension-rb .memory__verbal:focus, .extension-g .central-unit__base .memory__verbal:focus, .central-unit__base .extension-g .memory__verbal:focus, .extension-ws .central-unit__base .memory__verbal:focus, .central-unit__base .extension-ws .memory__verbal:focus, .extension-f .central-unit__base .memory__verbal:focus, .central-unit__base .extension-f .memory__verbal:focus {
       background: rgba(255, 0, 0, 0.3); }
 
@@ -359,6 +361,18 @@ svg {
 .extensions {
   display: inline-block;
   width: 40%; }
+
+.extension-wyls {
+  position: absolute;
+  top: 125px;
+  left: -530px;
+  width: 50px;
+  height: 220px; }
+  .extension-wyls svg {
+    width: 105px;
+    height: 220px;
+    margin-left: -50px;
+    z-index: 1; }
 
 .control-panel {
   margin: 30px auto; }
@@ -611,3 +625,5 @@ section.w-machine {
   background-color: #FFF;
   border-top: 0px solid #60A9FF;
   border-bottom: 0px solid #60A9FF; }
+
+/*# sourceMappingURL=style.css.map */
