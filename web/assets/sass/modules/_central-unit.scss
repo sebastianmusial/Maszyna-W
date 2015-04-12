@@ -14,7 +14,7 @@
 	@include transition(all 0.3s ease-in-out);
 
 	&:hover {
-		background: $bg-active-components;
+		//background: $bg-active-components;
 	}
 
 	&__data {
@@ -72,6 +72,14 @@
 		right: 325px;
 		width: 150px;
 		
+		&:hover {
+			background: $bg-active-components;
+
+			.acumulator__data:hover {
+				background: none;
+			}
+		}
+
 		&::before {
 			display: block;
 			position: absolute;
@@ -421,4 +429,19 @@
 .extensions { 
 	display: inline-block;
 	width: 40%;
+}
+
+.extension-wyls {
+	position: absolute;
+	top: 125px;
+	left: -530px;
+	width: 50px;
+	height: 220px;
+
+	svg {
+		width: 105px;
+		height: 220px;
+		margin-left: -50px;
+		z-index: 1;
+	}
 }

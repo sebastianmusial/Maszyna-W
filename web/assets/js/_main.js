@@ -19,7 +19,7 @@ MW.vars = {
     logicalOperations: $('#logical-operations'),
     extensionIAK: $('#extension-iak'),
     extensionDAK: $('#extension-dak'),
-    extensionF: $('#extension-f'),
+    extensionF: $('#extension-f')
 };
 
 
@@ -91,7 +91,7 @@ MW.centralUnit = function(containerCentralUnit) {
     var acumulator = function() {
         var wejaArrow = MW.setArrow(paper, 'M450 300 V255', true),
             wejaText = MW.setText(paper, MW.Architecture.Signals.ALU_IN, 425, 275, wejaArrow),
-            wyakArrow = MW.setArrow(paper, 'M605 300 V65, 65 H500, 500 V100', false),
+            wyakArrow = MW.setArrow(paper, 'M605 295 V65, 65 H500, 500 V100', false),
             wyakText = MW.setText(paper, MW.Architecture.Signals.ACCUMULATOR_OUT, 550, 55, wyakArrow),
             weakArrow = MW.setArrow(paper, 'M345 125 H374', true),
             weakText = MW.setText(paper, MW.Architecture.Signals.ACCUMULATOR_IN, 325, 125, weakArrow),
@@ -203,6 +203,11 @@ MW.additionalElements = function() {
             iwsText = MW.setText(paper, MW.Architecture.Signals.STACK_POINTER_INCREMENT, 15, 10, iwsArrow),
             dwsArrow = MW.setArrow(paper, 'M170 10 H154' , true, true),
             dwsText = MW.setText(paper, MW.Architecture.Signals.STACK_POINTER_DECREMENT, 185, 10, dwsArrow);
+        	
+        	var paperWyls = Raphael("extension-wyls");
+        	
+        	var wylsArrow = MW.setArrow(paperWyls, 'M100 0 V220' , true),
+            	wylsText = MW.setText(paperWyls, MW.Architecture.Signals.PROGRAM_COUNTER_OUT_TO_DATA_BUS, 75, 65, wylsArrow);
     };
 
     //artimetical operations
@@ -445,6 +450,7 @@ MW.setText = function(paper, signalId, posX, posY, arrow) {
     label.click(function() {
 		$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
 	});
+    
     label.signalId = signalId;
     arrow.signalId = signalId;
 
@@ -562,11 +568,26 @@ MW.editInputValue = function() {
     //Saving changes if new value
     input.focusout(function() {
 			var $this = $(this);
-
+			
 			if($this.val() == '') {
 				$this.val(actualValue);
 			}
+			
+			var pattern = /^\d+$/;
+			
+	    	if( !pattern.test($this.val()) ) {
+				$this.val('0');
+			}
 		});
+    
+    input.change(function() {
+    	var $this = $(this);
+		var pattern = /^\d+$/;
+		
+    	if( !pattern.test($this.val()) ) {
+			$this.val(actualValue);
+		}
+    });
 
     //Saving changes on click enter button
 	input.keypress(function(e) {
