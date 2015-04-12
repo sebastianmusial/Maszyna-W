@@ -80,19 +80,19 @@
 			      <div class="panel-body">
 			      	<div class="radio">
 		      			<label>
-							<input type="radio" name="trace-lavel" id="trace-lavel0" class="js-type">
+							<input id="track-program" type="radio" name="trace-lavel" id="trace-lavel0" class="js-type">
 							niski (program)
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="trace-lavel" id="trace-lavel1" class="js-type">
+							<input id="track-command" type="radio" name="trace-lavel" id="trace-lavel1" class="js-type">
 							średni (rozkaz)
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="trace-lavel" id="trace-lavel2" class="js-type">
+							<input id="track-tact" type="radio" name="trace-lavel" id="trace-lavel2" class="js-type">
 							wysoki (takt)
 						</label>
 					</div>
@@ -112,25 +112,25 @@
 	      		<div class="col-xs-3">
 	      			<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type0" class="js-type">
+							<input id="architecture-w" type="radio" name="type" id="type0" class="js-type">
 							W
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type1" class="js-type">
+							<input id="architecture-w-plus" type="radio" name="type" id="type1" class="js-type">
 							W+
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type2" class="js-type">
+							<input id="architecture-l" type="radio" name="type" id="type2" class="js-type">
 							L	
 						</label>
 					</div>
 					<div class="radio">
 		      			<label>
-							<input type="radio" name="type" id="type3" class="js-type">
+							<input id="architecture-ew" type="radio" name="type" id="type3" class="js-type">
 							EW	
 						</label>
 					</div>
@@ -207,13 +207,13 @@
 				   <div class="col-xs-6">
 					    <label>
 					    	Liczba bitów adresowych 
-					    	<input type="number" class="form-control js-only-numbers" value="5">
+					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5">
 					    </label>
 					</div>
 					<div class="col-xs-6">
 					    <label>
 					    	Liczba bitów kodu
-					   		<input type="number" class="form-control js-only-numbers" value="3">
+					   		<input id="op-code-bit-count" type="number" class="form-control js-only-numbers" value="3">
 					    </label>
 					 </div>
 		    	</div>
@@ -232,26 +232,17 @@
 			      <table class="table table-hover">
 			      	<thead>
 			      		<th></th>
-			      		<th>Adres (port)</th>
-			      		<th>Przerwanie</th>
+			      		<th>Wejście</th>
+			      		<th>Wyjście</th>
 			      	</thead>
 			      	<tbody>
 			      		<tr>
-			      			<td>Wejście</td>
+			      			<td>Adres (port)</td>
 			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="1">
+							    <input id="input-port-address" type="text" class="form-control js-only-numbers" value="1">
 			      			</td>
 			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="2">
-			      			</td>
-			      		</tr>
-			      		<tr>
-			      			<td>Wyjście</td>
-			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="3">
-			      			</td>
-			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="4">
+							    <input id="output-port-address" type="text" class="form-control js-only-numbers" value="3">
 			      			</td>
 			      		</tr>
 			      	</tbody>

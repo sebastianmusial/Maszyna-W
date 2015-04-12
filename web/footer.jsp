@@ -15,6 +15,8 @@
   <script src="assets/js/_main.js"></script>
   <script src="assets/js/_registration.js"></script>
   <script src="assets/js/_interaction.js"></script>
+  <script src="assets/js/_settings.js"></script>
+  <script src="assets/js/_runner.js"></script>
   <script src="assets/js/_ready.js"></script>
 </body>
 </html>
