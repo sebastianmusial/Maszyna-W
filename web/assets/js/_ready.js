@@ -12,6 +12,8 @@ $(document).ready(function() {
 			MW.initInteraction();
 			MW.initSettings();
 			MW.initRunner();
+			for(key in MW.Language.UI){
+				$("#" + key).html(MW.Language.UI[key]);
 			}
 		});
 	});
