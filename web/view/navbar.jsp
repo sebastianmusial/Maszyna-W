@@ -13,14 +13,14 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">Maszyna W</a>
+			<a id="SITE_HEADER" class="navbar-brand" href="index.jsp">Maszyna W</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-main">
-				<li class="active"><a href="index.jsp">Symulator <span class="sr-only">(current)</span></a></li>
-				<li><a href="guestbook.jsp">Księga gości</a></li>
-				<li><a href="forum.jsp">Forum</a></li>
+				<li class="active"><a id="SIMULATOR_TAB" href="index.jsp">Symulator <span class="sr-only">(current)</span></a></li>
+				<li><a id="GUEST_BOOK_TAB" href="guestbook.jsp">Księga gości</a></li>
+				<li><a id="FORUM_TAB" href="forum.jsp">Forum</a></li>
 
 				<!--<?php if($is_forum): ?>
 				<li class="dropdown">
@@ -37,13 +37,13 @@
 			
 				<c:if test="${sessionScope.loggedUser == null}">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<a id="USER_MENU_DROP_BOX" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						  <span class="glyphicon glyphicon-user"></span>
 						  Witaj nieznajomy!<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
-						  <li><a href="login.jsp">Logowanie</a></li>
-						  <li><a href="register.jsp">Rejestracja</a></li>
+						  <li><a id="USER_LOGIN_TAB" href="login.jsp">Logowanie</a></li>
+						  <li><a id="USER_REGISTER_TAB" href="register.jsp">Rejestracja</a></li>
 						</ul>
 					</li>				
 				</c:if>
@@ -56,7 +56,7 @@
 						</a>
 						<ul class="dropdown-menu" role="menu">
 						  <li>
-						  	<a href="LogoutUser">Wyloguj się</a>
+						  	<a id="LOGOUT_TAB" href="LogoutUser">Wyloguj się</a>
 						  </li>
 						</ul>
 					</li>				

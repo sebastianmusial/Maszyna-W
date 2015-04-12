@@ -32,11 +32,15 @@ $(document).ready(function() {
 						state.registers[registerId] = register.value;
 				}
 				
+				
 				$.get("TactRunner", {state: JSON.stringify(state)}, function(data) {
 					console.log(data);
 					MW.restoreState();
 				});
 			});
+			for(key in MW.Language.UI){
+				$("#" + key).html(MW.Language.UI[key]);
+			}
 		});
 	});
 });

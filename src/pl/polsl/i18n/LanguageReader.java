@@ -52,4 +52,21 @@ public class LanguageReader {
 			
 		}
 	}
+	
+	/**
+	 * Add translated UI element to language
+	 * @param lang language the name will be added to
+	 * @param uiElement name of constant defined in UIElements
+	 * @param name translated UI element name
+	 */
+	public void addUIElementText(Language lang, String uiElement, String name) {
+		try {
+			UIElements value = UIElements.valueOf(uiElement);
+			if(value != null)
+				lang.userInterface.put(value.ID, name);
+		}
+		catch(IllegalArgumentException ex) {
+			
+		}
+	}
 }

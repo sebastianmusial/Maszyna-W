@@ -38,7 +38,7 @@ public class LanguageSerializer implements JsonSerializer<Language> {
 	 * <pre>{
 	 *    Registers: { "1": "L", "2": "AK", ... },
 	 *    Signals: { "1": "wyak", "2": "weak", ... },
-	 *    UI: {"1": "Maszyna W", "2": "Symulator", ... }
+	 *    UI: {"SITE_HEADER": "Maszyna W", "2": "SIMULATOR_TAB", ... }
 	 *};</pre>
 	 */
 	@Override
@@ -66,13 +66,13 @@ public class LanguageSerializer implements JsonSerializer<Language> {
 		lang.add("Signals", signals);
 		
 		final JsonObject userInterface = new JsonObject();
-//		for(ArchitectureInfo.AvailableRegisters register : ArchitectureInfo.AvailableRegisters.values()) {
-//			Integer id = register.ID;
-//			String name = language.getRegisterName(id);
-//			if(name == null || "".equals(name))
-//				name = defaultLanguage.getUIText(id);
-//			userInterface.addProperty(id.toString(), name);
-//		}
+		for(UIElements uiElement : UIElements.values()) {
+			Integer id = uiElement.ID;
+			String name = language.getUIText(id);
+			if(name == null || "".equals(name))
+				name = defaultLanguage.getUIText(id);
+			userInterface.addProperty(uiElement.name() ,name);
+		}
 		lang.add("UI", userInterface);
 		
 		return lang;
