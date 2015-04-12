@@ -451,11 +451,6 @@ MW.setText = function(paper, signalId, posX, posY, arrow) {
 		$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
 	});
     
-    arrow.click(function() {
-		console.log('aaa');
-    	//$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
-	});
-    
     label.signalId = signalId;
     arrow.signalId = signalId;
 

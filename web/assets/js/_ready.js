@@ -1,10 +1,7 @@
 /**
- * 
- */
-
-
-/**
- * Running JS functions.
+ * Running JS functions defined in other files
+ * in the right order, but first read language
+ * and architecture info.
  */
 $(document).ready(function() {
 	$.get("LanguageAccessor", {lang: "pl"}, function(data) {
@@ -13,32 +10,8 @@ $(document).ready(function() {
 			MW.Architecture = JSON.parse(data);
 			MW.init();
 			MW.initInteraction();
-
-			$("#run-tact").click(function() {
-				var state = {
-					signals: {},
-					registers: {}
-				};
-				
-				for(var signalId in MW.Signals) {
-					var signal = MW.Signals[signalId];
-					if(signal.isVisible)
-						state.signals[signalId] = signal.state;
-				}
-				
-				for(var registerId in MW.Registers) {
-					var register = MW.Registers[registerId];
-					if(register.isVisible)
-						state.registers[registerId] = register.value;
-				}
-				
-				$.get("TactRunner", {state: JSON.stringify(state)}).done(function(data) {
-					result = JSON.parse(data);
-					if(result.status == "ERROR")
-						console.log(result.message)
-					MW.restoreState();
-				});
-			});
+			MW.initSettings();
+			MW.initRunner();
 		});
 	});
 });

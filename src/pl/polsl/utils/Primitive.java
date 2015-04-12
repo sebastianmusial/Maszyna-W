@@ -14,6 +14,7 @@ public class Primitive<T> {
 	/** Wrapped value. */
 	private T value;
 	
+	/** List of registered change listeners. */
 	private List<PrimitiveChangeListener<T>> listeners = new LinkedList<PrimitiveChangeListener<T>>();
 	
 	/**
@@ -34,6 +35,11 @@ public class Primitive<T> {
 			listener.primitiveChanged(this);
 	}
 	
+	/**
+	 * Register change listener.
+	 * @param listener object that would react when
+	 * value of this primitive is changed.
+	 */
 	public void addChangeListener(PrimitiveChangeListener<T> listener) {
 		listeners.add(listener);
 	}

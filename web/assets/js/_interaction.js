@@ -1,5 +1,5 @@
 /**
- * 
+ * TODO rozdzielić na pliki _registers.js, _signals.js i _memory.js
  */
 
 var MW = MW || {};

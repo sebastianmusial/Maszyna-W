@@ -21,7 +21,7 @@ final public class Register extends NonVolatileDataStorage {
     /**
      * Constructor with bit count as parameter. Constructs register
      * configured to contain bitCount long data word.
-     * @param bitCount - bit count for data word.
+     * @param bitCount bit count for data word.
      */
     public Register(Primitive<Integer> bitCount) {
     	super(bitCount);
