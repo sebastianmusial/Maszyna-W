@@ -19,7 +19,6 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-main">
 				<li class="active"><a id="SIMULATOR_TAB" href="index.jsp">Symulator <span class="sr-only">(current)</span></a></li>
-				<li><a id="GUEST_BOOK_TAB" href="guestbook.jsp">Księga gości</a></li>
 				<li><a id="FORUM_TAB" href="forum.jsp">Forum</a></li>
 
 				<c:if test="${sessionScope.loggedUser != null}">
