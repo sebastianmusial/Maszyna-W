@@ -20,15 +20,6 @@
 			<ul class="nav navbar-nav navbar-main">
 				<li class="active"><a id="SIMULATOR_TAB" href="index.jsp">Symulator <span class="sr-only">(current)</span></a></li>
 				<li><a id="FORUM_TAB" href="forum.jsp">Forum</a></li>
-
-				<c:if test="${sessionScope.loggedUser != null}">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Lista akcji<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-				    	<li><a href="create_topic.jsp"><span class="glyphicon glyphicon-plus"></span>Utwórz temat</a></li>
-					</ul>
-				</li>
-				</c:if>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
