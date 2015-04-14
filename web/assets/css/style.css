@@ -408,7 +408,7 @@ nav.nav-forum {
   height: 50px;
   margin-top: 25px;
   padding: 0px 25px;
-  background-color: #60A9FF; }
+  background-color: #6c6c6c; }
   nav.nav-forum .container-fluid, nav.nav-forum .row {
     height: 100%; }
   nav.nav-forum .glyphicon {
@@ -576,15 +576,13 @@ section.login-form .alert:not(.alert-info) {
   display: block; }
 
 /* ------------------------------------------------------------------
-	SECTION - Register/create topic status
+	SECTION - status
 --------------------------------------------------------------------- */
-section.register-successful .alert,
-section.createTopic-successful .alert {
+section.status .alert {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 50px; }
-  section.register-successful .alert .glyphicon,
-  section.createTopic-successful .alert .glyphicon {
+  section.status .alert .glyphicon {
     display: block;
     float: left;
     font-size: 32px;
@@ -670,5 +668,3 @@ section.w-machine {
   background-color: #FFF;
   border-top: 0px solid #60A9FF;
   border-bottom: 0px solid #60A9FF; }
-
-/*# sourceMappingURL=style.css.map */

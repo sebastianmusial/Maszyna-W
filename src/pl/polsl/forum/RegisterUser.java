@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,19 +38,19 @@ public class RegisterUser extends HttpServlet {
     	String user_pass  = request.getParameter("user_pass");
     	String user_email = request.getParameter("user_email");
     	
-    	boolean error = false;
+    	int error = 0;
     	
     	Connection con = new DatabaseConnection(request).getInstance();
     	
     	try {
-			InsertData.insertUser(con, user_login, user_pass, user_email);
+    		DatabaseInsertion.insertUser(con, user_login, user_pass, user_email);
 		} catch (SQLException e) {
-			error = true;
+			error = 1;
 		} catch (Exception e) {
-			error = true;
+			error = 1;
 		}
     	
-    	response.sendRedirect("register_status.jsp?error=" + error);
+    	response.sendRedirect("status.jsp?type=register&error=" + error);
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

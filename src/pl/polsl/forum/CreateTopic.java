@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import pl.polsl.database.DatabaseConnection;
-import pl.polsl.database.InsertData;
+import pl.polsl.database.DatabaseInsertion;;
 
 /**
  * Servlet implementation class CreateTopic
+ * @author Józef Flakus
  */
 @WebServlet("/CreateTopic")
 public class CreateTopic extends HttpServlet {
@@ -44,7 +45,7 @@ public class CreateTopic extends HttpServlet {
     	
     	try {
     		con.setAutoCommit(false);
-    		InsertData.insertTopic(con, topicName, topicBody, userID); 
+    		DatabaseInsertion.insertTopic(con, topicName, topicBody, userID); 
     		con.commit();
 		} catch (SQLException e) {
 			try {
@@ -71,7 +72,7 @@ public class CreateTopic extends HttpServlet {
 			}
 		}
     	   	
-    	response.sendRedirect("createTopic_status.jsp?error=" + error);
+    	response.sendRedirect("status.jsp?type=createTopic&error=" + error);
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

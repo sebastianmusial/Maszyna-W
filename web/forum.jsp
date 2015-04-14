@@ -52,8 +52,7 @@
 							<h4 class="topic-headline"><a href="topic.php?id=${row.topicID}">${row.topicName}</a></h4>
 							<footer class="topic-footer">Napisany przez Moridin , 11 wrz 2014</footer>
 						</td>
-						
-						
+											
 						<sql:query dataSource="${snapshot}" var="resCount">
 							SELECT COUNT(replyID) AS count FROM Reply WHERE ${row.topicID} = Reply.topicID;
 						</sql:query>

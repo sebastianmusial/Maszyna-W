@@ -8,7 +8,7 @@ nav.nav-forum {
 	height: 50px;
 	margin-top: 25px; 
 	padding: 0px 25px;
-	background-color: $color-blue-lighten;
+	background-color: darken(#9F9F9F, 20%);
 
 	.container-fluid, .row { height: 100%; }
 	.glyphicon { margin-left: 15px; }
@@ -207,11 +207,10 @@ section.login-form { .alert:not(.alert-info) { display: block; }  }
 
 
 /* ------------------------------------------------------------------
-	SECTION - Register/create topic status
+	SECTION - status
 --------------------------------------------------------------------- */
 
-section.register-successful, 
-section.createTopic-successful {
+section.status {
 
 	.alert {
 		max-width: 600px;

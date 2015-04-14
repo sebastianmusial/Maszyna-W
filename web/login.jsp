@@ -10,7 +10,7 @@
     <h3 class="signin">Zaloguj się</h3>
     <form name="login" method="post" action="LoginUser" onsubmit="return formValidate()">
     
-	    <c:if test="${not empty param.error}">
+	    <c:if test="${param.error == 1}">
 	    	<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-alert"></span>Niepoprawny login lub hasło.</div>
 		</c:if>
         
