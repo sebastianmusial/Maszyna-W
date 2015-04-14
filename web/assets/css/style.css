@@ -3,6 +3,7 @@ html, body {
   padding: 0;
   font-family: "Helvetica Neue", "Lato", sans-serif;
   background-color: #F5F5F3;
+  color: black;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   padding-top: 25px; }
@@ -24,6 +25,15 @@ svg {
     display: table-cell;
     vertical-align: center;
     width: 100%; }
+
+/* ------------------------------------------------------------------
+	TYPOGRAPHY
+--------------------------------------------------------------------- */
+p {
+  color: black; }
+
+a {
+  color: #4A90E2; }
 
 .central-unit {
   position: relative;
@@ -406,7 +416,7 @@ svg {
 nav.nav-forum {
   width: 100%;
   height: 50px;
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 0px 25px;
   background-color: #6c6c6c; }
   nav.nav-forum .container-fluid, nav.nav-forum .row {
@@ -451,10 +461,11 @@ nav.nav-forum {
 --------------------------------------------------------------------- */
 section.forum {
   width: 100%;
+  margin-top: 20px;
   padding: 20px;
   background-color: white;
   font-size: 12px;
-  color: #AFA4A4; }
+  color: #7e6f6f; }
   section.forum .table-category .category-header {
     padding-top: 12px;
     padding-left: 20px;
@@ -594,7 +605,7 @@ section.status .alert {
 	SECTION - Create topic
 --------------------------------------------------------------------- */
 section.create-topic {
-  margin-top: 25px; }
+  margin-top: 20px; }
   section.create-topic input[type=text] {
     padding: 0px 15px;
     font-size: 32px;

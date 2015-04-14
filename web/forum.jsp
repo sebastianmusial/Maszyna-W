@@ -21,7 +21,7 @@
 		   u.login AS login,
 		   COUNT(replyID) AS count
 	FROM Topics AS t, Users AS u, Reply AS r
-	WHERE t.userID = u.userID and t.topicID = r.topicID
+	WHERE t.userID = u.userID AND t.topicID = r.topicID
 	GROUP BY topicID;
 </sql:query>
 
@@ -43,11 +43,11 @@
 		<table class="table table-category">
 		
 			<thead>
-		        <tr><th colspan="3" class="category-header"><h3>Spolecznosc Maszyny W</h3></th></tr>
+		        <tr><th colspan="3" class="category-header"><h3>Spoleczność Maszyny W</h3></th></tr>
 		        <tr>
-		            <th class="title-header">Tytu wątku</th>
+		            <th class="title-header">Tytuł wątku</th>
 		            <th class="count-header">Liczba postów</th>
-		            <th class="last-header">Ostatnio napisal</th>
+		            <th class="last-header">Ostatnio napisał</th>
 		        </tr>
 	    	</thead>
 	    	
@@ -59,9 +59,17 @@
 	   						<footer class="topic-footer">Napisany przez <strong>${row.login}</strong>, w dniu <fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${row.date}"/></footer>
 						</td>																						
 						<td class="col-views"><p>${row.count}</p></td>					
-						<td class="col-post">   
-							<strong>rybak47</strong>
-							<footer class="post-footer">09 lut 2015</footer>
+						<td class="col-post">   						
+							<sql:query dataSource="${snapshot}" var="resultPost">
+								SELECT u.login AS userName, 
+									   max(r.date) AS latestDate 
+								FROM Users AS u, Reply AS r
+								WHERE ${row.topicID} = r.topicID AND r.userID = u.userID;							
+							</sql:query>
+							<c:forEach var="rowInner" items="${resultPost.rows}">					
+								<strong>${rowInner.login}</strong>
+								<footer class="post-footer"><fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${rowInner.latestDate}"/></footer>
+							</c:forEach>
 						</td>
 					</tr>
 				</c:forEach>				

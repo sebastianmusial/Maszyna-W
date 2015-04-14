@@ -1,12 +1,13 @@
-
 /* ------------------------------------------------------------------
 	SECTION - Forum navigation
 --------------------------------------------------------------------- */
 
+$gutter-top: 20px;
+
 nav.nav-forum {
 	width: 100%;
 	height: 50px;
-	margin-top: 25px; 
+	margin-top: $gutter-top; 
 	padding: 0px 25px;
 	background-color: darken(#9F9F9F, 20%);
 
@@ -55,12 +56,12 @@ nav.nav-forum {
 --------------------------------------------------------------------- */
 
 section.forum {
-	// margin-top: 25px;
 	width: 100%;
+	margin-top: $gutter-top;
 	padding: 20px;
 	background-color: white;
 	font-size: 12px;
-	color: #AFA4A4;
+	color: darken(#AFA4A4, 20%);
 
 	.table-category {	
 		
@@ -234,7 +235,7 @@ section.status {
 --------------------------------------------------------------------- */
 
 section.create-topic {
-	margin-top: 25px;
+	margin-top: $gutter-top;
 
 	input[type=text] {
 		padding: 0px 15px;
