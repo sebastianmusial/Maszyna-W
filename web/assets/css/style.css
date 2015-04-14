@@ -472,9 +472,11 @@ section.forum {
     text-align: center; }
   section.forum .table-category .topic-headline {
     font-size: 16px;
+    margin-bottom: 15px;
     color: #4A90E2; }
   section.forum .table-category .topic-footer {
-    color: gray; }
+    color: gray;
+    margin-bottom: 5px; }
   section.forum .table-category tr {
     height: 50px; }
     section.forum .table-category tr .col-content {

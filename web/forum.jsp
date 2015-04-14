@@ -2,6 +2,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="header.jsp" %>
 <%@ include file="view/navbar.jsp" %>
@@ -13,7 +14,15 @@
     password="${initParam['DB_PASS']}"/>
 
 <sql:query dataSource="${snapshot}" var="result">
-	SELECT * FROM Topics;
+	SELECT t.topicID AS topicID, 
+		   t.userID AS userID, 
+		   t.topicName AS topicName, 
+		   t.date AS date, 
+		   u.login AS login,
+		   COUNT(replyID) AS count
+	FROM Topics AS t, Users AS u, Reply AS r
+	WHERE t.userID = u.userID and t.topicID = r.topicID
+	GROUP BY topicID;
 </sql:query>
 
 <div class="container-fluid wrap">
@@ -34,9 +43,7 @@
 		<table class="table table-category">
 		
 			<thead>
-		        <tr>
-		            <th colspan="3" class="category-header"><h3>Spolecznosc Maszyny W</h3></th>
-		        </tr>
+		        <tr><th colspan="3" class="category-header"><h3>Spolecznosc Maszyny W</h3></th></tr>
 		        <tr>
 		            <th class="title-header">Tytu wątku</th>
 		            <th class="count-header">Liczba postów</th>
@@ -44,32 +51,20 @@
 		        </tr>
 	    	</thead>
 	    	
-			<tbody>	
-			
+			<tbody>			
 				<c:forEach var="row" items="${result.rows}">
 					<tr>
 						<td class="col-content">           
-							<h4 class="topic-headline"><a href="topic.php?id=${row.topicID}">${row.topicName}</a></h4>
-							<footer class="topic-footer">Napisany przez Moridin , 11 wrz 2014</footer>
-						</td>
-											
-						<sql:query dataSource="${snapshot}" var="resCount">
-							SELECT COUNT(replyID) AS count FROM Reply WHERE ${row.topicID} = Reply.topicID;
-						</sql:query>
-												
-						<td class="col-views">   
-							<c:forEach items="${resCount.rows}" var="result">
-   								<p>${result.count}</p>
-							</c:forEach>
-						</td>
-						
+							<h4 class="topic-headline"><a href="topic.php?id=${row.topicID}">${row.topicName}</a></h4>							
+	   						<footer class="topic-footer">Napisany przez <strong>${row.login}</strong>, w dniu <fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${row.date}"/></footer>
+						</td>																						
+						<td class="col-views"><p>${row.count}</p></td>					
 						<td class="col-post">   
 							<strong>rybak47</strong>
 							<footer class="post-footer">09 lut 2015</footer>
 						</td>
 					</tr>
-				</c:forEach>
-				
+				</c:forEach>				
 			</tbody>
 			
 		</table>
