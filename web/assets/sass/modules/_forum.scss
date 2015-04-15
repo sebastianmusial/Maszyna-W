@@ -68,7 +68,7 @@ section.forum {
 		.category-header {
 			padding-top: 12px;
 			padding-left: 20px;
-			background-color: #9F9F9F;
+			background-color: $color-blue-lighten;
 
 			h3 {
 				margin: 0;
@@ -80,18 +80,7 @@ section.forum {
 
 		.title-header { padding-left: 20px; }
 		.count-header { text-align: center; }
-		.last-header { text-align: center; }
-
-		.topic-headline {
-			font-size: 16px;
-			margin-bottom: 15px;
-			color: $color-blue;
-		}
-
-		.topic-footer {
-			color: gray;
-			margin-bottom: 5px;
-		}
+		.last-header  { text-align: center; }
 
 		tr {
 			$row-height: 50px;
@@ -99,7 +88,19 @@ section.forum {
 			height: $row-height;
 
 			.col-content {
-				h4 { font-size: 18px; }
+				.topic-headline {
+					font-size: 16px;
+					margin-bottom: 15px;
+					color: $color-blue;
+
+					.glyphicon { margin-right: 15px; }
+				}
+
+				.topic-footer {
+					color: gray;
+					margin-bottom: 5px;
+				}
+
 				max-width: 100%;
 				padding-left: 20px;
 			}
@@ -115,6 +116,71 @@ section.forum {
 				height: $row-height;
 				padding-top: $row-height / 2.5;
 				text-align: center;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------
+	SECTION - Create topic
+--------------------------------------------------------------------- */
+
+section.topic {
+	$gutter-horizontal: 20px;
+
+	header {
+		margin-top: $gutter-top;
+		padding: 25px $gutter-horizontal;
+		background-color: white;
+
+		.glyphicon { 
+			float: left; 
+			margin-right: 15px;
+			margin-bottom: 15px;
+			font-size: 60px;
+		}
+
+		h2 { 
+			margin: 0; 
+			margin-bottom: 10px;
+			padding: 0; 
+		}
+
+		.post-count {
+			width: 100%;
+			margin-top: $gutter-top + 10px;
+			padding: 20px;
+			background-color: darken(#9F9F9F, 20%);
+			color: white;
+		}
+	}
+
+	main {
+		.post {
+			display: inline-block;
+			width: 100%;
+			margin-top: $gutter-top;
+			background-color: white;
+
+			.post-author, .post-body {
+				padding: 20px;
+			}
+
+			.post-author {
+				text-align: center;
+				color: $color-blue;
+
+				img { 
+					display: block; 
+					width: 50%; 
+					margin-left: auto; 
+					margin-right: auto;
+					margin-bottom: 15px;
+				}
+			}
+
+			.post-body {
+				p:first-child { color: gray; font-size: 12px; }
 			}
 		}
 	}

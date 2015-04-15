@@ -14,30 +14,29 @@
     password="${initParam['DB_PASS']}"/>
 
 <sql:query dataSource="${snapshot}" var="result">
-	SELECT t.topicID AS topicID, 
-		   t.userID AS userID, 
-		   t.topicName AS topicName, 
-		   t.date AS date, 
-		   u.login AS login,
-		   COUNT(replyID) AS count
-	FROM Topics AS t, Users AS u, Reply AS r
-	WHERE t.userID = u.userID AND t.topicID = r.topicID
-	GROUP BY topicID;
+	SELECT concat(t.topicID,'')      AS topicID, 
+		   concat(t.userID,'')       AS authorID, 
+		   concat(t.topicName,'')    AS topicName, 
+		   concat(t.date,'')         AS topicDate, 
+		   concat(u.login,'')        AS topicAuthor,
+		   COUNT(DISTINCT r.replyID) AS postCount,
+		   concat(u2.login,'')       AS lastUser, 
+		   max(r2.date)              AS lastDate 
+	FROM Topics AS t, 
+		 Users AS u, 
+		 Reply AS r, 
+		 Users as u2, 
+		 Reply as r2
+	WHERE t.userID = u.userID AND 
+		  t.topicID = r.topicID AND 
+		  t.topicID = r2.topicID AND 
+		  r2.userID = u2.userID
+	GROUP BY topicID
+	ORDER BY r2.date DESC;
 </sql:query>
 
 <div class="container-fluid wrap">
-	<c:if test="${sessionScope.loggedUser != null}">
-		<nav class="nav-forum">
-			<div class="container-fluid">
-				<div class="row">
-					<ul>
-						<li>Forum:</li>
-						<li><a href="create_topic.jsp">Utwórz temat<span class="glyphicon glyphicon-plus"></span></a></li>
-					</ul>					
-				</div>
-			</div>
-		</nav>
-	</c:if>	
+	<%@ include file="view/navbar-forum.jsp" %>
 
 	<section class="forum">	
 		<table class="table table-category">
@@ -54,22 +53,17 @@
 			<tbody>			
 				<c:forEach var="row" items="${result.rows}">
 					<tr>
-						<td class="col-content">           
-							<h4 class="topic-headline"><a href="topic.php?id=${row.topicID}">${row.topicName}</a></h4>							
-	   						<footer class="topic-footer">Napisany przez <strong>${row.login}</strong>, w dniu <fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${row.date}"/></footer>
+						<td class="col-content">  
+							<h4 class="topic-headline"><a href="topic.jsp?id=${row.topicID}"><span class="glyphicon glyphicon-list-alt"></span>${row.topicName}</a></h4>	
+							<fmt:parseDate value="${row.topicDate}" var="date"/>
+	   						<footer class="topic-footer">Napisany przez <strong>${row.topicAuthor}</strong>, w dniu <fmt:formatDate pattern="yyyy-MM-dd" value="${date}"/></footer>
 						</td>																						
-						<td class="col-views"><p>${row.count}</p></td>					
-						<td class="col-post">   						
-							<sql:query dataSource="${snapshot}" var="resultPost">
-								SELECT u.login AS userName, 
-									   max(r.date) AS latestDate 
-								FROM Users AS u, Reply AS r
-								WHERE ${row.topicID} = r.topicID AND r.userID = u.userID;							
-							</sql:query>
-							<c:forEach var="rowInner" items="${resultPost.rows}">					
-								<strong>${rowInner.login}</strong>
-								<footer class="post-footer"><fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${rowInner.latestDate}"/></footer>
-							</c:forEach>
+						<td class="col-views">
+							<p>${row.postCount}</p>
+						</td>					
+						<td class="col-post">   										
+							<strong>${row.lastUser}</strong>
+							<footer class="post-footer"><fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${row.lastDate}"/></footer>
 						</td>
 					</tr>
 				</c:forEach>				

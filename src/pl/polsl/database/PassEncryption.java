@@ -4,8 +4,18 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Password encryption class.
+ * @author Józef Flakus
+ * @version 1.0
+ */
 public class PassEncryption {
 
+	/**
+	 * Hash password using SHA-256 encryption. 
+	 * @param pass password for encryption
+	 * @return hashed password
+	 */
 	public String hashS256(String pass) {
 		MessageDigest md = null;
 		byte[] digest = null;

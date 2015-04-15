@@ -469,7 +469,7 @@ section.forum {
   section.forum .table-category .category-header {
     padding-top: 12px;
     padding-left: 20px;
-    background-color: #9F9F9F; }
+    background-color: #60A9FF; }
     section.forum .table-category .category-header h3 {
       margin: 0;
       font-size: 20px;
@@ -481,20 +481,20 @@ section.forum {
     text-align: center; }
   section.forum .table-category .last-header {
     text-align: center; }
-  section.forum .table-category .topic-headline {
-    font-size: 16px;
-    margin-bottom: 15px;
-    color: #4A90E2; }
-  section.forum .table-category .topic-footer {
-    color: gray;
-    margin-bottom: 5px; }
   section.forum .table-category tr {
     height: 50px; }
     section.forum .table-category tr .col-content {
       max-width: 100%;
       padding-left: 20px; }
-      section.forum .table-category tr .col-content h4 {
-        font-size: 18px; }
+      section.forum .table-category tr .col-content .topic-headline {
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: #4A90E2; }
+        section.forum .table-category tr .col-content .topic-headline .glyphicon {
+          margin-right: 15px; }
+      section.forum .table-category tr .col-content .topic-footer {
+        color: gray;
+        margin-bottom: 5px; }
     section.forum .table-category tr .col-views {
       width: 120px;
       line-height: 50px;
@@ -504,6 +504,48 @@ section.forum {
       height: 50px;
       padding-top: 20px;
       text-align: center; }
+
+/* ------------------------------------------------------------------
+	SECTION - Create topic
+--------------------------------------------------------------------- */
+section.topic header {
+  margin-top: 20px;
+  padding: 25px 20px;
+  background-color: white; }
+  section.topic header .glyphicon {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-size: 60px; }
+  section.topic header h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0; }
+  section.topic header .post-count {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #6c6c6c;
+    color: white; }
+section.topic main .post {
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  background-color: white; }
+  section.topic main .post .post-author, section.topic main .post .post-body {
+    padding: 20px; }
+  section.topic main .post .post-author {
+    text-align: center;
+    color: #4A90E2; }
+    section.topic main .post .post-author img {
+      display: block;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 15px; }
+  section.topic main .post .post-body p:first-child {
+    color: gray;
+    font-size: 12px; }
 
 /* ------------------------------------------------------------------
 	SECTION - Register/Login
