@@ -122,7 +122,7 @@ section.forum {
 }
 
 /* ------------------------------------------------------------------
-	SECTION - Create topic
+	SECTION - Topic view
 --------------------------------------------------------------------- */
 
 section.topic {
@@ -138,13 +138,17 @@ section.topic {
 			margin-right: 15px;
 			margin-bottom: 15px;
 			font-size: 60px;
+			color: $color-blue;
 		}
 
 		h2 { 
 			margin: 0; 
 			margin-bottom: 10px;
 			padding: 0; 
+			color: $color-blue;
 		}
+
+		p { color: $color-blue; }
 
 		.post-count {
 			width: 100%;
@@ -181,6 +185,19 @@ section.topic {
 
 			.post-body {
 				p:first-child { color: gray; font-size: 12px; }
+				article {
+					display: block;
+				    padding: 9.5px;
+				    margin: 0 0 10px;
+				    font-size: 13px;
+				    font-family: monospace;
+				    white-space: pre-line;
+				    line-height: 1.42857143;
+				    color: #333;
+				    background-color: #f5f5f5;
+				    border: 1px solid #ccc;
+				    border-radius: 4px
+				}
 			}
 		}
 	}

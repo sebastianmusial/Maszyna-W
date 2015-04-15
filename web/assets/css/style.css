@@ -26,6 +26,12 @@ svg {
     vertical-align: center;
     width: 100%; }
 
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0; }
+
 /* ------------------------------------------------------------------
 	TYPOGRAPHY
 --------------------------------------------------------------------- */
@@ -506,7 +512,7 @@ section.forum {
       text-align: center; }
 
 /* ------------------------------------------------------------------
-	SECTION - Create topic
+	SECTION - Topic view
 --------------------------------------------------------------------- */
 section.topic header {
   margin-top: 20px;
@@ -516,11 +522,15 @@ section.topic header {
     float: left;
     margin-right: 15px;
     margin-bottom: 15px;
-    font-size: 60px; }
+    font-size: 60px;
+    color: #4A90E2; }
   section.topic header h2 {
     margin: 0;
     margin-bottom: 10px;
-    padding: 0; }
+    padding: 0;
+    color: #4A90E2; }
+  section.topic header p {
+    color: #4A90E2; }
   section.topic header .post-count {
     width: 100%;
     margin-top: 30px;
@@ -546,6 +556,18 @@ section.topic main .post {
   section.topic main .post .post-body p:first-child {
     color: gray;
     font-size: 12px; }
+  section.topic main .post .post-body article {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-family: monospace;
+    white-space: pre-line;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px; }
 
 /* ------------------------------------------------------------------
 	SECTION - Register/Login
