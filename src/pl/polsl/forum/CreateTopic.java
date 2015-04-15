@@ -33,6 +33,8 @@ public class CreateTopic extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
+    	request.setCharacterEncoding("UTF-8");
+    	
     	HttpSession session = request.getSession(true);
     	
     	String topicName = request.getParameter("topic_name");

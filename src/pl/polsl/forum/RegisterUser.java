@@ -34,6 +34,8 @@ public class RegisterUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
+    	request.setCharacterEncoding("UTF-8");
+    	
     	String user_login = request.getParameter("user_name");
     	String user_pass  = request.getParameter("user_pass");
     	String user_email = request.getParameter("user_email");

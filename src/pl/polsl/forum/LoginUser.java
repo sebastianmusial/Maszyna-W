@@ -35,6 +35,8 @@ public class LoginUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
+    	request.setCharacterEncoding("UTF-8");
+    	
     	String userLogin = request.getParameter("user_name");
     	String userPass  = request.getParameter("user_pass");
     	
