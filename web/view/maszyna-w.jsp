@@ -1,4 +1,9 @@
-﻿<div id="central-unit" class="central-unit">
+﻿<%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*,pl.polsl.architecture.*" %>
+<%
+WMachine machine = (WMachine)session.getAttribute("wmachine");
+%>
+
+<div id="central-unit" class="central-unit" style="opacity: 0;">
 	<div id="central-unit__extension-top" class="central-unit__extension">
 		<div id="extension-ws" class="extension-ws" data-name="WS">
 			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
@@ -16,9 +21,13 @@
 		<div id="acumulator" class="acumulator" data-name="AK">
 			<input type="text" class="acumulator__data js-only-numbers js-quick-edit" value="0">
 		</div>
-		<div id="memory" class="memory" data-top-name="A" data-down-name="S">
-			<input type="text" class="memory__address js-only-numbers js-quick-edit" value="0">
-			<input type="text" class="memory__verbal js-only-numbers js-quick-edit" value="0">
+		<div id="memory" class="memory">
+			<div id="memory-address" class="memory-address" data-name="A">
+				<input type="text" class="memory__address js-only-numbers js-quick-edit" value="0">
+			</div>
+			<div id="memory-data" class="memory-data" data-name="S">
+				<input type="text" class="memory__verbal js-only-numbers js-quick-edit" value="0">
+			</div>
 			<div class="memory__table">
 
 				<% for(int i = 0; i < 64; ++i) { %>

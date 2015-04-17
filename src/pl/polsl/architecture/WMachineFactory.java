@@ -58,8 +58,7 @@ public class WMachineFactory {
         builder.addSignal(INSTRUCTION_IN, magS, I);
         builder.addSignal(MEMORY_READ, memory, S);
         builder.addSignal(MEMORY_WRITE, S, memory);
-        // uncomment when arrow is added to UI
-        //builder.addSignal(PROGRAM_COUNTER_OUT_TO_DATA_BUS, L, magS);
+        builder.addSignal(PROGRAM_COUNTER_OUT_TO_DATA_BUS, L, magS);
         builder.addSignal(STACK_POINTER_IN, magA, WS);
         builder.addSignal(STACK_POINTER_OUT, WS, magA);
         builder.addSignal(DATA_X_IN, magS, X);

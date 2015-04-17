@@ -44,6 +44,7 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 		String action = request.getParameter("action");
 		
 		if("get".equalsIgnoreCase(action)) {
+			response.setContentType("application/json");
 			Map<String, Object> settingsMap = new HashMap<String, Object>();
 			settingsMap.put("ManualControl", settings.isManualControlEnabled());
 			settingsMap.put("TrackLevel", settings.getTrackLevel());
@@ -58,6 +59,7 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 		}
 		
 		else if("set".equalsIgnoreCase(action)) {
+			response.setContentType("text/plain");
 			String value = request.getParameter("value");
 			switch(request.getParameter("what")) {
 				case "ManualControl":
@@ -67,6 +69,7 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 					settings.setTrackLevel(TrackLevel.valueOf(value));
 					break;
 				case "Architecture":
+					response.setContentType("application/json");
 					Architecture architecture = Architecture.valueOf(value); 
 					settings.setArchitecture(architecture);
 					if(architecture != Architecture.USER_DEFINED) {
@@ -82,11 +85,11 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 					break;
 				case "AddressBitCount":
 					machine.setAddressBitCount(Integer.parseInt(value));
-					new Gson().toJson(getRegisterValues(machine), response.getWriter());
+					response.sendRedirect("RegisterAccessor?action=get");
 					break;
 				case "OpCodeBitCount":
 					machine.setDataBitCount(Integer.parseInt(value) + machine.getAddressBitCount());
-					new Gson().toJson(getRegisterValues(machine), response.getWriter());
+					response.sendRedirect("RegisterAccessor?action=get");
 					break;
 				case "InputPortAddress":
 					machine.setInputPortAddress(Integer.parseInt(value));

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.signals.Signal;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
 /**
  * Allow to access signals from client side.
@@ -25,7 +26,8 @@ public class SignalAccessor extends WMachineServletBase {
 	 */
 	@Override
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer signalId = Integer.parseInt(request.getParameter("signalId"));
+		response.setContentType("text/plain");
+		Integer signalId = AvailableSignals.valueOf(request.getParameter("signalId")).ID;
 		boolean signalEnabled = Boolean.parseBoolean(request.getParameter("signalEnabled"));
 		WMachine machine = getCurrentWMachine(request.getSession());
 		Signal signal = machine.getSignal(signalId);

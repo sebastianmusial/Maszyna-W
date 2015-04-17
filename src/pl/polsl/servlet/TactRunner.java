@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.signals.Signal;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
 import com.google.gson.Gson;
 
@@ -30,10 +31,10 @@ public class TactRunner extends WMachineServletBase {
 	 */
 	private class State {
 		/** Signal states. */
-		public Map<Integer, Boolean> signals;
+		public Map<String, Boolean> signals;
 		/** Register values. */
 		@SuppressWarnings("unused")
-		public Map<Integer, Integer> registers;
+		public Map<String, Integer> registers;
 	}
 	
 	/**
@@ -51,8 +52,8 @@ public class TactRunner extends WMachineServletBase {
 		
 		Map<String, String> result = new HashMap<>();
 		try {
-			for(Integer signalId : state.signals.keySet()) {
-				Signal signal = machine.getSignal(signalId);
+			for(String signalId : state.signals.keySet()) {
+				Signal signal = machine.getSignal(AvailableSignals.valueOf(signalId).ID);
 				if(signal == null)
 					continue;
 				Boolean signalState = state.signals.get(signalId);

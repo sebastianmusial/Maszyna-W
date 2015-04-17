@@ -42,6 +42,7 @@ public class WMachineState extends WMachineServletBase {
 	 * @see WMachineServletBase#processRequest(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
 		Writer writer = response.getWriter();
 		WMachine machine = getCurrentWMachine(request.getSession());
 		String action = request.getParameter("action");
