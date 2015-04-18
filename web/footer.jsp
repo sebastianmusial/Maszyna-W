@@ -18,6 +18,7 @@
 	<script src="assets/js/_registration.js"></script>
 	<script src="assets/js/interaction/_registers.js"></script>
 	<script src="assets/js/interaction/_signals.js"></script>
+	<script src="assets/js/interaction/_memory.js"></script>
 	<script src="assets/js/interaction/_settings.js"></script>
 	<script src="assets/js/interaction/_interaction.js"></script>
 	<script src="assets/js/interaction/_runner.js"></script>

@@ -30,7 +30,7 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 			</div>
 			<div class="memory__table">
 
-				<% for(int i = 0; i < 64; ++i) { %>
+				<% for(int i = 0; i < 8; ++i) { %>
 				<div id="memory-row-<%= i %>" class="memory__table--row">
 					<div class="memory__table--cell"><%= i %></div>
 					<input id="memory-cell-<%= i %>-value" class="memory__table__data js-only-numbers js-quick-edit" value="0">

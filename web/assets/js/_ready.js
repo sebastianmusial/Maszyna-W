@@ -28,5 +28,6 @@ $(document).ready(function() {
 	// Delayed so the browser can manage DOM changes before showing content.
 	setTimeout(function() {
 		Mappings.Dom.View.containerCentralUnit.animate({opacity: 1.0}, 0);
+		initMemory();
 	}, 25);
 });
