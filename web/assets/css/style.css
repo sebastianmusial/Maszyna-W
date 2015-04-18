@@ -3,6 +3,7 @@ html, body {
   padding: 0;
   font-family: "Helvetica Neue", "Lato", sans-serif;
   background-color: #F5F5F3;
+  color: black;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   padding-top: 25px; }
@@ -24,6 +25,21 @@ svg {
     display: table-cell;
     vertical-align: center;
     width: 100%; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0; }
+
+/* ------------------------------------------------------------------
+	TYPOGRAPHY
+--------------------------------------------------------------------- */
+p {
+  color: black; }
+
+a {
+  color: #4A90E2; }
 
 .central-unit {
   position: relative;
@@ -401,19 +417,65 @@ svg {
     padding-left: 30px; }
 
 /* ------------------------------------------------------------------
+	SECTION - Forum navigation
+--------------------------------------------------------------------- */
+nav.nav-forum {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  padding: 0px 25px;
+  background-color: #6c6c6c; }
+  nav.nav-forum .container-fluid, nav.nav-forum .row {
+    height: 100%; }
+  nav.nav-forum .glyphicon {
+    margin-left: 15px; }
+  nav.nav-forum ul {
+    margin: 0;
+    padding: 0;
+    height: 100%; }
+    nav.nav-forum ul li {
+      display: inline;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      list-style: none;
+      line-height: 50px;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white; }
+      nav.nav-forum ul li a {
+        height: 100%;
+        height: 50px;
+        line-height: 50px;
+        font-weight: normal;
+        letter-spacing: 0px;
+        text-transform: lowercase;
+        padding: 25px 15px;
+        color: white;
+        -webkit-transition: background-color 0.5s;
+        -moz-transition: background-color 0.5s;
+        -ms-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        transition: background-color 0.5s; }
+        nav.nav-forum ul li a:hover {
+          background-color: #4A90E2;
+          text-decoration: none; }
+
+/* ------------------------------------------------------------------
 	SECTION - Forum
 --------------------------------------------------------------------- */
 section.forum {
-  margin-top: 25px;
   width: 100%;
+  margin-top: 20px;
   padding: 20px;
-  background-color: #FFF;
+  background-color: white;
   font-size: 12px;
-  color: #AFA4A4; }
+  color: #7e6f6f; }
   section.forum .table-category .category-header {
     padding-top: 12px;
     padding-left: 20px;
-    background-color: #9F9F9F; }
+    background-color: #60A9FF; }
     section.forum .table-category .category-header h3 {
       margin: 0;
       font-size: 20px;
@@ -425,18 +487,20 @@ section.forum {
     text-align: center; }
   section.forum .table-category .last-header {
     text-align: center; }
-  section.forum .table-category .topic-headline {
-    font-size: 16px;
-    color: #4A90E2; }
-  section.forum .table-category .topic-footer {
-    color: #AFA4A4; }
   section.forum .table-category tr {
     height: 50px; }
     section.forum .table-category tr .col-content {
       max-width: 100%;
       padding-left: 20px; }
-      section.forum .table-category tr .col-content h4 {
-        font-size: 18px; }
+      section.forum .table-category tr .col-content .topic-headline {
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: #4A90E2; }
+        section.forum .table-category tr .col-content .topic-headline .glyphicon {
+          margin-right: 15px; }
+      section.forum .table-category tr .col-content .topic-footer {
+        color: gray;
+        margin-bottom: 5px; }
     section.forum .table-category tr .col-views {
       width: 120px;
       line-height: 50px;
@@ -446,6 +510,64 @@ section.forum {
       height: 50px;
       padding-top: 20px;
       text-align: center; }
+
+/* ------------------------------------------------------------------
+	SECTION - Topic view
+--------------------------------------------------------------------- */
+section.topic header {
+  margin-top: 20px;
+  padding: 25px 20px;
+  background-color: white; }
+  section.topic header .glyphicon {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-size: 60px;
+    color: #4A90E2; }
+  section.topic header h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    color: #4A90E2; }
+  section.topic header p {
+    color: #4A90E2; }
+  section.topic header .post-count {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #6c6c6c;
+    color: white; }
+section.topic main .post {
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  background-color: white; }
+  section.topic main .post .post-author, section.topic main .post .post-body {
+    padding: 20px; }
+  section.topic main .post .post-author {
+    text-align: center;
+    color: #4A90E2; }
+    section.topic main .post .post-author img {
+      display: block;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 15px; }
+  section.topic main .post .post-body p:first-child {
+    color: gray;
+    font-size: 12px; }
+  section.topic main .post .post-body article {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-family: monospace;
+    white-space: pre-line;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px; }
 
 /* ------------------------------------------------------------------
 	SECTION - Register/Login
@@ -531,15 +653,13 @@ section.login-form .alert:not(.alert-info) {
   display: block; }
 
 /* ------------------------------------------------------------------
-	SECTION - Register/create topic status
+	SECTION - status
 --------------------------------------------------------------------- */
-section.register-successful .alert,
-section.createTopic-successful .alert {
+section.status .alert {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 50px; }
-  section.register-successful .alert .glyphicon,
-  section.createTopic-successful .alert .glyphicon {
+  section.status .alert .glyphicon {
     display: block;
     float: left;
     font-size: 32px;
@@ -549,7 +669,7 @@ section.createTopic-successful .alert {
 	SECTION - Create topic
 --------------------------------------------------------------------- */
 section.create-topic {
-  margin-top: 25px; }
+  margin-top: 20px; }
   section.create-topic input[type=text] {
     padding: 0px 15px;
     font-size: 32px;
@@ -614,7 +734,7 @@ footer.footer-site {
   margin-top: 50px;
   text-align: center;
   font-size: 12px;
-  color: #AFA4A4; }
+  color: gray; }
 
 /* ------------------------------------------------------------------
 	SECTION - W Machine
@@ -625,5 +745,3 @@ section.w-machine {
   background-color: #FFF;
   border-top: 0px solid #60A9FF;
   border-bottom: 0px solid #60A9FF; }
-
-/*# sourceMappingURL=style.css.map */
