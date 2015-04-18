@@ -49,7 +49,6 @@ MW.initView = function() {
         MW.additionalElements();
         MW.showExtension();
     }
-    MW.shortcut();
 };
 
 
