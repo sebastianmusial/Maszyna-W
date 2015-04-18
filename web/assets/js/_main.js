@@ -19,7 +19,8 @@ MW.vars = {
     logicalOperations: $('#logical-operations'),
     extensionIAK: $('#extension-iak'),
     extensionDAK: $('#extension-dak'),
-    extensionF: $('#extension-f')
+    extensionF: $('#extension-f'),
+    tactBtn: $('#run-tact')
 };
 
 
@@ -67,6 +68,7 @@ MW.init = function() {
         MW.typeMachine();
         MW.showExtension();
     }
+    MW.shortcut();
 };
 
 
@@ -604,3 +606,24 @@ MW.editInputValue = function() {
     });
 };
 
+MW.shortcut = function () {
+    jwerty.key('f7', function () { 
+    	$('#run-tact').click();
+    });
+    
+    jwerty.key('f2', function () { 
+    	window.location = document.getElementById('SIMULATOR_TAB').href;
+    });
+    
+    jwerty.key('f3', function () {
+    	window.location = document.getElementById('FORUM_TAB').href;
+    });
+    
+    jwerty.key('ctrl+shift+1', function () { 
+    	window.location = document.getElementById('USER_LOGIN_TAB').href;
+    });
+    
+    jwerty.key('ctrl+shift+2',function () { 
+    	window.location = document.getElementById('USER_REGISTER_TAB').href;
+    });
+};
