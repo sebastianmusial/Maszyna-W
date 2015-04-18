@@ -60,7 +60,7 @@
   <div class="row">
   	<div class="col-xs-6">
   		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  			<div class="panel panel-default">
+  			<div class="panel panel-default panel--smaller">
 			    <div class="panel-heading panel-heading--clear" role="tab">
 		 			<div class="checkbox checkbox--clear">
 				      	<label class="collapse-headline hand-controls">
@@ -69,9 +69,10 @@
 								sterowanie ręczne
 							</span>
 						</label>
-					</div>	
+					</div>
 			    </div>
 			</div>
+			<input id="run-tact" type="button" value="Takt" class="btn btn-danger btn-tact"/>
 			<div class="panel panel-default">
 			    <div class="panel-heading panel-heading--clear" role="tab" id="headingZero">
 				    <h4 class="panel-title">
