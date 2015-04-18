@@ -33,7 +33,6 @@ public class WMachineServletBase extends HttpServlet {
 		WMachine machine = (WMachine)session.getAttribute("WMachineInstance");
 		if(machine == null) {
 			machine = new WMachineFactory().getInstance();
-			machine.setAddressBitCount(10);
 			session.setAttribute("WMachineInstance", machine);
 		}
 		return machine;

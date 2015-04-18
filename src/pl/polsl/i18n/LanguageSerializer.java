@@ -51,7 +51,7 @@ public class LanguageSerializer implements JsonSerializer<Language> {
 			String name = language.getRegisterName(id);
 			if(name == null || "".equals(name))
 				name = defaultLanguage.getRegisterName(id);
-			registers.addProperty(id.toString(), name);
+			registers.addProperty(register.toString(), name);
 		}
 		lang.add("Registers", registers);
 		
@@ -61,7 +61,7 @@ public class LanguageSerializer implements JsonSerializer<Language> {
 			String name = language.getSignalName(id);
 			if(name == null || "".equals(name))
 				name = defaultLanguage.getSignalName(id);
-			signals.addProperty(id.toString(), name);
+			signals.addProperty(signal.toString(), name);
 		}
 		lang.add("Signals", signals);
 		

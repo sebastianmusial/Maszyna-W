@@ -54,7 +54,7 @@ public class LanguageAccessor extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	response.setCharacterEncoding("UTF-8");
+    	response.setContentType("application/json;charset=UTF-8");
     	PrintWriter writer = response.getWriter();
     	String lang = request.getParameter("lang");
     	if(!languages.containsKey(lang))

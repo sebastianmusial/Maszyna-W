@@ -5,7 +5,8 @@ import java.lang.reflect.Type;
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.components.finalized.Register;
 import pl.polsl.architecture.signals.Signal;
-import pl.polsl.servlet.ArchitectureInfo;
+import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -39,9 +40,9 @@ public class WMachineSerializer implements JsonSerializer<WMachine> {
 		final JsonObject wmachine = new JsonObject();
 		
 		final JsonObject registers = new JsonObject();
-		for(Integer registerId : ArchitectureInfo.getRegisterIds()) {
+		for(AvailableRegisters registerId : AvailableRegisters.values()) {
 			try {
-				Register register = (Register)machine.getRegister(registerId);
+				Register register = (Register)machine.getRegister(registerId.ID);
 				if(register != null)
 					registers.addProperty(registerId.toString(), register.getValue());
 			} catch (Exception e) {
@@ -51,8 +52,8 @@ public class WMachineSerializer implements JsonSerializer<WMachine> {
 		wmachine.add("registers", registers);
 		
 		final JsonObject signals = new JsonObject();
-		for(Integer signalId : ArchitectureInfo.getSignalIds()) {
-			Signal signal = machine.getSignal(signalId);
+		for(AvailableSignals signalId : AvailableSignals.values()) {
+			Signal signal = machine.getSignal(signalId.ID);
 			if(signal != null)
 				signals.addProperty(signalId.toString(), signal.isEnabled());
 		}

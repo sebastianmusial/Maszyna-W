@@ -3,12 +3,10 @@
  * Allow to run program, command or tact.
  */
 
-var MW = MW || {};
-
 /**
  * Runners initializer.
  */
-MW.initRunner = function() {
+function initRunner() {
 	$("#run-tact").click(function() {
 		var state = {
 			signals: {},
@@ -31,7 +29,7 @@ MW.initRunner = function() {
 			result = JSON.parse(data);
 			if(result.status == "ERROR")
 				console.log(result.message)
-			MW.restoreState();
+			restoreState();
 		});
 	});
 };
