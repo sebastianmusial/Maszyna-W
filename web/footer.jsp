@@ -7,6 +7,7 @@
 		Have fun! <%= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date()) %>
 	</footer>
 </div>
+	<script src="assets/vendor/jwerty/jwerty.js"></script>
 	<script src="assets/vendor/raphael/raphael-min.js"></script>
 	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="assets/vendor/angular/angular.min.js"></script>
