@@ -3,6 +3,7 @@ html, body {
 	padding: 0; 
 	font-family: $base-font;
 	background-color: #F5F5F3;
+	color: black;
   	-moz-osx-font-smoothing: grayscale;
   	 -webkit-font-smoothing: antialiased;
 	padding-top: 25px; // make space for navbar
@@ -29,4 +30,11 @@ svg {
 		vertical-align: center;
 		width: 100%;
 	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	margin:  0;
+	padding: 0;
 }

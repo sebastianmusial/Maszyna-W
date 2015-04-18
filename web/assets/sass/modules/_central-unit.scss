@@ -107,20 +107,20 @@
 		width: 175px;
 		@include scrollbars(13px, $hover-row);
 
-		&::before {
+		.memory-address::before {
 			display: block;
 			position: absolute;
 			left: 10px;
 			top: 4px;
-			content: attr(data-top-name) ':';
+			content: attr(data-name) ':';
 		}
 
-		&::after {
+		.memory-data::before {
 			display: block;
 			position: absolute;
 			left: 10px;
 			bottom: 4px;
-			content: attr(data-down-name) ':';
+			content: attr(data-name) ':';
 		}
 		
 		&__address {

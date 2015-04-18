@@ -1,9 +1,13 @@
-USE sssebuss_bd;
 
-DROP TABLE IF EXISTS Categories CASCADE;
-DROP TABLE IF EXISTS Reply CASCADE;
-DROP TABLE IF EXISTS Topics CASCADE;
-DROP TABLE IF EXISTS User CASCADE;
+
+DROP TABLE IF EXISTS Categories CASCADE
+;
+DROP TABLE IF EXISTS Reply CASCADE
+;
+DROP TABLE IF EXISTS Topics CASCADE
+;
+DROP TABLE IF EXISTS User CASCADE
+;
 
 CREATE TABLE Categories
 (
@@ -11,7 +15,8 @@ CREATE TABLE Categories
 	categoryName VARCHAR(50) NOT NULL,
 	PRIMARY KEY (categoryID)
 
-) ;
+) 
+;
 
 
 CREATE TABLE Reply
@@ -20,11 +25,11 @@ CREATE TABLE Reply
 	userID BIGINT UNSIGNED NOT NULL,
 	topicID BIGINT UNSIGNED NOT NULL,
 	replyText TEXT NOT NULL,
-	PRIMARY KEY (replyID),
-	KEY (topicID),
-	KEY (userID)
+	date DATETIME NOT NULL,
+	PRIMARY KEY (replyID)
 
-) ;
+) 
+;
 
 
 CREATE TABLE Topics
@@ -33,10 +38,11 @@ CREATE TABLE Topics
 	userID BIGINT UNSIGNED NOT NULL,
 	categoryID BIGINT UNSIGNED NOT NULL,
 	topicName VARCHAR(50) NOT NULL,
-	PRIMARY KEY (topicID),
-	KEY (categoryID)
+	date DATETIME NOT NULL,
+	PRIMARY KEY (topicID)
 
-) ;
+) 
+;
 
 
 CREATE TABLE User
@@ -47,20 +53,5 @@ CREATE TABLE User
 	emailAddress VARCHAR(30) NOT NULL,
 	PRIMARY KEY (userID)
 
-) ;
-
-
-
-
-
-ALTER TABLE Reply ADD CONSTRAINT FK_Reply_Topics 
-	FOREIGN KEY (topicID) REFERENCES Topics (topicID);
-
-ALTER TABLE Reply ADD CONSTRAINT FK_Reply_User 
-	FOREIGN KEY (userID) REFERENCES User (userID);
-
-ALTER TABLE Topics ADD CONSTRAINT FK_Topics_Categories 
-	FOREIGN KEY (categoryID) REFERENCES Categories (categoryID);
-
-ALTER TABLE Topics ADD CONSTRAINT FK_Topics_User 
-	FOREIGN KEY (topicID) REFERENCES User (userID);
+) 
+;

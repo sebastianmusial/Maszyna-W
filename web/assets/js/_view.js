@@ -7,8 +7,6 @@ var MW = MW || {};
  */
 MW.vars = Mappings.Dom.View;
 
-
-
 /**
  * Basic attributes which have been used
  */
@@ -51,6 +49,7 @@ MW.initView = function() {
         MW.additionalElements();
         MW.showExtension();
     }
+    MW.shortcut();
 };
 
 

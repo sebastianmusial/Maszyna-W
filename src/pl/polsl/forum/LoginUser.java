@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import pl.polsl.database.DatabaseConnection;
-import pl.polsl.database.QueryData;
+import pl.polsl.database.DatabaseQuery;
 
 /**
  * Sign in user
@@ -35,6 +35,8 @@ public class LoginUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
+    	request.setCharacterEncoding("UTF-8");
+    	
     	String userLogin = request.getParameter("user_name");
     	String userPass  = request.getParameter("user_pass");
     	
@@ -44,12 +46,10 @@ public class LoginUser extends HttpServlet {
     	Connection con = new DatabaseConnection(request).getInstance();
     	
     	try {
-    		result = QueryData.findUser(con, userLogin, userPass);
-    		
+    		result = DatabaseQuery.findUser(con, userLogin, userPass);  		
     		if (result.get(0) == null || result.get(1) == null) {
     			error = 1;
-    		}
-    		
+    		}		
 		} catch (SQLException e) {
 			error = 1;
 		} catch (Exception e) {
@@ -63,9 +63,7 @@ public class LoginUser extends HttpServlet {
         	session.setAttribute("isAdmin", false); 
         	
         	response.sendRedirect("index.jsp");
-        	System.out.println("Logged: " + result.get(0) + " " + result.get(1));        	
         } else {     
-        	System.out.println(error);
         	response.sendRedirect("login.jsp?error=" + error);
         }   
     }
