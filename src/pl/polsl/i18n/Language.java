@@ -70,4 +70,8 @@ public class Language {
 	public void setUITextName(Integer uiTextId, String text) {
 		userInterface.put(uiTextId, text);
 	}
+	
+	public Map<Integer, String> getSignalsMap(){
+		return this.getSignalsMap();
+	}
 }
