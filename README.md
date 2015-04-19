@@ -49,3 +49,10 @@ Projekt BDII/PP
 
 Użytkownicy będą mieli możliwość tworzenia osobistych bibliotek, w których znajdować się będą rozkazy oraz programy, które sami stworzą albo które zostaną przez nich zapisane (z forum).
 Wizualizacja maszyny W zostanie utworzona w formacie SVG. Użytkownik za pomocą menu będzie wskazywał którą z dostępnych jej wersji będzie chciał wykorzystać (W, W+, L, EW). Ze względu na zaawansowanie projektu postanowiliśmy nie realizować układu przerwań. 
+
+# Skróty klawiszowe
+- F2 - Symulator
+- F3 - Forum
+- F7 - takt
+- Ctrl+Shift+1 - logowanie
+- Ctrl+Shift+2 - Rejestracja

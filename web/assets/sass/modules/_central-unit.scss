@@ -445,3 +445,13 @@
 		z-index: 1;
 	}
 }
+
+.loader {
+	position: absolute;
+	z-index: 0;
+	background: url(../img/hex-loader2.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 1160px;
+	height: 410px;
+}
