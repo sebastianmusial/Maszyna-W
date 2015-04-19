@@ -3,6 +3,7 @@
 WMachine machine = (WMachine)session.getAttribute("wmachine");
 %>
 
+<div class="loader"></div>
 <div id="central-unit" class="central-unit" style="opacity: 0;">
 	<div id="central-unit__extension-top" class="central-unit__extension">
 		<div id="extension-ws" class="extension-ws" data-name="WS">
@@ -30,7 +31,7 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 			</div>
 			<div class="memory__table">
 
-				<% for(int i = 0; i < 8; ++i) { %>
+				<% for(int i = 0; i < 5648; ++i) { %>
 				<div id="memory-row-<%= i %>" class="memory__table--row">
 					<div class="memory__table--cell"><%= i %></div>
 					<input id="memory-cell-<%= i %>-value" class="memory__table__data js-only-numbers js-quick-edit" value="0">
@@ -233,7 +234,7 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 					<div class="col-xs-6">
 					    <label>
 					    	<span id="CODE_BIT_COUNT_INPUT">Liczba bitów kodu</span>
-					   		<input id="op-code-bit-count" type="number" class="form-control js-only-numbers" value="3">
+					   		<input id="op-code-bit-count" type="number" class="form-control js-only-numbers" value="3" min="3" max="8">
 					    </label>
 					 </div>
 		    	</div>
@@ -252,26 +253,17 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 			      <table class="table table-hover">
 			      	<thead>
 			      		<th></th>
-			      		<th id="ADRESS_LABEL">Adres (port)</th>
-			      		<th id="INTERRUPT_LABEL">Przerwanie</th>
+			      		<th id="ADDRESS_INPUT_LABEL">Wejście</th>
+			      		<th id="ADDRESS_OUTPUT_LABEL">Wyjście</th>
 			      	</thead>
 			      	<tbody>
 			      		<tr>
-			      			<td id="ADDRESS_INPUT_LABEL">Wejście</td>
+			      			<td id="ADRESS_LABEL">Adres (port)</td>
 			      			<td>
 							    <input id="input-port-address" type="text" class="form-control js-only-numbers" value="1">
 			      			</td>
 			      			<td>
-							    <input type="text" class="form-control js-only-numbers" value="2">
-			      			</td>
-			      		</tr>
-			      		<tr>
-			      			<td id="ADDRESS_OUTPUT_LABEL">Wyjście</td>
-			      			<td>
 							    <input type="text" class="form-control js-only-numbers" value="3">
-			      			</td>
-			      			<td>
-							    <input id="output-port-address" type="text" class="form-control js-only-numbers" value="4">
 			      			</td>
 			      		</tr>
 			      	</tbody>
