@@ -50,6 +50,19 @@ public class VolatileDataStorage extends DataStorage {
     }
     
     /**
+     * Implementation of DataSource interface.
+     * Returns value set in the storage masked by mask returned
+     * from function getMask.
+     * @return Value set in the storage. Value may be null.
+     */
+    @Override
+    public Integer peekValue() {
+    	if(value == null)
+    		return null;
+    	return getMask() & value;
+    }
+    
+    /**
      * Implementation of DataTarget interface.
      * Set new value in the storage. If in current tact value
      * has already been set, cause exception to be thrown.
@@ -63,5 +76,19 @@ public class VolatileDataStorage extends DataStorage {
         if(this.value != null)
             throw new Exception("VolatileDataStorage is in use.");
         this.value = getMask() & value;
+    }
+    
+    /**
+     * Implementation of DataTarget interface.
+     * Set new value in the storage. Before value is set
+     * it is masked by mask returned from function getMask.
+     * @param value - value to be set in the storage. May be null.
+     */
+    @Override
+    public void replaceValue(Integer value) {
+    	if(value == null)
+    		this.value = null;
+    	else
+    		this.value = getMask() & value;
     }
 }

@@ -3,8 +3,11 @@ package pl.polsl.utils;
 import java.lang.reflect.Type;
 
 import pl.polsl.architecture.WMachine;
+import pl.polsl.architecture.components.finalized.MemoryCell;
 import pl.polsl.architecture.components.finalized.Register;
 import pl.polsl.architecture.signals.Signal;
+import pl.polsl.runner.CommandList;
+import pl.polsl.runner.DefaultCommandList;
 import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
 import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 
@@ -59,9 +62,13 @@ public class WMachineSerializer implements JsonSerializer<WMachine> {
 		}
 		wmachine.add("signals", signals);
 		
+		final CommandList commands = new DefaultCommandList();
 		final JsonArray memory = new JsonArray();
-		for(Integer value : machine.getMemory().getValues()) {
-			memory.add(new JsonPrimitive(value));
+		for(MemoryCell cell : machine.getMemory().getCells()) {
+			JsonObject jsonCell = new JsonObject();
+			jsonCell.addProperty("value", cell.peekValue());
+			jsonCell.addProperty("text", commands.getNameByCode(cell.getOpCode()) + " " + cell.getAddress());
+			memory.add(jsonCell);
 		}
 		wmachine.add("memory", memory);
 		

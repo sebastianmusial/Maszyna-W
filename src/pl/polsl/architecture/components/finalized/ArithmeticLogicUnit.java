@@ -45,6 +45,16 @@ final public class ArithmeticLogicUnit implements DataSource, DataTarget {
 	}
 	
 	/**
+	 * Implementation of DataSource interface.
+	 * Read value from output buffer and returns it.
+	 * @return Value stored in output buffer.
+	 */
+	@Override
+	public Integer peekValue() {
+		return outputBuffer.peekValue();
+	}
+	
+	/**
 	 * Implementation of DataTarget interface.
 	 * Write value to input buffer.
 	 * @throws Exception when input buffer already has value
@@ -52,5 +62,14 @@ final public class ArithmeticLogicUnit implements DataSource, DataTarget {
 	@Override
 	public void setValue(Integer value) throws Exception {
 		inputBuffer.setValue(value);
+	}
+	
+	/**
+	 * Implementation of DataTarget interface.
+	 * Write value to input buffer.
+	 */
+	@Override
+	public void replaceValue(Integer value) {
+		inputBuffer.replaceValue(value);
 	}
 }

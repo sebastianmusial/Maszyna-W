@@ -2,6 +2,7 @@
 
 <%@include file="header.jsp" %>
 <%@include file="view/navbar.jsp" %>
+<form><input id="test-memory" type="button" value="Fill memory" /></form>
 <div class="wrap">
 	<section class="w-machine">
         <%@include file="view/maszyna-w.jsp" %>

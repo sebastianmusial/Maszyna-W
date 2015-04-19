@@ -8,17 +8,37 @@ function restoreState() {
 			MW.Registers[registerId].value = wmachine.registers[registerId];
 		for(signalId in wmachine.signals)
 			MW.Signals[signalId].state = wmachine.signals[signalId];
-//		for(var i = 0; i < wmachine.memory.length; ++i)
-//			MW.Memory[i].value = wmachine.memory[i];
+//		var i;
+//		if(MW.Memory.length < wmachine.memory.length) {
+//			var newMemory = [];
+//			for(i = 0; i < MW.Memory.length; ++i) {
+//				newMemory[i] = MW.Memory[i];
+//				newMemory[i].value = wmachine.memory[i].value;
+//				newMemory[i].text = wmachine.memory[i].text;
+//			}
+//			
+//			MW.Memory = newMemory;
+//		}
+//		
+//		else if(MW.Memory.length > wmachine.memory.length) {
+//			
+//		}
+//		
+//		else {
+//			for(i = 0; i < wmachine.memory.length; ++i) {
+//				MW.Memory[i].value = wmachine.memory[i].value;
+//				MW.Memory[i].text = wmachine.memory[i].text;
+//			}
+//		}
 	});
 }
 
 
 function initInteractions() {
+	/**
+	 * Edit input value if are changes.
+	 */
 	var editInputValues = function() {
-		/**
-		 * Edit input value if are changes.
-		 */
 		var input = $('.js-quick-edit'),
 	        onlyNumber = $('.js-only-numbers'),
 			actualValue;

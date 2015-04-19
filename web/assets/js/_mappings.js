@@ -91,7 +91,8 @@ Mappings.Dom = {
 	    logicalOperations: $('#logical-operations'),
 	    extensionIAK: $('#extension-iak'),
 	    extensionDAK: $('#extension-dak'),
-	    extensionF: $('#extension-f')
+	    extensionF: $('#extension-f'),
+	    memoryTable: $('.memory__table', $("#memory"))
 	},
 	Settings: {
 		ManualControl: $("#handControls"),

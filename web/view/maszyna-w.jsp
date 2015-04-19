@@ -227,7 +227,7 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 				   <div class="col-xs-6">
 					    <label>
 					    	<span id="ADDRESS_BIT_COUNT_INPUT">Liczba bitów adresowych</span> 
-					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5" min="5" max="16">
+					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5" min="5" max="9">
 					    </label>
 					</div>
 					<div class="col-xs-6">

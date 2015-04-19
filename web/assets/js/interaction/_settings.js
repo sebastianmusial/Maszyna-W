@@ -8,7 +8,7 @@
  * Settings initializer.
  */
 function initSettings() {
-	$.get("SettingsAccessor", {action: "get"}, function(settings) {
+	return $.get("SettingsAccessor", {action: "get"}, function(settings) {
 		var setProperty = function(property, value, option) {
 			var args = {
 				action: "set",
@@ -23,11 +23,39 @@ function initSettings() {
 			input.prop("value", settings[property]);
 			
 			if(property === "AddressBitCount" || property === "OpCodeBitCount") {
-				input.change(function() {
+				var previousValue;
+				input.on("focus", function() {
+					previousValue = input.prop("value"); 
+				}).change(function() {
+					input.prop("disabled", true);
+				}).change(function() {
 					setProperty(property, input.val()).done(function(values) {
 						for(var registerId in values)
 							MW.Registers[registerId].value = values[registerId];
 					});
+					
+					var currentValue = input.prop("value");
+					if(previousValue == currentValue)
+						return;
+					
+					var i,
+						oldMemorySize = (1 << previousValue),
+						newMemorySize = (1 << currentValue);
+					
+					if(oldMemorySize < newMemorySize) {
+						for(i = oldMemorySize; i < newMemorySize; ++i) {
+							MW.Memory[i].isVisible = true;
+							MW.Memory[i].value = 0;
+							MW.Memory[i].text = "stp 0";
+						}
+					}
+					else {
+						for(i = newMemorySize; i < oldMemorySize; ++i)
+							MW.Memory[i].isVisible = false;
+					}
+					previousValue = currentValue;
+				}).change(function() {
+					input.prop("disabled", false);
 				});
 			}
 			else {
