@@ -74,3 +74,23 @@ function createTopicValidate() {
 		}
 	}
 }
+
+/* ------------------------------------------------------------------
+	CREATE POST FORM
+--------------------------------------------------------------------- */
+
+function createPostValidate() {
+	
+	var field;
+	
+	// check if all fields are filled
+	for(var i = 0; i < document.forms["createPost"].length - 1; i++) {
+		field = document.forms["createPost"][i].value;
+		if (field === null || field === "") {
+	    	$(alert).text("Pole treści postu jest nieuzupełnione!");
+	    	$(alert).fadeOut();
+	    	$(alert).fadeIn();
+	    	return false;			
+		}
+	}
+}

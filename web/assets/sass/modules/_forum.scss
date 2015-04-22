@@ -1,8 +1,9 @@
+$gutter-top: 20px;
+$gutter-horizontal: 20px;
+
 /* ------------------------------------------------------------------
 	SECTION - Forum navigation
 --------------------------------------------------------------------- */
-
-$gutter-top: 20px;
 
 nav.nav-forum {
 	width: 100%;
@@ -124,9 +125,7 @@ section.forum {
 /* ------------------------------------------------------------------
 	SECTION - Topic view
 --------------------------------------------------------------------- */
-
 section.topic {
-	$gutter-horizontal: 20px;
 
 	header {
 		margin-top: $gutter-top;
@@ -346,4 +345,73 @@ section.create-topic {
 	}
 
 	.alert-danger:not(.alert-danger-sql) { display: none; }
+}
+
+/* ------------------------------------------------------------------
+	SECTION - Create post
+--------------------------------------------------------------------- */
+
+section.create-post {
+	margin-top: $gutter-top;
+	padding: 25px $gutter-horizontal;
+	background-color: white;
+
+	.glyphicon { 
+		float: left; 
+		margin-right: 15px;
+		margin-bottom: 15px;
+		font-size: 42px;
+		color: $color-blue;
+	}
+
+	h3 {
+		margin: 0; 
+		margin-bottom: 20px;
+		padding: 0;
+		line-height: 42px;
+		color: $color-blue;
+	}
+
+	input[type=text] {
+		padding: 0px 15px;
+		font-size: 32px;
+		color: $color-blue;
+	}
+
+	input[type=text], #topic-body {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	input[type=submit] {
+		width: 100%;
+		background-color: $color-blue;
+		border: 0px solid $color-blue;
+		color: white;
+		height: 50px;
+		text-align: center;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+	}
+
+	.alert-danger:not(.alert-danger-sql) { display: none; }
+}
+
+section.not-logged-warning {
+	margin-top: $gutter-top;
+
+	.alert {
+		line-height: 24px;
+
+		.glyphicon {
+			display: block;
+			float: left;
+			font-size: 24px;
+			line-height: 24px;
+			margin-right: 15px;
+		}
+	}
 }

@@ -45,9 +45,9 @@
 		<header>
 			<c:forEach var="topic" items="${topicInfo.rows}">
 				<span class="glyphicon glyphicon-list-alt"></span>
-					<h2>${topic.topicName}</h2>
-					<fmt:parseDate value="${topic.topicDate}" var="date"/>
-					<p>Rozpoczęty przez <strong>${topic.topicAuthor}</strong>, dnia <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></p>				
+				<h2>${topic.topicName}</h2>
+				<fmt:parseDate value="${topic.topicDate}" var="date"/>
+				<p>Rozpoczęty przez <strong>${topic.topicAuthor}</strong>, dnia <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></p>				
 				<div class="post-count">${topic.postCount} odpowiedzi w tym temacie</div>
 			</c:forEach>
 		</header>
@@ -66,6 +66,24 @@
 			</c:forEach>
 		</main>
 	</section>
+	
+	<c:if test="${sessionScope.loggedUser != null}">
+		<section class="create-post">
+			<span class="glyphicon glyphicon-pencil"></span>
+			<h3>Napisz odpowiedź</h3>
+			<form name="createPost" method="POST" action="CreatePost" onsubmit="return createPostValidate()">
+				<textarea name="post_body" class="form-control" rows="15" id="post_body"></textarea>	
+				<input class="create-post-button" type="submit" value="Utwórz" />	
+			</form>
+			<div class="alert alert-danger" role="alert"></div>
+		</section>
+	</c:if>	
+	
+	<c:if test="${sessionScope.loggedUser == null}">
+		<section class="not-logged-warning">
+			<div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-warning-sign"></span> <a href="login.jsp">Zaloguj się</a> aby napisać odpowiedź.</div>
+		</section>
+	</c:if>
 </div>
 
 <%@ include file="footer.jsp" %>
