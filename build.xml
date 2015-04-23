@@ -1,3 +1,4 @@
+<!DOCTYPE project>
 <project name="WMachine" default="create-war" basedir=".">
     <description>
         WMachine build file.

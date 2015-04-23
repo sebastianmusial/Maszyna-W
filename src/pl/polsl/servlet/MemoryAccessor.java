@@ -50,7 +50,7 @@ public class MemoryAccessor extends WMachineServletBase {
 	 */
 	@Override
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json");
+		response.setContentType("application/json;charset=UTF-8");
 		machine = getCurrentWMachine(request.getSession());
 		memory = machine.getMemory();
 		out = response.getWriter();
