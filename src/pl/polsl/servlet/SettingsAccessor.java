@@ -85,11 +85,11 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 					break;
 				case "AddressBitCount":
 					machine.setAddressBitCount(Integer.parseInt(value));
-					response.sendRedirect("RegisterAccessor?action=get");
+					response.sendRedirect("WMachineState?action=restore");
 					break;
 				case "OpCodeBitCount":
 					machine.setDataBitCount(Integer.parseInt(value) + machine.getAddressBitCount());
-					response.sendRedirect("RegisterAccessor?action=get");
+					response.sendRedirect("WMachineState?action=restore");
 					break;
 				case "InputPortAddress":
 					machine.setInputPortAddress(Integer.parseInt(value));

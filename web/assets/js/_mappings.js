@@ -92,7 +92,9 @@ Mappings.Dom = {
 	    extensionIAK: $('#extension-iak'),
 	    extensionDAK: $('#extension-dak'),
 	    extensionF: $('#extension-f'),
-	    memoryTable: $('.memory__table', $("#memory"))
+	    memoryTable: $('.memory__table', $("#memory")),
+	    controlPanel: $("#accordion"),
+	    loader: $("#loader")
 	},
 	Settings: {
 		ManualControl: $("#handControls"),
@@ -121,7 +123,8 @@ Mappings.Dom = {
 		AddressBitCount: $("#address-bit-count"),
 		OpCodeBitCount: $("#op-code-bit-count"),
 		InputPortAddress: $("#input-port-address"),
-		OutputPortAddress: $("#output-port-address")
+		OutputPortAddress: $("#output-port-address"),
+		AcceptBitCountButton: $("#accept-bit-count-change")
 	}
 };
 

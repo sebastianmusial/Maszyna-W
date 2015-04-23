@@ -17,58 +17,44 @@ function initSettings() {
 				value: value
 			};
 			return $.get("SettingsAccessor", args);
-		}
+		};
 		
 		var initInput = function(input, property) {
 			input.prop("value", settings[property]);
-			
-			if(property === "AddressBitCount" || property === "OpCodeBitCount") {
-				var previousValue;
-				input.on("focus", function() {
-					previousValue = input.prop("value"); 
-				}).change(function() {
-					input.prop("disabled", true);
-				}).change(function() {
-					setProperty(property, input.val()).done(function(values) {
-						for(var registerId in values)
-							MW.Registers[registerId].value = values[registerId];
-					});
-					
-					var currentValue = input.prop("value");
-					if(previousValue == currentValue)
-						return;
-					
-					var i,
-						oldMemorySize = (1 << previousValue),
-						newMemorySize = (1 << currentValue);
-					
-					if(oldMemorySize < newMemorySize) {
-						for(i = oldMemorySize; i < newMemorySize; ++i) {
-							MW.Memory[i].isVisible = true;
-							MW.Memory[i].value = 0;
-							MW.Memory[i].text = "stp 0";
-						}
-					}
-					else {
-						for(i = newMemorySize; i < oldMemorySize; ++i)
-							MW.Memory[i].isVisible = false;
-					}
-					previousValue = currentValue;
-				}).change(function() {
-					input.prop("disabled", false);
-				});
-			}
-			else {
-				input.change(function() {
-					setProperty(property, input.val());
-				});
-			}
+			input.change(function() {
+				setProperty(property, input.val());
+			});
 			//Saving changes on click enter button
 			input.keypress(function(e) {
 		        if (e.keyCode == 13)
 					input.blur();
 		    });
 		};
+		
+		var initBitCountInput = function(input, property) {
+			var changed, acceptButton = Mappings.Dom.Settings.AcceptBitCountButton;
+			input.prop("value", settings[property]);
+			input.OldValue = input.val();
+			if(property === "AddressBitCount")
+				input.change(function() {
+					changed = (input.OldValue != input.val());
+					acceptButton.AddressBitCountChanged = changed;
+				});
+			else
+				input.change(function() {
+					changed = (input.OldValue != input.val());
+					acceptButton.OpCodeBitCountChanged = changed;
+				});
+			input.change(function() {
+				changed = (acceptButton.AddressBitCountChanged || acceptButton.OpCodeBitCountChanged); 
+				acceptButton.prop("disabled", !changed);
+			});
+			//Saving changes on click enter button
+			input.keypress(function(e) {
+		        if (e.keyCode == 13)
+					input.blur();
+		    });
+		}
 		
 		var initRadio = function(radio, property, value, responseHandler) {
 			radio.prop("checked", settings[property] == value);
@@ -113,10 +99,30 @@ function initSettings() {
 		
 		var key, mapping = Mappings.Dom.Settings;
 		initCheckBox(mapping.ManualControl, "ManualControl")
-		initInput(mapping.AddressBitCount, "AddressBitCount");
-		initInput(mapping.OpCodeBitCount, "OpCodeBitCount");
+		initBitCountInput(mapping.AddressBitCount, "AddressBitCount");
+		initBitCountInput(mapping.OpCodeBitCount, "OpCodeBitCount");
 		initInput(mapping.InputPortAddress, "InputPortAddress");
 		initInput(mapping.OutputPortAddress, "OutputPortAddress");
+		
+		mapping.AcceptBitCountButton.click(function() {
+			var mapping = Mappings.Dom.Settings;
+			mapping.AcceptBitCountButton.prop("disabled", true);
+			
+			var newAddressBitCount = mapping.AddressBitCount.val();
+			var oldAddressBitCount = mapping.AddressBitCount.OldValue;
+			if(newAddressBitCount != oldAddressBitCount) {
+				mapping.AddressBitCount.OldValue = newAddressBitCount;
+				MW.Memory.resize(MW.Memory.DesiredSize);
+				setProperty("AddressBitCount", newAddressBitCount).done(restoreState);
+			}
+			
+			var newOpCodeBitCount = mapping.OpCodeBitCount.val();
+			var oldOpCodeBitCount = mapping.OpCodeBitCount.OldValue;
+			if(newOpCodeBitCount != oldOpCodeBitCount) {
+				mapping.OpCodeBitCount.OldValue = newOpCodeBitCount;
+				setProperty("AddressBitCount", newOpCodeBitCount).done(restoreState);
+			}
+		}).prop("disabled", true);
 		
 		mapping = Mappings.Dom.Settings.TrackLevels;
 		for(key in mapping)

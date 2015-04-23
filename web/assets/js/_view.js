@@ -420,3 +420,14 @@ MW.clickHandler = function() {
 	signal.state = !signal.state;
 };
 
+
+var CentralUnit = {
+	hide: function() {
+		Mappings.Dom.View.containerCentralUnit.animate({opacity: 0.0}, 0);
+		Mappings.Dom.View.loader.animate({opacity: 1.0}, 0);
+	},
+	show: function() {
+		Mappings.Dom.View.containerCentralUnit.animate({opacity: 1.0}, 0);
+		Mappings.Dom.View.loader.animate({opacity: 0.0}, 0);
+	}
+};

@@ -4,15 +4,24 @@
  * and architecture info.
  */
 
-$(document).ready(function() {
-	Mappings.Dom.View.containerCentralUnit.animate({opacity: 0.0}, 0);
-	
-	MW.initView();
-	initRegisters();
-	initSignals();
-	initMemoryPreview();
-	
-	$.get("LanguageAccessor", {lang: "pl"}, function(language) {
+function runInBackground(runner, initialValue, timeout) {
+	return $.Deferred(function() {
+		var self = this,
+			value = initialValue,
+			nextStep = function() {
+				value = runner.step(value);
+				if(!runner.finished(value))
+					setTimeout(nextStep, timeout);
+				else {
+					self.resolve();
+				}
+			};
+		setTimeout(nextStep, timeout);
+	});
+};
+
+function retranslatePage(language) {
+	$.get("LanguageAccessor", {lang: language}, function(language) {
 		MW.Language = language;
 		retranslateRegisters();
 		retranslateSignals();
@@ -20,34 +29,23 @@ $(document).ready(function() {
 			$("#" + key).html(MW.Language.UI[key]);
 		}
 	});
+}
+
+$(document).ready(function() {
+	CentralUnit.hide();
 	
+	var memoryInitialized = initMemory();
 	var settingsInitialized = initSettings();
+	
+	MW.initView();
+	initRegisters();
+	initSignals();
+	retranslatePage("pl");
 	initRunner();
-	initInteractions();
-	restoreState();
 	
-	// Delayed so the browser can manage DOM changes before showing content.
-	setTimeout(function() {
-		Mappings.Dom.View.containerCentralUnit.animate({opacity: 1.0}, 0);
-		setTimeout(function() {
-			$.when(settingsInitialized).then(initMemoryLeft);
-		}, 25);
-	}, 25);
-	
-	$("#test-memory").click(function() {
-		var i = 0;
-		var update = function() {
-			var start = i;
-			for(; i < start + 8; ++i) {
-				MW.Memory[i].value = i;
-				MW.Memory[i].text = "stp " + i;
-			}
-		}
-		var updateRecursively = function() {
-			update();
-			if(i < 512)
-				setTimeout(updateRecursively, 500);
-		}
-		setTimeout(updateRecursively, 500);
+	$.when(memoryInitialized, settingsInitialized).then(function() {
+		restoreState();
+		initInteractions();
+		setTimeout(CentralUnit.show, 25);
 	});
 });

@@ -1,11 +1,11 @@
 /**
- * TODO rozdzielić na pliki _registers.js, _signals.js i _memory.js
+ * 
  */
 
 function MemoryCell(index) {
 	var row = $("#memory-row-" + index);
-	var input = $("#memory-cell-" + index + "-value");
-	var text = $("#memory-cell-" + index + "-text");
+	var input = $(".memory-cell-value", row);
+	var text = $(".memory-cell-text", row);
 	var cell = {
 		get isVisible() { return row[0].style.display != "none"; },
 		set isVisible(v) { 
@@ -27,45 +27,63 @@ function MemoryCell(index) {
 			cell.text = cellData.text;
 		});
 	});
-	MW.Memory[index] = cell;
 	return cell;
 }
 
-var lastInitializedMemoryCellIndex = 0;
-function initMemoryPreview() {
-	MW.Memory = [];
-	var i;
-	for(i = 0; i < 8; ++i) {
-		MW.Memory[i] = MemoryCell(i);
-	}
-	lastInitializedMemoryCellIndex = i;
-};
+function memoryCellHtml(index) {
+	return	"<div id='memory-row-" + index + "' class='memory__table--row'> \
+				<div class='memory__table--cell memory-cell-index'>" + index + "</div> \
+				<input class='memory__table__data js-only-numbers js-quick-edit memory-cell-value' value='0'> \
+				<div class='memory__table--cell memory-cell-text'>stp 0</div> \
+			</div>";
+}
 
-/**
- * Initialize rest of memory cells (those that are not visible).
- * Must be called after settings are initialized because
- * it depends on address bit count set in settings.
- */
-function initMemoryLeft() {
-	var memorySize = (1 << Mappings.Dom.Settings.AddressBitCount.prop('value'));
-	var i, start = lastInitializedMemoryCellIndex, cell;
-	for(i = start; i < start + 16 && i < 512; ++i) {
-		appendMemoryCell(i);
-		cell = MemoryCell(i);
-		MW.Memory[i] = cell;
-		cell.isVisible = (i < memorySize);
-	}
-	lastInitializedMemoryCellIndex = i;
-	if(i < 512)
-		setTimeout(initMemoryLeft, 25);
-};
+function initMemory() {
+	var actualSize = 32;
+	MW.Memory = {
+		get ActualSize() { return actualSize; },
+		get DesiredSize() { return (1 << Mappings.Dom.Settings.AddressBitCount.prop('value')); },
+		get MaxSize() { return 512; },
+		Cells: [],
+		resize: function(newMemorySize) {
+			var i, oldMemorySize = actualSize;
+			if(oldMemorySize < newMemorySize) {
+				for(i = oldMemorySize; i < newMemorySize; ++i) {
+					MW.Memory.Cells[i].isVisible = true;
+					MW.Memory.Cells[i].value = 0;
+					MW.Memory.Cells[i].text = "stp 0";
+				}
+				actualSize = newMemorySize;
+			}
+			else if(oldMemorySize > newMemorySize) {
+				for(i = newMemorySize; i < oldMemorySize; ++i)
+					MW.Memory.Cells[i].isVisible = false;
+				actualSize = newMemorySize;
+			}
+		}
+	};
 
-function appendMemoryCell(index) {
-	var cellHtml =
-		"<div id=\"memory-row-" + index + "\" class=\"memory__table--row\">" +
-		"	<div class=\"memory__table--cell\">" + index + "</div>" +
-		"	<input id=\"memory-cell-" + index + "-value\" class=\"memory__table__data js-only-numbers js-quick-edit\" value=\"0\">" +
-		"	<div id=\"memory-cell-" + index + "-text\" class=\"memory__table--cell\">stp 0</div>" +
-		"</div>";
-	Mappings.Dom.View.memoryTable.append(cellHtml);
+	var maxMemorySize = MW.Memory.MaxSize,
+		desiredMemorySize = MW.Memory.DesiredSize;
+		index = 0,
+		memoryHtml = [],
+		initializer = {
+			step: function(value) {
+				var i;
+				for(i = value; i < value + 8 && i < maxMemorySize; ++i)
+					memoryHtml.push(memoryCellHtml(i));
+				return i;
+			},
+			finished: function(value) { return value >= maxMemorySize; },
+		};
+	
+	return runInBackground(initializer, 0, 10).done(function() {
+		Mappings.Dom.View.memoryTable.html(memoryHtml.join("\n"));
+		var i, cell;
+		for(i = 0; i < 512; ++i) {
+			cell = MemoryCell(i);
+			cell.isVisible = false;
+			MW.Memory.Cells[i] = cell;
+		}
+	});
 }
