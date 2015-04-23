@@ -1,6 +1,6 @@
 package pl.polsl.architecture.components;
 
-import pl.polsl.utils.Primitive;
+import pl.polsl.architecture.data.Data;
 
 /**
  * Abstract class representing generic data storage.
@@ -9,24 +9,23 @@ import pl.polsl.utils.Primitive;
  */
 public abstract class DataStorage implements DataSource, DataTarget {
 
-	/** Bit count that this storage can keep. */
-	private Primitive<Integer> bitCount;
+	/** Stored data. */
+	private Data data;
 	
 	/**
 	 * Creates data storage configured to keep
 	 * bitCount long data words.
-	 * @param bitCount bit count for data word.
+	 * @param data data instance to be stored
 	 */
-	public DataStorage(Primitive<Integer> bitCount) {
-		this.bitCount = bitCount;
+	public DataStorage(Data data) {
+		this.data = data;
 	}
 	
 	/**
-     * Function to generate mask depending on bus bit count.
-     * getMask() &amp; integer_value gives value adjusted to accurate bit count.
-     * @return Mask that keep specified bits in value after logical conjunction.
+     * Allow to get currently stored data.
+     * @return Stored data.
      */
-    public Integer getMask() {
-        return ~((~0) << bitCount.getValue());
+    public Data getData() {
+        return data;
     }
 }

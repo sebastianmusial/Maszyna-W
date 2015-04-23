@@ -51,7 +51,7 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 			settingsMap.put("Architecture", settings.getArchitecture());
 			settingsMap.put("Extensions", settings.getExtensions());
 			settingsMap.put("AddressBitCount", machine.getAddressBitCount());
-			settingsMap.put("OpCodeBitCount", machine.getDataBitCount() - machine.getAddressBitCount());
+			settingsMap.put("OpCodeBitCount", machine.getOpCodeBitCount());
 			settingsMap.put("InputPortAddress", machine.getInputPortAddress());
 			settingsMap.put("OutputPortAddress", machine.getOutputPortAddress());
 			
@@ -88,7 +88,7 @@ public class SettingsAccessor extends WMachineServletBase implements Servlet {
 					response.sendRedirect("WMachineState?action=restore");
 					break;
 				case "OpCodeBitCount":
-					machine.setDataBitCount(Integer.parseInt(value) + machine.getAddressBitCount());
+					machine.setOpCodeBitCount(Integer.parseInt(value));
 					response.sendRedirect("WMachineState?action=restore");
 					break;
 				case "InputPortAddress":

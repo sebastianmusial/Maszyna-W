@@ -1,6 +1,6 @@
 package pl.polsl.architecture.components;
 
-import pl.polsl.utils.Primitive;
+import pl.polsl.architecture.data.Data;
 
 /**
  * Non volatile data storage always have value,
@@ -10,19 +10,17 @@ import pl.polsl.utils.Primitive;
  * @version 1.0
  */
 public class NonVolatileDataStorage extends DataStorage {
-	/** Current value stored in the storage. */
-    private Integer value = 0;
-
     /** Logical value indicating if value has been changed in current tact. */
     private Boolean valueChanged = false;
     
     /**
      * Constructor with bit count as parameter. Constructs non-volatile
      * data storage configured to contain bitCount long data word.
-     * @param bitCount - bit count for data word.
+     * @param data data instance to be stored
      */
-	public NonVolatileDataStorage(Primitive<Integer> bitCount) {
-		super(bitCount);
+	public NonVolatileDataStorage(Data data) {
+		super(data);
+		data.setValue(0);
 	}
     
     /**
@@ -44,7 +42,7 @@ public class NonVolatileDataStorage extends DataStorage {
      */
     @Override
     public Integer getValue() throws Exception {
-        return getMask() & value;
+        return getData().getValue();
     }
     
     /**
@@ -55,9 +53,7 @@ public class NonVolatileDataStorage extends DataStorage {
      */
     @Override
     public Integer peekValue() {
-    	if(value == null)
-    		return null;
-    	return getMask() & value;
+    	return getData().getValue();
     }
     
     /**
@@ -73,7 +69,7 @@ public class NonVolatileDataStorage extends DataStorage {
     public void setValue(Integer value) throws Exception {
     	if(valueChanged)
     		throw new Exception("NonVolatileDataStorage in use.");
-        this.value = getMask() & value;
+        getData().setValue(value);
     }
     
     /**
@@ -84,9 +80,6 @@ public class NonVolatileDataStorage extends DataStorage {
      */
     @Override
     public void replaceValue(Integer value) {
-    	if(value == null)
-    		this.value = null;
-    	else
-    		this.value = getMask() & value;
+    	getData().setValue(value);
     }
 }

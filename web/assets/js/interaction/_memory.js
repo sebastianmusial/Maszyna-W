@@ -80,7 +80,7 @@ function initMemory() {
 	return runInBackground(initializer, 0, 10).done(function() {
 		Mappings.Dom.View.memoryTable.html(memoryHtml.join("\n"));
 		var i, cell;
-		for(i = 0; i < 512; ++i) {
+		for(i = 0; i < maxMemorySize; ++i) {
 			cell = MemoryCell(i);
 			cell.isVisible = false;
 			MW.Memory.Cells[i] = cell;

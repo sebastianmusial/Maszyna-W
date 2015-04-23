@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import pl.polsl.architecture.components.DataSource;
 import pl.polsl.architecture.components.DataTarget;
+import pl.polsl.architecture.data.Command;
 import pl.polsl.utils.Primitive;
 import pl.polsl.utils.PrimitiveChangeListener;
 
@@ -14,7 +15,7 @@ import pl.polsl.utils.PrimitiveChangeListener;
  */
 final public class Memory implements DataSource, DataTarget, PrimitiveChangeListener<Integer> {
 	/** Bit count defining data word. */
-    private Primitive<Integer> dataBitCount;
+    private Primitive<Integer> opCodeBitCount;
     
     /** Bit count defining address. */
     private Primitive<Integer> addressBitCount;
@@ -35,16 +36,16 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	 * @param addressRegister reference to address register used
 	 * to address memory cell
 	 * @param addressBitCount bit count used to store addresses
-	 * @param dataBitCount bit count used to store data
+	 * @param opCodeBitCount bit count used to store data
 	 */
-	public Memory(Register addressRegister, Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount) {
+	public Memory(Register addressRegister, Primitive<Integer> addressBitCount, Primitive<Integer> opCodeBitCount) {
 		this.addressRegister = addressRegister;
-		this.dataBitCount = dataBitCount;
+		this.opCodeBitCount = opCodeBitCount;
 		this.addressBitCount = addressBitCount;
 		Integer memorySize = 1 << addressBitCount.getValue(); 
 		cells.setSize(memorySize);
 		for(int i = 0; i < memorySize; ++i) {
-			cells.set(i, new MemoryCell(dataBitCount, addressBitCount));
+			cells.set(i, new MemoryCell(new Command(opCodeBitCount, addressBitCount)));
 			setValue(i, i);
 		}
 	}
@@ -174,7 +175,7 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 			cells.setSize(newSize);
 			if(newSize > oldSize) {
 				for(int i = oldSize; i < newSize; ++i)
-					cells.set(i, new MemoryCell(dataBitCount, addressBitCount));
+					cells.set(i, new MemoryCell(new Command(opCodeBitCount, addressBitCount)));
 			}
 		}
 	}

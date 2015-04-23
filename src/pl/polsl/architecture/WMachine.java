@@ -32,7 +32,7 @@ public class WMachine {
 	private Primitive<Integer> addressBitCount;
     
     /** Bit count for command (operation + address). */
-	private Primitive<Integer> dataBitCount;
+	private Primitive<Integer> opCodeBitCount;
     
     /** Map of registers identified by IDs. */
 	private Map<Integer, Register> registers = new HashMap<>();
@@ -61,12 +61,12 @@ public class WMachine {
 	/**
 	 * Constructs W Machine configured with given parameters.
 	 * @param addressBitCount bit count for address components
-	 * @param dataBitCount bit count for data components
+	 * @param opCodeBitCount bit count for data components
 	 * @param engine script engine used to execute script signals
 	 */
-	public WMachine(Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount, ScriptEngine engine) {
+	public WMachine(Primitive<Integer> addressBitCount, Primitive<Integer> opCodeBitCount, ScriptEngine engine) {
 		this.addressBitCount = addressBitCount;
-		this.dataBitCount = dataBitCount;
+		this.opCodeBitCount = opCodeBitCount;
 		this.engine = engine;
 	}
 	
@@ -118,17 +118,15 @@ public class WMachine {
     public void setAddressBitCount(Integer count) {
     	if(addressBitCount.getValue() == count)
     		return;
-    	Integer opCodeBitCount = dataBitCount.getValue() - addressBitCount.getValue();
     	addressBitCount.setValue(count);
-    	dataBitCount.setValue(count + opCodeBitCount);
     }
     
     /**
 	 * Data bit count getter.
 	 * @return Data bit count.
 	 */
-	public Integer getDataBitCount() {
-    	return dataBitCount.getValue();
+	public Integer getOpCodeBitCount() {
+    	return opCodeBitCount.getValue();
     }
     
     /**
@@ -136,10 +134,10 @@ public class WMachine {
      * and informs command storing components about the change.
      * @param count - new operation code bit count.
      */
-    public void setDataBitCount(Integer count) {
-    	if(dataBitCount.getValue() == count)
+    public void setOpCodeBitCount(Integer count) {
+    	if(opCodeBitCount.getValue() == count)
     		return;
-    	dataBitCount.setValue(count);
+    	opCodeBitCount.setValue(count);
     }
     
     /**
