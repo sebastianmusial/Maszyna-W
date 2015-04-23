@@ -4,14 +4,24 @@
  * and architecture info.
  */
 
-$(document).ready(function() {
-	Mappings.Dom.View.containerCentralUnit.animate({opacity: 0.0}, 0);
-	
-	MW.initView();
-	initRegisters();
-	initSignals();
-	
-	$.get("LanguageAccessor", {lang: "pl"}, function(language) {
+function runInBackground(runner, initialValue, timeout) {
+	return $.Deferred(function() {
+		var self = this,
+			value = initialValue,
+			nextStep = function() {
+				value = runner.step(value);
+				if(!runner.finished(value))
+					setTimeout(nextStep, timeout);
+				else {
+					self.resolve();
+				}
+			};
+		setTimeout(nextStep, timeout);
+	});
+};
+
+function retranslatePage(language) {
+	$.get("LanguageAccessor", {lang: language}, function(language) {
 		MW.Language = language;
 		retranslateRegisters();
 		retranslateSignals();
@@ -19,15 +29,23 @@ $(document).ready(function() {
 			$("#" + key).html(MW.Language.UI[key]);
 		}
 	});
+}
 
-	initSettings();
-	initRunner();
-	initInteractions();
-	restoreState();
+$(document).ready(function() {
+	CentralUnit.hide();
 	
-	// Delayed so the browser can manage DOM changes before showing content.
-	setTimeout(function() {
-		Mappings.Dom.View.containerCentralUnit.animate({opacity: 1.0}, 0);
-		initMemory();
-	}, 25);
+	var memoryInitialized = initMemory();
+	var settingsInitialized = initSettings();
+	
+	MW.initView();
+	initRegisters();
+	initSignals();
+	retranslatePage("pl");
+	initRunner();
+	
+	$.when(memoryInitialized, settingsInitialized).then(function() {
+		restoreState();
+		initInteractions();
+		setTimeout(CentralUnit.show, 25);
+	});
 });

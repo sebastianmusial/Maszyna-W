@@ -16,8 +16,18 @@ package pl.polsl.architecture.components;
 public interface DataTarget extends WMachineComponent {
 	/**
 	 * Function to set value for this W Machine component.
+	 * This function is used in W Machine data flow so it
+	 * may throw an exception.
 	 * @param value a value to be set.
 	 * @throws Exception when error occurs
 	 */
     public void setValue(Integer value) throws Exception;
+    
+    /**
+	 * Function to safely set value for this W Machine component.
+	 * This function does not throw exception as it is not
+     * used in W Machine data flow.
+	 * @param value a value to be set.
+	 */
+    public void replaceValue(Integer value);
 }

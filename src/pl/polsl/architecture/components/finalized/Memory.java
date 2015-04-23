@@ -14,13 +14,16 @@ import pl.polsl.utils.PrimitiveChangeListener;
  */
 final public class Memory implements DataSource, DataTarget, PrimitiveChangeListener<Integer> {
 	/** Bit count defining data word. */
-    private Primitive<Integer> bitCount;
+    private Primitive<Integer> dataBitCount;
+    
+    /** Bit count defining address. */
+    private Primitive<Integer> addressBitCount;
     
 	/** Vector containing memory cells. */
-	Vector<MemoryCell> cells = new Vector<>();
+    private Vector<MemoryCell> cells = new Vector<>();
 	
 	/** Reference to address register. */
-	Register addressRegister;
+    private Register addressRegister;
     
 	/** Logical value indicating if memory was accessed (read or writen) in current tact. */
 	boolean memoryAccessed = false;
@@ -36,11 +39,12 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	 */
 	public Memory(Register addressRegister, Primitive<Integer> addressBitCount, Primitive<Integer> dataBitCount) {
 		this.addressRegister = addressRegister;
-		bitCount = dataBitCount;
+		this.dataBitCount = dataBitCount;
+		this.addressBitCount = addressBitCount;
 		Integer memorySize = 1 << addressBitCount.getValue(); 
 		cells.setSize(memorySize);
 		for(int i = 0; i < memorySize; ++i) {
-			cells.set(i, new MemoryCell(bitCount));
+			cells.set(i, new MemoryCell(dataBitCount, addressBitCount));
 			setValue(i, i);
 		}
 	}
@@ -67,8 +71,20 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 		if(memoryAccessed)
     		throw new Exception("Jednoczesny odczyt i zapis do pamięci jest niemożliwy.");
 		memoryAccessed = true;
-		Integer address = addressRegister.getValue();
+		Integer address = addressRegister.peekValue();
 		return cells.get(address).getValue();
+	}
+	
+	/**
+     * Implementation of DataSource interface.
+     * Returns value stored in the cell at address stored in address register.
+     * Before value is returned it is masked by mask returned from function getMask.
+     * @return Value stored in the memory cell at address stored in address register.
+     */
+	@Override
+	public Integer peekValue() {
+		Integer address = addressRegister.peekValue();
+		return cells.get(address).peekValue();
 	}
 	
 	/**
@@ -84,8 +100,20 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 		if(memoryAccessed)
     		throw new Exception("Jednoczesny odczyt i zapis do pamięci jest niemożliwy.");
 		memoryAccessed = true;
-		Integer address = addressRegister.getValue();
+		Integer address = addressRegister.peekValue();
         cells.get(address).setValue(value);
+	}
+	
+	/**
+     * Implementation of DataSource interface.
+     * Set new value in the cell at address stored in address register.
+     * Before value is set it is masked by mask returned from function getMask.
+     * @param value value to be set in the memory cell.
+     */
+	@Override
+	public void replaceValue(Integer value) {
+		Integer address = addressRegister.peekValue();
+        cells.get(address).replaceValue(value);
 	}
 
 	/**
@@ -139,16 +167,33 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	 */
 	@Override
 	public void primitiveChanged(Primitive<Integer> primitive) {
-		Integer addressBitCount = primitive.getValue();
-		Integer newSize = 1 << addressBitCount;
+		Integer newAddressBitCount = primitive.getValue();
+		Integer newSize = 1 << newAddressBitCount;
 		Integer oldSize = cells.size();
 		if(newSize != oldSize) {
 			cells.setSize(newSize);
 			if(newSize > oldSize) {
 				for(int i = oldSize; i < newSize; ++i)
-					cells.set(i, new MemoryCell(bitCount));
+					cells.set(i, new MemoryCell(dataBitCount, addressBitCount));
 			}
 		}
 	}
 	
+	/**
+	 * Allow to get single MemoryCell instance.
+	 * @param index index of MemoryCell to be returned
+	 * @return MemoryCell at given index.
+	 * @throws IndexOutOfBoundsException when index is out of bounds
+	 */
+	public MemoryCell getCell(Integer index) throws IndexOutOfBoundsException {
+		return cells.get(index);
+	}
+	
+	/**
+	 * Allow to get all memory cells at once.
+	 * @return Array of MemoryCell's.
+	 */
+	public MemoryCell[] getCells() {
+		return cells.toArray(new MemoryCell[cells.size()]);
+	}
 }

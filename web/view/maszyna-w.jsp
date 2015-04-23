@@ -3,70 +3,61 @@
 WMachine machine = (WMachine)session.getAttribute("wmachine");
 %>
 
-<div class="loader"></div>
-<div id="central-unit" class="central-unit" style="opacity: 0;">
-	<div id="central-unit__extension-top" class="central-unit__extension">
-		<div id="extension-ws" class="extension-ws" data-name="WS">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-			
-		<div id="extension-wyls" class="extension-wyls"></div>
-		</div>
-	</div>
-	<div id="central-unit__base" class="central-unit__base" data-top-bus="magistrala adresowa" data-down-bus="magistrala danych">
-		<div id="counter" class="counter" data-name="L">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-		</div>
-		<div id="address" class="address" data-name="I">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-		</div>
-		<div id="acumulator" class="acumulator" data-name="AK">
-			<input type="text" class="acumulator__data js-only-numbers js-quick-edit" value="0">
-		</div>
-		<div id="memory" class="memory">
-			<div id="memory-address" class="memory-address" data-name="A">
-				<input type="text" class="memory__address js-only-numbers js-quick-edit" value="0">
+<div id="loader" class="loader"></div>
+<div id="central-unit" style="opacity: 0;">
+	<div class="central-unit">
+		<div id="central-unit__extension-top" class="central-unit__extension">
+			<div id="extension-ws" class="extension-ws" data-name="WS">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+				
+			<div id="extension-wyls" class="extension-wyls"></div>
 			</div>
-			<div id="memory-data" class="memory-data" data-name="S">
-				<input type="text" class="memory__verbal js-only-numbers js-quick-edit" value="0">
+		</div>
+		<div id="central-unit__base" class="central-unit__base" data-top-bus="magistrala adresowa" data-down-bus="magistrala danych">
+			<div id="counter" class="counter" data-name="L">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
 			</div>
-			<div class="memory__table">
-
-				<% for(int i = 0; i < 5648; ++i) { %>
-				<div id="memory-row-<%= i %>" class="memory__table--row">
-					<div class="memory__table--cell"><%= i %></div>
-					<input id="memory-cell-<%= i %>-value" class="memory__table__data js-only-numbers js-quick-edit" value="0">
-					<div id="memory-cell-<%= i %>-text" class="memory__table--cell">stp 0</div>
+			<div id="address" class="address" data-name="I">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+			</div>
+			<div id="acumulator" class="acumulator" data-name="AK">
+				<input type="text" class="acumulator__data js-only-numbers js-quick-edit" value="0">
+			</div>
+			<div id="memory" class="memory">
+				<div id="memory-address" class="memory-address" data-name="A">
+					<input type="text" class="memory__address js-only-numbers js-quick-edit" value="0">
 				</div>
-				<% } %>
-
+				<div id="memory-data" class="memory-data" data-name="S">
+					<input type="text" class="memory__verbal js-only-numbers js-quick-edit" value="0">
+				</div>
+				<div class="memory__table"></div>
+			</div>
+			<div id="bus-connection" class="bus-connection"></div>
+			<div id="aritmetical-operations" class="aritmetical-operations"></div>
+			<div id="logical-operations" class="logical-operations"></div>
+			<div id="extension-iak" class="extension-iak"></div>
+			<div id="extension-dak" class="extension-dak"></div>
+			<div id="extension-f" class="extension-f" data-name="F">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
 			</div>
 		</div>
-		<div id="bus-connection" class="bus-connection"></div>
-		<div id="aritmetical-operations" class="aritmetical-operations"></div>
-		<div id="logical-operations" class="logical-operations"></div>
-		<div id="extension-iak" class="extension-iak"></div>
-		<div id="extension-dak" class="extension-dak"></div>
-		<div id="extension-f" class="extension-f" data-name="F">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+		<div id="central-unit__extension-bottom" class="central-unit__extension">
+			<div id="register-x" class="register-x" data-name="X">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+			</div>
+			<div id="register-y" class="register-y" data-name="Y">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+			</div>
+			<div id="extension-rb" class="extension-rb" data-name="RB">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+			</div>
+			<div id="extension-g" class="extension-g" data-name="G">
+				<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
+			</div>
 		</div>
 	</div>
-	<div id="central-unit__extension-bottom" class="central-unit__extension">
-		<div id="register-x" class="register-x" data-name="X">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-		</div>
-		<div id="register-y" class="register-y" data-name="Y">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-		</div>
-		<div id="extension-rb" class="extension-rb" data-name="RB">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-		</div>
-		<div id="extension-g" class="extension-g" data-name="G">
-			<input type="text" class="element__data js-only-numbers js-quick-edit" value="0">
-		</div>
-	</div>
-</div>
-
-<div class="container-fluid control-panel">
+	
+	<div class="container-fluid control-panel">
   <div class="row">
   	<div class="col-xs-6">
   		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -228,7 +219,7 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 				   <div class="col-xs-6">
 					    <label>
 					    	<span id="ADDRESS_BIT_COUNT_INPUT">Liczba bitów adresowych</span> 
-					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5" min="5" max="16">
+					    	<input id="address-bit-count" type="number" class="form-control js-only-numbers" value="5" min="5" max="9">
 					    </label>
 					</div>
 					<div class="col-xs-6">
@@ -237,6 +228,9 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
 					   		<input id="op-code-bit-count" type="number" class="form-control js-only-numbers" value="3" min="3" max="8">
 					    </label>
 					 </div>
+					 <form>
+					 	<input id="accept-bit-count-change" type="button" value="Zatwierdź zmiany" class="btn btn-accept" />
+					 </form>
 		    	</div>
 		    </div>
 		  </div>
@@ -277,4 +271,5 @@ WMachine machine = (WMachine)session.getAttribute("wmachine");
   		<textarea class="form-control area-height" rows="3"></textarea>
   	</div>
   </div>
+</div>
 </div>

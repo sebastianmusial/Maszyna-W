@@ -39,7 +39,15 @@ function initRegisters() {
 		key = names[index];
 		MW.Registers[key] = Register(key, dom[key]);
 	}
-};
+}
+
+function restoreRegisters() {
+	$.get("RegisterAccessor", {action: "get"}, function(values) {
+		var registerId;
+		for(registerId in values)
+			MW.Registers[registerId].value = values[registerId];
+	});
+}
 
 function retranslateRegisters() {
 	var key,

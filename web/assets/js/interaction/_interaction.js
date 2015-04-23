@@ -2,23 +2,34 @@
  * 
  */
 
-function restoreState() {
-	$.get("WMachineState", {action: "restore"}, function(wmachine) {
+function restoreState(wmachine) {
+	var restore = function(wmachine) {
 		for(registerId in wmachine.registers)
 			MW.Registers[registerId].value = wmachine.registers[registerId];
 		for(signalId in wmachine.signals)
 			MW.Signals[signalId].state = wmachine.signals[signalId];
-//		for(var i = 0; i < wmachine.memory.length; ++i)
-//			MW.Memory[i].value = wmachine.memory[i];
-	});
+		var i, cell;
+		for(i = 0; i < wmachine.memory.length; ++i) {
+			cell = MW.Memory.Cells[i]; 
+			cell.value = wmachine.memory[i].value;
+			cell.text = wmachine.memory[i].text;
+			cell.isVisible = true;
+		}
+	};
+	if(typeof wmachine === "undefined") {
+		$.get("WMachineState", {action: "restore"}, restore);
+	}
+	else {
+		restore(wmachine);
+	}
 }
 
 
 function initInteractions() {
+	/**
+	 * Edit input value if are changes.
+	 */
 	var editInputValues = function() {
-		/**
-		 * Edit input value if are changes.
-		 */
 		var input = $('.js-quick-edit'),
 	        onlyNumber = $('.js-only-numbers'),
 			actualValue;

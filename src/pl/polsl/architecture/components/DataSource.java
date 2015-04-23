@@ -16,8 +16,18 @@ package pl.polsl.architecture.components;
 public interface DataSource extends WMachineComponent {
 	/**
 	 * Function to get value saved in this W Machine component.
+	 * This function is used in W Machine data flow so it
+	 * may throw an exception.
 	 * @return Value saved in this W Machine component.
 	 * @throws Exception when error occurs
 	 */
     public Integer getValue() throws Exception;
+    
+    /**
+     * Function to safely get value saved in this W Machine component.
+     * This function does not throw exception as it is not
+     * used in W Machine data flow.
+     * @return Value saved in this W Machine component.
+     */
+    public Integer peekValue();
 }
