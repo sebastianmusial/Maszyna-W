@@ -21,7 +21,7 @@ values ('Różne');
 insert into Topics (userID, categoryID, topicName, date)
 values (1, 1, 'Temat 1', '2015-04-14 15:34:09' );
 insert into Topics (userID, categoryID, topicName, date)
-values (1, 1, 'Temat 2', '2015-04-14 15:34:09' );
+values (5, 1, 'Temat 2', '2015-04-14 15:34:09' );
 insert into Topics (userID, categoryID, topicName, date)
 values (2, 1, 'Temat 3', '2015-04-14 15:34:09' );
 insert into Topics (userID, categoryID, topicName, date)
@@ -37,16 +37,7 @@ values (4, 1, 'Temat 8', '2015-04-14 15:34:09' );
 insert into Topics (userID, categoryID, topicName, date)
 values (5, 1, 'Temat 9', '2015-04-14 15:34:09' );
 insert into Topics (userID, categoryID, topicName, date)
-values (6, 1, 'Temat 10', '2015-04-14 15:34:09' );
-
-insert into Reply (userID, topicID, replyText, date) 
-values (1, 8, 'Topic text', '2015-04-14 15:34:09');
-insert into Reply (userID, topicID, replyText, date) 
-values (2, 8, 'Reply', '2015-04-14 15:54:09');
-insert into Reply (userID, topicID, replyText, date) 
-values (1, 8, 'Reply 2', '2015-04-14 16:35:09');
-insert into Reply (userID, topicID, replyText, date) 
-values (2, 8, 'Reply 3', '2015-04-14 16:39:09');
+values (6, 1, 'I like bananana', '2015-04-14 15:34:09' );
 
 insert into Reply (userID, topicID, replyText, date) 
 values (1, 1, 'Reply 1', '2015-04-14 16:39:09');
@@ -59,4 +50,34 @@ values (3, 1, 'Reply 1.1', '2015-04-15 10:00:00');
 
 insert into Reply (userID, topicID, replyText, date) 
 values (5, 2, 'Reply 1.1', '2015-04-15 11:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (2, 3, 'Reply 1.1', '2015-04-15 11:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (3, 4, 'Reply 1.1', '2015-04-15 11:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (3, 5, 'I like banana.', '2015-04-15 11:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (3, 6, 'Reply 1.1', '2015-04-15 11:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (4, 7, 'Reply 1.1', '2015-04-15 11:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (4, 8, 'Topic text', '2015-04-14 15:34:09');
+insert into Reply (userID, topicID, replyText, date) 
+values (2, 8, 'Reply', '2015-04-14 15:54:09');
+insert into Reply (userID, topicID, replyText, date) 
+values (1, 8, 'Reply 2', '2015-04-14 16:35:09');
+insert into Reply (userID, topicID, replyText, date) 
+values (2, 8, 'Reply 3', '2015-04-14 16:39:09');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (5, 9, 'Reply start', '2015-04-14 16:39:09');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (6, 10, 'Reply start', '2015-04-14 16:39:09');
 
