@@ -72,7 +72,8 @@
 			<span class="glyphicon glyphicon-pencil"></span>
 			<h3>Napisz odpowiedź</h3>
 			<form name="createPost" method="POST" action="CreatePost" onsubmit="return createPostValidate()">
-				<textarea name="post_body" class="form-control" rows="15" id="post_body"></textarea>	
+				<textarea name="post_body" class="form-control" rows="15" id="post_body"></textarea>
+				<input type="hidden" name="topic_id" value="${param.id}">	
 				<input class="create-post-button" type="submit" value="Utwórz" />	
 			</form>
 			<div class="alert alert-danger" role="alert"></div>

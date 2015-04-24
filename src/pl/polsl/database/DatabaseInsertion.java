@@ -24,7 +24,10 @@ public class DatabaseInsertion {
 	 * @throws SQLException an exception that provides information on a database access error or other errors
 	 * @throws Exception an exception if error occurs
 	 */
-	public static void insertUser(Connection con, String userLogin, String userPass, String userEmail) throws SQLException, Exception {				
+	public static void insertUser(Connection con, 
+									  String userLogin, 
+									  String userPass, 
+									  String userEmail) throws SQLException, Exception {				
 		PreparedStatement pst = null;
 		PassEncryption encryption = new PassEncryption();
 		
@@ -55,7 +58,10 @@ public class DatabaseInsertion {
 	 * @throws SQLException an exception that provides information on a database access error or other errors
 	 * @throws Exception an exception if error occurs
 	 */
-	public static void insertTopic(Connection con, String topicName, String topicBody, int userID) throws SQLException, Exception {
+	public static void insertTopic(Connection con, 
+									   String topicName, 
+									   String topicBody, 
+									   int userID) throws SQLException, Exception {
 		PreparedStatement pst = null;		
 		int topicID = 0;
 		
@@ -89,5 +95,27 @@ public class DatabaseInsertion {
 				pst.close();
 			}			
 		}		
-	}	
+	}
+	
+	public static void insertPost(Connection con, 
+									  String postBody, 
+									  String currentTime, 
+									     int topicID, 
+									     int userID) throws SQLException, Exception {
+		PreparedStatement pst = null;
+		
+		try {			
+            pst = con.prepareStatement("INSERT INTO Reply VALUES (?, ?, ?, ?, ?)");
+            pst.setNull(1, 0);
+            pst.setInt(2, userID);
+            pst.setInt(3, topicID);
+            pst.setString(4, postBody);
+            pst.setString(5, currentTime);
+            pst.executeUpdate();         
+		} finally {			
+			if (pst != null) {
+				pst.close();
+			}			
+		}			
+	}
 }
