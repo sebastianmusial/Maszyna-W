@@ -14,25 +14,32 @@
     password="${initParam['DB_PASS']}"/>
 
 <sql:query dataSource="${snapshot}" var="result">
-	SELECT concat(t.topicID,'')      AS topicID, 
-		   concat(t.userID,'')       AS authorID, 
-		   concat(t.topicName,'')    AS topicName, 
-		   concat(t.date,'')         AS topicDate, 
-		   concat(u.login,'')        AS topicAuthor,
-		   COUNT(DISTINCT r.replyID) AS postCount,
-		   concat(u2.login,'')       AS lastUser, 
-		   max(r2.date)              AS lastDate 
-	FROM Topics AS t, 
-		 Users AS u, 
-		 Reply AS r, 
-		 Users as u2, 
-		 Reply as r2
-	WHERE t.userID = u.userID AND 
-		  t.topicID = r.topicID AND 
-		  t.topicID = r2.topicID AND 
-		  r2.userID = u2.userID
-	GROUP BY topicID
-	ORDER BY r2.date DESC;
+SELECT 
+	CONCAT(t.topicID,'')      AS topicID, 
+	CONCAT(t.userID,'')       AS authorID, 
+	CONCAT(t.topicName,'')    AS topicName, 
+	CONCAT(t.DATE,'')         AS topicDate, 
+	CONCAT(u.login,'')        AS topicAuthor, 
+	COUNT(DISTINCT r.replyID) AS postCount, 
+	CONCAT(u2.login,'') 	  AS lastUser, 
+	CONCAT(r2.DATE, '') 	  AS lastDate
+FROM Topics AS t,
+	Users AS u,
+	Reply AS r,
+	Users AS u2,
+	Reply AS r2
+WHERE t.userID = u.userID AND
+	t.topicID = r.topicID AND
+	t.topicID = r2.topicID AND
+	u2.userID = r2.userID AND
+	r2.replyID = 
+ 	(
+    SELECT MAX(r3.replyID)
+    FROM Reply r3
+    WHERE r3.topicID = t.topicID
+  	)
+GROUP BY topicID
+ORDER BY r2.DATE DESC; 
 </sql:query>
 
 <div class="container-fluid wrap">
@@ -55,15 +62,16 @@
 					<tr>
 						<td class="col-content">  
 							<h4 class="topic-headline"><a href="topic.jsp?id=${row.topicID}"><span class="glyphicon glyphicon-list-alt"></span>${row.topicName}</a></h4>	
-							<fmt:parseDate value="${row.topicDate}" var="date"/>
-	   						<footer class="topic-footer">Napisany przez <strong>${row.topicAuthor}</strong>, w dniu <fmt:formatDate pattern="yyyy-MM-dd" value="${date}"/></footer>
+							<fmt:parseDate value="${row.topicDate}" var="date1"/>
+	   						<footer class="topic-footer">Założony przez <strong>${row.topicAuthor}</strong>, w dniu <fmt:formatDate pattern="yyyy-MM-dd" value="${date1}"/></footer>
 						</td>																						
 						<td class="col-views">
 							<p>${row.postCount}</p>
 						</td>					
 						<td class="col-post">   										
 							<strong>${row.lastUser}</strong>
-							<footer class="post-footer"><fmt:formatDate pattern="dd-MM-yyyy, HH:mm" value="${row.lastDate}"/></footer>
+							<fmt:parseDate value="${row.lastDate}" var="date2"/>
+							<footer class="post-footer"><fmt:formatDate pattern="dd-MM-yyyy" value="${date2}"/></footer>
 						</td>
 					</tr>
 				</c:forEach>				

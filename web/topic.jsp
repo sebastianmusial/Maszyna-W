@@ -36,6 +36,7 @@
 	WHERE t.topicID = ${param.id} AND
 		  t.topicID = r.topicID AND
 		  r.userID = u.userID
+	ORDER BY r.date ASC; 
 </sql:query>
 
 <div class="container-fluid wrap">
