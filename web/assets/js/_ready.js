@@ -31,7 +31,7 @@ function retranslatePage(language) {
 	});
 }
 
-$(document).ready(function() {
+$().ready(function() {
 	CentralUnit.hide();
 	
 	var memoryInitialized = initMemory();

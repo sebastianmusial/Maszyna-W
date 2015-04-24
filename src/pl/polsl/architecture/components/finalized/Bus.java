@@ -1,7 +1,7 @@
 package pl.polsl.architecture.components.finalized;
 
 import pl.polsl.architecture.components.VolatileDataStorage;
-import pl.polsl.utils.Primitive;
+import pl.polsl.architecture.data.Data;
 
 /**
  * Bus used to pass value between registers in a single tact.
@@ -12,10 +12,10 @@ final public class Bus extends VolatileDataStorage {
     /**
      * Constructor with bit count as parameter. Constructs bus
      * configured to contain bitCount long data word.
-     * @param bitCount bit count for data word.
+     * @param data data instance to be stored
      */
-	public Bus(Primitive<Integer> bitCount) {
-		super(bitCount);
+	public Bus(Data data) {
+		super(data);
 	}
 
 }

@@ -1,6 +1,6 @@
 package pl.polsl.architecture.components;
 
-import pl.polsl.utils.Primitive;
+import pl.polsl.architecture.data.Data;
 
 /**
  * Volatile data storage means that in every tact
@@ -10,17 +10,14 @@ import pl.polsl.utils.Primitive;
  * @version 1.0
  */
 public class VolatileDataStorage extends DataStorage {
-	/** Current value. After reset it is set to null. */
-    private Integer value = null;
-    
     /**
      * Constructor with bit count as parameter. Constructs 
      * volative data storage configured to contain bitCount
      * long data word.
-     * @param bitCount - bit count for data word.
+     * @param data data instance to be stored
      */
-    public VolatileDataStorage(Primitive<Integer> bitCount) {
-        super(bitCount);
+    public VolatileDataStorage(Data data) {
+        super(data);
     }
     
     /**
@@ -30,7 +27,7 @@ public class VolatileDataStorage extends DataStorage {
      */
     @Override
     public void nextTact() {
-        value = null;
+        getData().setValue(null);
     }
     
     /**
@@ -44,9 +41,9 @@ public class VolatileDataStorage extends DataStorage {
      */
     @Override
     public Integer getValue() throws Exception {
-        if(value == null)
+        if(getData().getValue() == null)
             throw new Exception("VolatileDataStorage is in use.");
-        return getMask() & value;
+        return getData().getValue();
     }
     
     /**
@@ -57,9 +54,7 @@ public class VolatileDataStorage extends DataStorage {
      */
     @Override
     public Integer peekValue() {
-    	if(value == null)
-    		return null;
-    	return getMask() & value;
+    	return getData().getValue();
     }
     
     /**
@@ -73,9 +68,9 @@ public class VolatileDataStorage extends DataStorage {
      */
     @Override
     public void setValue(Integer value) throws Exception {
-        if(this.value != null)
+        if(getData().getValue() != null)
             throw new Exception("VolatileDataStorage is in use.");
-        this.value = getMask() & value;
+        getData().setValue(value);
     }
     
     /**
@@ -86,9 +81,6 @@ public class VolatileDataStorage extends DataStorage {
      */
     @Override
     public void replaceValue(Integer value) {
-    	if(value == null)
-    		this.value = null;
-    	else
-    		this.value = getMask() & value;
+    	getData().setValue(value);
     }
 }

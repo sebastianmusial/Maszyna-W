@@ -6,7 +6,7 @@
 package pl.polsl.architecture.components.finalized;
 
 import pl.polsl.architecture.components.NonVolatileDataStorage;
-import pl.polsl.utils.Primitive;
+import pl.polsl.architecture.data.Data;
 
 /**
  * W Machine register. It's configured by bit count for data word.
@@ -21,9 +21,9 @@ final public class Register extends NonVolatileDataStorage {
     /**
      * Constructor with bit count as parameter. Constructs register
      * configured to contain bitCount long data word.
-     * @param bitCount bit count for data word.
+     * @param data data instance to be stored
      */
-    public Register(Primitive<Integer> bitCount) {
-    	super(bitCount);
+    public Register(Data data) {
+    	super(data);
     }
 }
