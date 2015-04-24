@@ -52,3 +52,11 @@ insert into Reply (userID, topicID, replyText, date)
 values (1, 1, 'Reply 1', '2015-04-14 16:39:09');
 insert into Reply (userID, topicID, replyText, date) 
 values (4, 1, 'Reply 1', '2015-04-14 16:49:09');
+insert into Reply (userID, topicID, replyText, date) 
+values (6, 1, 'Reply 2', '2015-04-14 16:49:20');
+insert into Reply (userID, topicID, replyText, date) 
+values (3, 1, 'Reply 1.1', '2015-04-15 10:00:00');
+
+insert into Reply (userID, topicID, replyText, date) 
+values (5, 2, 'Reply 1.1', '2015-04-15 11:00:00');
+
