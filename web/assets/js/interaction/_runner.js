@@ -32,4 +32,16 @@ function initRunner() {
 			restoreState();
 		});
 	});
+	
+	$('#rightTab a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		});
+	
+	$('#leftTab a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		});
+	
+	$(".tip").tooltip();
 };

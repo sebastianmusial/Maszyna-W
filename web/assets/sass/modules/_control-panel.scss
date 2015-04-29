@@ -27,11 +27,25 @@
 }
 
 .hand-controls {
-	background-color: $other-tab;
+	position: relative;
+	border: 1px solid $gray;
+	background-color: $bg-panel;
+	border-radius: 4px;
+	margin-bottom: 25px;
+	height: 40px;
+	padding: 8px 15px;
+	cursor: pointer;
 
+	&:hover {
+		border-color: $gray-hover;
+		background-color: $bg-panel-hover
+	}
 
-	.checkbox & {
-		padding-left: 30px;
+	span {
+		position: absolute;
+		margin-top: 2px;
+		padding: 0 10px;
+		font-weight: normal;
 	}
 }
 
@@ -41,9 +55,8 @@
 }
 
 .btn-tact {
-	margin: 10px 0.5%;
 	padding: 9px;
-	width: 28.5%;
+	width: 100%;
 	text-transform: uppercase;
 }
 
@@ -54,4 +67,59 @@
 
 .btn-discard {
 	width: 48%;
+}
+
+.panel-title {
+	font-size: 14px;
+}
+
+label, span {
+	font-size: 12px;
+}
+
+#accept-bit-count-change {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.tab-content {
+	padding: 10px;
+	border: 1px solid $gray;
+	margin-top: -1px;
+}
+
+.panel-group {
+	margin-bottom: 0px;
+}
+
+.btn-controls {
+	font-size: 0;
+
+	button {
+		width: 33.3%;
+		border-radius: 0;
+  		margin: 0 -1px;
+  		border-color: $gray;
+
+  		&:hover {
+			z-index: 2;
+			position: relative;
+  		}
+	}
+
+	button:last-of-type {
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+  		margin: 0;
+	}
+
+	button:first-of-type {
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+  		margin: 0;
+	}
+}
+
+.col-hand-controls {
+	padding-right: 0;
 }
