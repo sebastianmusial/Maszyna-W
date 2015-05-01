@@ -5,7 +5,7 @@
 
 <div class="wrap">
 	<section class="w-machine">
-        <%@include file="view/maszyna-w.jsp" %>
+        <%@include file="view/simulator.jsp" %>
 	</section>
 </div>
 
