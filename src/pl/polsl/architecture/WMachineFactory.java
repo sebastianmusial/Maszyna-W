@@ -5,7 +5,7 @@ import pl.polsl.architecture.components.finalized.Buffer;
 import pl.polsl.architecture.components.finalized.Bus;
 import pl.polsl.architecture.components.finalized.Memory;
 import pl.polsl.architecture.components.finalized.Register;
-
+import pl.polsl.architecture.data.FlagWord;
 import static pl.polsl.servlet.ArchitectureInfo.AvailableRegisters.*;
 import static pl.polsl.servlet.ArchitectureInfo.AvailableSignals.*;
 
@@ -41,7 +41,8 @@ public class WMachineFactory {
         Register Y = builder.addRegister(DATA_Y, dataBitCount);
         Register RB = builder.addRegister(IO_PORT, dataBitCount);
         Register G = builder.addRegister(STROBE, dataBitCount);
-        builder.addRegister(FLAGS, dataBitCount);
+        Register F = builder.addFlagRegister();
+        AK.addChangeListener("AccumulatorChanged", (FlagWord)F.getData());
         
         Memory memory = builder.addMemory(A);
         
@@ -88,6 +89,8 @@ public class WMachineFactory {
         builder.addScriptSignal(ACCUMULATOR_DECREMENT, AK, AK, "x - 1");
         builder.addScriptSignal(STACK_POINTER_INCREMENT, WS, WS, "x + 1");
         builder.addScriptSignal(STACK_POINTER_DECREMENT, WS, WS, "x - 1");
+        
+        builder.addStopSignal();
         
 		return builder.end();
 	}

@@ -7,7 +7,7 @@ import pl.polsl.utils.Primitive;
  * @author Tomasz Rzepka
  *
  */
-public class Command implements Data {
+public class CommandWord implements DataWord {
 	/** Currently set operation code. */
 	private Integer opCode = null;
 	
@@ -28,7 +28,7 @@ public class Command implements Data {
 	 * @param addressBitCount primitive referencing to W Machine
 	 * address bit count.
 	 */
-	public Command(Primitive<Integer> opCodeBitCount, Primitive<Integer> addressBitCount) {
+	public CommandWord(Primitive<Integer> opCodeBitCount, Primitive<Integer> addressBitCount) {
 		this.addressBitCount = addressBitCount;
 		this.opCodeBitCount = opCodeBitCount;
 	}
@@ -59,6 +59,8 @@ public class Command implements Data {
 	@Override
 	public void setValue(Integer value) {
 		if(value != null) {
+			while(value < 0)
+				value = (1 << (addressBitCount.getValue() + opCodeBitCount.getValue())) + value;
 			opCode = adjust(value >> addressBitCount.getValue(), opCodeBitCount.getValue());
 			address = adjust(value, addressBitCount.getValue());
 		}
@@ -66,6 +68,16 @@ public class Command implements Data {
 			opCode = null;
 			address = null;
 		}
+	}
+	
+	/**
+	 * Implementation of Data interface.
+	 * Allow to get bit count that data occupies.
+	 * @return Bit count that data occupies.
+	 */
+	@Override
+	public Integer getBitCount() {
+		return opCodeBitCount.getValue() + addressBitCount.getValue();
 	}
 	
 	/**

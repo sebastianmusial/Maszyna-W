@@ -3,6 +3,9 @@ package pl.polsl.settings;
 import java.util.Map;
 import java.util.HashMap;
 
+import pl.polsl.runner.CommandList;
+import pl.polsl.runner.DefaultCommandList;
+
 /**
  * Settings storage.
  * @author Tomasz Rzepka
@@ -89,5 +92,9 @@ public class Settings {
 	 */
 	public void setExtensionEnabled(Extension extension, Boolean enabled) {
 		extensions.replace(extension, enabled);
+	}
+	
+	public CommandList getCommandList() {
+		return new DefaultCommandList();
 	}
 }

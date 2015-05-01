@@ -72,6 +72,6 @@ public class Language {
 	}
 	
 	public Map<Integer, String> getSignalsMap(){
-		return this.getSignalsMap();
+		return signals;
 	}
 }

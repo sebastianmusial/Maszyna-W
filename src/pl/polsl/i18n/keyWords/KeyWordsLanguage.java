@@ -1,4 +1,4 @@
-package pl.polsl.i18n.keyWords;
+package pl.polsl.i18n.keywords;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,25 +8,25 @@ import java.util.Map;
  * @author Dawid Poloczek
  * @version 1.0
  */
-public class KeyWordsLanguage {
-
-	Map<Integer, String> keyWords = new HashMap<Integer, String>();
+public class KeywordsLanguage {
+	/** Collection of translated keywords. */
+	Map<Keywords, String> keywords = new HashMap<>();
 	
 	/**
-	 * Translated key words names getter.
-	 * @param keyWordId ID of a key word
-	 * @return Translated name of the word key with ID <i>keyWordId</i>.
+	 * Translated keywords names getter.
+	 * @param keyword ID of a keyword
+	 * @return Translated name of the keyword with ID <i>keyword</i>.
 	 */
-	public String getKeyWord(Integer keyWordId) {
-		return keyWords.get(keyWordId);
+	public String getKeyword(Keywords keyword) {
+		return keywords.get(keyword);
 	}
 	
 	/**
-	 * Translated key words names setter.
-	 * @param keyWordId ID of a key word.
-	 * @param name translated name of a key word
+	 * Translated keywords names setter.
+	 * @param keyword ID of a keyword.
+	 * @param value translated name of a keyword
 	 */
-	public void setKeyWord(Integer keyWordId, String name) {
-		keyWords.put(keyWordId, name);
+	public void setKeyword(Keywords keyword, String value) {
+		keywords.put(keyword, value);
 	}
 }

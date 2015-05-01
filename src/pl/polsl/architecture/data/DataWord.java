@@ -6,7 +6,7 @@ package pl.polsl.architecture.data;
  * @author Tomasz Rzepka
  * @version 1.0
  */
-public interface Data {
+public interface DataWord {
 	/**
 	 * Allow to get data as single integer value.
 	 * @return Value integer equivalent to stored data.
@@ -20,6 +20,12 @@ public interface Data {
 	 * @param value value representing new data. Can be null.
 	 */
 	void setValue(Integer value);
+	
+	/**
+	 * Allow to get bit count that data occupies.
+	 * @return Bit count that data occupies.
+	 */
+	Integer getBitCount();
 	
 	/**
 	 * Helpful function to adjust value to given bit count.

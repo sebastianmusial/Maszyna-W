@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import pl.polsl.architecture.components.DataSource;
 import pl.polsl.architecture.components.DataTarget;
-import pl.polsl.architecture.data.Command;
+import pl.polsl.architecture.data.CommandWord;
 import pl.polsl.utils.Primitive;
 import pl.polsl.utils.PrimitiveChangeListener;
 
@@ -45,7 +45,7 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 		Integer memorySize = 1 << addressBitCount.getValue(); 
 		cells.setSize(memorySize);
 		for(int i = 0; i < memorySize; ++i) {
-			cells.set(i, new MemoryCell(new Command(opCodeBitCount, addressBitCount)));
+			cells.set(i, new MemoryCell(new CommandWord(opCodeBitCount, addressBitCount)));
 			setValue(i, i);
 		}
 	}
@@ -175,7 +175,7 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 			cells.setSize(newSize);
 			if(newSize > oldSize) {
 				for(int i = oldSize; i < newSize; ++i)
-					cells.set(i, new MemoryCell(new Command(opCodeBitCount, addressBitCount)));
+					cells.set(i, new MemoryCell(new CommandWord(opCodeBitCount, addressBitCount)));
 			}
 		}
 	}

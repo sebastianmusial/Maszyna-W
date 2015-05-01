@@ -7,7 +7,7 @@ import pl.polsl.utils.Primitive;
  * @author Tomasz Rzepka
  * @version 1.0
  */
-public class Address implements Data {
+public class AddressWord implements DataWord {
 	
 	/** Address of memory cell. */
 	private Integer address = null;
@@ -20,7 +20,7 @@ public class Address implements Data {
 	 * @param addressBitCount primitive referencing to W Machine
 	 * address bit count.
 	 */
-	public Address(Primitive<Integer> addressBitCount) {
+	public AddressWord(Primitive<Integer> addressBitCount) {
 		bitCount = addressBitCount;
 	}
 	
@@ -43,6 +43,18 @@ public class Address implements Data {
 	 */
 	@Override
 	public void setValue(Integer value) {
+		while(value != null && value < 0)
+			value = (1 << bitCount.getValue()) + value;
 		address = adjust(value, bitCount.getValue());
+	}
+
+	/**
+	 * Implementation of Data interface.
+	 * Allow to get bit count that data occupies.
+	 * @return Bit count that data occupies.
+	 */
+	@Override
+	public Integer getBitCount() {
+		return bitCount.getValue();
 	}
 }

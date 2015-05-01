@@ -5,8 +5,12 @@
  */
 package pl.polsl.architecture.components.finalized;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import pl.polsl.architecture.components.NonVolatileDataStorage;
-import pl.polsl.architecture.data.Data;
+import pl.polsl.architecture.data.DataWord;
+import pl.polsl.utils.RegisterChangeListener;
 
 /**
  * W Machine register. It's configured by bit count for data word.
@@ -18,12 +22,55 @@ import pl.polsl.architecture.data.Data;
  * @version 1.0
  */
 final public class Register extends NonVolatileDataStorage {
+	/** Registered change listeners. */
+	private Map<String, RegisterChangeListener> listeners = new HashMap<>();
+	
     /**
      * Constructor with bit count as parameter. Constructs register
      * configured to contain bitCount long data word.
      * @param data data instance to be stored
      */
-    public Register(Data data) {
+    public Register(DataWord data) {
     	super(data);
+    }
+    
+    /**
+     * Setting value cause listeners to be notified.
+     */
+    @Override
+    public void setValue(Integer value) throws Exception {
+    	super.setValue(value);
+    	notifyListeners();
+    }
+    
+    /**
+     * Replacing value cause listeners to be notified.
+     */
+    @Override
+    public void replaceValue(Integer value) {
+    	super.replaceValue(value);
+    	notifyListeners();
+    }
+    
+    /**
+     * Allow to add register change listener. When value
+     * stored in the register is set or replaced
+     * all registered listeners will be notified about
+     * the change.
+     * @param command command that will be passed to listener
+     * @param listener change listener to be added
+     */
+    public void addChangeListener(String command, RegisterChangeListener listener) {
+    	listeners.put(command, listener);
+    }
+    
+    /**
+     * Notify all change listeners that value was changed.
+     */
+    private void notifyListeners() {
+    	for(String command : listeners.keySet()) {
+    		RegisterChangeListener listener = listeners.get(command);
+    		listener.registerValueChanged(command, getData());
+    	}
     }
 }

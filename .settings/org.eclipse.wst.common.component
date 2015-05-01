@@ -2,6 +2,7 @@
     <wb-module deploy-name="WMachine">
         <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <dependent-module archiveName="mysql-connector-java-5.1.35-bin.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/WMachine/web/WEB-INF/lib/mysql-connector-java-5.1.35-bin.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
