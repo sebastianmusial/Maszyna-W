@@ -46,7 +46,6 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 		cells.setSize(memorySize);
 		for(int i = 0; i < memorySize; ++i) {
 			cells.set(i, new MemoryCell(new CommandWord(opCodeBitCount, addressBitCount)));
-			setValue(i, i);
 		}
 	}
 	
