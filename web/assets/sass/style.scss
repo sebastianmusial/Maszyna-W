@@ -1,3 +1,9 @@
+//tools
+@import "../css/normalize.css";
+@import "../vendor/bootstrap/dist/css/bootstrap.min.css";
+//@import "../vendor/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css";
+
+
 //base
 @import "base/vars";
 @import "base/mixin";
@@ -8,6 +14,7 @@
 @import "modules/central-unit";
 @import "modules/control-panel";
 @import "modules/forum";
+@import "modules/vertical-tabs";
 
 //
 @import "navbar";
