@@ -1,6 +1,6 @@
 package pl.polsl.architecture.components;
 
-import pl.polsl.architecture.data.Data;
+import pl.polsl.architecture.data.DataWord;
 
 /**
  * Abstract class representing generic data storage.
@@ -10,14 +10,14 @@ import pl.polsl.architecture.data.Data;
 public abstract class DataStorage implements DataSource, DataTarget {
 
 	/** Stored data. */
-	private Data data;
+	private DataWord data;
 	
 	/**
 	 * Creates data storage configured to keep
 	 * bitCount long data words.
 	 * @param data data instance to be stored
 	 */
-	public DataStorage(Data data) {
+	public DataStorage(DataWord data) {
 		this.data = data;
 	}
 	
@@ -25,7 +25,7 @@ public abstract class DataStorage implements DataSource, DataTarget {
      * Allow to get currently stored data.
      * @return Stored data.
      */
-    public Data getData() {
+    public DataWord getData() {
         return data;
     }
 }

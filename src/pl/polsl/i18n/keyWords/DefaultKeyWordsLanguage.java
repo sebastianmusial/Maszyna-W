@@ -1,36 +1,22 @@
 /**
  * 
  */
-package pl.polsl.i18n.keyWords;
+package pl.polsl.i18n.keywords;
 
 /**
  * @author Dawid Poloczek
  * @version 1.0
  */
-public class DefaultKeyWordsLanguage extends KeyWordsLanguage {
-
-	public DefaultKeyWordsLanguage(){
-		setKeyWord("COMMAND", "COMMAND");
-		setKeyWord("IF", "IF");
-		setKeyWord("THEN", "THEN");
-		setKeyWord("IF_NOT", "IF NOT");
-		setKeyWord("END", "END");	
-	}
-	
+public class DefaultKeywordsLanguage extends KeywordsLanguage {
 	/**
-	 * Add translated key word name to language.
-	 * @param keyWord name of constant defined in ArchitectureInfo#AvailableRegisters 
-	 * @param name translated register name
+	 * Constructs default keyword language.
 	 */
-	public void setKeyWord(String keyWord, String name) {
-		try {
-			name = name.toUpperCase();
-			KeyWords value = KeyWords.valueOf(keyWord);
-			if(value != null)
-				keyWords.put(value.ID, name);
-		}
-		catch(IllegalArgumentException ex) {
-			
-		}
-	}	
+	public DefaultKeywordsLanguage(){
+		setKeyword(Keywords.COMMAND, "COMMAND");
+		setKeyword(Keywords.IF, "IF");
+		setKeyword(Keywords.THEN, "THEN");
+		setKeyword(Keywords.ELSE, "ELSE");
+		setKeyword(Keywords.END, "END");
+		setKeyword(Keywords.ARGUMENTS, "ARGUMENTS");
+	}
 }

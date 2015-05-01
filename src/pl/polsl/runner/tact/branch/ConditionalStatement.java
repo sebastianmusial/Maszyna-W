@@ -1,13 +1,15 @@
 /**
  * 
  */
-package pl.polsl.parser;
+package pl.polsl.runner.tact.branch;
+
 
 /**
+ * Conditional statement. Allow to branch execution of command.
  * @author Dawid Poloczek
  * @version 1.0
  */
-public class ConditionStatement implements ITact {
+public class ConditionalStatement implements Branch {
 	
 	private String condition;
 	
@@ -38,5 +40,4 @@ public class ConditionStatement implements ITact {
 	public String getTrueLabel() {
 		return this.ifTrue;
 	}
-	
 }

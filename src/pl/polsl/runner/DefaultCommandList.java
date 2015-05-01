@@ -1,28 +1,82 @@
 package pl.polsl.runner;
 
+import pl.polsl.parser.CommandParser;
+import pl.polsl.runner.command.Command;
+
+
 public class DefaultCommandList extends CommandList {
 
-	// public DefaultCommandList(Language) {
-	public DefaultCommandList() {
-		add(new Command(0, "stp"));
-		add(new Command(1, "dod"));
-		add(new Command(2, "ode"));
-		add(new Command(3, "pob"));
-		add(new Command(4, "ład"));
-		add(new Command(5, "sob"));
-		add(new Command(6, "som"));
-		add(new Command(7, "soz"));
-		
-//		for(DefaultCommand command : DefaultCommand.values()) {
-//			add(new Command(command.CODE, language.getCommandName(command)));
-//		}
+	public DefaultCommandList() {		
+		String[] commands =  {
+			STP_COMMAND,
+			ADD_COMMAND,
+			SUB_COMMAND,
+			LD_COMMAND,
+			ST_COMMAND,
+			JMP_COMMAND,
+			JMPN_COMMAND,
+			JMPZ_COMMAND
+		};
+		CommandParser parser = new CommandParser();
+		for(String command : commands) {
+			add(parser.parse(command));
+		}
 	}
+
+	private final String STP_COMMAND =
+			"// zakończenie programu\n" +
+			"COMMAND STP;\n" +
+			"ARGUMENTS 0;\n" +
+			"czyt wys wei il;\n" +
+			"stop;";
 	
-	@Override
-	public String getNameByCode(Integer code) {
-		if(code < 0 || code >= 8)
-			return null;
-		return get(code).getName();
-	}
+	private final String ADD_COMMAND =
+			"// (Ak)+((Ad))->Ak\n" +
+			"COMMAND ADD;\n" +
+			"czyt wys wei il;\n" +
+			"wyad wea;\n" +
+			"czyt wys weja dod weak wyl wea;";
 	
+	private final String SUB_COMMAND =
+			"// (Ak)-((Ad))->Ak\n" +
+			"COMMAND SUB;\n" +
+			"czyt wys wei il;\n" +
+			"wyad wea;\n" +
+			"czyt wys weja ode weak wyl wea;";
+
+	private final String LD_COMMAND =
+			"// ((Ad))->Ak\n" +
+			"COMMAND LD;\n" +
+			"czyt wys wei il;\n" +
+			"wyad wea;\n" +
+			"czyt wys weja przep weak wyl wea;";
+
+	private final String ST_COMMAND =
+			"// ((Ad))->Ak\n" +
+			"COMMAND ST;\n" +
+			"czyt wys wei il;\n" +
+			"wyad wea wyak wes;\n" +
+			"pisz wyl wea;";
+	
+	private final String JMP_COMMAND =
+			"// skok bezwarunkowy\n" +
+			"COMMAND JMP;\n" +
+			"czyt wys wei il;\n" +
+			"wyad wea wel;\n";
+	
+	private final String JMPN_COMMAND =
+			"// skok gdy (AK) < 0\n" +
+			"COMMAND JMPN;\n" +
+			"czyt wys wei il;\n" +
+			"IF SIGN THEN @ujemne ELSE @dodatnie;\n" +
+			"@ujemne wyad wea wel END;\n" +
+			"@dodatnie wyl wea;";
+	
+	private final String JMPZ_COMMAND =
+			"// skok gdy (AK) < 0\n" +
+			"COMMAND JMPZ;\n" +
+			"czyt wys wei il;\n" +
+			"IF ZERO THEN @zero ELSE @niezero;\n" +
+			"@zero wyad wea wel END;\n" +
+			"@niezero wyl wea;";
 }

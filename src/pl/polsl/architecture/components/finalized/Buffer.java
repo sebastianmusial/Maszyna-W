@@ -1,7 +1,7 @@
 package pl.polsl.architecture.components.finalized;
 
 import pl.polsl.architecture.components.VolatileDataStorage;
-import pl.polsl.architecture.data.Data;
+import pl.polsl.architecture.data.DataWord;
 
 /**
  * Buffer to store value for a single tact.
@@ -14,7 +14,7 @@ final public class Buffer extends VolatileDataStorage {
      * configured to contain bitCount long data word.
      * @param data data instance to be stored
      */
-	public Buffer(Data data) {
+	public Buffer(DataWord data) {
 		super(data);
 	}
 

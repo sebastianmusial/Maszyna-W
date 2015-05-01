@@ -1,6 +1,6 @@
 package pl.polsl.architecture.components;
 
-import pl.polsl.architecture.data.Data;
+import pl.polsl.architecture.data.DataWord;
 
 /**
  * Volatile data storage means that in every tact
@@ -16,7 +16,7 @@ public class VolatileDataStorage extends DataStorage {
      * long data word.
      * @param data data instance to be stored
      */
-    public VolatileDataStorage(Data data) {
+    public VolatileDataStorage(DataWord data) {
         super(data);
     }
     

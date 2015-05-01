@@ -1,7 +1,7 @@
 package pl.polsl.architecture.components.finalized;
 
 import pl.polsl.architecture.components.NonVolatileDataStorage;
-import pl.polsl.architecture.data.Command;
+import pl.polsl.architecture.data.CommandWord;
 
 /**
  * Memory cell used to store single value.
@@ -10,14 +10,14 @@ import pl.polsl.architecture.data.Command;
  */
 final public class MemoryCell extends NonVolatileDataStorage {
 	/** Data stored in this memory cell. */
-	Command data;
+	CommandWord data;
 	
     /**
      * Constructor with bit count as parameter. Constructs memory
      * cell configured to contain bitCount long data word.
      * @param data command instance to be stored
      */
-	public MemoryCell(Command data) {
+	public MemoryCell(CommandWord data) {
 		super(data);
 		this.data = data;
 	}

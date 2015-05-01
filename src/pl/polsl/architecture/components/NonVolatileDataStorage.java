@@ -1,6 +1,6 @@
 package pl.polsl.architecture.components;
 
-import pl.polsl.architecture.data.Data;
+import pl.polsl.architecture.data.DataWord;
 
 /**
  * Non volatile data storage always have value,
@@ -18,7 +18,7 @@ public class NonVolatileDataStorage extends DataStorage {
      * data storage configured to contain bitCount long data word.
      * @param data data instance to be stored
      */
-	public NonVolatileDataStorage(Data data) {
+	public NonVolatileDataStorage(DataWord data) {
 		super(data);
 		data.setValue(0);
 	}

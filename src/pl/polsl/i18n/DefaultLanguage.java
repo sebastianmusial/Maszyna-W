@@ -62,6 +62,7 @@ public class DefaultLanguage extends Language {
 		setSignalName("STROBE_START", "start");
 		setSignalName("STROBE_OUT", "wyg");
 		setSignalName("ALU_IN", "weja");
+		setSignalName("STOP", "stop");
 		
 		setUITextName("SITE_HEADER", "Maszyna W");
 		setUITextName("SIMULATOR_TAB", "Symulator");

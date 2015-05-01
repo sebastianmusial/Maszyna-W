@@ -18,7 +18,7 @@ import pl.polsl.architecture.components.DataTarget;
  * @author Tomasz Rzepka
  * @version 1.0
  */
-public class ScriptSignal extends Signal {
+public class ScriptDataFlowSignal extends DataFlowSignal {
 	/** Script engine used to evaluate out value. */
 	private ScriptEngine engine;
 	
@@ -38,7 +38,7 @@ public class ScriptSignal extends Signal {
      * data source and pass result to data target.
      * @param engine - script engine to perform operation specified by <i>function</i>.
      */
-    public ScriptSignal(DataSource source, DataTarget target, String function, ScriptEngine engine) {
+    public ScriptDataFlowSignal(DataSource source, DataTarget target, String function, ScriptEngine engine) {
         super(source, target);
         this.functionString = "function(x) " + function;
         this.engine = engine;

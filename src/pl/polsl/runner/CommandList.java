@@ -2,25 +2,33 @@ package pl.polsl.runner;
 
 import java.util.LinkedList;
 
+import pl.polsl.runner.command.Command;
+
 public class CommandList extends LinkedList<Command> {
 	
-	public Integer getCodeByName(String name) {
+	public Command getCommandByName(String name) {
 		if(name == null || name.equals(""))
 			return null;
 		for(Command command : this) {
 			if(name.equals(command.getName()))
-				return command.getCode();
+				return command;
+		}
+		return null;
+	}
+	
+	public Integer getCodeByName(String name) {
+		if(name == null || name.equals(""))
+			return null;
+		for(int code = 0; code < size(); ++code) {
+			if(name.equals(get(code).getName()))
+				return code;
 		}
 		return null;
 	}
 	
 	public String getNameByCode(Integer code) {
-		if(code == null)
+		if(code == null || code < 0 || code >= size())
 			return null;
-		for(Command command : this) {
-			if(code == command.getCode())
-				return command.getName();
-		}
-		return null;
+		return get(code).getName();
 	}
 }

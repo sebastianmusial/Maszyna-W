@@ -16,8 +16,12 @@ import javax.script.ScriptEngine;
 import pl.polsl.architecture.components.WMachineComponent;
 import pl.polsl.architecture.components.finalized.Memory;
 import pl.polsl.architecture.components.finalized.Register;
+import pl.polsl.architecture.data.FlagWord;
+import pl.polsl.architecture.signals.DataFlowSignal;
 import pl.polsl.architecture.signals.Signal;
+import pl.polsl.architecture.signals.StopSignal;
 import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
+import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 import pl.polsl.utils.Primitive;
 
 
@@ -57,6 +61,12 @@ public class WMachine {
 	
 	/** Address of the output port. */
 	private Integer outputPortAddress = 2;
+	
+	/** Current flags. */
+	private FlagWord flags = null;
+	
+	/** Signal indicating if W Machine is stopped. */
+	private StopSignal stopSignal = null;
     
 	/**
 	 * Constructs W Machine configured with given parameters.
@@ -85,7 +95,7 @@ public class WMachine {
 	 * @param signalId ID of signal to be added
 	 * @param signal signal to be added
 	 */
-	public void addSignal(Integer signalId, Signal signal) {
+	public void addSignal(Integer signalId, DataFlowSignal signal) {
 		signals.put(signalId, signal);
 	}
 	
@@ -188,6 +198,7 @@ public class WMachine {
     	for(WMachineComponent component : components) {
     		component.nextTact();
     	}
+    	updateScriptContext();	
     }
     
     /**
@@ -220,5 +231,44 @@ public class WMachine {
      */
     public void setOutputPortAddress(Integer address) {
     	outputPortAddress = address;
+    }
+    
+    /**
+     * Allow to set W Machine flag word.
+     * @param flagWord flag word to be set
+     */
+    public void setFlagWord(FlagWord flagWord) {
+    	this.flags = flagWord;
+    }
+    
+    /**
+	 * Single flag state getter.
+	 * @param flag flag which state will be returned
+	 * @return State of given flag.
+	 */
+    public Boolean getFlag(Flag flag) {
+    	return flags.getFlag(flag);
+    }
+    
+    /**
+     * Allow to set stop signal, i.e. signal that
+     * indicates if W Machine is stopped or not.
+     * @param stopSignal stop signal to be set
+     */
+    public void setStopSignal(StopSignal stopSignal) {
+    	this.stopSignal = stopSignal;
+    	signals.put(AvailableSignals.STOP.ID, stopSignal);
+    }
+    
+    /**
+     * Check is W Machine is stopped.
+     * @return True if W Machine is stopped, i.e. stop signal
+     * is enabled, false otherwise. If stop signal is not
+     * available true will be retuned.
+     */
+    public Boolean isStopped() {
+    	if(stopSignal != null)
+    		return stopSignal.isEnabled();
+    	return true;
     }
 }

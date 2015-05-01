@@ -126,7 +126,7 @@ public class ArchitectureInfo extends WMachineServletBase {
 		/** Decrement value stored in accumulator. */
 		ACCUMULATOR_DECREMENT(150),
 		/** Pass value from address bus to memory address register. */
-		MEMORY_ADDRESS_IN(170),
+		MEMORY_ADDRESS_IN(380),
 		/** Pass value from data bus to memory data register. */
 		MEMORY_DATA_IN(190),
 		/** Pass value from memory data register to data bus. */
@@ -180,7 +180,9 @@ public class ArchitectureInfo extends WMachineServletBase {
 		/** Pass value from strobe signal register to data bus. */
 		STROBE_OUT(90),
 		/** Pass value from data bus to logic arithmetic unit. */
-		ALU_IN(250);
+		ALU_IN(250),
+		/** Indicates if W Machine is stopped. */
+		STOP(400);
 		
 		/** Signal ID. */
 		public final Integer ID;

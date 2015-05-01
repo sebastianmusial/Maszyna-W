@@ -58,6 +58,11 @@ MW.initView = function() {
 MW.centralUnit = function() {
     var paper = Raphael("central-unit__base");
 
+    var stop = function() {
+    	var stopArrow = MW.setArrow(paper, 'M130 140 h-50', false, true),
+    		stopText = MW.setText(paper, "STOP", 105, 130, stopArrow);
+    }
+    
     //counter
     var counter = function() {
         var welArrow = MW.setArrow(paper, 'M100 0 V50', true),
@@ -108,6 +113,7 @@ MW.centralUnit = function() {
     };
 
     //Drawing elements
+    stop();
     counter();
     acumulator();
     instructionRegister();
@@ -185,8 +191,8 @@ MW.additionalElements = function() {
         	
     	var paperWyls = Raphael("extension-wyls");
     	
-    	var wylsArrow = MW.setArrow(paperWyls, 'M100 0 V220' , true),
-        	wylsText = MW.setText(paperWyls, "PROGRAM_COUNTER_OUT_TO_DATA_BUS", 75, 65, wylsArrow);
+    	var wylsArrow = MW.setArrow(paperWyls, 'M80 0 V220' , true),
+        	wylsText = MW.setText(paperWyls, "PROGRAM_COUNTER_OUT_TO_DATA_BUS", 55, 65, wylsArrow);
     };
 
     //artimetical operations
