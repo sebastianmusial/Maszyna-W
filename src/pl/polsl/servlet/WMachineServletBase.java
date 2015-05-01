@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.WMachineFactory;
+import pl.polsl.architecture.components.finalized.Memory;
 import pl.polsl.settings.Settings;
 
 /**
@@ -34,6 +35,37 @@ public class WMachineServletBase extends HttpServlet {
 		if(machine == null) {
 			machine = new WMachineFactory().getInstance();
 			session.setAttribute("WMachineInstance", machine);
+			
+			/**
+			 *  Load simple program:
+			    pętla:  pob wynik
+				        dod n
+				        ład wynik
+				        pob n
+				        ode jeden
+				        soz koniec
+				        ład n
+				        sob pętla
+				koniec: pob wynik
+				        stp
+				jeden:  rst 1
+				n:      rst 5
+				wynik:  rst 0
+			 */
+			Memory memory = machine.getMemory();
+			memory.setValue(0, 108);
+			memory.setValue(1, 43);
+			memory.setValue(2, 140);
+			memory.setValue(3, 107);
+			memory.setValue(4, 74);
+			memory.setValue(5, 232);
+			memory.setValue(6, 139);
+			memory.setValue(7, 160);
+			memory.setValue(8, 108);
+			memory.setValue(9, 0);
+			memory.setValue(10, 1);
+			memory.setValue(11, 5);
+			memory.setValue(12, 0);
 		}
 		return machine;
 	}

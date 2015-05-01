@@ -33,6 +33,10 @@ function initRunner() {
 		});
 	});
 	
+	$("#run-command").click(function() {
+		$.get("CommandRunner").done(restoreState);
+	});
+	
 	$('#rightTab a').click(function (e) {
 		  e.preventDefault();
 		  $(this).tab('show');

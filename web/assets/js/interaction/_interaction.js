@@ -16,7 +16,7 @@ function restoreState(wmachine) {
 			cell.isVisible = true;
 		}
 	};
-	if(typeof wmachine === "undefined") {
+	if(typeof wmachine === "undefined" || wmachine == "") {
 		$.get("WMachineState", {action: "restore"}, restore);
 	}
 	else {
@@ -84,6 +84,10 @@ function initInteractions() {
     var shortcut = function () {
         jwerty.key('f7', function () { 
         	$('#run-tact').click();
+        });
+        
+        jwerty.key('f8', function () { 
+        	$('#run-command').click();
         });
         
         jwerty.key('f2', function () { 
