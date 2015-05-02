@@ -261,13 +261,12 @@
 				<li><a href="#programs"><i
 						class="glyphicon glyphicon-education"> </i> Programy</a></li>
 			</ul>
-			<div class="tab-content clear-bottom">
+			<div class="tab-content clear-bottom tab-content--with-tabs">
 				<div class="tab-pane fade in active" id="commands">
 					<%@include file="commands.jsp" %>
 				</div>
 				<div class="tab-pane fade" id="programs">
-					<!--  tymczasowa kopia wyglądu taba rozkazów -->
-					<%@include file="commands.jsp" %>
+					<%@include file="programs.jsp" %>
 				</div>
 			</div>
 		</div>
