@@ -20,6 +20,8 @@ import pl.polsl.architecture.data.FlagWord;
 import pl.polsl.architecture.signals.DataFlowSignal;
 import pl.polsl.architecture.signals.Signal;
 import pl.polsl.architecture.signals.StopSignal;
+import pl.polsl.runner.CommandList;
+import pl.polsl.runner.DefaultCommandList;
 import pl.polsl.servlet.ArchitectureInfo.AvailableRegisters;
 import pl.polsl.servlet.ArchitectureInfo.AvailableSignals;
 import pl.polsl.utils.Primitive;
@@ -47,9 +49,6 @@ public class WMachine {
 	/** Memory instance. */
 	private Memory memory;
 	
-//	/** ALU instance. */
-//	private ArithmeticLogicUnit alu;
-	
 	/** List of all components in this architecture. */
 	private List<WMachineComponent> components = new LinkedList<>();
 	
@@ -67,6 +66,9 @@ public class WMachine {
 	
 	/** Signal indicating if W Machine is stopped. */
 	private StopSignal stopSignal = null;
+	
+	/** Current command list. */
+	private CommandList commandList;
     
 	/**
 	 * Constructs W Machine configured with given parameters.
@@ -78,6 +80,7 @@ public class WMachine {
 		this.addressBitCount = addressBitCount;
 		this.opCodeBitCount = opCodeBitCount;
 		this.engine = engine;
+		commandList = new DefaultCommandList();
 	}
 	
 	/**
@@ -198,7 +201,9 @@ public class WMachine {
     	for(WMachineComponent component : components) {
     		component.nextTact();
     	}
-    	updateScriptContext();	
+    	for(Signal signal : signals.values())
+    		signal.setEnabled(false);
+    	updateScriptContext();
     }
     
     /**
@@ -270,5 +275,13 @@ public class WMachine {
     	if(stopSignal != null)
     		return stopSignal.isEnabled();
     	return true;
+    }
+    
+    /**
+     * Command list getter.
+     * @return Current command list.
+     */
+    public CommandList getCommandList() {
+    	return commandList;
     }
 }

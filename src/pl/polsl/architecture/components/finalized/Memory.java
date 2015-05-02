@@ -137,13 +137,8 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	 * @param index index of memory cell to be returned.
 	 * @return Value stored in selected cell.
 	 */
-	public Integer getValue(Integer index) {
-		try {
-			MemoryCell cell = cells.get(index); 
-			return cell.getValue();
-		} catch (Exception e) {
-			return 0;
-		}
+	public Integer peekValue(Integer index) { 
+		return cells.get(index).peekValue();
 	}
 	
 	/**
@@ -151,14 +146,8 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 	 * @param index index of memory cell to be changed.
 	 * @param value value to be set in the cell.
 	 */
-	public void setValue(Integer index, Integer value) {
-		try {
-			MemoryCell cell = cells.get(index); 
-			cell.setValue(value);
-			cell.nextTact();
-		} catch (Exception e) {
-			// ignore
-		}
+	public void replaceValue(Integer index, Integer value) {
+		cells.get(index).replaceValue(value);
 	}
 
 	/**
@@ -177,6 +166,14 @@ final public class Memory implements DataSource, DataTarget, PrimitiveChangeList
 					cells.set(i, new MemoryCell(new CommandWord(opCodeBitCount, addressBitCount)));
 			}
 		}
+	}
+	
+	/**
+	 * Allow to get current MemoryCell instance.
+	 * @return MemoryCell at address pointed in memory address register.
+	 */
+	public MemoryCell getCurrentCell() {
+		return cells.get(addressRegister.peekValue());
 	}
 	
 	/**

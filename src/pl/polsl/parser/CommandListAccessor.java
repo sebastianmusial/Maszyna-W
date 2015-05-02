@@ -17,8 +17,8 @@ import pl.polsl.settings.Settings;
 /**
  * Servlet implementation class CommandAccessor
  */
-@WebServlet("/CommandAccessor")
-public class CommandAccessor extends WMachineServletBase {
+@WebServlet("/CommandListAccessor")
+public class CommandListAccessor extends WMachineServletBase {
 	/** Serial version UID. */
 	private static final long serialVersionUID = 1L;
 
@@ -27,20 +27,17 @@ public class CommandAccessor extends WMachineServletBase {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WMachine machine = getCurrentWMachine(request.getSession());
-		Settings settings = getCurrentSettings(request.getSession());
-		CommandList commandList = settings.getCommandList();
+		CommandList commandList = machine.getCommandList();
+		Integer listId = Integer.parseInt(request.getParameter("list"));
+		Integer commandId = null;
+		if("COMMAND".equalsIgnoreCase(request.getParameter("what")))
+			commandId = Integer.parseInt(request.getParameter("command"));
 		
-		switch(request.getParameter("action")) {
-			case "run":
-				String name = request.getParameter("command");
-				Command command = commandList.getCommandByName(name);
-				command.run(machine);
+		switch(request.getParameter("action").toUpperCase()) {
+			case "GET":
 				break;
 				
-			case "add":
-//				CommandParser parser = new CommandParser();
-//				Command command = parser.parseText(request.getParameter("command"));
-//				commandList.add(command);
+			case "ADD":
 				break;
 		}
 	}

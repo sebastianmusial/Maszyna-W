@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.WMachineFactory;
 import pl.polsl.architecture.components.finalized.Memory;
+import pl.polsl.runner.Runner;
 import pl.polsl.settings.Settings;
 
 /**
@@ -53,19 +54,19 @@ public class WMachineServletBase extends HttpServlet {
 				wynik:  rst 0
 			 */
 			Memory memory = machine.getMemory();
-			memory.setValue(0, 108);
-			memory.setValue(1, 43);
-			memory.setValue(2, 140);
-			memory.setValue(3, 107);
-			memory.setValue(4, 74);
-			memory.setValue(5, 232);
-			memory.setValue(6, 139);
-			memory.setValue(7, 160);
-			memory.setValue(8, 108);
-			memory.setValue(9, 0);
-			memory.setValue(10, 1);
-			memory.setValue(11, 5);
-			memory.setValue(12, 0);
+			memory.replaceValue(0, 108);
+			memory.replaceValue(1, 43);
+			memory.replaceValue(2, 140);
+			memory.replaceValue(3, 107);
+			memory.replaceValue(4, 74);
+			memory.replaceValue(5, 232);
+			memory.replaceValue(6, 139);
+			memory.replaceValue(7, 160);
+			memory.replaceValue(8, 108);
+			memory.replaceValue(9, 0);
+			memory.replaceValue(10, 1);
+			memory.replaceValue(11, 5);
+			memory.replaceValue(12, 0);
 		}
 		return machine;
 	}
@@ -84,7 +85,23 @@ public class WMachineServletBase extends HttpServlet {
 		}
 		return settings;
 	}
-    
+	
+	/**
+	 * Return runner stored in HTTP session or creates
+	 * a new one and save it in the session.
+	 * @param session - current HTTP session.
+	 * @return Runner instance.
+	 */
+	protected Runner getCurrentRunner(HttpSession session) {
+		WMachine machine = getCurrentWMachine(session);
+		Runner runner = (Runner)session.getAttribute("RunnerInstance");
+		if(runner == null) {
+			runner = new Runner(machine);
+			session.setAttribute("RunnerInstance", runner);
+		}
+		return runner;
+	}
+	
 	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> method.
      * This function should be overriden in subclasses.

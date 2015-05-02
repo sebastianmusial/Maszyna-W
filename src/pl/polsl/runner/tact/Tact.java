@@ -88,10 +88,12 @@ public class Tact {
 	 * @param machine W Machine instance that signals will be activated on
 	 */
 	public void run(WMachine machine) {
+		machine.nextTact();
 		try {
 			// TODO begin transation, commit on success, rollback on failure
 			for(Integer signalId : signals) {
 				Signal signal = machine.getSignal(signalId);
+				signal.setEnabled(true);
 				signal.activate();
 			}
 		} catch (Exception e) {
