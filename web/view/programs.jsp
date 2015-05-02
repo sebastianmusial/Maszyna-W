@@ -4,35 +4,31 @@
 <div class="row">
 	<div class="tabbable tabs-right">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#newCommand" data-toggle="tab"><i
+			<li class="active"><a href="#newProgram" data-toggle="tab"><i
 					class="glyphicon glyphicon-pencil"></i> nowy</a></li>
-			<li><a href="#settingsCommand" data-toggle="tab"><i
+			<li><a href="#settingsPrograms" data-toggle="tab"><i
 					class="glyphicon glyphicon-wrench"></i> ustawienia</a></li>
-			<li><a href="#dod" data-toggle="tab">DOD</a></li>
-			<li><a href="#ode" data-toggle="tab">ODE</a></li>
-			<li><a href="#lad" data-toggle="tab">ŁAD</a></li>
+			<li><a href="#a" data-toggle="tab">program 1</a></li>
+			<li><a href="#b" data-toggle="tab">program 2</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane fade in active" id="newCommand">
+			<div class="tab-pane fade in active" id="newProgram">
 				<form class="form-horizontal">
 					<div class="input-group form-space">
-					  <input type="text" class="form-control" placeholder="Nazwa rozkazu">
+					  <input type="text" class="form-control" placeholder="Nazwa programu">
 					  <div class="input-group-btn">
 					  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="dodaj"><i class="glyphicon glyphicon-plus"></i></button>
 					  </div>
 					</div>
-					<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu"></textarea>
+					<textarea class="form-control form-space" rows="3" placeholder="Kod programu"></textarea>
 				</form>
 			</div>
-			<div class="tab-pane fade" id="settingsCommand">
+			<div class="tab-pane fade" id="settingsPrograms">
 				<form class="form-horizontal">
 					<div class="input-group form-space">
 						<select class="form-control">
-						  <option>DOD</option>
-						  <option>ODE</option>
-						  <option>ŁAD</option>
-						  <option>POB</option>
-						  <option>SOB</option>
+						  <option>Program 1</option>
+						  <option>Program 2</option>
 						  <option>Wszystko</option>
 						</select>
 						<div class="input-group-btn">
@@ -41,9 +37,8 @@
 					</div>
 					<div class="input-group form-space">
 						<select class="form-control">
-						  <option>Lista podstawowa</option>
-						  <option>Lista dodatkowa</option>
-						  <option>Jakaś jeszcze lista</option>
+						  <option>Program 1</option>
+						  <option>Program 2</option>
 						</select>
 						<div class="input-group-btn">
 						  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="wczytaj"><i class="glyphicon glyphicon-level-up"></i></button>
@@ -51,7 +46,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="tab-pane fade" id="dod">
+			<div class="tab-pane fade" id="a">
 				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum dolor
 				sit amet, charetra varius quam sit amet vulputate. Quisque mauris
 				augue, molestie tincidunt condimentum vitae, gravida a
@@ -66,16 +61,8 @@
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="ode">
+			<div class="tab-pane fade" id="b">
 				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum </textarea>
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="lad">
-				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum</textarea>
 				<div class="input-group-btn">
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
