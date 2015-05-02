@@ -35,6 +35,9 @@ public class Command {
 	/** Labels mapped to tact indices. */
 	private Map<String, Integer> labels = new HashMap<>();
 	
+	/** Index of tact that will be run next. */
+	private Integer nextTactIndex = 0;
+	
 	/**
 	 * Command name getter.
 	 * @return Command name.
@@ -116,37 +119,81 @@ public class Command {
 		tacts.add(tact);
 	}
 	
+//	/**
+//	 * Allow to run command on W Machine instance.
+//	 * @param machine W Machine instance that command will be run on
+//	 */
+//	public void run(WMachine machine) {
+//		for(int i = 0; i < tacts.size(); ) {
+//			Tact tact = tacts.get(i);
+//			if(tact.hasSignals())
+//				tact.run(machine);
+//			if(tact.canBranch()) {
+//				Branch branch = tact.getBranch();
+//				if(branch instanceof ConditionalStatement) {
+//					ConditionalStatement conditionalStatement = (ConditionalStatement)branch;
+//					String flagName = conditionalStatement.getCondition();
+//					Flag flag = Flag.valueOf(flagName);
+//					if(machine.getFlag(flag))
+//						i = labels.get(conditionalStatement.getTrueLabel());
+//					else
+//						i = labels.get(conditionalStatement.getFalseLabel());
+//				}
+//				else if(branch instanceof EndStatement) {
+//					i = tacts.size();
+//				}
+//			}
+//			else {
+//				++i;
+//			}
+//			machine.nextTact();
+//		}
+//	}
+	
 	/**
 	 * Allow to run command on W Machine instance.
 	 * @param machine W Machine instance that command will be run on
 	 */
 	public void run(WMachine machine) {
-		for(int i = 0; i < tacts.size(); ) {
-			Tact tact = tacts.get(i);
-			if(tact.hasSignals())
-				tact.run(machine);
-			if(tact.canBranch()) {
-				Branch branch = tact.getBranch();
-				if(branch instanceof ConditionalStatement) {
-					ConditionalStatement conditionalStatement = (ConditionalStatement)branch;
-					String flagName = conditionalStatement.getCondition();
-					Flag flag = Flag.valueOf(flagName);
-					if(machine.getFlag(flag))
-						i = labels.get(conditionalStatement.getTrueLabel());
-					else
-						i = labels.get(conditionalStatement.getFalseLabel());
-				}
-				else if(branch instanceof EndStatement) {
-					i = tacts.size();
-				}
-			}
-			else {
-				++i;
-			}
-			machine.nextTact();
-		}
+		nextTactIndex = 0;
+		while(!runTact(machine))
+			;
 	}
 	
+	/**
+	 * Allow to run single tact from this command.
+	 * @param machine W Machine instance that tact will be run on
+	 * @return True if all command tacts was executed or false if not.
+	 */
+	public Boolean runTact(WMachine machine) {
+		if(nextTactIndex == tacts.size())
+			nextTactIndex = 0;
+		Tact tact = tacts.get(nextTactIndex);
+		if(tact.hasSignals())
+			tact.run(machine);
+		if(tact.canBranch()) {
+			Branch branch = tact.getBranch();
+			if(branch instanceof ConditionalStatement) {
+				ConditionalStatement conditionalStatement = (ConditionalStatement)branch;
+				String flagName = conditionalStatement.getCondition();
+				Flag flag = Flag.valueOf(flagName);
+				if(machine.getFlag(flag))
+					nextTactIndex = labels.get(conditionalStatement.getTrueLabel());
+				else
+					nextTactIndex = labels.get(conditionalStatement.getFalseLabel());
+			}
+			else if(branch instanceof EndStatement) {
+				nextTactIndex = tacts.size();
+			}
+		}
+		else {
+			++nextTactIndex;
+		}
+		if(nextTactIndex == tacts.size())
+			return true;
+		return false;
+	}
+
 	/**
 	 * Check if command is valid.
 	 * TODO: throw another exception

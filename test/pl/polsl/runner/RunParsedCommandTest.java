@@ -8,6 +8,7 @@ import org.junit.Test;
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.WMachineFactory;
 import pl.polsl.architecture.components.finalized.Memory;
+import pl.polsl.architecture.components.finalized.MemoryCell;
 import pl.polsl.architecture.components.finalized.Register;
 import pl.polsl.parser.CommandParser;
 import pl.polsl.runner.command.Command;
@@ -47,6 +48,10 @@ public class RunParsedCommandTest {
 		assertEquals(0, L.peekValue().intValue());
 		assertEquals(0, A.peekValue().intValue());
 		assertEquals(0, memory.peekValue().intValue());
+		
+		int counter = 0;
+		for(MemoryCell cell : memory.getCells())
+			cell.replaceValue(counter++);
 		
 		memory.replaceValue(15);
 		assertEquals(15, memory.peekValue().intValue());

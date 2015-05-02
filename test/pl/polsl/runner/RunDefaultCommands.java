@@ -9,6 +9,7 @@ import pl.polsl.architecture.Flag;
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.WMachineFactory;
 import pl.polsl.architecture.components.finalized.Memory;
+import pl.polsl.architecture.components.finalized.MemoryCell;
 import pl.polsl.architecture.components.finalized.Register;
 import pl.polsl.runner.CommandList;
 import pl.polsl.runner.DefaultCommandList;
@@ -39,16 +40,20 @@ public class RunDefaultCommands {
 		assertEquals(0, A.peekValue().intValue());
 		assertEquals(0, memory.peekValue().intValue());
 		
-		memory.setValue(0, 15);
-		memory.setValue(1, 10);
-		memory.setValue(2, 7);
-		memory.setValue(3, 2);
-		memory.setValue(4, 0);
-		assertEquals(15, memory.getValue(0).intValue());
-		assertEquals(10, memory.getValue(1).intValue());
-		assertEquals(7, memory.getValue(2).intValue());
-		assertEquals(2, memory.getValue(3).intValue());
-		assertEquals(0, memory.getValue(4).intValue());
+		int counter = 0;
+		for(MemoryCell cell : memory.getCells())
+			cell.replaceValue(counter++);
+		
+		memory.replaceValue(0, 15);
+		memory.replaceValue(1, 10);
+		memory.replaceValue(2, 7);
+		memory.replaceValue(3, 2);
+		memory.replaceValue(4, 0);
+		assertEquals(15, memory.peekValue(0).intValue());
+		assertEquals(10, memory.peekValue(1).intValue());
+		assertEquals(7, memory.peekValue(2).intValue());
+		assertEquals(2, memory.peekValue(3).intValue());
+		assertEquals(0, memory.peekValue(4).intValue());
 		
 		commandList.getCommandByName("ADD").run(machine);
 		assertEquals(15, AK.peekValue().intValue());
@@ -66,7 +71,7 @@ public class RunDefaultCommands {
 		assertEquals(3, AK.peekValue().intValue());
 		assertEquals(4, A.peekValue().intValue());
 		assertEquals(2, I.peekValue().intValue());
-		assertEquals(3, memory.getValue(2).intValue());
+		assertEquals(3, memory.peekValue(2).intValue());
 		
 		commandList.getCommandByName("JMP").run(machine);
 		assertEquals(0, A.peekValue().intValue());

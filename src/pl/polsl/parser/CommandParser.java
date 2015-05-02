@@ -79,21 +79,6 @@ public class CommandParser {
 				else
 					throw new InvalidParameterException("Unknown parse error at line " + (i+1));
 			}
-			
-//			ITact parsedCommandLine = null;
-//			
-//			if(line.charAt(0) == '@'){
-//				parsedCommandLine = this.parseLineWithLabel(line);
-//			}
-//			else if(line.matches("(([a-zA-Z]+[ ]+)*[a-zA-Z]+);")){
-//				parsedCommandLine = this.parseLineOfSignals(line);	
-//			}
-//			else if(line.toUpperCase().matches(commandLineRegex)){
-//				parsedCommandLine = this.parseConditionStatement(line);
-//			}
-//			else{
-//				throw new InvalidParameterException("Parser error at line " + (i+1));
-//			}
 		}
 		state.command.setDescription(state.description.toString());
 		return state.command;
@@ -154,55 +139,6 @@ public class CommandParser {
 		/** Currently parsed command. */
 		public Command command = new Command();
 	}
-	
-//	private ITact parseConditionStatement(String line){
-//		ConditionalStatement statement = new ConditionalStatement();
-//		String[] splited = line.split("( )+");
-//		
-//		statement.setCondition(splited[1]);
-//		statement.setTrueLabel(splited[3]);
-//		statement.setFalseLabel(splited[6].replace(";", ""));
-//		
-//		return statement;
-//	}
-//	
-//	private ITact parseLineOfSignals(String line){
-//		line = line.trim();
-//		SetOfSignals signalsSet = new SetOfSignals();
-//		List<Integer> signalsList = this.getSignalIds(line);
-//		
-//		signalsSet.setSignalsList(signalsList);
-//		
-//		return signalsSet;
-//	}
-//	
-//	private String getConditionStatementRegex(){
-//		StringBuilder regex = new StringBuilder();
-//		regex.append(keyWordsLang.getKeyWord(KeyWords.IF.ID));
-//		regex.append("( )+[A-Z]+( )+");
-//		regex.append(keyWordsLang.getKeyWord(KeyWords.THEN.ID));
-//		regex.append("( )+@[A-Z]+( )+");
-//		regex.append(keyWordsLang.getKeyWord(KeyWords.IF_NOT.ID));
-//		regex.append("( )+@[A-Z]+( )*;");
-//		return regex.toString();
-//				
-//	}
-//	
-//	private ITact parseLineWithLabel(String line){
-//		LineWithLabel lineWithLabel = new LineWithLabel();
-//		line = line.trim();
-//		
-//		int spacePos = line.indexOf(" ");
-//		String label = line.substring(0, spacePos);
-//		line = line.substring(spacePos + 1);
-//		
-//		List<Integer> signalsList = this.getSignalIds(line);
-//		
-//		lineWithLabel.setLabel(label);
-//		lineWithLabel.setSignalsList(signalsList);
-//		
-//		return lineWithLabel;
-//	}
 	
 	private List<Integer> getSignalIds(String[] signals){
 		if(signals == null)
