@@ -81,3 +81,31 @@ values (5, 9, 'Reply start', '2015-04-14 16:39:09');
 insert into Reply (userID, topicID, replyText, date) 
 values (6, 10, 'Reply start', '2015-04-14 16:39:09');
 
+
+
+insert into CommandLists (listId, listName)
+values (0, 'Podstawowa lista rozkazów');
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'STP',  '// zakończenie programu\nCOMMAND STP;\nARGUMENTS 0;\nczyt wys wei il;\nstop;', 0, 0);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'ADD',  '// (Ak)+((Ad))->Ak\nCOMMAND ADD;\nczyt wys wei il;\nwyad wea;\nczyt wys weja dod weak wyl wea;', 0, 1);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'SUB',  '// (Ak)-((Ad))->Ak\nCOMMAND SUB;\nczyt wys wei il;\nwyad wea;\nczyt wys weja ode weak wyl wea;', 0, 2);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'LD',   '// ((Ad))->Ak\nCOMMAND LD;\nczyt wys wei il;\nwyad wea;\nczyt wys weja przep weak wyl wea;', 0, 3);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'ST',   '// ((Ad))->Ak\nCOMMAND ST;\nczyt wys wei il;\nwyad wea wyak wes;\npisz wyl wea;', 0, 4);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'JMP',  '// skok bezwarunkowy\nCOMMAND JMP;\nczyt wys wei il;\nwyad wea wel;\n', 0, 5);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'JMPN', '// skok gdy (AK) < 0\nCOMMAND JMPN;\nczyt wys wei il;\nIF SIGN THEN @ujemne ELSE @dodatnie;\n@ujemne wyad wea wel END;\n@dodatnie wyl wea;', 0, 6);
+
+insert into Commands (commandId, commandName, commandDefinition, commandListId, indexInCommandList)
+values (0, 'JMPZ', '// skok gdy (AK) < 0\nCOMMAND JMPZ;\nczyt wys wei il;\nIF ZERO THEN @zero ELSE @niezero;\n@zero wyad wea wel END;\n@niezero wyl wea;', 0, 7);
