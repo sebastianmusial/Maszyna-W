@@ -152,3 +152,37 @@
 #rightTab {
   margin-right: 130px;
 }
+
+.button-group {
+  font-size: 0;
+
+  button {
+    border-radius: 0;
+    margin: 0 -1px;
+    border-color: $gray;
+
+    &:hover {
+      z-index: 2;
+      position: relative;
+    }
+  }
+
+  button:last-of-type {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+  button:first-of-type {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+}
+
+.btn-right, .btn-right:hover {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.border-right--clear {
+  border-right: none;
+} 

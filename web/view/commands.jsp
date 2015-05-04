@@ -13,9 +13,12 @@
 			<div class="tab-pane fade in active fixed" id="newCommand">
 				<form class="form-horizontal">
 					<div class="input-group form-space">
-					  <input type="text" class="form-control" placeholder="Nazwa rozkazu">
+					  <input type="text" class="form-control border-right--clear" placeholder="Nazwa rozkazu">
+					  <div class="input-group-addon">
+				        <input type="checkbox" class="tip" data-toggle="tooltip"  data-original-title="argument" />
+				      </div>
 					  <div class="input-group-btn">
-					  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="dodaj"><i class="glyphicon glyphicon-plus"></i></button>
+					  	<button type="button" class="btn btn-default tip btn-right" data-toggle="tooltip" data-original-title="dodaj"><i class="glyphicon glyphicon-plus"></i></button>
 					  </div>
 					</div>
 					<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu"></textarea>
@@ -27,9 +30,9 @@
 						<select id="selectCommand" class="form-control" data-selected="-1">
 							<option class="fixed">Wszystko</option>
 						</select>
-						<div class="input-group-btn">
+						<span class="input-group-btn">
 						  	<button id="deleteCommand" type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="usuń"><i class="glyphicon glyphicon-trash"></i></button>
-						  </div>
+						  </span>
 					</div>
 					<div class="input-group form-space">
 						<select id="selectCommandList" class="form-control" data-selected="-1">
@@ -37,9 +40,9 @@
 						  <option>Lista dodatkowa</option>
 						  <option>Jakaś jeszcze lista</option>
 						</select>
-						<div class="input-group-btn">
+						<span class="input-group-btn">
 						  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="wczytaj"><i class="glyphicon glyphicon-level-up"></i></button>
-						  </div>
+						  </span>
 					</div>
 				</form>
 			</div>

@@ -7,10 +7,10 @@ function CommandTab(data) {
 		contentHtml = '\
 			<div class="tab-pane fade" id="' + data.name + '-content"> \
 				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>' + data.definition + '</textarea> \
-				<div class="btn-group edit-group"> \
+				<div class="button-group edit-group"> \
 					<button type="button" class="btn btn-default tip edit" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button> \
 				</div> \
-				<div class="btn-group confirm-group"> \
+				<div class="button-group confirm-group"> \
 					<button type="button" class="btn btn-default tip save" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button> \
 					<button type="button" class="btn btn-default tip cancel" data-toggle="tooltip" data-original-title="Anuluj"><i class="glyphicon glyphicon-remove"></i></button> \
 				</div> \

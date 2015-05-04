@@ -12,17 +12,26 @@
 					</label>
 				</div>
 				<div class="col-xs-6 btn-controls">
+					<button id="reset" type="button"
+						class="btn btn-default btn-tact tip" data-toggle="tooltip"
+						title="reset">
+						<i class="glyphicon glyphicon-stop"></i>
+					</button>
+					<button id="pause" type="button"
+						class="btn btn-default btn-tact tip" data-toggle="tooltip"
+						title="przerwa">
+						<i class="glyphicon glyphicon-pause"></i>
+					</button>
 					<button id="run-tact" type="button"
 						class="btn btn-default btn-tact tip" data-toggle="tooltip"
 						title="takt (F7)">
-						<i class="glyphicon glyphicon-fast-forward"></i>
+						<i class="glyphicon glyphicon-step-forward"></i>
 					</button>
 					<button id="run-command" type="button"
 						class="btn btn-default btn-tact tip" data-toggle="tooltip"
 						title="rozkaz (F8)">
-						<i class="glyphicon glyphicon-step-forward"></i>
+						<i class="glyphicon glyphicon-fast-forward"></i>
 					</button>
-
 					<button id="run-program" type="button"
 						class="btn btn-default btn-tact tip" data-toggle="tooltip"
 						title="program (F9)">
@@ -250,7 +259,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="inOutConsole">konsolka</div>
+				<div class="tab-pane fade" id="inOutConsole">
+					<form class="form-horizontal">
+					    <input type="text" class="form-control form-space" placeholder="Wejście" />
+						<textarea class="form-control form-space" rows="5" placeholder="Wyjście" disabled></textarea>
+					</form>
+				</div>
 			</div>
 		</div>
 
