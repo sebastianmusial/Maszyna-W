@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import pl.polsl.architecture.WMachine;
+import pl.polsl.database.CommandStorage;
 import pl.polsl.runner.CommandList;
 import pl.polsl.runner.command.Command;
 import pl.polsl.servlet.WMachineServletBase;
@@ -35,6 +38,9 @@ public class CommandListAccessor extends WMachineServletBase {
 		
 		switch(request.getParameter("action").toUpperCase()) {
 			case "GET":
+				CommandStorage storage = new CommandStorage();
+				response.setContentType("application/json;charset=UTF-8");
+				new Gson().toJson(storage.readCommandList(listId), response.getWriter());
 				break;
 				
 			case "ADD":

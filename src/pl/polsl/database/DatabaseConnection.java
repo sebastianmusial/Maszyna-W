@@ -3,6 +3,8 @@ package pl.polsl.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -13,20 +15,32 @@ import javax.servlet.http.HttpServletRequest;
 public class DatabaseConnection {
     
     private static boolean isCreated;
-    private static Connection con;
+    private static Connection connection;
+    
+    private static Properties connectionProperties;
     
     /**
      * Method used for returning singleton instance.
      * @return connection instance
      */
-    public Connection getInstance() {
-        return con;
+    public static Connection getInstance() {
+    	try {
+			if(!connection.isValid(10))
+				reconnect();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return connection;
     }
     
     /**
      * Constructor with parameter.
      * @param request HttpServletRequest object
+     * @deprecated Do not use constructor, instead use
+     * DatabaseConnection.getInstance() static method directly.
      */
+    @Deprecated
     public DatabaseConnection(HttpServletRequest request) {
         
         if (!isCreated) {
@@ -39,7 +53,7 @@ public class DatabaseConnection {
             try {
                 
                 Class.forName(db_driver);
-                con = DriverManager.getConnection(db_url, db_user, db_pass);
+                connection = DriverManager.getConnection(db_url, db_user, db_pass);
                 
             } catch (ClassNotFoundException ex) {
                 
@@ -53,6 +67,38 @@ public class DatabaseConnection {
                             
             isCreated = true;
             System.out.printf("First connection to database.\n");
+        }
+    }
+    
+    /**
+     * Constructs database connection using properties.
+     * Should be used only once in servlet context listener
+     * at context initialization.
+     * @param properties properties with database connection data
+     */
+    public DatabaseConnection(Properties properties) {
+    	if(!isCreated) {
+    		isCreated = true;
+    		connectionProperties = properties;
+    		reconnect();
+    		System.out.printf("First connection to database.\n");
+    	}
+    }
+    
+    private static void reconnect() {
+    	try {
+            String db_driver = connectionProperties.getProperty("DB_DRIVER");
+            String db_url    = connectionProperties.getProperty("DB_URL");
+            String db_user   = connectionProperties.getProperty("DB_USER");
+            String db_pass   = connectionProperties.getProperty("DB_PASS");
+            Class.forName(db_driver);
+            connection = DriverManager.getConnection(db_url, db_user, db_pass);
+        }
+        catch (ClassNotFoundException ex) {
+            System.err.println("Class not found exception: " + ex.getMessage());
+        }
+        catch (SQLException ex) {
+            System.err.println("SQL exception: " + ex.getMessage());
         }
     }
 }

@@ -48,4 +48,6 @@ $().ready(function() {
 		initInteractions();
 		setTimeout(CentralUnit.show, 25);
 	});
+	
+	initCommands();
 });

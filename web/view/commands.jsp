@@ -4,16 +4,13 @@
 <div class="row">
 	<div class="tabbable tabs-right">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#newCommand" data-toggle="tab"><i
+			<li class="active fixed"><a href="#newCommand" data-toggle="tab"><i
 					class="glyphicon glyphicon-pencil"></i> nowy</a></li>
-			<li><a href="#settingsCommand" data-toggle="tab"><i
+			<li class="fixed"><a href="#settingsCommand" data-toggle="tab"><i
 					class="glyphicon glyphicon-wrench"></i> ustawienia</a></li>
-			<li><a href="#dod" data-toggle="tab">DOD</a></li>
-			<li><a href="#ode" data-toggle="tab">ODE</a></li>
-			<li><a href="#lad" data-toggle="tab">ŁAD</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane fade in active" id="newCommand">
+			<div class="tab-pane fade in active fixed" id="newCommand">
 				<form class="form-horizontal">
 					<div class="input-group form-space">
 					  <input type="text" class="form-control" placeholder="Nazwa rozkazu">
@@ -24,23 +21,18 @@
 					<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu"></textarea>
 				</form>
 			</div>
-			<div class="tab-pane fade" id="settingsCommand">
+			<div class="tab-pane fade fixed" id="settingsCommand">
 				<form class="form-horizontal">
 					<div class="input-group form-space">
-						<select class="form-control">
-						  <option>DOD</option>
-						  <option>ODE</option>
-						  <option>ŁAD</option>
-						  <option>POB</option>
-						  <option>SOB</option>
-						  <option>Wszystko</option>
+						<select id="selectCommand" class="form-control" data-selected="-1">
+							<option class="fixed">Wszystko</option>
 						</select>
 						<div class="input-group-btn">
-						  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="usuń"><i class="glyphicon glyphicon-trash"></i></button>
+						  	<button id="deleteCommand" type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="usuń"><i class="glyphicon glyphicon-trash"></i></button>
 						  </div>
 					</div>
 					<div class="input-group form-space">
-						<select class="form-control">
+						<select id="selectCommandList" class="form-control" data-selected="-1">
 						  <option>Lista podstawowa</option>
 						  <option>Lista dodatkowa</option>
 						  <option>Jakaś jeszcze lista</option>
@@ -50,37 +42,6 @@
 						  </div>
 					</div>
 				</form>
-			</div>
-			<div class="tab-pane fade" id="dod">
-				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum dolor
-				sit amet, charetra varius quam sit amet vulputate. Quisque mauris
-				augue, molestie tincidunt condimentum vitae, gravida a
-				liberoThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit.
-				Duis pharetra varius quam sit amet vulputate. Quisque mauris augue,
-				molestie tincidunt condimentum vitae.Thirdamuno, ipsum dolor sit
-				amet, consectetur adipiscing elit.
-				</textarea>
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="ode">
-				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum </textarea>
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
-				</div>
-			</div>
-			<div class="tab-pane fade" id="lad">
-				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum</textarea>
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
-					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
-				</div>
 			</div>
 		</div>
 	</div>
