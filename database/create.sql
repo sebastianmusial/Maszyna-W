@@ -48,7 +48,7 @@ CREATE TABLE Programs
 	userID BIGINT UNSIGNED NOT NULL,
 	programName VARCHAR(30) NOT NULL,
 	programCode TEXT NOT NULL,
-	comment VARCHAR(100),
+	isPublic BOOL NOT NULL DEFAULT false,
 	PRIMARY KEY (programID),
 	KEY (userID)
 
@@ -62,8 +62,8 @@ CREATE TABLE Commands
 	userID BIGINT UNSIGNED NOT NULL,
 	commandName VARCHAR(10) NOT NULL,
 	commandCode TEXT NOT NULL,
-	comment VARCHAR(100),
 	arguments BOOL NOT NULL DEFAULT false,
+	isPublic BOOL NOT NULL DEFAULT false,
 	PRIMARY KEY (commandID),
 	KEY (userID)
 
