@@ -36,6 +36,7 @@
         <copy todir="${web}/doc">
             <fileset dir="${doc}" />
         </copy>
+    	<copy file="${src}/hibernate.cfg.xml" todir="${web}/WEB-INF/classes" />
         <war destfile="./build/WMachine.war" webxml="${web}/WEB-INF/web.xml">
             <fileset dir="${web}" />
             <classes dir="${build}"/>
