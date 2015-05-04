@@ -15,7 +15,10 @@
 			<div class="tab-pane fade in active" id="newProgram">
 				<form class="form-horizontal">
 					<div class="input-group form-space">
-					  <input type="text" class="form-control" placeholder="Nazwa programu">
+					  <input type="text" class="form-control border-right--clear" placeholder="Nazwa programu">
+					  <div class="input-group-addon">
+				        <input type="checkbox" class="tip" data-toggle="tooltip"  data-original-title="argument" />
+				      </div>
 					  <div class="input-group-btn">
 					  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="dodaj"><i class="glyphicon glyphicon-plus"></i></button>
 					  </div>
@@ -55,7 +58,7 @@
 				molestie tincidunt condimentum vitae.Thirdamuno, ipsum dolor sit
 				amet, consectetur adipiscing elit.
 				</textarea>
-				<div class="input-group-btn">
+				<div class="button-group">
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
@@ -63,7 +66,7 @@
 			</div>
 			<div class="tab-pane fade" id="b">
 				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>Lorem ipsum </textarea>
-				<div class="input-group-btn">
+				<div class="button-group">
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Usuń"><i class="glyphicon glyphicon-trash"></i></button>
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button>
 					<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="Zapisz"><i class="glyphicon glyphicon-floppy-saved"></i></button>
