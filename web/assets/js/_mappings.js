@@ -125,7 +125,8 @@ Mappings.Dom = {
 		InputPortAddress: $("#input-port-address"),
 		OutputPortAddress: $("#output-port-address"),
 		AcceptBitCountButton: $("#accept-bit-count-change")
-	}
+	},
+	Commands: {}
 };
 
 Mappings.Raphael = { Signals: {} };

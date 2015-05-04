@@ -22,6 +22,7 @@
 	<script src="assets/js/interaction/_settings.js"></script>
 	<script src="assets/js/interaction/_interaction.js"></script>
 	<script src="assets/js/interaction/_runner.js"></script>
+	<script src="assets/js/_commands.js"></script>
 	<script src="assets/js/_ready.js"></script>
 </body>
 </html>
