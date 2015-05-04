@@ -27,7 +27,9 @@
 </sql:query>
 
 <sql:query dataSource="${snapshot}" var="results">
-	SELECT concat(u.login,'')     AS postAuthor,
+	SELECT concat(r.replyID,'')   AS postID,
+		   concat (u.userID,'')   AS postAuthorID,
+		   concat(u.login,'')     AS postAuthor,
 		   concat(r.date,'')      AS postDate,
 		   concat(r.replyText,'') AS postBody
 	FROM Reply AS r,
@@ -47,9 +49,9 @@
 			<c:forEach var="topic" items="${topicInfo.rows}">
 				<span class="glyphicon glyphicon-list-alt"></span>
 				<h2>${topic.topicName}</h2>
-				<fmt:parseDate value="${topic.topicDate}" var="date"/>
-				<p>Rozpoczęty przez <strong>${topic.topicAuthor}</strong>, dnia <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></p>				
+				<p>Rozpoczęty przez <strong>${topic.topicAuthor}</strong>, dnia ${topic.topicDate}</p>				
 				<div class="post-count">${topic.postCount} odpowiedzi w tym temacie</div>
+				<c:set var="count" value="${topic.postCount}"/>
 			</c:forEach>
 		</header>
 		<main>
@@ -63,6 +65,14 @@
 						<p>Napisano: ${post.postDate}</p>
 						<article>${post.postBody}</article>
 					</div>
+					
+					<c:if test="${sessionScope.loggedUser != null && sessionScope.loggedID == post.postAuthorID && count != 1}">
+						<form action="RemovePost" method="POST">	
+							<input type="hidden" name="post_id" value="${post.postID}">
+							<input type="hidden" name="topic_id" value="${param.id}">		
+							<button type="submit" class="remove">Usuń post <span class="glyphicon glyphicon-remove"></span></button>
+						</form>
+					</c:if>
 				</div>
 			</c:forEach>
 		</main>
@@ -70,7 +80,6 @@
 	
 	<c:if test="${sessionScope.loggedUser != null}">
 		<section class="create-post">
-			<span class="glyphicon glyphicon-pencil"></span>
 			<h3>Napisz odpowiedź</h3>
 			<form name="createPost" method="POST" action="CreatePost" onsubmit="return createPostValidate()">
 				<textarea name="post_body" class="form-control" rows="15" id="post_body"></textarea>

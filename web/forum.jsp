@@ -59,19 +59,17 @@ ORDER BY r2.DATE DESC;
 	    	
 			<tbody>			
 				<c:forEach var="row" items="${result.rows}">
-					<tr>
+					<tr class="topic">
 						<td class="col-content">  
 							<h4 class="topic-headline"><a href="topic.jsp?id=${row.topicID}"><span class="glyphicon glyphicon-list-alt"></span>${row.topicName}</a></h4>	
-							<fmt:parseDate value="${row.topicDate}" var="date1"/>
-	   						<footer class="topic-footer">Założony przez <strong>${row.topicAuthor}</strong>, w dniu <fmt:formatDate pattern="yyyy-MM-dd" value="${date1}"/></footer>
+	   						<footer class="topic-footer">Założony przez <strong>${row.topicAuthor}</strong>, w dnia ${row.topicDate}</footer>
 						</td>																						
 						<td class="col-views">
 							<p>${row.postCount}</p>
 						</td>					
 						<td class="col-post">   										
 							<strong>${row.lastUser}</strong>
-							<fmt:parseDate value="${row.lastDate}" var="date2"/>
-							<footer class="post-footer"><fmt:formatDate pattern="dd-MM-yyyy" value="${date2}"/></footer>
+							<footer class="post-footer">${row.lastDate}</footer>
 						</td>
 					</tr>
 				</c:forEach>				
