@@ -10,6 +10,8 @@ insert into Users (login, password, emailAddress)
 values ('jozef', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'jozef@jozef.pl');
 insert into Users (login, password, emailAddress)
 values ('test', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'test@raku.pl');
+insert into Users (login, password, emailAddress)
+values ('test2', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'tes2@raku.pl');
 
 insert into Categories (categoryName)
 values ('Ogłoszenia');

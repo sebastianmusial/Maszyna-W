@@ -1,16 +1,97 @@
-
-
-DROP TABLE IF EXISTS Categories CASCADE
+DROP TABLE IF EXISTS ProgramMMLibrary CASCADE
+;
+DROP TABLE IF EXISTS CommandMMLibrary CASCADE
+;
+DROP TABLE IF EXISTS Programs CASCADE
+;
+DROP TABLE IF EXISTS Commands CASCADE
+;
+DROP TABLE IF EXISTS ProgramsLibrary CASCADE
+;
+DROP TABLE IF EXISTS CommandsLibrary CASCADE
 ;
 DROP TABLE IF EXISTS Reply CASCADE
 ;
 DROP TABLE IF EXISTS Topics CASCADE
 ;
+DROP TABLE IF EXISTS Categories CASCADE
+;
 DROP TABLE IF EXISTS Users CASCADE
 ;
 
-DROP TABLE IF EXISTS CommandLists CASCADE;
-DROP TABLE IF EXISTS Commands CASCADE;
+CREATE TABLE ProgramMMLibrary
+(
+	programLibraryID BIGINT UNSIGNED NOT NULL,
+	programID BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY (programLibraryID, programID),
+	KEY (programID),
+	KEY (programLibraryID)
+
+) 
+;
+
+
+CREATE TABLE CommandMMLibrary
+(
+	commandLibraryID BIGINT UNSIGNED NOT NULL,
+	commandID BIGINT UNSIGNED NOT NULL,
+	KEY (commandID),
+	KEY (commandLibraryID)
+
+) 
+;
+
+
+CREATE TABLE Programs
+(
+	programID BIGINT UNSIGNED NOT NULL,
+	userID BIGINT UNSIGNED NOT NULL,
+	programName VARCHAR(30) NOT NULL,
+	programCode TEXT NOT NULL,
+	comment VARCHAR(100),
+	PRIMARY KEY (programID),
+	KEY (userID)
+
+) 
+;
+
+
+CREATE TABLE Commands
+(
+	commandID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	userID BIGINT UNSIGNED NOT NULL,
+	commandName VARCHAR(10) NOT NULL,
+	commandCode TEXT NOT NULL,
+	comment VARCHAR(100),
+	arguments BOOL NOT NULL DEFAULT false,
+	PRIMARY KEY (commandID),
+	KEY (userID)
+
+) 
+;
+
+
+CREATE TABLE ProgramsLibrary
+(
+	programLibraryID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	userID BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY (programLibraryID),
+	KEY (userID)
+
+) 
+;
+
+
+CREATE TABLE CommandsLibrary
+(
+	commandLibraryID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	userID BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY (commandLibraryID),
+	KEY (userID)
+
+) 
+;
+
 
 CREATE TABLE Categories
 (
@@ -29,7 +110,9 @@ CREATE TABLE Reply
 	topicID BIGINT UNSIGNED NOT NULL,
 	replyText TEXT NOT NULL,
 	date DATETIME NOT NULL,
-	PRIMARY KEY (replyID)
+	PRIMARY KEY (replyID),
+	KEY (topicID),
+	KEY (userID)
 
 ) 
 ;
@@ -42,7 +125,9 @@ CREATE TABLE Topics
 	categoryID BIGINT UNSIGNED NOT NULL,
 	topicName VARCHAR(50) NOT NULL,
 	date DATETIME NOT NULL,
-	PRIMARY KEY (topicID)
+	PRIMARY KEY (topicID),
+	KEY (categoryID),
+	KEY (userID)
 
 ) 
 ;
@@ -54,25 +139,67 @@ CREATE TABLE Users
 	login VARCHAR(30) NOT NULL,
 	password VARCHAR(64) NOT NULL,
 	emailAddress VARCHAR(30) NOT NULL,
+	privilegesLevel SMALLINT NOT NULL DEFAULT 10,
 	PRIMARY KEY (userID)
 
 ) 
 ;
 
-CREATE TABLE CommandLists
-(
-	listId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	listName VARCHAR(30) NOT NULL,
-	PRIMARY KEY (listId)
-);
 
-CREATE TABLE Commands
-(
-	commandId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	commandName VARCHAR(30) NOT NULL,
-	commandDefinition TEXT NOT NULL,
-	commandListId BIGINT UNSIGNED NOT NULL,
-	indexInCommandList SMALLINT UNSIGNED NOT NULL,
-	PRIMARY KEY (commandId),
-	INDEX listIndex (commandListId)
-);
+ALTER TABLE ProgramMMLibrary ADD CONSTRAINT FK_ProgramMMLibrary_Program 
+	FOREIGN KEY (programID) REFERENCES Programs (programID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE ProgramMMLibrary ADD CONSTRAINT FK_ProgramMMLibrary_ProgramsLibrary 
+	FOREIGN KEY (programLibraryID) REFERENCES ProgramsLibrary (programLibraryID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE CommandMMLibrary ADD CONSTRAINT FK_CommandMMLibrary_Command 
+	FOREIGN KEY (commandID) REFERENCES Commands (commandID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE CommandMMLibrary ADD CONSTRAINT FK_CommandMMLibrary_CommandsLibrary 
+	FOREIGN KEY (commandLibraryID) REFERENCES CommandsLibrary (commandLibraryID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE Programs ADD CONSTRAINT FK_Program_User 
+	FOREIGN KEY (userID) REFERENCES Users (userID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE Commands ADD CONSTRAINT FK_Command_User 
+	FOREIGN KEY (userID) REFERENCES Users (userID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE ProgramsLibrary ADD CONSTRAINT FK_ProgramsLibrary_User 
+	FOREIGN KEY (userID) REFERENCES Users (userID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE CommandsLibrary ADD CONSTRAINT FK_CommandsLibrary_User 
+	FOREIGN KEY (userID) REFERENCES Users (userID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE Reply ADD CONSTRAINT FK_Reply_Topics 
+	FOREIGN KEY (topicID) REFERENCES Topics (topicID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+;
+
+ALTER TABLE Reply ADD CONSTRAINT FK_Reply_User 
+	FOREIGN KEY (userID) REFERENCES Users (userID)
+;
+
+ALTER TABLE Topics ADD CONSTRAINT FK_Topics_Categories 
+	FOREIGN KEY (categoryID) REFERENCES Categories (categoryID)
+;
+
+ALTER TABLE Topics ADD CONSTRAINT FK_Topics_User 
+	FOREIGN KEY (userID) REFERENCES Users (userID)
+	ON DELETE NO ACTION ON UPDATE NO ACTION
+;
