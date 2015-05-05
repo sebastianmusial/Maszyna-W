@@ -88,7 +88,7 @@ values (6, 10, 'Reply start', '2015-04-14 16:39:09');
 
 
 
-insert into Commands (userID, commandName, commandCode, arguments, isPublic)
+insert into Commands (userID, commandName, commandCode, arguments, isPublic, )
 values (1, 'STP', '// zakończenie programu\nCOMMAND STP;\nARGUMENTS 0;\nczyt wys wei il;\nstop;', false, true);
 
 insert into Commands (userID, commandName, commandCode, arguments, isPublic)
