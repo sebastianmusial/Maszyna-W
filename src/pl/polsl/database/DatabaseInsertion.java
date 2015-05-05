@@ -21,23 +21,26 @@ public class DatabaseInsertion {
 	 * @param userLogin user login name
 	 * @param userPass user password
 	 * @param userEmail user email address
+	 * @param privilegesLevel privileges for newly created user
 	 * @throws SQLException an exception that provides information on a database access error or other errors
 	 * @throws Exception an exception if error occurs
 	 */
 	public static void insertUser(Connection con, 
 									  String userLogin, 
 									  String userPass, 
-									  String userEmail) throws SQLException, Exception {				
+									  String userEmail,
+									  int privilegesLevel) throws SQLException, Exception {				
 		PreparedStatement pst = null;
 		PassEncryption encryption = new PassEncryption();
 		
 		try {		
-            pst = con.prepareStatement("INSERT INTO Users VALUES (?, ?, ?, ?)");
+            pst = con.prepareStatement("INSERT INTO Users VALUES (?, ?, ?, ?, ?)");
 
             pst.setNull(1, 0);
             pst.setString(2, userLogin);
             pst.setString(3, encryption.hashS256(userPass));
             pst.setString(4, userEmail);
+            pst.setInt(5, privilegesLevel);
 
             pst.executeUpdate();
             

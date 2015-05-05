@@ -26,26 +26,29 @@ public class DatabaseQuery {
 	public static List<String> findUser(Connection con, String userName, String userPass) throws SQLException, Exception {		
 		PreparedStatement pst = null;
 		String loggedUserName = null;
-		String loggedUserID = null;
-		List<String> result = null;
+		String loggedUserID   = null;
+		String privileges     = null;
+		List<String> result   = null;
 		
 		PassEncryption encryption = new PassEncryption();
 		
 		try {			
-			pst = con.prepareStatement("SELECT login, userID FROM Users WHERE login = ? AND password = ?");
+			pst = con.prepareStatement("SELECT login, userID, privilegesLevel FROM Users WHERE login = ? AND password = ?");
 	        pst.setString(1, userName);
 	        pst.setString(2, encryption.hashS256(userPass));
 	        	        
 	        ResultSet rs = pst.executeQuery();
 	        
 			while (rs.next()) {			 
-				loggedUserID = rs.getString("userID");
+				loggedUserID   = rs.getString("userID");
 				loggedUserName = rs.getString("login");
+				privileges     = Integer.toString(rs.getInt("privilegesLevel"));
 			}
 			
 			result = new ArrayList<String>();
 			result.add(loggedUserID);
 			result.add(loggedUserName);
+			result.add(privileges);
 	        
 		} finally {				
 			if (pst != null) {

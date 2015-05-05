@@ -32,6 +32,13 @@ svg {
 	}
 }
 
+.hover-opacity {
+	opacity: 1.0; 
+	@include transition(opacity);
+
+    &:hover { opacity: 0.7; }
+}
+
 img {
 	max-width: 100%;
 	height: auto;

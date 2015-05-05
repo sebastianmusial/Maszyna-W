@@ -66,7 +66,7 @@
 						<article>${post.postBody}</article>
 					</div>
 					
-					<c:if test="${sessionScope.loggedUser != null && sessionScope.loggedID == post.postAuthorID && count != 1}">
+					<c:if test="${sessionScope.loggedUser != null && sessionScope.loggedID == post.postAuthorID && sessionScope.privileges >= 10 && count != 1}">
 						<form action="RemovePost" method="POST">	
 							<input type="hidden" name="post_id" value="${post.postID}">
 							<input type="hidden" name="topic_id" value="${param.id}">		

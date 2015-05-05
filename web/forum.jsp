@@ -46,7 +46,7 @@ ORDER BY r2.DATE DESC;
 	<%@ include file="view/navbar-forum.jsp" %>
 
 	<section class="forum">	
-		<table class="table table-category">
+		<table class="table table-category table-striped">
 		
 			<thead>
 		        <tr><th colspan="3" class="category-header"><h3>Spoleczność Maszyny W</h3></th></tr>
@@ -59,7 +59,7 @@ ORDER BY r2.DATE DESC;
 	    	
 			<tbody>			
 				<c:forEach var="row" items="${result.rows}">
-					<tr class="topic">
+					<tr class="topic hover-opacity">
 						<td class="col-content">  
 							<h4 class="topic-headline"><a href="topic.jsp?id=${row.topicID}"><span class="glyphicon glyphicon-list-alt"></span>${row.topicName}</a></h4>	
 	   						<footer class="topic-footer">Założony przez <strong>${row.topicAuthor}</strong>, w dnia ${row.topicDate}</footer>

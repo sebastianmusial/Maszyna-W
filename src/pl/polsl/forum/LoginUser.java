@@ -59,8 +59,9 @@ public class LoginUser extends HttpServlet {
         if (error == 0) {       	
         	HttpSession session = request.getSession(true);
         	session.setAttribute("loggedID", result.get(0));  
-        	session.setAttribute("loggedUser", result.get(1));  
-        	session.setAttribute("isAdmin", false); 
+        	session.setAttribute("loggedUser", result.get(1));
+        	session.setAttribute("privileges", Integer.parseInt(result.get(2)));
+        	session.setAttribute("isAdmin", false);
         	
         	response.sendRedirect("index.jsp");
         } else {     

@@ -22,6 +22,8 @@ import pl.polsl.database.*;
 public class RegisterUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	/** Privileges level for newly created user */
+	final int privilegesLevel = 10;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -45,7 +47,7 @@ public class RegisterUser extends HttpServlet {
     	Connection con = new DatabaseConnection(request).getInstance();
     	
     	try {
-    		DatabaseInsertion.insertUser(con, user_login, user_pass, user_email);
+    		DatabaseInsertion.insertUser(con, user_login, user_pass, user_email, privilegesLevel);
 		} catch (SQLException e) {
 			error = 1;
 		} catch (Exception e) {
@@ -63,5 +65,4 @@ public class RegisterUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
-
 }
