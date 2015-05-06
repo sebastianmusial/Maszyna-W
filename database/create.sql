@@ -30,6 +30,7 @@ CREATE TABLE ProgramMMLibrary
 	KEY (programLibraryID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -43,6 +44,7 @@ CREATE TABLE CommandsLists
 	KEY (userID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -57,6 +59,7 @@ CREATE TABLE Programs
 	KEY (userID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -72,6 +75,7 @@ CREATE TABLE Commands
 	KEY (commandListID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -83,6 +87,7 @@ CREATE TABLE ProgramsLibrary
 	KEY (userID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -96,6 +101,7 @@ CREATE TABLE Categories
 	PRIMARY KEY (categoryID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -111,6 +117,7 @@ CREATE TABLE Reply
 	KEY (userID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -126,6 +133,7 @@ CREATE TABLE Topics
 	KEY (userID)
 
 ) 
+ENGINE=InnoDB
 ;
 
 
@@ -138,7 +146,8 @@ CREATE TABLE Users
 	privilegesLevel SMALLINT NOT NULL DEFAULT 10,
 	PRIMARY KEY (userID)
 
-) 
+)
+ENGINE=InnoDB 
 ;
 
 
@@ -171,8 +180,6 @@ ALTER TABLE ProgramsLibrary ADD CONSTRAINT FK_ProgramsLibrary_User
 	FOREIGN KEY (userID) REFERENCES Users (userID)
 	ON DELETE CASCADE ON UPDATE CASCADE
 ;
-
-
 
 ALTER TABLE Reply ADD CONSTRAINT FK_Reply_Topics 
 	FOREIGN KEY (topicID) REFERENCES Topics (topicID)
