@@ -17,16 +17,8 @@ import pl.polsl.storage.dao.UsersDAO;
 
 public class Test {
 	public static void main(String[] args) {
-		UserStorage user = UsersDAO.getByLoginAndPassword("raku", "haslo");
-		if (user != null) {
-			List<CommandsListStorage> list = CommandsListDAO.getByUser(user);
-
-			for (CommandsListStorage r : list) {
-				System.out.println(r.getName());
-			}
-		} else {
-			System.out.println("Zle haslo/login!");
-		}
+		CommandsListStorage co = CommandsListDAO.getStandardList();
+		System.out.println(co.getName());
 	}
 
 }

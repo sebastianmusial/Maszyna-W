@@ -13,7 +13,8 @@ import java.util.List;
 @NamedQueries({ 
 	@NamedQuery(name = "CommandsListStorage.findAll", query = "SELECT c FROM CommandsListStorage c"),
 	@NamedQuery(name = "CommandsListStorage.findByUser", query = "SELECT c FROM CommandsListStorage c WHERE c.user = :user"),
-	@NamedQuery(name = "CommandsListStorage.findByUserIfPublic", query = "SELECT c FROM CommandsListStorage c WHERE c.user = :user or c.isPublic = 1")
+	@NamedQuery(name = "CommandsListStorage.findByUserIfPublic", query = "SELECT c FROM CommandsListStorage c WHERE c.user = :user or c.isPublic = 1"),
+	@NamedQuery(name = "CommandsListStorage.getStandardList", query = "SELECT c FROM CommandsListStorage c WHERE c.user.login = 'admin'")
 })
 public class CommandsListStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
