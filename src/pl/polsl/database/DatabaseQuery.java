@@ -58,4 +58,40 @@ public class DatabaseQuery {
 			
 		return result;
 	}
+	
+	/**
+	 * Find login in the database
+	 * @param con database connection
+	 * @param userName user name
+	 * @return true (if found), false (if not found) 
+	 * @throws SQLException an exception that provides information on a database access error or other errors
+	 * @throws Exception an exception if error occurs
+	 */
+	public static Boolean findLogin(Connection con, String userName) throws SQLException, Exception {		
+		PreparedStatement pst = null;
+		String resultString   = null;
+		Boolean result		  = false;
+				
+		try {			
+			pst = con.prepareStatement("SELECT userID FROM Users WHERE login = ?");
+	        pst.setString(1, userName);
+	        	        
+	        ResultSet rs = pst.executeQuery();
+	        
+			while (rs.next()) {		 
+				resultString   = rs.getString("userID");
+			}
+			
+			if (resultString != null) {
+				result = true;
+			}
+			
+		} finally {				
+			if (pst != null) {
+				pst.close();
+			}			
+		}
+			
+		return result;
+	}
 }
