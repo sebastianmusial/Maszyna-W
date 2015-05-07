@@ -1,17 +1,21 @@
 package pl.polsl.storage;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.*;
+
+import java.util.List;
 
 /**
  * The persistent class for the Users database table.
  * 
  */
 @Entity
-@Table(name="Users")
-@NamedQuery(name="UserStorage.findAll", query="SELECT u FROM UserStorage u")
+@Table(name = "Users")
+@NamedQueries({ 
+		@NamedQuery(name = "UserStorage.findAll", query = "SELECT u FROM UserStorage u"),
+		@NamedQuery(name = "UserStorage.findByName", query = "SELECT u FROM UserStorage u WHERE u.login = :login")
+})
 public class UserStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,24 +30,24 @@ public class UserStorage implements Serializable {
 
 	private short privilegesLevel;
 
-	//bi-directional many-to-one association to CommandsListStorage
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to CommandsListStorage
+	@OneToMany(mappedBy = "user")
 	private List<CommandsListStorage> commandsLists;
 
-	//bi-directional many-to-one association to ProgramStorage
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to ProgramStorage
+	@OneToMany(mappedBy = "user")
 	private List<ProgramStorage> programs;
 
-	//bi-directional many-to-one association to ProgramsLibraryStorage
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to ProgramsLibraryStorage
+	@OneToMany(mappedBy = "user")
 	private List<ProgramsLibraryStorage> programsLibraries;
 
-	//bi-directional many-to-one association to ReplyStorage
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to ReplyStorage
+	@OneToMany(mappedBy = "user")
 	private List<ReplyStorage> replies;
 
-	//bi-directional many-to-one association to TopicStorage
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to TopicStorage
+	@OneToMany(mappedBy = "user")
 	private List<TopicStorage> topics;
 
 	public UserStorage() {
@@ -104,7 +108,8 @@ public class UserStorage implements Serializable {
 		return commandsList;
 	}
 
-	public CommandsListStorage removeCommandsList(CommandsListStorage commandsList) {
+	public CommandsListStorage removeCommandsList(
+			CommandsListStorage commandsList) {
 		getCommandsLists().remove(commandsList);
 		commandsList.setUser(null);
 
@@ -137,18 +142,21 @@ public class UserStorage implements Serializable {
 		return this.programsLibraries;
 	}
 
-	public void setProgramsLibraries(List<ProgramsLibraryStorage> programsLibraries) {
+	public void setProgramsLibraries(
+			List<ProgramsLibraryStorage> programsLibraries) {
 		this.programsLibraries = programsLibraries;
 	}
 
-	public ProgramsLibraryStorage addProgramsLibrary(ProgramsLibraryStorage programsLibrary) {
+	public ProgramsLibraryStorage addProgramsLibrary(
+			ProgramsLibraryStorage programsLibrary) {
 		getProgramsLibraries().add(programsLibrary);
 		programsLibrary.setUser(this);
 
 		return programsLibrary;
 	}
 
-	public ProgramsLibraryStorage removeProgramsLibrary(ProgramsLibraryStorage programsLibrary) {
+	public ProgramsLibraryStorage removeProgramsLibrary(
+			ProgramsLibraryStorage programsLibrary) {
 		getProgramsLibraries().remove(programsLibrary);
 		programsLibrary.setUser(null);
 

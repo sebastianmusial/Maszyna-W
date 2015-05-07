@@ -88,6 +88,15 @@ values (6, 10, 'Reply start', '2015-04-14 16:39:09');
 insert into CommandsLists(userID, isPublic, name)
 values (1, true, 'Standard list');
 
+insert into CommandsLists(userID, isPublic, name)
+values (2, true, 'Test list');
+
+insert into CommandsLists(userID, isPublic, name)
+values (2, false, 'Test list 2');
+
+insert into CommandsLists(userID, isPublic, name)
+values (3, false, 'Test list 3');
+
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
 values (1, 'STP', '// zakończenie programu\nCOMMAND STP;\nARGUMENTS 0;\nczyt wys wei il;\nstop;', false, 0);
 

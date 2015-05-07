@@ -4,14 +4,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the CommandsLists database table.
  * 
  */
 @Entity
-@Table(name="CommandsLists")
-@NamedQuery(name="CommandsListStorage.findAll", query="SELECT c FROM CommandsListStorage c")
+@Table(name = "CommandsLists")
+@NamedQueries({ 
+	@NamedQuery(name = "CommandsListStorage.findAll", query = "SELECT c FROM CommandsListStorage c"),
+	@NamedQuery(name = "CommandsListStorage.findByUser", query = "SELECT c FROM CommandsListStorage c WHERE c.user = :user"),
+	@NamedQuery(name = "CommandsListStorage.findByUserIfPublic", query = "SELECT c FROM CommandsListStorage c WHERE c.user = :user or c.isPublic = 1")
+})
 public class CommandsListStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,13 +25,13 @@ public class CommandsListStorage implements Serializable {
 
 	private String name;
 
-	//bi-directional many-to-one association to CommandStorage
-	@OneToMany(mappedBy="commandsList")
+	// bi-directional many-to-one association to CommandStorage
+	@OneToMany(mappedBy = "commandsList")
 	private List<CommandStorage> commands;
 
-	//bi-directional many-to-one association to UserStorage
+	// bi-directional many-to-one association to UserStorage
 	@ManyToOne
-	@JoinColumn(name="userID")
+	@JoinColumn(name = "userID")
 	private UserStorage user;
 
 	public CommandsListStorage() {

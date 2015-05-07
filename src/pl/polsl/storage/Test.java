@@ -11,19 +11,21 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import pl.polsl.hibernate.DatabaseConnector;
+import pl.polsl.storage.dao.CommandsListDAO;
+import pl.polsl.storage.dao.UsersDAO;
+
 public class Test {
 	public static void main(String[] args) {
-//		Configuration configuration = new Configuration();
-//		configuration.configure("hibernate.cfg.xml");
-//		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-//	            configuration.getProperties()).build();
-		EntityManagerFactory emFactory = Persistence
-				.createEntityManagerFactory("Maszyna-W");
-		EntityManager em = emFactory.createEntityManager();
-		Query q = em.createNamedQuery("UserStorage.findAll");
-		List<UserStorage> a = q.getResultList();
-		for (UserStorage u : a) {
-			System.out.println(u.getLogin());
+		UserStorage user = UsersDAO.getByLoginAndPassword("raku", "haslo");
+		if (user != null) {
+			List<CommandsListStorage> list = CommandsListDAO.getByUser(user);
+
+			for (CommandsListStorage r : list) {
+				System.out.println(r.getName());
+			}
+		} else {
+			System.out.println("Zle haslo/login!");
 		}
 	}
 
