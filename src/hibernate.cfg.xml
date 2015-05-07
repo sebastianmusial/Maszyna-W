@@ -30,7 +30,14 @@
         <property name="hbm2ddl.auto">update</property>
         
         <!-- Mappings -->
-        <mapping class="pl.polsl.storage.StoredCommand" />
+        <mapping class="pl.polsl.storage.CategoryStorage" />
+		<mapping class="pl.polsl.storage.CommandStorage" />
+		<mapping class="pl.polsl.storage.CommandsListStorage" />
+		<mapping class="pl.polsl.storage.ProgramStorage" />
+		<mapping class="pl.polsl.storage.ProgramsLibraryStorage" />
+		<mapping class="pl.polsl.storage.ReplyStorage" />
+		<mapping class="pl.polsl.storage.TopicStorage" />
+		<mapping class="pl.polsl.storage.UserStorage" />
         
     </session-factory>
 </hibernate-configuration>

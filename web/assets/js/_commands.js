@@ -6,7 +6,7 @@ function CommandTab(data) {
 	var mapping = Mappings.Dom.Commands,
 		contentHtml = '\
 			<div class="tab-pane fade" id="' + data.name + '-content"> \
-				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>' + data.definition + '</textarea> \
+				<textarea class="form-control form-space" rows="3" placeholder="Kod rozkazu" disabled>' + data.code + '</textarea> \
 				<div class="button-group edit-group"> \
 					<button type="button" class="btn btn-default tip edit" data-toggle="tooltip" data-original-title="Edytuj"><i class="glyphicon glyphicon-edit"></i></button> \
 				</div> \
