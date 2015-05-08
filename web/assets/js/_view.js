@@ -304,7 +304,19 @@ MW.showExtension = function() {
             components[i].fadeOut(0);
         }
     }
-    
+    MW.showInOutConsole();
+};
+
+MW.showInOutConsole = function() {
+	var checkbox = Mappings.Dom.Settings.Extensions.INPUT_OUTPUT;
+	var inOutTab = $('#inOutTab');
+	
+	if(checkbox.prop('checked')) {
+		inOutTab.fadeIn(500);
+	}
+	else { 
+		inOutTab.fadeOut(500);
+	}
 };
 
 
