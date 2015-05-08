@@ -24,10 +24,12 @@ function Signal(signalId, objects) {
 				label.animate( MW.attr.inactiveCommand, 250 ).data('status', 0);
 		        arrow.animate( MW.attr.inactiveArrow, 250 ).data('status', 0);
 			}
-		}
+		},
+		send: function() { $.get("SignalAccessor", {signalId: signalId, signalEnabled: signal.state}); }
 	};
     label.click(function() {
-		$.get("SignalAccessor", {signalId: signalId, signalEnabled: !signal.state});
+    	signal.state = !signal.state;
+		signal.send();
 	});
     return signal;
 }

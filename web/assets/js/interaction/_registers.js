@@ -10,7 +10,8 @@ function Register(registerId, input) {
 		get name() { return div.attr('data-name'); },
 		set name(value) { div.attr('data-name', value); },
 		get value() { return input.prop('value'); },
-		set value(value) { input.prop('value', value); }
+		set value(value) { input.prop('value', value); },
+		send: function() { input.change(); }
 	}; 
 	input.change(function() {
 		var args, pattern = /^\d+$/;

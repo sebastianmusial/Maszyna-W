@@ -52,6 +52,25 @@ function initRunner() {
 			$.get("RunnerAccessor", {run: "TACT"}).done(restoreState);
 	});
 	
+	$("#reset").click(function() {
+		var key, register, signal;
+		for(key in MW.Registers) {
+			register = MW.Registers[key];
+			register.value = 0;
+			register.send();
+		}
+		for(key in MW.Signals) {
+			signal = MW.Signals[key];
+			signal.state = false;
+			signal.send();
+		}
+	});
+	
+	$("#stop").click(function() {
+		
+	});
+	
+	
 	$('#rightTab a').click(function (e) {
 		  e.preventDefault();
 		  $(this).tab('show');

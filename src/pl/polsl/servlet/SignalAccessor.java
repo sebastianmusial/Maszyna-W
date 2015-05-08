@@ -31,6 +31,7 @@ public class SignalAccessor extends WMachineServletBase {
 		boolean signalEnabled = Boolean.parseBoolean(request.getParameter("signalEnabled"));
 		WMachine machine = getCurrentWMachine(request.getSession());
 		Signal signal = machine.getSignal(signalId);
-		signal.setEnabled(signalEnabled);
+		if(signal != null)
+			signal.setEnabled(signalEnabled);
 	}
 }
