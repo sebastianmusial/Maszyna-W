@@ -15,12 +15,12 @@
 					<button id="reset" type="button"
 						class="btn btn-default btn-tact tip" data-toggle="tooltip"
 						title="reset">
-						<i class="glyphicon glyphicon-stop"></i>
+						<i class="glyphicon glyphicon-refresh"></i>
 					</button>
-					<button id="pause" type="button"
+					<button id="stop" type="button"
 						class="btn btn-default btn-tact tip" data-toggle="tooltip"
-						title="przerwa">
-						<i class="glyphicon glyphicon-pause"></i>
+						title="stop">
+						<i class="glyphicon glyphicon-stop"></i>
 					</button>
 					<button id="run-tact" type="button"
 						class="btn btn-default btn-tact tip" data-toggle="tooltip"
@@ -42,7 +42,7 @@
 			<ul class="nav nav-tabs" id="leftTab">
 				<li class="active"><a href="#settings"><i
 						class="glyphicon glyphicon-cog"> </i> Ustawienia</a></li>
-				<li><a href="#inOutConsole"><i
+				<li id="inOutTab"><a href="#inOutConsole"><i
 						class="glyphicon glyphicon-transfer"> </i> Konsola wejścia-wyjścia</a></li>
 			</ul>
 			<div class="tab-content">
