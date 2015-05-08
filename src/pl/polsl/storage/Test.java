@@ -17,8 +17,8 @@ import pl.polsl.storage.dao.UsersDAO;
 
 public class Test {
 	public static void main(String[] args) {
-		CommandsListStorage co = CommandsListDAO.getStandardList();
-		System.out.println(co.getName());
+		List<CommandStorage> co = CommandsListDAO.getStandardList();
+		System.out.println(co);
 	}
 
 }
