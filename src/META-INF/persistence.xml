@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="WMachine">
+	<persistence-unit name="WMachine" transaction-type="JTA">
 		<class>pl.polsl.storage.TopicStorage</class>
 		<class>pl.polsl.storage.CategoryStorage</class>
 		<class>pl.polsl.storage.CommandsListStorage</class>
@@ -12,12 +11,14 @@
 		<class>pl.polsl.storage.ProgramStorage</class>
 		<class>pl.polsl.storage.UserStorage</class>
 		<class>pl.polsl.storage.ReplyStorage</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.connection.url"
 				value="jdbc:mysql://mysql3.hekko.net.pl:3306/sssebuss_bd" />
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.username" value="sssebuss_bd" />
-			<property name="hibernate.connection.password" value="maszynaW2015" />		
+			<property name="hibernate.connection.password" value="maszynaW2015" />
 		</properties>
 
 	</persistence-unit>

@@ -1,7 +1,6 @@
 package pl.polsl.forum;
 
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 import pl.polsl.database.DatabaseConnection;
 import pl.polsl.database.DatabaseQuery;
@@ -43,12 +48,21 @@ public class LoginUser extends HttpServlet {
     	String userLogin = request.getParameter("user_name");
     	String userPass  = request.getParameter("user_pass");
     	
-    	List<UserStorage> userList = UsersDAO.getAll();
+//    	List<UserStorage> userList = UsersDAO.getAll();
     	
-    	
-    	
-    	
-    	int error = 0;
+    	Configuration configuration = new Configuration();
+    	configuration.configure();
+    	StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        SessionFactory sessionFactory = configuration.buildSessionFactory(ssrb.build());
+        Session session2 = sessionFactory.openSession();
+        
+        session2.beginTransaction();
+        Query q = session2.createQuery("SELECT u FROM UserStorage u");
+        List<?> userList = q.list();
+        UserStorage u = (UserStorage)userList.get(0);
+        
+        
+        int error = 0;
     	List<String> result = null;
     	
     	Connection con = new DatabaseConnection(request).getInstance();

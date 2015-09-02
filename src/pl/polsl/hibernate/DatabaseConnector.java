@@ -17,7 +17,7 @@ public class DatabaseConnector {
 	}
 
 	public void connect() {
-		emFactory = Persistence.createEntityManagerFactory("WMachine");
+		emFactory = Persistence.createEntityManagerFactory("WMachine2");
 		em = emFactory.createEntityManager();
 	}
 	
