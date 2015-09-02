@@ -1,13 +1,20 @@
 package pl.polsl.hibernate;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 public class DatabaseConnector {
 	private static DatabaseConnector instance;
-	private static EntityManagerFactory emFactory;
-	private static EntityManager em;
+	private static Configuration configuration;
+	private static StandardServiceRegistryBuilder ssrb;
+	private static SessionFactory sessionFactory;
+	private static Session session;
+	private static Transaction transaction;
 
 	public static DatabaseConnector getInstance() {
 		if (instance == null) {
@@ -16,49 +23,32 @@ public class DatabaseConnector {
 		return instance;
 	}
 
-	public void connect() {
-		emFactory = Persistence.createEntityManagerFactory("WMachine2");
-		em = emFactory.createEntityManager();
+	private void connect() {
+		configuration = new Configuration();
+    	configuration.configure();
+    	ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        sessionFactory = configuration.buildSessionFactory(ssrb.build());
+        session = sessionFactory.openSession();
 	}
 	
 	public void beginTransaction() {
-		em.getTransaction().begin();
+		transaction = session.beginTransaction();
 	}
 	
 	public void endTransaction() {
-		em.getTransaction().commit();
+		transaction.commit();
 	}
 
 	public void disconnect() {
-		em.close();
-		emFactory.close();
+		session.close();
 	}
 
-	public  EntityManagerFactory getEmFactory() {
-		return emFactory;
-	}
 
-	public  void setEmFactory(EntityManagerFactory emFactory) {
-		DatabaseConnector.emFactory = emFactory;
-	}
-
-	public  EntityManager getEm() {
-		return em;
-	}
-
-	public  void setEm(EntityManager em) {
-		DatabaseConnector.em = em;
-	}
-
-	public DatabaseConnector() {
+	private DatabaseConnector() {
 		connect();
 	}
-	
-	public <T> void  mergeTransaction(T item) {
-		em.merge(item);
-	}
-	
-	public Query createQuery(String query) {
-		return em.createQuery(query);		
+
+	public Query createQuery(String query) {	
+		return session.createQuery(query);
 	}
 }

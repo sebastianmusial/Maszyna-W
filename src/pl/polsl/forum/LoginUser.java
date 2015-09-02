@@ -20,8 +20,9 @@ import org.hibernate.cfg.Configuration;
 
 import pl.polsl.database.DatabaseConnection;
 import pl.polsl.database.DatabaseQuery;
+import pl.polsl.hibernate.DatabaseConnector;
 import pl.polsl.storage.UserStorage;
-import pl.polsl.storage.dao.UsersDAO;
+//import pl.polsl.storage.dao.UsersDAO;
 
 /**
  * Sign in user
@@ -50,14 +51,9 @@ public class LoginUser extends HttpServlet {
     	
 //    	List<UserStorage> userList = UsersDAO.getAll();
     	
-    	Configuration configuration = new Configuration();
-    	configuration.configure();
-    	StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-        SessionFactory sessionFactory = configuration.buildSessionFactory(ssrb.build());
-        Session session2 = sessionFactory.openSession();
-        
-        session2.beginTransaction();
-        Query q = session2.createQuery("SELECT u FROM UserStorage u");
+        DatabaseConnector.getInstance().beginTransaction();
+        Query q = DatabaseConnector.getInstance().createQuery("SELECT u FROM UserStorage u");
+        DatabaseConnector.getInstance().endTransaction();
         List<?> userList = q.list();
         UserStorage u = (UserStorage)userList.get(0);
         

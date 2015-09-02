@@ -8,29 +8,33 @@ import java.util.List;
 import javax.persistence.Query;
 
 import pl.polsl.hibernate.DatabaseConnector;
+import pl.polsl.storage.ICRUD;
 import pl.polsl.storage.UserStorage;
 
-public class UsersDAO {
-	
-	public static List<UserStorage> getAll() {
-		Query q = DatabaseConnector.getInstance().getEm().createNamedQuery("UserStorage.findAll");
-		return (List<UserStorage>) q.getResultList();
+public class UsersDAO implements ICRUD{
+
+	@Override
+	public void create(Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public static UserStorage getByLoginAndPassword(String login, String password) {
-		Query q = DatabaseConnector.getInstance().getEm().createNamedQuery("UserStorage.findByName");
-		q.setParameter("login", login);
-		List<UserStorage> list = q.getResultList();
-		if (list.isEmpty()) {
-			return null;
-		} else {
-			UserStorage user = list.get(0);
-			if (checkPassword(user, password)) {
-				return user;
-			} else {
-				return null;
-			}
-		}		
+	@Override
+	public void read() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Object t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Object t) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	private static boolean checkPassword(UserStorage user, String password) {
@@ -65,4 +69,5 @@ public class UsersDAO {
         
         return hashedPass.toString();
 	}
+
 }
