@@ -11,6 +11,11 @@ import pl.polsl.hibernate.DatabaseConnector;
 import pl.polsl.storage.UserStorage;
 
 public class UsersDAO {
+	
+	public static List<UserStorage> getAll() {
+		Query q = DatabaseConnector.getInstance().getEm().createNamedQuery("UserStorage.findAll");
+		return (List<UserStorage>) q.getResultList();
+	}
 
 	public static UserStorage getByLoginAndPassword(String login, String password) {
 		Query q = DatabaseConnector.getInstance().getEm().createNamedQuery("UserStorage.findByName");

@@ -1,5 +1,4 @@
 package pl.polsl.hibernate;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -18,7 +17,7 @@ public class DatabaseConnector {
 	}
 
 	public void connect() {
-		emFactory = Persistence.createEntityManagerFactory("Maszyna-W");
+		emFactory = Persistence.createEntityManagerFactory("WMachine");
 		em = emFactory.createEntityManager();
 	}
 	

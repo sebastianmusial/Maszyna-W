@@ -1,6 +1,7 @@
 package pl.polsl.forum;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import pl.polsl.database.DatabaseConnection;
 import pl.polsl.database.DatabaseQuery;
+import pl.polsl.storage.UserStorage;
+import pl.polsl.storage.dao.UsersDAO;
 
 /**
  * Sign in user
@@ -39,6 +42,11 @@ public class LoginUser extends HttpServlet {
     	
     	String userLogin = request.getParameter("user_name");
     	String userPass  = request.getParameter("user_pass");
+    	
+    	List<UserStorage> userList = UsersDAO.getAll();
+    	
+    	
+    	
     	
     	int error = 0;
     	List<String> result = null;
