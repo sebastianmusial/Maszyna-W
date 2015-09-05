@@ -12,17 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
+import pl.polsl.dao.UserDao;
 import pl.polsl.database.DatabaseConnection;
 import pl.polsl.database.DatabaseQuery;
-import pl.polsl.hibernate.DatabaseConnector;
-import pl.polsl.storage.UserStorage;
 //import pl.polsl.storage.dao.UsersDAO;
+import pl.polsl.storage.UserStorage;
 
 /**
  * Sign in user
@@ -30,7 +24,7 @@ import pl.polsl.storage.UserStorage;
  * @version 1.0
  */
 @WebServlet("/LoginUser")
-public class LoginUser extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -48,43 +42,51 @@ public class LoginUser extends HttpServlet {
     	
     	String userLogin = request.getParameter("user_name");
     	String userPass  = request.getParameter("user_pass");
-    	
-//    	List<UserStorage> userList = UsersDAO.getAll();
-    	
-        DatabaseConnector.getInstance().beginTransaction();
-        Query q = DatabaseConnector.getInstance().createQuery("SELECT u FROM UserStorage u");
-        DatabaseConnector.getInstance().endTransaction();
-        List<?> userList = q.list();
-        UserStorage u = (UserStorage)userList.get(0);
-        
-        
-        int error = 0;
-    	List<String> result = null;
-    	
-    	Connection con = new DatabaseConnection(request).getInstance();
+ 
+    	LoginService service = new LoginService(userLogin, userPass);
+    	UserStorage u = null;
     	
     	try {
-    		result = DatabaseQuery.findUser(con, userLogin, userPass);  		
-    		if (result.get(0) == null || result.get(1) == null) {
-    			error = 1;
-    		}		
-		} catch (SQLException e) {
-			error = 1;
-		} catch (Exception e) {
-			error = 1;
-		}
-        
-        if (error == 0) {       	
-        	HttpSession session = request.getSession(true);
-        	session.setAttribute("loggedID", result.get(0));  
-        	session.setAttribute("loggedUser", result.get(1));
-        	session.setAttribute("privileges", Integer.parseInt(result.get(2)));
+			u = service.isValid();
+			HttpSession session = request.getSession(true);
+        	session.setAttribute("loggedID", u.getUserID());  
+        	session.setAttribute("loggedUser", u.getLogin());
+        	session.setAttribute("privileges", (int) u.getPrivilegesLevel());
         	session.setAttribute("isAdmin", false);
-        	
         	response.sendRedirect("index.jsp");
-        } else {     
-        	response.sendRedirect("login.jsp?error=" + error);
-        }   
+		} catch (LoginException e1) {
+			response.sendRedirect("login.jsp?error=" + 1);
+		}
+    	
+    	
+//    	
+//        int error = 0;
+//    	List<String> result = null;
+//    	
+//    	Connection con = new DatabaseConnection(request).getInstance();
+//    	
+//    	try {
+//    		result = DatabaseQuery.findUser(con, userLogin, userPass);  		
+//    		if (result.get(0) == null || result.get(1) == null) {
+//    			error = 1;
+//    		}		
+//		} catch (SQLException e) {
+//			error = 1;
+//		} catch (Exception e) {
+//			error = 1;
+//		}
+//        
+//        if (error == 0) {       	
+//        	HttpSession session = request.getSession(true);
+//        	session.setAttribute("loggedID", result.get(0));  
+//        	session.setAttribute("loggedUser", result.get(1));
+//        	session.setAttribute("privileges", Integer.parseInt(result.get(2)));
+//        	session.setAttribute("isAdmin", false);
+//        	
+//        	response.sendRedirect("index.jsp");
+//        } else {     
+//        	response.sendRedirect("login.jsp?error=" + error);
+//        }   
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

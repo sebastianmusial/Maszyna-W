@@ -29,8 +29,16 @@ public class DatabaseConnector {
     	ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         sessionFactory = configuration.buildSessionFactory(ssrb.build());
         session = sessionFactory.openSession();
-	}
+	}	
 	
+	public Session getSession() {
+		return session;
+	}
+
+	public static void setSession(Session session) {
+		DatabaseConnector.session = session;
+	}
+
 	public void beginTransaction() {
 		transaction = session.beginTransaction();
 	}

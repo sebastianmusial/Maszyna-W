@@ -31,13 +31,15 @@ public class PassEncryption {
 			e.printStackTrace();
 			System.err.println(e.getMessage() + "\nSHA-256 encryption failed.");
 		}
-		
-        StringBuffer hashedPass = new StringBuffer();
-        for (int i = 0; i < digest.length; i++) {
-        	hashedPass.append(Integer.toString((digest[i] & 0xff) + 0x100, 16).substring(1));
-        }	
+		       
+        StringBuffer hexString = new StringBuffer();
+    	for (int i=0;i<digest.length;i++) {
+    		String hex=Integer.toHexString(0xff & digest[i]);
+   	     	if(hex.length()==1) hexString.append('0');
+   	     	hexString.append(hex);
+    	}
         
-        return hashedPass.toString();
+        return hexString.toString();
 	}
 	
 }
