@@ -131,7 +131,6 @@ CREATE TABLE Topics
 	PRIMARY KEY (topicID),
 	KEY (categoryID),
 	KEY (userID)
-
 ) 
 ENGINE=InnoDB
 ;
@@ -144,7 +143,8 @@ CREATE TABLE Users
 	password VARCHAR(64) NOT NULL,
 	emailAddress VARCHAR(30) NOT NULL,
 	privilegesLevel SMALLINT NOT NULL DEFAULT 10,
-	PRIMARY KEY (userID)
+	PRIMARY KEY (userID),
+	UNIQUE INDEX `login` (`login`)
 
 )
 ENGINE=InnoDB 

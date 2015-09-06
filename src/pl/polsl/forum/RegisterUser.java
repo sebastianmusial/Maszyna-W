@@ -38,23 +38,17 @@ public class RegisterUser extends HttpServlet {
     	
     	request.setCharacterEncoding("UTF-8");
     	
-    	String user_login = request.getParameter("user_name");
-    	String user_pass  = request.getParameter("user_pass");
-    	String user_email = request.getParameter("user_email");
+    	String userLogin = request.getParameter("user_name");
+    	String userPass  = request.getParameter("user_pass");
+    	String userEmail = request.getParameter("user_email");
     	
-    	int error = 0;
-    	
-    	Connection con = new DatabaseConnection(request).getInstance();
-    	
+    	RegisterService service = new RegisterService(userLogin, userPass, userEmail);
     	try {
-    		DatabaseInsertion.insertUser(con, user_login, user_pass, user_email, privilegesLevel);
-		} catch (SQLException e) {
-			error = 1;
-		} catch (Exception e) {
-			error = 1;
+			service.registerUser();
+			response.sendRedirect("status.jsp?type=register&error=" + 0);
+		} catch (RegisterException e1) {
+			response.sendRedirect("status.jsp?type=register&error=" + 1);
 		}
-    	
-    	response.sendRedirect("status.jsp?type=register&error=" + error);
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -6,7 +6,7 @@ import pl.polsl.storage.UserStorage;
 
 public class UserDao {
 
-	private Dao dao = new Dao();
+	private Dao<UserStorage> dao = new Dao<UserStorage>();
 	
 	public List<UserStorage> getAll() {
 		return dao.getAll(UserStorage.class);
