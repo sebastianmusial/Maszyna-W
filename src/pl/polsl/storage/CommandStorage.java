@@ -15,7 +15,7 @@ public class CommandStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String commandID;
+	private Integer commandID;
 
 	private byte arguments;
 
@@ -34,11 +34,11 @@ public class CommandStorage implements Serializable {
 	public CommandStorage() {
 	}
 
-	public String getCommandID() {
+	public Integer getCommandID() {
 		return this.commandID;
 	}
 
-	public void setCommandID(String commandID) {
+	public void setCommandID(Integer commandID) {
 		this.commandID = commandID;
 	}
 

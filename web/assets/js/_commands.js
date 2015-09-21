@@ -143,7 +143,7 @@ function initCommands() {
 	var args = {
 		action: "get",
 		what: "list",
-		list: 0
+		list: 1
 	};
 	
 	$.get("CommandListAccessor", args, function(commandList) {

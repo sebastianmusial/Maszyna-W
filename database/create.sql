@@ -158,8 +158,7 @@ CREATE TABLE Language
 	language VARCHAR(30) NOT NULL,
 	context VARCHAR(30) NOT NULL,
 	textID BIGINT UNSIGNED NOT NULL,
-	textValue VARCHAR(30) NOT NULL,
-	PRIMARY KEY (language)
+	textValue VARCHAR(30) NOT NULL
 )
 ENGINE=InnoDB 
 ;
