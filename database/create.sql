@@ -20,6 +20,9 @@ DROP TABLE IF EXISTS Categories CASCADE
 ;
 DROP TABLE IF EXISTS Users CASCADE
 ;
+DROP TABLE IF EXISTS Language CASCADE
+;
+
 
 CREATE TABLE ProgramMMLibrary
 (
@@ -146,6 +149,17 @@ CREATE TABLE Users
 	PRIMARY KEY (userID),
 	UNIQUE INDEX `login` (`login`)
 
+)
+ENGINE=InnoDB 
+;
+
+CREATE TABLE Language
+(
+	language VARCHAR(30) NOT NULL,
+	context VARCHAR(30) NOT NULL,
+	textID BIGINT UNSIGNED NOT NULL,
+	textValue VARCHAR(30) NOT NULL,
+	PRIMARY KEY (language)
 )
 ENGINE=InnoDB 
 ;
