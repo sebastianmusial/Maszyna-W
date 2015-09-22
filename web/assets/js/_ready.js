@@ -42,6 +42,17 @@ $().ready(function() {
 	initSignals();
 	retranslatePage("pl");
 	initRunner();
+	closeMessageBox();
+	
+	/*
+	 * Type:
+	 * 0 - error
+	 * 1 - success
+	 * 2 - information
+	 * 3 - warning
+	 */
+	var msgText = "lorem ipsum dolor sit amet enim. etiam ullamcorper. suspendisse a pellentesque dui non felis";
+	msgBox(msgText, 0);
 	
 	$.when(memoryInitialized, settingsInitialized).then(function() {
 		restoreState();
