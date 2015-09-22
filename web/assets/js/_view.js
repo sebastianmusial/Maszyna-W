@@ -307,6 +307,10 @@ MW.showExtension = function() {
     MW.showInOutConsole();
 };
 
+
+/**
+ * 
+ */
 MW.showInOutConsole = function() {
 	var checkbox = Mappings.Dom.Settings.Extensions.INPUT_OUTPUT;
 	var inOutTab = $('#inOutTab');
