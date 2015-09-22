@@ -86,7 +86,7 @@ insert into Reply (userID, topicID, replyText, date)
 values (6, 10, 'Reply start', '2015-04-14 16:39:09');
 
 insert into CommandsLists(userID, isPublic, name)
-values (0, true, 'Standard list');
+values (1, true, 'Standard list');
 
 insert into CommandsLists(userID, isPublic, name)
 values (2, true, 'Test list');
@@ -98,28 +98,28 @@ insert into CommandsLists(userID, isPublic, name)
 values (3, false, 'Test list 3');
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'STP', '// zakończenie programu\nCOMMAND STP;\nARGUMENTS 0;\nczyt wys wei il;\nstop;', false, 0);
+values (1, 'STP', '// zakończenie programu\nCOMMAND STP;\nARGUMENTS 0;\nczyt wys wei il;\nstop;', false, 0);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'ADD', '// (Ak)+((Ad))->Ak\nCOMMAND ADD;\nczyt wys wei il;\nwyad wea;\nczyt wys weja dod weak wyl wea;', true, 1);
+values (1, 'ADD', '// (Ak)+((Ad))->Ak\nCOMMAND ADD;\nczyt wys wei il;\nwyad wea;\nczyt wys weja dod weak wyl wea;', true, 1);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'SUB', '// (Ak)-((Ad))->Ak\nCOMMAND SUB;\nczyt wys wei il;\nwyad wea;\nczyt wys weja ode weak wyl wea;', true,  2);
+values (1, 'SUB', '// (Ak)-((Ad))->Ak\nCOMMAND SUB;\nczyt wys wei il;\nwyad wea;\nczyt wys weja ode weak wyl wea;', true,  2);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'LD', '// ((Ad))->Ak\nCOMMAND LD;\nczyt wys wei il;\nwyad wea;\nczyt wys weja przep weak wyl wea;', true, 3);
+values (1, 'LD', '// ((Ad))->Ak\nCOMMAND LD;\nczyt wys wei il;\nwyad wea;\nczyt wys weja przep weak wyl wea;', true, 3);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'ST', '// ((Ad))->Ak\nCOMMAND ST;\nczyt wys wei il;\nwyad wea wyak wes;\npisz wyl wea;', true, 4);
+values (1, 'ST', '// ((Ad))->Ak\nCOMMAND ST;\nczyt wys wei il;\nwyad wea wyak wes;\npisz wyl wea;', true, 4);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'JMP', '// skok bezwarunkowy\nCOMMAND JMP;\nczyt wys wei il;\nwyad wea wel;\n', true,  5);
+values (1, 'JMP', '// skok bezwarunkowy\nCOMMAND JMP;\nczyt wys wei il;\nwyad wea wel;\n', true,  5);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'JMPN', '// skok gdy (AK) < 0\nCOMMAND JMPN;\nczyt wys wei il;\nIF SIGN THEN @ujemne ELSE @dodatnie;\n@ujemne wyad wea wel END;\n@dodatnie wyl wea;', true, 6);
+values (1, 'JMPN', '// skok gdy (AK) < 0\nCOMMAND JMPN;\nczyt wys wei il;\nIF SIGN THEN @ujemne ELSE @dodatnie;\n@ujemne wyad wea wel END;\n@dodatnie wyl wea;', true, 6);
 
 insert into Commands (commandListID, commandName, commandCode, arguments, commandIndex)
-values (0, 'JMPZ', '// skok gdy (AK) < 0\nCOMMAND JMPZ;\nczyt wys wei il;\nIF ZERO THEN @zero ELSE @niezero;\n@zero wyad wea wel END;\n@niezero wyl wea;', true, 7);
+values (1, 'JMPZ', '// skok gdy (AK) < 0\nCOMMAND JMPZ;\nczyt wys wei il;\nIF ZERO THEN @zero ELSE @niezero;\n@zero wyad wea wel END;\n@niezero wyl wea;', true, 7);
 
 insert into Language (language, context, textID, textValue)
 values ('PL', 'Register', 'PROGRAM_COUNTER', 'L' );
