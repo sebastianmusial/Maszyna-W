@@ -7,6 +7,7 @@ assets/js/*scripts*.js
 assets/manifest.json
 assets/sass/.sass-cache
 build
+doc
 
 ### SublimeText ###
 # cache files for sublime text

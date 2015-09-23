@@ -54,3 +54,35 @@ img {
 		color: $font-color;
 	}
 }
+
+.msg-box {
+	display: none;
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.7);
+    padding: 5%;
+
+    &.active {
+    	display: block;
+    }
+
+	.close span {
+		font-size: 24px;
+		color: black;
+	}
+}
+
+.msg-box__content {
+	position: absolute;
+    @include prefix(transform, translate(-50%, -50%));
+    top: 50%;
+    left: 50%;
+
+    .alert {
+    	padding: 30px 50px;
+    }
+}
