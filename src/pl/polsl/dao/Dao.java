@@ -11,16 +11,19 @@ import pl.polsl.hibernate.DatabaseConnector;
 public class Dao<T> {
 
 	private Session session;
-	private Transaction transaction;
 
 	public Dao() {
-		this.session = DatabaseConnector.getInstance().getSession();
+		this.session = DatabaseConnector.getInstance().openSession();
+	}
+	
+	protected void finalize() throws Throwable {
+		session.close();
 	}
 
 	@SuppressWarnings("hiding")
 	public <T> void save(final T o) {
 		Transaction transaction = session.beginTransaction();
-		session.save(o);
+		session.persist(o);
 		transaction.commit();
 	}
 
@@ -31,10 +34,14 @@ public class Dao<T> {
 		transaction.commit();
 	}
 
-	public void delete(final Object object) {
+	public void delete(final Class<T> type, Long id) {
 		Transaction transaction = session.beginTransaction();
-		session.delete(object);
+		Object persistentInstance = session.load(type, id);
+	    if (persistentInstance != null) {
+	        session.delete(persistentInstance);
+	    }
 		transaction.commit();
+		
 	}
 
 	@SuppressWarnings("hiding")

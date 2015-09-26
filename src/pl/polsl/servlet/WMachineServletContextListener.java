@@ -9,8 +9,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import pl.polsl.dao.Dao;
 import pl.polsl.database.DatabaseConnection;
 import pl.polsl.database.HibernateUtil;
+import pl.polsl.hibernate.DatabaseConnector;
 
 import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
@@ -33,6 +35,7 @@ public final class WMachineServletContextListener implements ServletContextListe
      */
     public void contextDestroyed(ServletContextEvent event)  { 
     	HibernateUtil.getSessionFactory().close();
+    	DatabaseConnector.getInstance().disconnect();
     }
 
 	/**

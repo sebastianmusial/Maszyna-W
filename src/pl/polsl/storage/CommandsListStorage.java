@@ -1,7 +1,12 @@
 package pl.polsl.storage;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import java.util.List;
 
 /**
@@ -20,7 +25,8 @@ public class CommandsListStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer commandListID;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long commandListID;
 
 	private byte isPublic;
 
@@ -38,11 +44,11 @@ public class CommandsListStorage implements Serializable {
 	public CommandsListStorage() {
 	}
 
-	public Integer getCommandListID() {
+	public Long getCommandListID() {
 		return this.commandListID;
 	}
 
-	public void setCommandListID(Integer commandListID) {
+	public void setCommandListID(Long commandListID) {
 		this.commandListID = commandListID;
 	}
 

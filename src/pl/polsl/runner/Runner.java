@@ -35,10 +35,11 @@ public class Runner {
 	
 	public void runManually() {
 		currentCommand = null;
+		machine.nextTact(true);
 		// Transaction txn = new Transaction();
 		try {
 			// txn.begin()
-			for(AvailableSignals signalId : AvailableSignals.values()) {
+			for(AvailableSignals signalId : AvailableSignals.getOrdered()) {
 				Signal signal = machine.getSignal(signalId.ID);
 				if(signal == null)
 					continue;

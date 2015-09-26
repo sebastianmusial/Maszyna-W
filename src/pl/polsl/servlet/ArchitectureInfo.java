@@ -2,10 +2,12 @@ package pl.polsl.servlet;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -193,6 +195,11 @@ public class ArchitectureInfo extends WMachineServletBase {
 		 */
 		private AvailableSignals(Integer id) {
 			this.ID = id;
+		}
+		
+		public static List<AvailableSignals> getOrdered() {
+			List<AvailableSignals> signals = Arrays.asList(AvailableSignals.values());
+			return signals.stream().sorted((s1, s2) -> s1.ID - s2.ID).collect(Collectors.toList());
 		}
 	}
 	

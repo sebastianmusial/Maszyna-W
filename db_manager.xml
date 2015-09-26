@@ -1,0 +1,40 @@
+<!DOCTYPE project>
+<project name="Database manager" basedir=".">
+    <description>
+        WMachine build file.
+    </description>
+    
+    <property name="mysql.path" value="C:/WebServ/mysql/bin" />
+	<property name="mysql.exe" value="${mysql.path}/mysql.exe" />
+	<property name="mysql.username" value="root" />
+	<property name="mysql.password" value="" />
+	<property name="mysql.base.url" value="jdbc:mysql://localhost:3306" />
+	<property name="mysql.url" value="${mysql.base.url}/maszynaw" />
+	<property name="mysql.driver" value="com.mysql.jdbc.Driver" />
+	<property name="mysql.database" value="maszynaw" />
+	<property name="create.sql" value="database/create.sql" />
+	<property name="insert.sql" value="database/insert.sql" />
+    
+	<path id="mysql.classpath">
+    	<file name="./web/WEB-INF/lib/mysql-connector-java-5.1.35-bin.jar" />
+    </path>
+	
+	<target name="reload-database">
+		<sql userid="${mysql.username}" url="${mysql.base.url}" password="${mysql.password}" driver="${mysql.driver}">
+    		<classpath refid="mysql.classpath" />
+    		DROP DATABASE IF EXISTS ${mysql.database};
+			CREATE DATABASE ${mysql.database} CHARACTER SET utf8 COLLATE utf8_general_ci;
+    	</sql>
+    	<antcall target="reload-tables" />
+    </target>
+	
+	<target name="reload-tables">
+		<sql src="${create.sql}" userid="${mysql.username}" url="${mysql.url}" password="${mysql.password}" driver="${mysql.driver}">
+    		<classpath refid="mysql.classpath" />
+    	</sql>
+		<sql src="${insert.sql}" userid="${mysql.username}" url="${mysql.url}" password="${mysql.password}" driver="${mysql.driver}">
+    		<classpath refid="mysql.classpath" />
+    	</sql>
+	</target>
+	
+</project>

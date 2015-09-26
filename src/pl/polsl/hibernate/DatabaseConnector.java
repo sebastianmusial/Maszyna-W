@@ -34,6 +34,10 @@ public class DatabaseConnector {
 	public Session getSession() {
 		return session;
 	}
+	
+	public Session openSession() {
+		return sessionFactory.openSession();
+	}
 
 	public static void setSession(Session session) {
 		DatabaseConnector.session = session;

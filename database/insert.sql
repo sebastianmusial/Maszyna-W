@@ -1,19 +1,19 @@
 insert into Users (login, password, emailAddress)
 values ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin@polsl.pl');
 insert into Users (login, password, emailAddress)
-values ('raku', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'raku@raku.pl');
+values ('raku', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'raku@raku.pl');
 insert into Users (login, password, emailAddress)
-values ('rzepa', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'rzepa@raku.pl');
+values ('rzepa', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'rzepa@raku.pl');
 insert into Users (login, password, emailAddress)
-values ('polo', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'polo@polo.pl');
+values ('polo', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'polo@polo.pl');
 insert into Users (login, password, emailAddress)
-values ('seba', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'seba@seba.pl');
+values ('seba', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'seba@seba.pl');
 insert into Users (login, password, emailAddress)
-values ('jozef', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'jozef@jozef.pl');
+values ('jozef', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'jozef@jozef.pl');
 insert into Users (login, password, emailAddress)
-values ('test', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'test@raku.pl');
+values ('test', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'test@raku.pl');
 insert into Users (login, password, emailAddress)
-values ('test2', 'abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab', 'tes2@raku.pl');
+values ('test2', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'tes2@raku.pl');
 
 insert into Categories (categoryName)
 values ('Ogłoszenia');

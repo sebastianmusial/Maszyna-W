@@ -198,11 +198,21 @@ public class WMachine {
      * Informs all components that new tact started.
      */
     public void nextTact() {
+    	nextTact(false);
+    }
+    
+    /**
+     * Informs all components that new tact started.
+     * @param keepSignals if true signals status will not be reset
+     */
+    public void nextTact(boolean keepSignals) {
     	for(WMachineComponent component : components) {
     		component.nextTact();
     	}
-    	for(Signal signal : signals.values())
-    		signal.setEnabled(false);
+    	if(!keepSignals) {
+	    	for(Signal signal : signals.values())
+	    		signal.setEnabled(false);
+    	}
     	updateScriptContext();
     }
     

@@ -28,8 +28,10 @@ function Signal(signalId, objects) {
 		send: function() { $.get("SignalAccessor", {signalId: signalId, signalEnabled: signal.state}); }
 	};
     label.click(function() {
-    	signal.state = !signal.state;
-		signal.send();
+    	if(Mappings.Dom.Settings.ManualControl.prop("checked")) {
+    		signal.state = !signal.state;
+    		signal.send();
+    	}
 	});
     return signal;
 }

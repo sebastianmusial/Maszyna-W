@@ -12,6 +12,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 /**
  * The persistent class for the Users database table.
  * 
@@ -26,8 +29,8 @@ public class UserStorage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String userID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long userID;
 
 	private String emailAddress;
 
@@ -60,11 +63,11 @@ public class UserStorage implements Serializable {
 	public UserStorage() {
 	}
 
-	public String getUserID() {
+	public Long getUserID() {
 		return this.userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(Long userID) {
 		this.userID = userID;
 	}
 

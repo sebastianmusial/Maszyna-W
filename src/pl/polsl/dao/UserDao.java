@@ -2,6 +2,7 @@ package pl.polsl.dao;
 
 import java.util.List;
 
+import pl.polsl.storage.CommandsListStorage;
 import pl.polsl.storage.UserStorage;
 
 public class UserDao {
@@ -14,6 +15,16 @@ public class UserDao {
 	
 	public void save(UserStorage u) {
 		dao.save(u);
+	}
+	
+	public UserStorage getById(Long id) {
+		if(id == null)
+			return null;
+		for(UserStorage user : getAll()) {
+			if(id == user.getUserID())
+				return user;
+		}
+		return null;
 	}
 	
 }

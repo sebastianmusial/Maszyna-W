@@ -51,7 +51,7 @@ function CommandTab(data) {
 	$(".tip", content).tooltip();
 }
 
-function CommandList() {
+function CommandsTab() {
 	var mapping = Mappings.Dom.Commands,
 		navbar = mapping.Navbar,
 		content = mapping.Content,
@@ -66,51 +66,163 @@ function CommandList() {
 		Settings: {
 			Command: {
 				get Name() { return commands.val(); },
-				get Id() { return commands.prop("data-selected"); },
-				set Id(id) { return commands.prop("data-selected", id); }
+				get CurrentIndex() { return commands.prop("data-selected"); },
+				set CurrentIndex(id) { commands.prop("data-selected", id); },
+				clear: function() {
+					content.children("div:not(.fixed)").remove();
+					navbar.children("li:not(.fixed)").remove();
+					commands.children("option:not(.fixed)").remove();
+				},
+				add: CommandTab
 			},
 			CommandList: {
 				get Name() { return lists.val(); },
-				get Id() { return lists.prop("data-selected"); },
-				set Id(id) { return lists.prop("data-selected", id); }
+				get Id() {
+					index = lists.prop("data-selected");
+					option = $("option", lists).eq(index)
+					console.log("option data-index is " + option.attr("data-index"))
+					return option.attr("data-index") || 1;
+				},
+				get CurrentIndex() { return lists.prop("data-selected"); },
+				set CurrentIndex(id) { lists.prop("data-selected", id); },
+				clear: function() {
+					select = Mappings.Dom.Commands.Settings.CommandList.Select;
+					select.children().remove();
+				}
 			}
-		},
-		CommandTabs: {},
-		addCommand: CommandTab,
-		removeCommand: function(index) {
-			content.children("div:not(.fixed)").slice(index, index + 1).remove();
-			navbar.children("li:not(.fixed)").slice(index, index + 1).remove();
-			commands.children("option:not(.fixed)").slice(index, index + 1).remove();
-		},
-		clearCommands: function() {
-			content.children("div:not(.fixed)").remove();
-			navbar.children("li:not(.fixed)").remove();
-			commands.children("option:not(.fixed)").remove();
 		}
 	};
 	
 	mapping.New.Add.click(function() {
 		var name = commandList.New.Name,
 			def = commandList.New.Definition;
-		if(name != "" && def != "")
-			commandList.addCommand({name: name, definition: def});
+		if(name != "" && def != "") {
+			var args = {
+				action: "add",
+				what: "command",
+				list: commandList.Settings.CommandList.Id,
+				name: name,
+				code: def
+			};
+			
+			$.get("CommandListAccessor", args, function() {
+				commandList.Settings.Command.clear();
+				readCurrentCommandList();
+			});
+			//commandList.addCommand({name: name, definition: def});
+		}
 	});
 	
 	mapping.Settings.Command.Select.change(function(e) {
-		commandList.Settings.Command.Id = (e.target.selectedIndex - 1);
+		commandList.Settings.Command.CurrentIndex = e.target.selectedIndex;
 	});
 	
 	mapping.Settings.Command.Delete.click(function() {
-		var commandId = commandList.Settings.Command.Id;
-	    if (commandId == -1)
-	    	commandList.clearCommands();
-	    else {
-	    	commandList.removeCommand(commandId);
-	    	commands.change();
-	    }
+		var args = {
+			action: "delete",
+			list: MW.Commands.Settings.CommandList.Id,
+			what: "command",
+			command: commandList.Settings.Command.Name
+		};
+	    $.get("CommandListAccessor", args, function() {
+	    	commandList.Settings.Command.clear();
+	    	readCurrentCommandList();
+	    });
+	});
+	
+	mapping.Settings.CommandList.Select.change(function(e) {
+		commandList.Settings.CommandList.CurrentIndex = e.target.selectedIndex;
+		commandList.Settings.Command.clear();
+		readCurrentCommandList();
+	});
+	
+	mapping.Settings.CommandList.Delete.click(function() {
+		var args = {
+			action: "delete",
+			list: MW.Commands.Settings.CommandList.Id,
+			what: "list"
+		};
+	    $.get("CommandListAccessor", args, function() {
+	    	commandList.Settings.Command.clear();
+    		commandList.Settings.CommandList.clear();
+    		readCommandsLists().done(readCurrentCommandList);
+    		MW.Commands.Settings.CommandList.CurrentIndex = 0;
+    		MW.Commands.Settings.Command.CurrentIndex = 0;
+	    });
+	});
+	
+	mapping.Settings.CommandList.Empty.click(function() {
+		var name = mapping.Settings.CommandList.Name.val();
+		if(name != "") {
+			var args = {
+				action: "add",
+				what: "list",
+				name: name
+			};
+			$.get("CommandListAccessor", args, function() {
+				commandList.Settings.Command.clear();
+	    		commandList.Settings.CommandList.clear();
+	    		readCommandsLists().done(readCurrentCommandList); 
+	    		MW.Commands.Settings.CommandList.CurrentIndex = $("option", mapping.Settings.CommandList.Select).size() - 1;
+	    		MW.Commands.Settings.Command.CurrentIndex = 0;
+			});
+		}
+	});
+	
+	mapping.Settings.CommandList.Clone.click(function() {
+		var name = mapping.Settings.CommandList.Name.val();
+		if(name != "") {
+			var args = {
+				action: "clone",
+				what: "list",
+				list: commandList.Settings.CommandList.Id,
+				name: name
+			};
+			$.get("CommandListAccessor", args, function() {
+				commandList.Settings.Command.clear();
+	    		commandList.Settings.CommandList.clear();
+	    		readCommandsLists().done(readCurrentCommandList); 
+	    		MW.Commands.Settings.CommandList.CurrentIndex = $("option", mapping.Settings.CommandList.Select).size() - 1;
+	    		MW.Commands.Settings.Command.CurrentIndex = 0;
+			});
+		}
 	});
 	
 	return commandList;
+}
+
+function readCurrentCommandList() {
+	var args = {
+		action: "get",
+		what: "list",
+		list: String(MW.Commands.Settings.CommandList.Id)
+	};
+	console.log(MW.Commands.Settings.CommandList.Id)
+	
+	$.get("CommandListAccessor", args, function(commandList) {
+		var command;
+		for(key in commandList) {
+			command = commandList[key];
+			MW.Commands.Settings.Command.add(command);
+		}
+	});
+}
+
+function readCommandsLists() {
+	var args = {
+		action: "enum",
+		what: "list"
+	};
+
+	return $.get("CommandListAccessor", args, function(commandLists) {
+		var commandList,
+			select = Mappings.Dom.Commands.Settings.CommandList.Select;
+		for(key in commandLists) {
+			commandList = commandLists[key];
+			optionHtml = '<option data-index="' + commandList.id + '">' + commandList.name + '</option>';
+			select.append(optionHtml);
+		}
+	});
 }
 
 function initCommands() {
@@ -132,25 +244,18 @@ function initCommands() {
 				Delete: $("#deleteCommand", settingsTab)
 			},
 			CommandList: {
-				Select: $("#selectCommandList", settingsTab),
-				Load: $("#loadCommandList", settingsTab)
+				Select: $("#selectCommandsList", settingsTab),
+				Delete: $("#deleteCommandsList", settingsTab),
+				Clone: $("#cloneCurrentCommandsList", settingsTab),
+				Empty: $("#createEmptyCommandsList", settingsTab),
+				Name: $("#newCommandsListName", settingsTab)
 			}
 		}
 	};
 	
-	MW.Commands = CommandList();
-	
-	var args = {
-		action: "get",
-		what: "list",
-		list: 1
-	};
-	
-	$.get("CommandListAccessor", args, function(commandList) {
-		var command;
-		for(key in commandList) {
-			command = commandList[key];
-			MW.Commands.addCommand(command);
-		}
+	MW.Commands = CommandsTab();
+	readCommandsLists().done(function() {
+		MW.Commands.Settings.CommandList.CurrentIndex = 0
+		readCurrentCommandList();
 	});
 }

@@ -51,8 +51,8 @@ $().ready(function() {
 	 * 2 - information
 	 * 3 - warning
 	 */
-	var msgText = "lorem ipsum dolor sit amet enim. etiam ullamcorper. suspendisse a pellentesque dui non felis";
-	msgBox(msgText, 0);
+	//var msgText = "lorem ipsum dolor sit amet enim. etiam ullamcorper. suspendisse a pellentesque dui non felis";
+	//msgBox(msgText, 0);
 	
 	$.when(memoryInitialized, settingsInitialized).then(function() {
 		restoreState();

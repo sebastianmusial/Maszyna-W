@@ -391,13 +391,11 @@ MW.setText = function(paper, signalId, posX, posY, arrow) {
         if(checkbox.prop('checked')) {
             label
                 .attr({'cursor': 'pointer'})
-                .click(MW.clickHandler)
                 .hover(hoverIn, hoverOut);
         }
         else {
             label
                 .attr({'cursor': 'default'})
-                .unclick(MW.clickHandler)
                 .unhover(hoverIn, hoverOut);
         }
     });

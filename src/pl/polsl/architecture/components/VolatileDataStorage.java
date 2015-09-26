@@ -42,7 +42,7 @@ public class VolatileDataStorage extends DataStorage {
     @Override
     public Integer getValue() throws Exception {
         if(getData().getValue() == null)
-            throw new Exception("VolatileDataStorage is in use.");
+            throw new Exception("VolatileDataStorage is empty.");
         return getData().getValue();
     }
     

@@ -28,21 +28,29 @@
 				<form class="form-horizontal">
 					<div class="input-group form-space">
 						<select id="selectCommand" class="form-control" data-selected="-1">
-							<option class="fixed">Wszystko</option>
 						</select>
 						<span class="input-group-btn">
 						  	<button id="deleteCommand" type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="usuń"><i class="glyphicon glyphicon-trash"></i></button>
-						  </span>
+						</span>
 					</div>
 					<div class="input-group form-space">
-						<select id="selectCommandList" class="form-control" data-selected="-1">
-						  <option>Lista podstawowa</option>
-						  <option>Lista dodatkowa</option>
-						  <option>Jakaś jeszcze lista</option>
+						<select id="selectCommandsList" class="form-control" data-selected="-1">
 						</select>
 						<span class="input-group-btn">
-						  	<button type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="wczytaj"><i class="glyphicon glyphicon-level-up"></i></button>
-						  </span>
+						  	<button id="deleteCommandsList" type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="usuń"><i class="glyphicon glyphicon-trash"></i></button>
+						</span>
+					</div>
+					<div>
+						<label><span id="NEW_COMMANDS_LIST">Nowa lista rozkazów</span>:</label>
+						<div class="input-group form-space">
+							<input id="newCommandsListName" class="form-control" type="text" />
+							<span class="input-group-btn">
+							  	<button id="createEmptyCommandsList" type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="nowa lista"><i class="glyphicon glyphicon-file"></i></button>
+							</span>
+							<span class="input-group-btn">
+							  	<button id="cloneCurrentCommandsList" type="button" class="btn btn-default tip" data-toggle="tooltip" data-original-title="kopiuj aktualną"><i class="glyphicon glyphicon-duplicate"></i></button>
+							</span>
+						</div>
 					</div>
 				</form>
 			</div>

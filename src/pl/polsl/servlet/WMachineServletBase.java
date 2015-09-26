@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 import pl.polsl.architecture.WMachine;
 import pl.polsl.architecture.WMachineFactory;
 import pl.polsl.architecture.components.finalized.Memory;
+import pl.polsl.dao.UserDao;
 import pl.polsl.runner.Runner;
 import pl.polsl.settings.Settings;
+import pl.polsl.storage.UserStorage;
 
 /**
  * Base class for servlets manipulating W Machine state.
@@ -24,6 +26,15 @@ import pl.polsl.settings.Settings;
 public class WMachineServletBase extends HttpServlet {
 	/** Serial version UID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** Request being handled. */
+	protected HttpServletRequest currentRequest;
+	
+	/** Response for request being handled. */
+	protected HttpServletResponse currentResponse;
+	
+	/** Current HTTP session. */
+	protected HttpSession currentSession;
 	
 	/**
 	 * Return W Machine stored in HTTP session or creates
@@ -103,6 +114,30 @@ public class WMachineServletBase extends HttpServlet {
 	}
 	
 	/**
+	 * Read current logged user for session.
+	 * @return Current logged user.
+	 */
+	protected UserStorage getCurrentUser() {
+		Long userId = getCurrentUserId();
+		if(userId != null) {
+			UserDao dao = new UserDao();
+			return dao.getById(userId);
+		}
+		return null;
+	}
+	
+	/**
+	 * Read current logged user ID for session.
+	 * @return Current logged user ID.
+	 */
+	protected Long getCurrentUserId() {
+		Object userId = currentSession.getAttribute("loggedID");
+		if(userId != null)
+			return (Long)userId;
+		return null;
+	}
+	
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> method.
      * This function should be overriden in subclasses.
      * @param request servlet request
@@ -125,7 +160,10 @@ public class WMachineServletBase extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected final void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		currentRequest = request;
+		currentResponse = response;
+		currentSession = request.getSession();
 		processRequest(request, response);
 	}
 
@@ -139,7 +177,10 @@ public class WMachineServletBase extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected final void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		currentRequest = request;
+		currentResponse = response;
+		currentSession = request.getSession();
 		processRequest(request, response);
 	}
 }
