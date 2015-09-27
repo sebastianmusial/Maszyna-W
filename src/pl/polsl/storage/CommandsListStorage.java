@@ -98,4 +98,30 @@ public class CommandsListStorage implements Serializable {
 		this.user = user;
 	}
 
+	public Object serialize() {
+		SerializableCommandList scl = new SerializableCommandList();
+		scl.name = getName();
+		scl.id = getCommandListID();
+		return scl;
+	}
+	
+	public Object serializeCommands() {
+		List<CommandStorage> commands = getCommands();
+		return commands.stream().map((c) -> {
+			SerializableCommand sc = new SerializableCommand();
+			sc.name = c.getCommandName();
+			sc.code = c.getCommandCode();
+			return sc;
+		}).toArray();
+	}
+	
+	private class SerializableCommand {
+		public String name;
+		public String code;
+	}
+	
+	private class SerializableCommandList {
+		public String name;
+		public Long id;
+	}
 }

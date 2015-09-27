@@ -24,7 +24,7 @@ import pl.polsl.storage.CommandsListStorage;
 import pl.polsl.storage.UserStorage;
 
 /**
- * Servlet implementation class CommandAccessor
+ * Servlet to access commands and commands lists.
  */
 @WebServlet("/CommandListAccessor")
 public class CommandListAccessor extends WMachineServletBase {
@@ -42,14 +42,7 @@ public class CommandListAccessor extends WMachineServletBase {
 				response.setContentType("application/json;charset=UTF-8");
 				Long listId = Long.parseLong(request.getParameter("list"));
 				CommandsListStorage commandList = commandsListDao.getById(listId);
-				List<SerializableCommand> serializableCommands = new LinkedList<>();
-				for(CommandStorage commandStorage : commandList.getCommands()) {
-					SerializableCommand cmd = new SerializableCommand();
-					cmd.name = commandStorage.getCommandName();
-					cmd.code = commandStorage.getCommandCode();
-					serializableCommands.add(cmd);
-				}
-				new Gson().toJson(serializableCommands, response.getWriter());
+				new Gson().toJson(commandList.serializeCommands(), response.getWriter());
 			} break;
 				
 			case "ENUM": {
@@ -62,14 +55,8 @@ public class CommandListAccessor extends WMachineServletBase {
 				if(userId != null) {
 					commandsLists.addAll(commandsListDao.getUserCommandsLists(userId));
 				}
-				List<SerializableCommandList> serializableCommandsLists = new LinkedList<>();
-				for(CommandsListStorage commandsListStorage : commandsLists) {
-					SerializableCommandList cmd = new SerializableCommandList();
-					cmd.name = commandsListStorage.getName();
-					cmd.id = commandsListStorage.getCommandListID();
-					serializableCommandsLists.add(cmd);
-				}
-				new Gson().toJson(serializableCommandsLists, response.getWriter());
+				Object[] serialized = commandsLists.stream().map(CommandsListStorage::serialize).toArray();
+				new Gson().toJson(serialized, response.getWriter());
 			} break;
 				
 			case "DELETE": {
@@ -114,11 +101,6 @@ public class CommandListAccessor extends WMachineServletBase {
 						//commandsListDao.save(commandsList);
 					} break;
 					case "LIST": {
-//						var args = {
-//								action: "add",
-//								what: "list",
-//								name: name
-//							};
 						String name = request.getParameter("name");
 						CommandsListStorage emptyCommandsList = new CommandsListStorage();
 						emptyCommandsList.setIsPublic((byte)0);
@@ -135,12 +117,6 @@ public class CommandListAccessor extends WMachineServletBase {
 					return;
 				switch(request.getParameter("what").toUpperCase()) {
 					case "LIST": {
-//						var args = {
-//								action: "clone",
-//								what: "list",
-//								list: commandList.Settings.CommandList.Id,
-//								name: name
-//							};
 						String name = request.getParameter("name");
 						Long listId = Long.parseLong(request.getParameter("list"));
 						CommandsListStorage sourceCommandsList = commandsListDao.getById(listId);
@@ -164,15 +140,5 @@ public class CommandListAccessor extends WMachineServletBase {
 				}
 			} break;
 		}
-	}
-	
-	private class SerializableCommand {
-		public String name;
-		public String code;
-	}
-	
-	private class SerializableCommandList {
-		public String name;
-		public Long id;
 	}
 }
