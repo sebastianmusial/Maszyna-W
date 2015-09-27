@@ -57,7 +57,7 @@ public class Dao<T> {
 	 * Delete method.
 	 * @param object object to delete
 	 */
-	public void delete(final Object object) {
+	public void delete(final Class<T> type, Long id) {
 		Transaction transaction = session.beginTransaction();
 		Object persistentInstance = session.load(type, id);
 	    if (persistentInstance != null) {
