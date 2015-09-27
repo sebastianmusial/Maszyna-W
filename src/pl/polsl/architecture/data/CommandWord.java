@@ -3,9 +3,9 @@ package pl.polsl.architecture.data;
 import pl.polsl.utils.Primitive;
 
 /**
- * 
+ * Class representing command stored in W Machine components.
  * @author Tomasz Rzepka
- *
+ * @version 1.0
  */
 public class CommandWord implements DataWord {
 	/** Currently set operation code. */

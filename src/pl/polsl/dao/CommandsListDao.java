@@ -7,6 +7,11 @@ import pl.polsl.storage.CommandStorage;
 import pl.polsl.storage.CommandsListStorage;
 import pl.polsl.storage.UserStorage;
 
+/**
+ * Implementation of Dao for coommands list's table.
+ * @author Tomasz Rzepka
+ * @version 1.0
+ */
 public class CommandsListDao {
 
 	private Dao<CommandsListStorage> dao = new Dao<CommandsListStorage>();

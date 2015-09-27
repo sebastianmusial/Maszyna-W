@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 import pl.polsl.storage.CommandStorage;
 import pl.polsl.storage.CommandsListStorage;
 
+/**
+ * Implementation of Dao for coommands' table.
+ * @author Tomasz Rzepka
+ * @version 1.0
+ */
 public class CommandDao {
 
 	private Dao<CommandStorage> dao = new Dao<CommandStorage>();
