@@ -451,3 +451,31 @@ var CentralUnit = {
 		Mappings.Dom.View.loader.animate({opacity: 0.0}, 0);
 	}
 };
+
+
+function msgBox(text, typeId) {
+	var msgBox = $('.msg-box'),
+		alert = msgBox.find('.alert'),
+		information = msgBox.find('.msg-txt');
+		msgType = ['danger', 'success', 'info', 'warning'];
+	
+	msgBox.addClass('active');
+	alert.addClass('alert-' + msgType[typeId]);
+	information.text(text);
+}
+
+function closeMessageBox() {
+	var btn = $('.js-close-msg');
+
+	btn.on('click', function() {
+		var msgBox = $(this).closest('.msg-box'),
+			alert = btn.find('.alert'),
+			msgType = ['danger', 'success', 'info', 'warning'];
+		
+		msgBox.toggleClass('active');
+		
+		for(var i = 0; i < msgType.length; i++) {
+			alert.removeClass('alert-' + msgType[i]);
+		}
+	});
+}

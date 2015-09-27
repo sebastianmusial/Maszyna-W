@@ -2,6 +2,9 @@
  * Register constructor, initializer and translator.
  */
 
+/**
+ * Create DOM wrapper that can manipulate registers.
+ */
 function Register(registerId, input) {
 	var div = input.parent();
 	var register = {
@@ -31,6 +34,9 @@ function Register(registerId, input) {
 	return register; 
 }
 
+/**
+ * Create register wrappers.
+ */
 function initRegisters() {
 	var key,
 		names = Mappings.Names.Registers,
@@ -42,6 +48,9 @@ function initRegisters() {
 	}
 }
 
+/**
+ * Read registers' state from server.
+ */
 function restoreRegisters() {
 	$.get("RegisterAccessor", {action: "get"}, function(values) {
 		var registerId;
@@ -50,6 +59,9 @@ function restoreRegisters() {
 	});
 }
 
+/**
+ * Change registers' language.
+ */
 function retranslateRegisters() {
 	var key,
 		names = Mappings.Names.Registers;

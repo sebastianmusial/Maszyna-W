@@ -2,6 +2,9 @@
  * Signal constructor, initializer and translator.
  */
 
+/**
+ * Create DOM wrapper that can manipulate signal.
+ */
 function Signal(signalId, objects) {
 	var label = objects.label,
 		arrow = objects.arrow,
@@ -36,6 +39,9 @@ function Signal(signalId, objects) {
     return signal;
 }
 
+/**
+ * Create signal wrappers.
+ */
 function initSignals() {
 	MW.Signals = {};
 	var signals = Mappings.Raphael.Signals;
@@ -44,6 +50,9 @@ function initSignals() {
 	}
 }
 
+/**
+ * Change signals' language.
+ */
 function retranslateSignals() {
 	var signals = Mappings.Raphael.Signals;
 	for(key in signals) {
@@ -51,29 +60,3 @@ function retranslateSignals() {
 	}
 }
 
-function msgBox(text, typeId) {
-	var msgBox = $('.msg-box'),
-		alert = msgBox.find('.alert'),
-		information = msgBox.find('.msg-txt');
-		msgType = ['danger', 'success', 'info', 'warning'];
-	
-	msgBox.addClass('active');
-	alert.addClass('alert-' + msgType[typeId]);
-	information.text(text);
-}
-
-function closeMessageBox() {
-	var btn = $('.js-close-msg');
-
-	btn.on('click', function() {
-		var msgBox = $(this).closest('.msg-box'),
-			alert = btn.find('.alert'),
-			msgType = ['danger', 'success', 'info', 'warning'];
-		
-		msgBox.toggleClass('active');
-		
-		for(var i = 0; i < msgType.length; i++) {
-			alert.removeClass('alert-' + msgType[i]);
-		}
-	});
-}
