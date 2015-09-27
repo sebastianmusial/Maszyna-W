@@ -5,7 +5,7 @@ import pl.polsl.database.PassEncryption;
 import pl.polsl.storage.UserStorage;
 
 /**
- * Service is used in {@link pl.polsl.forum.RegisterServlet} to manage process of registering new user.
+ * Service is used in {@link pl.polsl.forum.RegisterService} to manage process of registering new user.
  * @author Michal Rakoczy
  *
  */
@@ -30,9 +30,9 @@ public class RegisterService {
 		
 	/**
 	 * Constructor.
-	 * @param login
-	 * @param password
-	 * @param email
+	 * @param login user login
+	 * @param password user password
+	 * @param email user email address
 	 */
 	public RegisterService(String login, String password, String email) {
 		super();

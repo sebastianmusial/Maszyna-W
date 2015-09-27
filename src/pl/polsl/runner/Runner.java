@@ -34,11 +34,11 @@ public class Runner {
 	}
 	
 	public void runManually() {
+		if(machine.isStopped())
+			return;
 		currentCommand = null;
 		machine.nextTact(true);
-		// Transaction txn = new Transaction();
 		try {
-			// txn.begin()
 			for(AvailableSignals signalId : AvailableSignals.getOrdered()) {
 				Signal signal = machine.getSignal(signalId.ID);
 				if(signal == null)
@@ -46,10 +46,8 @@ public class Runner {
 				if(signal.isEnabled())
 					signal.activate();
 			}
-			// txn.commit()
 		}
 		catch(Exception ex) {
-			// txn.rollback();
 		}
 	}
 	

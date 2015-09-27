@@ -1,8 +1,5 @@
 <!DOCTYPE project>
 <project name="Database manager" basedir=".">
-    <description>
-        WMachine build file.
-    </description>
     
     <property name="mysql.path" value="C:/WebServ/mysql/bin" />
 	<property name="mysql.exe" value="${mysql.path}/mysql.exe" />

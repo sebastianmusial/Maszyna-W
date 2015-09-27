@@ -10,6 +10,8 @@ public class DatabaseRemove {
 	 * Remove given post from the database.
 	 * @param con database connection
 	 * @param postID identification number of post
+	 * @throws SQLException when SQL error occured
+	 * @throws Exception when error occured
 	 */
 	public static void removePost(Connection con, int postID) throws SQLException, Exception {
 		PreparedStatement pst = null;		

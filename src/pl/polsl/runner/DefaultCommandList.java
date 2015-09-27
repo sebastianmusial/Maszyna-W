@@ -8,7 +8,13 @@ import pl.polsl.runner.command.Command;
 import pl.polsl.storage.CommandStorage;
 import pl.polsl.storage.CommandsListStorage;
 
-
+/**
+ * Default commands list. If database is available
+ * it is read from the database otherwise
+ * is is created in constructor.
+ * @author Tomasz Rzepka
+ *
+ */
 public class DefaultCommandList extends CommandList {
 
 	public DefaultCommandList() {
