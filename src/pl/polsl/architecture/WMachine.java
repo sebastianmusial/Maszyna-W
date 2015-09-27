@@ -294,4 +294,12 @@ public class WMachine {
     public CommandList getCommandList() {
     	return commandList;
     }
+    
+    /**
+     * Command list setter.
+     * @param commandList New command list.
+     */
+    public void setCommandList(CommandList commandList) {
+    	this.commandList = commandList;
+    }
 }

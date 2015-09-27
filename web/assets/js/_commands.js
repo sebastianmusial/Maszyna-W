@@ -1,7 +1,6 @@
 /**
- * 
+ * Create new command tab.
  */
-
 function CommandTab(data) {
 	var mapping = Mappings.Dom.Commands,
 		contentHtml = '\
@@ -51,6 +50,10 @@ function CommandTab(data) {
 	$(".tip", content).tooltip();
 }
 
+/**
+ * Update mappings.
+ * @returns mappings for "Commands" tab.
+ */
 function CommandsTab() {
 	var mapping = Mappings.Dom.Commands,
 		navbar = mapping.Navbar,
@@ -191,6 +194,10 @@ function CommandsTab() {
 	return commandList;
 }
 
+/**
+ * Read currently selected commands list from server
+ * and show it in browser.
+ */
 function readCurrentCommandList() {
 	var args = {
 		action: "get",
@@ -208,6 +215,10 @@ function readCurrentCommandList() {
 	});
 }
 
+/**
+ * Read all available commands lists from server
+ * and show them in browser.
+ */
 function readCommandsLists() {
 	var args = {
 		action: "enum",
@@ -225,6 +236,9 @@ function readCommandsLists() {
 	});
 }
 
+/**
+ * Create mappings, load available lists and show default list.
+ */
 function initCommands() {
 	var commandsTab = $("#commands"),
 		newCommandTab = $("#newCommand", commandsTab),

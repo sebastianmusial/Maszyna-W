@@ -1,31 +1,49 @@
 package pl.polsl.runner;
 
+import java.util.List;
+
+import pl.polsl.dao.CommandsListDao;
 import pl.polsl.parser.CommandParser;
 import pl.polsl.runner.command.Command;
+import pl.polsl.storage.CommandStorage;
+import pl.polsl.storage.CommandsListStorage;
 
-
+/**
+ * Default commands list. If database is available
+ * it is read from the database otherwise
+ * is is created in constructor.
+ * @author Tomasz Rzepka
+ *
+ */
 public class DefaultCommandList extends CommandList {
 
-	public DefaultCommandList() {		
-		String[] commands =  {
-			STP_COMMAND,
-			ADD_COMMAND,
-			SUB_COMMAND,
-			LD_COMMAND,
-			ST_COMMAND,
-			JMP_COMMAND,
-			JMPN_COMMAND,
-			JMPZ_COMMAND
-		};
+	public DefaultCommandList() {
 		CommandParser parser = new CommandParser();
-		for(String command : commands) {
-			add(parser.parse(command));
+		CommandsListDao dao = new CommandsListDao();
+		CommandsListStorage def = dao.getById(1L);
+		if(def != null) {
+			parse(def);
+		}
+		else {
+			String[] commands =  {
+				STP_COMMAND,
+				ADD_COMMAND,
+				SUB_COMMAND,
+				LD_COMMAND,
+				ST_COMMAND,
+				JMP_COMMAND,
+				JMPN_COMMAND,
+				JMPZ_COMMAND
+			};
+			for(String command : commands) {
+				add(parser.parse(command));
+			}
 		}
 	}
 
 	private final String STP_COMMAND =
 			"// zakończenie programu\n" +
-			"COMMAND STP;\n" +
+			"COMMAND SToP;\n" +
 			"ARGUMENTS 0;\n" +
 			"czyt wys wei il;\n" +
 			"stop;";

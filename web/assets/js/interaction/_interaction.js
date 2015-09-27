@@ -1,7 +1,7 @@
 /**
- * 
+ * Restore W Machine state. Read state from server
+ * and fill controls.
  */
-
 function restoreState(wmachine) {
 	var restore = function(wmachine) {
 		for(registerId in wmachine.registers)
@@ -24,7 +24,9 @@ function restoreState(wmachine) {
 	}
 }
 
-
+/**
+ * Init controls.
+ */
 function initInteractions() {
 	/**
 	 * Edit input value if are changes.

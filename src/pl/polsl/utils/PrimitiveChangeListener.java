@@ -2,7 +2,7 @@ package pl.polsl.utils;
 
 /**
  * Change listener interface. Used to listen for value
- * changes in Primitive<T> class.
+ * changes in Primitive class.
  * @author Tomasz Rzepka
  * @version 1.0
  * @param <T> type that primitive is wrapping

@@ -82,7 +82,7 @@ public enum UIElements {
 	
 	/**
 	 * Constructs enum value
-	 * @param id
+	 * @param id UI element identifier
 	 */
 	private UIElements(Integer id){
 		this.ID = id;

@@ -4,6 +4,10 @@
  * and architecture info.
  */
 
+/**
+ * Split multiple operations in small blocks
+ * so they do not block browser.
+ */
 function runInBackground(runner, initialValue, timeout) {
 	return $.Deferred(function() {
 		var self = this,
@@ -20,6 +24,10 @@ function runInBackground(runner, initialValue, timeout) {
 	});
 };
 
+/**
+ * Change page language.
+ * @param language new language id
+ */
 function retranslatePage(language) {
 	$.get("LanguageAccessor", {lang: language}, function(language) {
 		MW.Language = language;
@@ -31,6 +39,9 @@ function retranslatePage(language) {
 	});
 }
 
+/**
+ * Done when page is loaded.
+ */
 $().ready(function() {
 	CentralUnit.hide();
 	

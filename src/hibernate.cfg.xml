@@ -7,9 +7,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://mysql3.hekko.net.pl:3306/sssebuss_bd</property>
-        <property name="hibernate.connection.username">sssebuss_bd</property>
-        <property name="hibernate.connection.password">maszynaW2015</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/maszynaw</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
         
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>

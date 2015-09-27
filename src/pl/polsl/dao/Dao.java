@@ -11,8 +11,7 @@ import pl.polsl.hibernate.DatabaseConnector;
 /**
  * Dao class is used to implement access to database using DAO pattern.
  * @author Michal Rakoczy
- *
- * @param <T>
+ * @param <T> type from pl.polsl.storage package that is handled
  */
 public class Dao<T> {
 
@@ -35,6 +34,7 @@ public class Dao<T> {
 	/**
 	 * Insert method.
 	 * @param o object to insert
+	 * @param <T> type from pl.polsl.storage package that is handled
 	 */
 	@SuppressWarnings("hiding")
 	public <T> void save(final T o) {
@@ -46,6 +46,7 @@ public class Dao<T> {
 	/**
 	 * Insert or update method
 	 * @param o object to insert or update
+	 * @param <T> type from pl.polsl.storage package that is handled
 	 */
 	@SuppressWarnings("hiding")
 	public <T> void saveOrUpdate(final T o) {
@@ -55,7 +56,8 @@ public class Dao<T> {
 	}
 	/**
 	 * Delete method.
-	 * @param object object to delete
+	 * @param type Entity type
+	 * @param id id of object to be removed
 	 */
 	public void delete(final Class<T> type, Long id) {
 		Transaction transaction = session.beginTransaction();
@@ -71,6 +73,7 @@ public class Dao<T> {
 	 * Select method.
  	 * @param type Entity class.
 	 * @param id ID of selected object from database.
+	 * @param <T> type from pl.polsl.storage package that is handled
 	 * @return Selected object or null.
 	 */
 	@SuppressWarnings("hiding")
@@ -81,6 +84,7 @@ public class Dao<T> {
 	/**
 	 * Insert method
 	 * @param o object to insert
+	 * @param <T> type from pl.polsl.storage package that is handled
 	 * @return Inserted object (with ID).
 	 */
 	@SuppressWarnings("hiding")
@@ -91,6 +95,7 @@ public class Dao<T> {
 	/**
 	 * Select all data from table.
 	 * @param type Entity type
+	 * @param <T> type from pl.polsl.storage package that is handled
 	 * @return List of objects or null.
 	 */
 	@SuppressWarnings("hiding")

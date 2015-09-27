@@ -1,7 +1,6 @@
 /**
- * 
+ * Create DOM wrapper that can manipulate memory cell.
  */
-
 function MemoryCell(index) {
 	var row = $("#memory-row-" + index);
 	var input = $(".memory-cell-value", row);
@@ -30,6 +29,11 @@ function MemoryCell(index) {
 	return cell;
 }
 
+/**
+ * Create memory cell's HTML code.
+ * @param index
+ * @returns {String}
+ */
 function memoryCellHtml(index) {
 	return	"<div id='memory-row-" + index + "' class='memory__table--row'> \
 				<div class='memory__table--cell memory-cell-index'>" + index + "</div> \
